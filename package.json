@@ -2,10 +2,14 @@
   "name": "root",
   "private": true,
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "demos/*"
   ],
+  "scripts": {
+    "install": "lerna bootstrap",
+    "start": "lerna run start"
+  },
   "devDependencies": {
-    "lerna": "^4.0.0",
-    "diff": "lerna diff"
+    "lerna": "^4.0.0"
   }
 }

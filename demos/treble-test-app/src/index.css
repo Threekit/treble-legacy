@@ -1,0 +1,13 @@
+.tk-treble-app {
+  display: grid;
+  grid-template-columns: auto 400px;
+  grid-gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.tk-treble-player {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
