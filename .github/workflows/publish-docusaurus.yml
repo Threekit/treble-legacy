@@ -1,0 +1,77 @@
+name: Publish
+
+on:
+  push:
+    branches: main
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: "Use NodeJS 16"
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > .npmrc
+      - run: yarn
+        working-directory: ./docusaurus
+      - run: yarn build
+        working-directory: ./docusaurus
+
+      - name: Create build artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-dir
+          path: ./docusaurus/build
+          retention-days: 5
+
+  deploy:
+    name: Build and deploy Prod
+    needs: build
+    runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/treble--docs
+    steps:
+      - name: Login
+        uses: google-github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_email: ${{ secrets.GCP_EMAIL }}
+          service_account_key: ${{ secrets.GCP_CREDENTIALS }}
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
+
+      - name: Checks out Threekit/treble-launchpad
+        uses: actions/checkout@v2
+        with:
+          repository: Threekit/treble-launchpad
+
+      - name: Download a build artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build-prod
+          path: build
+
+      - name: Build Docker image
+        run: docker build . -t $IMAGE_NAME
+
+      - name: Push Docker image
+        run: docker push $IMAGE_NAME
+
+      - name: Update Porter app
+        uses: porter-dev/porter-cli-action@v0.1.0
+        with:
+          command: update config --app treble--docs --tag latest --namespace threekit-dev
+        env:
+          PORTER_HOST: https://dashboard.getporter.dev
+          PORTER_CLUSTER: ${{ secrets.PORTER_CLUSTER_ID }}
+          PORTER_PROJECT: ${{ secrets.PORTER_PROJECT_ID }}
+          PORTER_TOKEN: ${{ secrets.PORTER_TOKEN }}
