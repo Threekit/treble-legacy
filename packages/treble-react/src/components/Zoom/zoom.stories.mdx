@@ -1,0 +1,29 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+
+import { ZoomComponent } from './index'
+
+export const Template = (args) => <ZoomComponent {...args} />
+
+<Meta title="Widgets/Zoom" />
+
+# Zoom
+
+### A Widget for changing the Zoom of the active Threekit Player Camera
+
+<Canvas>
+  <Story name="Zoom" args={{ type: 'standard' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Overview
+
+The Zoom widgets offers a Click interaction based alternative to the existing
+zoom feature that comes with the Threekit Player.
+
+The component comes in both a **horizontal** and **vertical** orientation for placement
+on any side of the player.
+
+## Props
+
+<ArgsTable of={ZoomComponent} />

@@ -1,0 +1,27 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+
+import { AttributeTitle } from './index'
+
+export const Template = (args) => <AttributeTitle {...args} />
+
+<Meta title="Display/Attribute Title" />
+
+# Attribute Title
+
+### Display a translated Attribute Title
+
+The `<AttributeTitle />` component will display the translated title of the attribute specified in the `attribute` prop.
+
+It's also possible to display a custom Attribute title by passing a string into the `title` prop.
+
+## Demo
+
+<Canvas>
+  <Story name="Default" args={{ title: 'Color' }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={AttributeTitle} />

@@ -1,0 +1,67 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
+import styled from 'styled-components'
+import { Button, TYPES } from './index'
+
+export const TemplateDefault = (args) => (
+  <Button icon="cart" title="Add to Cart" {...args} />
+)
+
+export const Template = (args) => (
+  <div
+    style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(5, max-content)',
+      gridGap: '8px',
+    }}
+  >
+    <Button {...args} icon="cart" />
+    <Button {...args} title="Add to Cart" icon="cart" />
+    <Button {...args} title="Add to Cart" type="hollow" />
+    <Button {...args} title="Add to Cart" type="accent" />
+    <Button {...args} title="Add to Cart" type="primary" />
+    <Button {...args} icon="cart" shape="round" />
+    <Button {...args} title="Add to Cart" icon="cart" shape="round" />
+    <Button {...args} title="Add to Cart" type="hollow" shape="round" />
+    <Button {...args} title="Add to Cart" type="accent" shape="round" />
+    <Button {...args} title="Add to Cart" type="primary" shape="round" />
+  </div>
+)
+
+<Meta title="Form Components/Button" />
+
+# Button
+
+### A Simple Button component
+
+<Canvas>
+  <Story name="Button" args={{}}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Overview
+
+The `<Button />` component can be used anywhere in the app.
+It does not connect to any attribute type or even to the
+ThreekitProvider and as such it can be used as a general
+UI element.
+
+## How to Use
+
+Example of how to use a **Button** component:
+
+`<Button title="Button Title" onClick={() => console.log('clicked')} />`
+
+## Props
+
+<ArgsTable of={Button} />
+
+## Variations
+
+### Full Width
+
+<Canvas>
+  <Story name="Full Width" args={{ fullWidth: true }}>
+    {TemplateDefault.bind({})}
+  </Story>
+</Canvas>

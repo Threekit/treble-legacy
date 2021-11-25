@@ -1,0 +1,23 @@
+import { Meta, Story, Canvas } from '@storybook/addon-docs'
+
+<Meta title="Wrappers/Await Player Load" />
+
+## Await Player Load
+
+The `<AwaitPlayerLoad>` wrapper, is used to wrap any content that we don't want to render until the Threekit Player initialization process is complete.
+
+```jsx
+import { AwaitPlayerLoad } from 'threekit/components'
+
+const Component = () => {
+  return (
+    <div>
+      <div>Content here will be rendered as normal</div>
+      <AwaitPlayerLoad>
+        This content will only be rendered after the Threekit Player
+        intialization is complete
+      </AwaitPlayerLoad>
+    </div>
+  )
+}
+```
