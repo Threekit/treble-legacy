@@ -6,8 +6,8 @@ on:
 
 jobs:
   build:
+    name: Build Docusaurus
     runs-on: ubuntu-latest
-
     steps:
       - name: "Checkout"
         uses: actions/checkout@v2
@@ -33,7 +33,7 @@ jobs:
           retention-days: 5
 
   deploy:
-    name: Build and deploy Prod
+    name: Build and deploys Docusaurus Docker image
     needs: build
     runs-on: ubuntu-latest
     env:
@@ -57,7 +57,7 @@ jobs:
       - name: Download a build artifact
         uses: actions/download-artifact@v2
         with:
-          name: build-prod
+          name: build-dir
           path: build
 
       - name: Build Docker image
