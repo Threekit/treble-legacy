@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "src/index.js",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "start": "treble-scripts start",
     "build": "treble-scripts build"
