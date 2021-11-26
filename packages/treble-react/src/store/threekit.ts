@@ -8,6 +8,7 @@ import {
   // IThreekitConfigurator,
   IThreekitDisplayAttribute,
   IMetadata,
+  DISPLAY_OPTIONS,
 } from '../threekit'
 import threekitAPI from '../api'
 import { getParams, createThreekitScriptEl } from '../utils'
@@ -55,6 +56,7 @@ export interface ILaunchConfig {
   locale?: string
   allowMobileVerticalOrbit?: boolean
   publishStage?: string
+  display?: DISPLAY_OPTIONS
   //  Language Stuff
   language?: string | undefined
 }
@@ -353,6 +355,7 @@ export const launch =
       locale,
       allowMobileVerticalOrbit,
       publishStage,
+      display,
     } = Object.assign(DEFAULT_PLAYER_CONFIG, launchConfig)
 
     const threekitCredentials = launchConfig[threekitEnv || 'preview']
@@ -430,6 +433,7 @@ export const launch =
         locale,
         allowMobileVerticalOrbit,
         publishStage,
+        display,
       }),
       threekitAPI.products.fetchTranslations(),
       threekitAPI.price.getPricebooksList(),

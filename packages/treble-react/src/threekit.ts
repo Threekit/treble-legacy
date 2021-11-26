@@ -4,6 +4,8 @@ type SCENE_PHASES = 'LOADED' | 'PRELOADED' | 'RENDERED'
 
 type PRIVATE_APIS = 'scene' | 'player'
 
+export type DISPLAY_OPTIONS = 'webgl' | 'image'
+
 type IAttributeTypes = 'String' | 'Asset' | 'Color' | 'Number'
 
 export type IMetadata = Record<string, string | number | null>
@@ -281,6 +283,7 @@ export interface ThreekitInitConfig {
   locale?: string
   allowMobileVerticalOrbit?: boolean
   publishStage?: string
+  display?: DISPLAY_OPTIONS
 }
 
 /***************************************************
