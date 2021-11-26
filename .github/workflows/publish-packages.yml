@@ -21,7 +21,7 @@ jobs:
 
       - name: "Setup npm"
         run: |
-          npm set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}"
+          echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }} > .npmrc
 
       - name: Install dependencies
         run: |
