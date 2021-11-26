@@ -44,7 +44,7 @@ export interface IFormContainerProps {
   className?: string
 }
 
-export interface IFormComponenetProps<T extends IOptionShared> {
+export interface IFormComponentProps<T extends IOptionShared> {
   title?: string
   description?: string
   value?: string

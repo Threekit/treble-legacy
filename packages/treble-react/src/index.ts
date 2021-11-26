@@ -32,6 +32,8 @@ import message from './components/message'
 //  Layouts
 import Modal from './components/TotalPrice'
 import Drawer from './components/Drawer'
+import Accordion from './components/Accordion'
+import Tabs from './components/Tabs'
 //  Wrappers
 import PortalToElement from './components/PortalToElement'
 import AwaitThreekitLoad from './components/AwaitThreekitLoad'
@@ -78,6 +80,8 @@ export {
   //  Layouts
   Modal,
   Drawer,
+  Accordion,
+  Tabs,
   //  Wrappers
   PortalToElement,
   AwaitThreekitLoad,
