@@ -1,28 +1,35 @@
-checks:
-  runs-on: ubuntu-latest
+name: Publish Packages
 
-  steps:
-    - name: "Checkout"
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+on:
+  push:
+    branches: main
 
-    - name: "Use NodeJS 16"
-      uses: actions/setup-node@v2
-      with:
-        node-version: "16"
+jobs:
+  publish:
+    runs-on: ubuntu-latest
 
-    - name: "Setup npm"
-      run: |
-        npm set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}"
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-    - name: Install dependencies
-      run: |
-        npm ci
-        npx lerna bootstrap
+      - name: "Use NodeJS 16"
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
 
-    - name: Run build # Run tests of all packages
-      run: npx lerna build
+      - name: "Setup npm"
+        run: |
+          npm set "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}"
 
-    - name: Publish # Run tests of all packages
-      run: npx lerna publish --canary --yes
+      - name: Install dependencies
+        run: |
+          npm ci
+          npx lerna bootstrap
+
+      - name: Run build # Run tests of all packages
+        run: npx lerna build
+
+      - name: Publish # Run tests of all packages
+        run: npx lerna publish --canary --yes
