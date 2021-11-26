@@ -16,6 +16,19 @@
   --ifm-code-font-size: 95%;
 }
 
+.navbar {
+  height: auto;
+  box-shadow: none;
+  padding-top: 27px;
+  padding-bottom: 27px;
+}
+
+.navbar__link {
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 18px;
+}
+
 .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.1);
   display: block;
@@ -23,6 +36,6 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
+html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }

@@ -24,7 +24,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl: "https://github.com/facebook/docusaurus/edit/main/website/",
+          // editUrl: "https://github.com/facebook/docusaurus/edit/main/website/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -36,11 +36,15 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        disableSwitch: true,
+      },
       navbar: {
-        title: "Treble Design System",
+        // title: "Treble Design System",
         logo: {
           alt: "Threekit - Treble",
-          src: "https://www.threekit.com/hubfs/Logos%20and%20Trademarks/threekit_logo_black.svg",
+          src:
+            "https://www.threekit.com/hubfs/Logos%20and%20Trademarks/threekit_logo_black.svg",
         },
         items: [
           {

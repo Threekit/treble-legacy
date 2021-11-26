@@ -5,21 +5,4 @@ custom_edit_url:
 
 # Welcome
 
-```jsx live
-function ThreekitApp() {
-  return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={"preview"}>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "auto 300px",
-          gridGap: "12px",
-        }}
-      >
-        <Player />
-        <FlatForm />
-      </div>
-    </ThreekitProvider>
-  );
-}
-```
+Welcome to the Treble Design System

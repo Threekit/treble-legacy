@@ -1,0 +1,24 @@
+.card--wrapper {
+  padding: 80px;
+  background: #f4f4f4;
+}
+
+.card--image {
+  padding-bottom: 40px;
+}
+
+.card--image img {
+  height: 80px;
+  width: 80px;
+}
+
+.card--title {
+  margin-bottom: 27px;
+}
+
+.card--description {
+  margin-bottom: 27px;
+}
+
+.card--button {
+}

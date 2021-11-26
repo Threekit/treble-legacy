@@ -7,7 +7,7 @@ custom_edit_url:
 
 The `<ThreekitProvider />` initializes the Threekit API used by the various components in the Treble library. It should be wrapped around the portion of the React app where the Treble components and hooks are being used.
 
-The Threekit Provider requires the a config object, which includes all the credentials related a the project.
+The Threekit Provider requires the a `threekitConfig` object, which includes all the credentials related a the project and a `threekitEnv` value to specify which Threekit Environment to use.
 
 ```jsx
 import React from "react";
@@ -16,26 +16,13 @@ import ReactDOM from "react-dom";
 import { ThreekitProvider } from "@threekit-tools/treble";
 import App from "./App";
 
-const config = {
-  //  The environment specific credentials should be placed
-  //  in an object assigned to the name of the environment
-  //  Note: The token key is 'publicToken' not 'authToken'
+const threekitConfig = {
   preview: {
+    //  These credentials DO NOT point to a real org
     publicToken: "3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48",
     assetId: "a9a66218-bkid-4106-96fe-a0359fdc3dc1",
     orgId: "20df501b-1ef8-4bh0-sfda-2l59426624de",
   },
-  "admin-fts": {
-    publicToken: "3fb4asd5d-ea38-0g05-a1c3-6cf9d8dd3d48",
-    assetId: "a9a66218-bkid-2206-96fe-a0709fdc3dc1",
-    orgId: "20df501b-1ef8-4bkm-sfda-2b99426624de",
-  },
-  //  Any additional parameters to pass to the player initialization
-  //  can also be added here. For example setting the showShare
-  //  property
-  showShare: true,
-  // We can pass overwrites to the default theme
-  theme: { primaryColor: "#54AA54" },
 };
 
 const threekitEnv = "preview";
@@ -48,9 +35,7 @@ ReactDOM.render(
 );
 ```
 
-### Threekit Provider Props
-
-The Threekit Provider takes two props:
+## Prop: Threekit Provider Props
 
 The `threekitEnv` sets which Threekit environment, `preview | admin-fts`, to use when running the app. It defaults to the **preview** environment.
 
@@ -58,31 +43,49 @@ The `threekitEnv` sets which Threekit environment, `preview | admin-fts`, to use
 const threekitEnv = "admin-fts";
 ```
 
-A `config` object including the **Threekit environment credentials**, the **Player API initialization parameters** and any **theme** overrides.
+## Prop: config
+
+The `config` object includes:
+
+- An object for each **Threekit environment credentials**
+- The **Player API initialization parameters**
+- An object for any **theme** overrides.
+
+### Threekit Environment Credentials
 
 The Threekit environment credentials include all variables that are specific to the Threekit Environment you are using. These include:
 
 ```js
-const threekitEnvironmentCredentials = {
-  //  The public auth token created in the settings
-  //  tab in your org on the Threekit Platform. It should
-  //  include the `localhost` domain for local development
-  //  and any domains to include for production / deployment
-  publicToken: "",
-  //  The Org Id for the Threekit Org
-  orgId: "",
-  //  The asset id of the Catalog Item you wish to initialize
-  //  in the Threekit Player
-  assetId: "",
-  //  (optional): The Asset Id of the Stage you wish to initialize in the
-  //  Threekit Player
-  stageId: "",
+const threekitConfig = {
+  //  The name of the object should be the environment
+  //  you want to use: preview | admin-fts
+  preview: {
+    //  The public auth token created in the settings
+    //  tab in your org on the Threekit Platform. It should
+    //  include the `localhost` domain for local development
+    //  and any domains to include for production / deployment
+    publicToken: "",
+    //  The Org Id for the Threekit Org
+    orgId: "",
+    //  The asset id of the Catalog Item you wish to initialize
+    //  in the Threekit Player
+    assetId: "",
+    //  (optional): The Asset Id of the Stage you wish to initialize in the
+    //  Threekit Player
+    stageId: "",
+  },
 };
 ```
 
+:::tip
+
+The Threekit Auth Token should be passed into its environment object under the key `publicToken`.
+
+:::
+
 ### Threekit Player API Parameters
 
-The **Player API initialization parameters** should be added directly to the `config` object. More information about parameters can be found here: [Embedding the Threekit Player](https://community.threekit.com/hc/en-us/articles/4406068353307-Embedding-the-Threekit-Player).
+The **Player API initialization parameters** should be added directly to the `threekitConfig` object. More information about parameters can be found here: [Embedding the Threekit Player](https://community.threekit.com/hc/en-us/articles/4406068353307-Embedding-the-Threekit-Player).
 
 ```js
 const threekitConfig = {
@@ -127,25 +130,70 @@ const threekitConfig = {
 
 ### Theming
 
-The **theme** is used to style all the component available in the Treble library. You can override any of the default values by passing in your own value for a parameter into the theme object. The default values for the theme are:
+The **theme** is used to style all the component available in the Treble library. You can override any of the default values by passing in your own value for a parameter into the theme object.
+
+The default values for the theme are:
 
 ```js
-const theme = {
-  primaryColor: "#1890ff",
-  linkColor: "#1890ff",
-  successColor: "#52c41a",
-  warningColor: "#faad14",
-  errorColor: "#f5222d",
-  fontBaseSize: "14px",
-  headingColor: "rgba(0, 0, 0, 0.85)",
-  textColor: "rgba(0, 0, 0, 0.65)",
-  textColorSecondary: "rgba(0, 0, 0, 0.45)",
-  disabledColor: "rgba(0, 0, 0, 0.25)",
-  borderRadius: "2px",
-  borderColorBase: "#d9d9d9",
-  boxShadowBase:
-    "0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);",
-  widgetSize: "36px",
-  fontFamily: '"Open Sans", sans-serif',
+const threekitConfig = {
+  theme: {
+    primaryColor: "#1890ff",
+    linkColor: "#1890ff",
+    successColor: "#52c41a",
+    warningColor: "#faad14",
+    errorColor: "#f5222d",
+    fontBaseSize: "14px",
+    headingColor: "rgba(0, 0, 0, 0.85)",
+    textColor: "rgba(0, 0, 0, 0.65)",
+    textColorSecondary: "rgba(0, 0, 0, 0.45)",
+    disabledColor: "rgba(0, 0, 0, 0.25)",
+    borderRadius: "2px",
+    borderColorBase: "#d9d9d9",
+    boxShadowBase:
+      "0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);",
+    widgetSize: "36px",
+    fontFamily: '"Open Sans", sans-serif',
+  },
 };
+```
+
+## Example
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+
+import { ThreekitProvider } from "@threekit-tools/treble";
+import App from "./App";
+
+const threekitConfig = {
+  //  The environment specific credentials should be placed
+  //  in an object assigned to the name of the environment
+  //  Note: The token key is 'publicToken' not 'authToken'
+  preview: {
+    publicToken: "3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48",
+    assetId: "a9a66218-bkid-4106-96fe-a0359fdc3dc1",
+    orgId: "20df501b-1ef8-4bh0-sfda-2l59426624de",
+  },
+  "admin-fts": {
+    publicToken: "3fb4asd5d-ea38-0g05-a1c3-6cf9d8dd3d48",
+    assetId: "a9a66218-bkid-2206-96fe-a0709fdc3dc1",
+    orgId: "20df501b-1ef8-4bkm-sfda-2b99426624de",
+  },
+  //  Any additional parameters to pass to the player initialization
+  //  can also be added here. For example setting the showShare
+  //  property
+  showShare: true,
+  // We can pass overwrites to the default theme
+  theme: { primaryColor: "#54AA54" },
+};
+
+const threekitEnv = "preview";
+
+ReactDOM.render(
+  <ThreekitProvider config={threekitConfig} threekitEnv={threekitEnv}>
+    <App /> // All Threekit related code goes here
+  </ThreekitProvider>,
+  document.getElementById("root")
+);
 ```

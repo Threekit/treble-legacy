@@ -1,27 +1,45 @@
 import React from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import styles from "./index.module.css";
 import HomepageFeatures from "../components/HomepageFeatures";
+import Card from "../components/Card/Card";
 
-function HomepageHeader() {
+const cards = [
+  {
+    image:
+      "https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-quickstart.svg",
+    title: "Quick start",
+    description: "Launch a new project and run starter code in a few steps.",
+    linkText: "Get Started ->",
+    link: "/docs/getting-started/quick-start",
+  },
+  {
+    image:
+      "https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-coreconcepts.svg",
+    title: "Basic Concepts",
+    description: "Learn about core features and functionality.",
+    linkText: "Learn Here ->",
+    link: "docs/getting-started/basic-concepts",
+  },
+];
+
+function HomepageBanner() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
+    <header className={clsx("treble treble--banner", styles.titlebanner)}>
+      <div>
+        <h1 className={clsx("treble treble--title", styles.supertitle)}>
+          Treble
+        </h1>
+        <h3>
+          Build a <i>Web Experience</i>
+          <br />
+          for your <i>Threekit Configurator</i>.
+        </h3>
       </div>
+      <div></div>
     </header>
   );
 }
@@ -33,8 +51,13 @@ export default function Home() {
       title={`Threekit - Treble`}
       description="Threekit - Treble Design System"
     >
-      <HomepageHeader />
+      <HomepageBanner />
       <main>
+        <div className={clsx("treble treble--title", styles.cardsarea)}>
+          {cards.map((card) => (
+            <Card {...card} />
+          ))}
+        </div>
         <HomepageFeatures />
       </main>
     </Layout>
