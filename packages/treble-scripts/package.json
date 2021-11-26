@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble-scripts",
-  "version": "0.0.12-alpha.13+09956b8",
+  "version": "0.0.12-alpha.14+2329b27",
   "main": "index.js",
   "license": "MIT",
   "bin": {
@@ -30,5 +30,6 @@
     "webpack-dev-server": "^4.5.0",
     "webpack-merge": "^5.8.0",
     "webpack-node-externals": "^3.0.0"
-  }
+  },
+  "gitHead": "2329b277abaa1ff88e30d60d27bb2e83468a8e64"
 }
