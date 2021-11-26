@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble",
-  "version": "0.0.10-alpha.14+2329b27",
+  "version": "0.0.10-alpha.16+2e16bcf",
   "author": "Amaan Saeed",
   "license": "MIT",
   "files": [
@@ -15,8 +15,7 @@
     "clean": "rimraf dist",
     "format": "prettier --write ./src",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -o build",
-    "publish": "npm publish"
+    "build-storybook": "build-storybook -o build"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
@@ -49,5 +48,5 @@
     "storybook-addon-styled-component-theme": "^2.0.0",
     "typescript": ">=4.4.4"
   },
-  "gitHead": "2329b277abaa1ff88e30d60d27bb2e83468a8e64"
+  "gitHead": "2e16bcf98f81e16bb1768072fdb3968122e7966f"
 }
