@@ -29,7 +29,7 @@ jobs:
           npx lerna bootstrap
 
       - name: Run build # Run tests of all packages
-        run: npx lerna build
+        run: npx lerna run build
 
       - name: Publish # Run tests of all packages
         run: npx lerna publish --canary --yes
