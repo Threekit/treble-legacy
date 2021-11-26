@@ -14,11 +14,11 @@ import {
 import { generateInputClassName as generateClassName } from '../../utils'
 import { ATTRIBUTE_TYPES } from '../../constants'
 import container, {
-  IFormComponenetProps,
+  IFormComponentProps,
   IOption,
 } from '../containers/formInputContainer'
 
-export interface ICards extends IFormComponenetProps<IOption> {
+export interface ICards extends IFormComponentProps<IOption> {
   showThumbnail?: boolean
   showPrice?: boolean
   showDescription?: boolean

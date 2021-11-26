@@ -7,11 +7,11 @@ import { FormComponentWrapper as Wrapper } from '../shared.styles'
 import { generateInputClassName as generateClassName } from '../../utils'
 import { ATTRIBUTE_TYPES } from '../../constants'
 import container, {
-  IFormComponenetProps,
+  IFormComponentProps,
   IOptionShared,
 } from '../containers/formInputContainer'
 
-export interface ITiles extends IFormComponenetProps<IOptionShared> {
+export interface ITiles extends IFormComponentProps<IOptionShared> {
   columns?: number
 }
 

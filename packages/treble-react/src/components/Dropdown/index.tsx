@@ -17,11 +17,11 @@ import { CaretDownIcon } from '../../icons'
 import { generateInputClassName as generateClassName } from '../../utils'
 import { ATTRIBUTE_TYPES } from '../../constants'
 import container, {
-  IFormComponenetProps,
+  IFormComponentProps,
   IOption,
 } from '../containers/formInputContainer'
 
-export interface IDropdown extends IFormComponenetProps<IOption> {
+export interface IDropdown extends IFormComponentProps<IOption> {
   showThumbnail?: boolean
   showPrice?: boolean
   showDescription?: boolean

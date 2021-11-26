@@ -14,11 +14,11 @@ import { FormComponentWrapper as Wrapper } from '../shared.styles'
 import { generateInputClassName as generateClassName } from '../../utils'
 import { ATTRIBUTE_TYPES } from '../../constants'
 import container, {
-  IFormComponenetProps,
+  IFormComponentProps,
   IOption,
 } from '../containers/formInputContainer'
 
-export interface IStrips extends IFormComponenetProps<IOption> {
+export interface IStrips extends IFormComponentProps<IOption> {
   showThumbnail?: boolean
   showPrice?: boolean
   showDescription?: boolean
