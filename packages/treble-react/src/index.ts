@@ -9,6 +9,7 @@ import useThreekitInitStatus from './hooks/useThreekitInitStatus'
 import useZoom from './hooks/useZoom'
 import useSnapshot from './hooks/useSnapshot'
 import useWishlist from './hooks/useWishlist'
+import useShare from './hooks/useShare'
 //  Components
 import ThreekitProvider from './components/ThreekitProvider'
 import Player from './components/Player'
@@ -40,6 +41,7 @@ import FlatForm from './components/FlatForm'
 import Zoom from './components/Zoom'
 import Snapshots from './components/Snapshots'
 import Wishlist from './components/Wishlist'
+import Share from './components/Share'
 
 export {
   //  Hooks
@@ -53,6 +55,7 @@ export {
   useZoom,
   useSnapshot,
   useWishlist,
+  useShare,
   //  Components
   ThreekitProvider,
   Player,
@@ -84,4 +87,5 @@ export {
   Zoom,
   Snapshots,
   Wishlist,
+  Share,
 }

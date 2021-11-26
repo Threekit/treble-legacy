@@ -14,6 +14,7 @@ import {
   SNAPSHOT_OUTPUTS,
   ATTRIBUTE_TYPES,
   WISHLIST_LOCALSTORAGE_KEY,
+  TK_SAVED_CONFIG_PARAM_KEY,
 } from '../constants'
 import {
   dataURItoBlob,
@@ -21,6 +22,8 @@ import {
   regularToKebabCase,
   setCameraPosition,
   getCameraPosition,
+  getParams,
+  objectToQueryStr,
 } from '../utils'
 import { IConfigurationResponse } from '../http/configurations'
 
@@ -295,8 +298,15 @@ class Treble {
       files,
     })
 
+    const params = Object.assign(getParams(), {
+      [TK_SAVED_CONFIG_PARAM_KEY]: response.data.shortId,
+    })
+    const url = window.location.href.replace(window.location.search, '')
+
     return Object.assign(
-      {},
+      {
+        resumableUrl: `${url}${objectToQueryStr(params)}`,
+      },
       response.data,
       response.data.thumbnail?.length
         ? {
