@@ -468,7 +468,7 @@ export const launch =
     dispatch(setThreekitLoaded(true))
     dispatch(setPlayerLoading(false))
 
-    const wishlistData = await window.threekit.treble.getWishlist()
+    const wishlistData = await window.threekit.treble.wishlist.getWishlist()
     dispatch(setWishlist(wishlistData))
 
     return
@@ -488,13 +488,13 @@ export const setConfiguration =
 //  Wishlst
 export const addToWishlist =
   (config: ISaveConfigurationConfig) => async (dispatch: ThreekitDispatch) => {
-    const wishlistData = await window.threekit.treble.addToWishlist(config)
+    const wishlistData = await window.threekit.treble.wishlist.addItem(config)
     dispatch(setWishlist(wishlistData))
   }
 
 export const removeFromWishlist =
   (idx: number) => (dispatch: ThreekitDispatch) => {
-    const wishlistData = window.threekit.treble.removeFromWishlist(idx)
+    const wishlistData = window.threekit.treble.wishlist.removeItemByIdx(idx)
     dispatch(setWishlist(wishlistData))
   }
 
@@ -507,7 +507,7 @@ export const resumeFromWishlist =
   }
 
 export const clearWishlist = () => (dispatch: ThreekitDispatch) => {
-  const wishlistData = window.threekit.treble.clearWishlist()
+  const wishlistData = window.threekit.treble.wishlist.clearWishlist()
   dispatch(setWishlist(wishlistData))
 }
 

@@ -13,7 +13,6 @@ import {
   ATTRIBUTES_RESERVED,
   SNAPSHOT_OUTPUTS,
   ATTRIBUTE_TYPES,
-  WISHLIST_LOCALSTORAGE_KEY,
   TK_SAVED_CONFIG_PARAM_KEY,
 } from '../constants'
 import {
@@ -25,7 +24,7 @@ import {
   getParams,
   objectToQueryStr,
 } from '../utils'
-import { IConfigurationResponse } from '../http/configurations'
+import Wishlist from './Wishlist'
 
 interface ITreble {
   player: IThreekitPlayer
@@ -66,13 +65,14 @@ const DEFAULT_CAMERA_CONFIG = {
 class Treble {
   _api: typeof threekitAPI
   _player: IThreekitPlayer
+  wishlist: Wishlist
   private _cameraValues?: CamerasMap
-  private _wishlist?: Array<IConfigurationResponse>
 
   constructor({ player }: ITreble) {
     //  Threekit API
     this._api = threekitAPI
     this._player = player
+    this.wishlist = new Wishlist()
     // this._player = player.enableApi('player')
   }
 
@@ -314,86 +314,6 @@ class Treble {
           }
         : undefined
     )
-  }
-
-  async getWishlist() {
-    if (this._wishlist) return this._wishlist
-    const { threekitDomain } = connection.getConnection()
-
-    const wishlistListStr = localStorage.getItem(WISHLIST_LOCALSTORAGE_KEY)
-    const wishlistList: Array<string> = JSON.parse(wishlistListStr || '[]')
-
-    const wishlistData = await Promise.all(
-      wishlistList.map((el) => threekitAPI.configurations.fetch(el))
-    )
-
-    this._wishlist = wishlistData.map((el) =>
-      Object.assign(
-        {},
-        el.data,
-        el.data.thumbnail?.length
-          ? {
-              thumbnail: `${threekitDomain}/api/files/hash/${el.data.thumbnail}`,
-            }
-          : undefined
-      )
-    )
-
-    return this._wishlist
-  }
-
-  async addToWishlist(config?: ISaveConfigurationConfig) {
-    if (!this._wishlist) {
-      this._wishlist = []
-      localStorage.setItem(WISHLIST_LOCALSTORAGE_KEY, JSON.stringify([]))
-    }
-
-    const configPrepped = Object.assign({ snapshot: true }, config)
-
-    const savedConfiguration = await this.saveConfiguration(configPrepped)
-    if (!savedConfiguration) return this._wishlist
-
-    this._wishlist = [...this._wishlist, savedConfiguration]
-    const wishlistListStr = localStorage.getItem(WISHLIST_LOCALSTORAGE_KEY)
-    const wishlistList: Array<string> = JSON.parse(wishlistListStr || '[]')
-    wishlistList.push(savedConfiguration.shortId)
-    localStorage.setItem(
-      WISHLIST_LOCALSTORAGE_KEY,
-      JSON.stringify(wishlistList)
-    )
-
-    return this.getWishlist()
-  }
-
-  removeFromWishlist(idx: number) {
-    if (!this._wishlist) {
-      this._wishlist = []
-      localStorage.setItem(WISHLIST_LOCALSTORAGE_KEY, JSON.stringify([]))
-      return this._wishlist
-    }
-
-    if (idx > this._wishlist.length - 1) return this._wishlist
-
-    const updatedWishlist = [...this._wishlist]
-    updatedWishlist.splice(idx, 1)
-    this._wishlist = updatedWishlist
-
-    const wishlistListStr = localStorage.getItem(WISHLIST_LOCALSTORAGE_KEY)
-    const wishlistList: Array<string> = JSON.parse(wishlistListStr || '[]')
-    wishlistList.splice(idx, 1)
-
-    localStorage.setItem(
-      WISHLIST_LOCALSTORAGE_KEY,
-      JSON.stringify(wishlistList)
-    )
-
-    return this._wishlist
-  }
-
-  clearWishlist() {
-    this._wishlist = []
-    localStorage.setItem(WISHLIST_LOCALSTORAGE_KEY, JSON.stringify([]))
-    return this._wishlist
   }
 }
 
