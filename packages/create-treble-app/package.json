@@ -1,0 +1,14 @@
+{
+  "name": "@threekit-tools/create-treble-app",
+  "version": "0.0.15",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "create-treble-app": "index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^8.3.0"
+  }
+}
