@@ -4,25 +4,36 @@ import { IConfigurationResponse } from '../http/configurations'
 import { ISaveConfigurationConfig } from './Treble'
 import { WISHLIST_LOCALSTORAGE_KEY } from '../constants'
 
-class Wishlist {
-  private _wishlist?: Array<IConfigurationResponse>
+export type WishlistArray = Array<IConfigurationResponse>
 
+let wishlistData: WishlistArray
+
+export interface IWishlist {
+  getWishlist(): Promise<Array<IConfigurationResponse>>
+  addItem(
+    config?: ISaveConfigurationConfig
+  ): Promise<Array<IConfigurationResponse>>
+  removeItemByIdx(idx: number): Array<IConfigurationResponse>
+  clearWishlist(): Array<IConfigurationResponse>
+}
+
+class Wishlist implements IWishlist {
   constructor() {
     this.getWishlist()
   }
 
-  async getWishlist() {
-    if (this._wishlist) return this._wishlist
+  getWishlist = async () => {
+    if (wishlistData) return wishlistData
     const { threekitDomain } = connection.getConnection()
 
     const wishlistListStr = localStorage.getItem(WISHLIST_LOCALSTORAGE_KEY)
     const wishlistList: Array<string> = JSON.parse(wishlistListStr || '[]')
 
-    const wishlistData = await Promise.all(
+    const wishlistDataRaw = await Promise.all(
       wishlistList.map((el) => threekitAPI.configurations.fetch(el))
     )
 
-    this._wishlist = wishlistData.map((el) =>
+    wishlistData = wishlistDataRaw.map((el) =>
       Object.assign(
         {},
         el.data,
@@ -34,12 +45,12 @@ class Wishlist {
       )
     )
 
-    return this._wishlist
+    return wishlistData
   }
 
-  async addItem(config?: ISaveConfigurationConfig) {
-    if (!this._wishlist) {
-      this._wishlist = []
+  addItem = async (config?: ISaveConfigurationConfig) => {
+    if (!wishlistData) {
+      wishlistData = []
       localStorage.setItem(WISHLIST_LOCALSTORAGE_KEY, JSON.stringify([]))
     }
 
@@ -49,9 +60,9 @@ class Wishlist {
       configPrepped
     )
     // const savedConfiguration = await this.saveConfiguration(configPrepped)
-    if (!savedConfiguration) return this._wishlist
+    if (!savedConfiguration) return wishlistData
 
-    this._wishlist = [...this._wishlist, savedConfiguration]
+    wishlistData = [...wishlistData, savedConfiguration]
     const wishlistListStr = localStorage.getItem(WISHLIST_LOCALSTORAGE_KEY)
     const wishlistList: Array<string> = JSON.parse(wishlistListStr || '[]')
     wishlistList.push(savedConfiguration.shortId)
@@ -63,18 +74,18 @@ class Wishlist {
     return this.getWishlist()
   }
 
-  removeItemByIdx(idx: number) {
-    if (!this._wishlist) {
-      this._wishlist = []
+  removeItemByIdx = (idx: number) => {
+    if (!wishlistData?.length) {
+      wishlistData = []
       localStorage.setItem(WISHLIST_LOCALSTORAGE_KEY, JSON.stringify([]))
-      return this._wishlist
+      return wishlistData
     }
 
-    if (idx > this._wishlist.length - 1) return this._wishlist
+    if (idx > wishlistData?.length - 1) return wishlistData
 
-    const updatedWishlist = [...this._wishlist]
+    const updatedWishlist = [...wishlistData]
     updatedWishlist.splice(idx, 1)
-    this._wishlist = updatedWishlist
+    wishlistData = updatedWishlist
 
     const wishlistListStr = localStorage.getItem(WISHLIST_LOCALSTORAGE_KEY)
     const wishlistList: Array<string> = JSON.parse(wishlistListStr || '[]')
@@ -85,14 +96,16 @@ class Wishlist {
       JSON.stringify(wishlistList)
     )
 
-    return this._wishlist
+    return wishlistData
   }
 
-  clearWishlist() {
-    this._wishlist = []
+  clearWishlist = () => {
+    wishlistData = []
     localStorage.setItem(WISHLIST_LOCALSTORAGE_KEY, JSON.stringify([]))
-    return this._wishlist
+    return wishlistData
   }
 }
 
-export default Wishlist
+export default function createWishlist() {
+  return new Wishlist()
+}

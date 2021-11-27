@@ -18,7 +18,7 @@ import {
   TK_PLAYER_ROOT_DIV,
 } from '../constants'
 import { ITranslationMap } from '../api/products'
-import Treble, { ISaveConfigurationConfig } from '../Treble'
+import Treble, { ISaveConfigurationConfig, WishlistArray } from '../Treble'
 import { IConfigurationResponse } from '../http/configurations'
 
 /*****************************************************
@@ -125,7 +125,7 @@ export interface ThreekitState {
   //  Attributes State
   attributes: undefined | Array<IThreekitDisplayAttribute>
   //  Wishlist
-  wishlist: Array<IConfigurationResponse>
+  wishlist: WishlistArray
 }
 
 const initialState: ThreekitState = {

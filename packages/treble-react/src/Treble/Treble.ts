@@ -1,293 +1,43 @@
 import threekitAPI from '../api'
 import connection from '../connection'
-import {
-  IThreekitPlayer,
-  IDisplayAttributeAsset,
-  IDisplayAttributeString,
-  IDisplayAttributeAssetValue,
-  IDisplayAttributeStringValue,
-  IMetadata,
-} from '../threekit'
-import {
-  SNAPSHOT_FORMATS,
-  ATTRIBUTES_RESERVED,
-  SNAPSHOT_OUTPUTS,
-  ATTRIBUTE_TYPES,
-  TK_SAVED_CONFIG_PARAM_KEY,
-} from '../constants'
-import {
-  dataURItoBlob,
-  dataURItoFile,
-  regularToKebabCase,
-  setCameraPosition,
-  getCameraPosition,
-  getParams,
-  objectToQueryStr,
-} from '../utils'
-import Wishlist from './Wishlist'
+import { IThreekitPlayer, IMetadata } from '../threekit'
+import { TK_SAVED_CONFIG_PARAM_KEY } from '../constants'
+import { getParams, objectToQueryStr } from '../utils'
+import Wishlist, { IWishlist } from './Wishlist'
+import Snapshots from './Snapshots'
 
 interface ITreble {
   player: IThreekitPlayer
-}
-
-export type ISnapshotsCameras = undefined | string | Array<string | undefined>
-
-export interface ITakeSnapshotsConfig {
-  attributeName?: string
-  output?: string
-  format?: string
-  size?: { width: number; height: number }
-  filename?: string
 }
 
 export interface ISaveConfigurationConfig {
   customerId?: string
   metadata?: IMetadata
   productVersion?: string
-  snapshot?:
-    | true
-    | {
-        camera: string | undefined
-        config: ITakeSnapshotsConfig
-      }
-}
-
-type CamerasMap = Record<string, string | { assetId: string }>
-
-const DEFAULT_CAMERA_CONFIG = {
-  filename: `snapshot`,
-  size: { width: 1920, height: 1080 },
-  format: SNAPSHOT_FORMATS.png,
-  attributeName: ATTRIBUTES_RESERVED.camera,
-  output: SNAPSHOT_OUTPUTS.blob,
 }
 
 class Treble {
   _api: typeof threekitAPI
   _player: IThreekitPlayer
-  wishlist: Wishlist
-  private _cameraValues?: CamerasMap
+  wishlist: IWishlist
+  private _snapshots: Snapshots
+  takeSnapshots: Snapshots['takeSnapshots']
 
   constructor({ player }: ITreble) {
     //  Threekit API
     this._api = threekitAPI
     this._player = player
-    this.wishlist = new Wishlist()
+    this.wishlist = Wishlist()
+    this._snapshots = new Snapshots()
+    this.takeSnapshots = this._snapshots.takeSnapshots
     // this._player = player.enableApi('player')
   }
 
-  private _getCameraValue(cameraAttrName: string) {
-    const attribute = window.threekit.configurator
-      .getDisplayAttributes()
-      .find((el) => el.name === cameraAttrName)
-    if (!attribute) return undefined
-    return attribute.value
-  }
-
-  private _getCamerasMap(cameraAttrName: string) {
-    if (this._cameraValues) return this._cameraValues
-    const attribute = window.threekit.configurator
-      .getDisplayAttributes()
-      .find((el) => el.name === cameraAttrName)
-    if (!attribute) {
-      this._cameraValues = {}
-      return this._cameraValues
-    }
-
-    const cameraAttribute = attribute as
-      | IDisplayAttributeAsset
-      | IDisplayAttributeString
-
-    cameraAttribute.values.forEach((el) => {
-      const value =
-        cameraAttribute.type === ATTRIBUTE_TYPES.asset
-          ? { assetId: (el as IDisplayAttributeAssetValue).assetId }
-          : (el as IDisplayAttributeStringValue).value
-      this._cameraValues = Object.assign(this._cameraValues || {}, {
-        [el.label]: value,
-      })
-    }, {})
-
-    return this._cameraValues
-  }
-
-  async takeSnapshots(
-    cameras: ISnapshotsCameras,
-    config: ITakeSnapshotsConfig
-  ) {
+  saveConfiguration = async (config?: ISaveConfigurationConfig) => {
     const { threekitDomain } = connection.getConnection()
-    const filename = config.filename || DEFAULT_CAMERA_CONFIG.filename
-    const size = config.size || DEFAULT_CAMERA_CONFIG.size
-    const format = config.format || DEFAULT_CAMERA_CONFIG.format
-    const attributeName =
-      config.attributeName || DEFAULT_CAMERA_CONFIG.attributeName
-    const output = config.output || DEFAULT_CAMERA_CONFIG.output
-
-    let camerasList = Array.isArray(cameras) ? cameras : [cameras]
-    let snapshotsRaw: Array<string>
-
-    if (camerasList.length === 1 && camerasList[0] === undefined) {
-      const snapshotData = await getSnapshot()
-      snapshotsRaw = [snapshotData]
-    } else {
-      const camerasMap = this._getCamerasMap(attributeName)
-      if (!camerasMap) return null
-      camerasList = camerasList.filter(
-        (el) => el === undefined || Object.keys(camerasMap).includes(el)
-      )
-
-      const currentCamera = this._getCameraValue(attributeName)
-      const cameraPosition = getCameraPosition(window.threekit.player.camera)
-      snapshotsRaw = await getSnapshots(camerasList, camerasMap)
-      await window.threekit.configurator.setConfiguration({
-        [attributeName]: currentCamera,
-      })
-      setCameraPosition(window.threekit.player.camera, cameraPosition)
-    }
-
-    switch (output) {
-      case SNAPSHOT_OUTPUTS.url:
-        const savedSnapshots = await Promise.all(
-          snapshotsRaw.map((snapshotBlob, idx) => {
-            const cameraName = camerasList?.[idx]
-              ? `-${regularToKebabCase(camerasList[idx] || 'default')}`
-              : ''
-            return saveSnapshotToPlatform(
-              snapshotBlob,
-              `${filename}${cameraName}.${format}`
-            )
-          })
-        )
-        return Promise.resolve(savedSnapshots)
-      case SNAPSHOT_OUTPUTS.download:
-        snapshotsRaw.forEach((snapshotBlob, idx) => {
-          const cameraName = camerasList?.[idx]
-            ? `-${regularToKebabCase(camerasList[idx] || 'default')}`
-            : ''
-          downloadSnapshot(snapshotBlob, `${filename}${cameraName}.${format}`)
-        })
-        return Promise.resolve()
-      case SNAPSHOT_OUTPUTS.blob:
-        const snapshotBlobs = snapshotsRaw.map((el) => dataURItoBlob(el))
-        return Promise.resolve(snapshotBlobs)
-      case SNAPSHOT_OUTPUTS.file:
-        const snapshotFiles = snapshotsRaw.map((el, idx) => {
-          const cameraName = camerasList?.[idx]
-            ? `-${regularToKebabCase(camerasList[idx] || 'default')}`
-            : ''
-          return dataURItoFile(el, `${filename}${cameraName}.${format}`)
-        })
-        return Promise.resolve(snapshotFiles)
-      case SNAPSHOT_OUTPUTS.dataUrl:
-      default:
-        return Promise.resolve(snapshotsRaw)
-    }
-
-    function getSnapshot() {
-      return window.threekit.player.snapshotAsync({
-        size,
-        mimeType: `image/${SNAPSHOT_FORMATS[format]}`,
-      })
-    }
-
-    function getSnapshots(
-      cameras: Array<string | undefined>,
-      camerasMap: CamerasMap
-    ) {
-      let snapshots: Array<string> = []
-      return cameras.reduce((snapshotPromise, camera) => {
-        return snapshotPromise.then(
-          () =>
-            new Promise(async (resolve) => {
-              if (camera)
-                await window.threekit.configurator.setConfiguration({
-                  [attributeName]: camerasMap[camera],
-                })
-              const snapshotStr = await getSnapshot()
-              snapshots.push(snapshotStr)
-              resolve(snapshots)
-            })
-        )
-      }, Promise.resolve(snapshots))
-    }
-
-    async function saveSnapshotToPlatform(snapshot: string, filename: string) {
-      const files = dataURItoFile(snapshot, filename)
-
-      const response = await threekitAPI.configurations.save({
-        assetId: window.threekit.player.assetId,
-        configuration: window.threekit.configurator.getConfiguration(),
-        files,
-      })
-
-      return `${threekitDomain}/api/files/hash/${response.data.thumbnail}`
-    }
-
-    async function downloadSnapshot(snapshot: string, filename: string) {
-      const blob = dataURItoBlob(snapshot)
-      const blobUrl = URL.createObjectURL(blob)
-      const link = document.createElement('a') // Or maybe get it from the current document
-      link.href = blobUrl
-      link.download = filename
-      const clickHandler = () => {
-        setTimeout(() => {
-          URL.revokeObjectURL(blobUrl)
-          link.removeEventListener('click', clickHandler)
-        }, 150)
-      }
-
-      link.addEventListener('click', clickHandler)
-      document.body.appendChild(link)
-
-      link.click()
-    }
-  }
-
-  async saveConfiguration(config?: ISaveConfigurationConfig) {
-    const { threekitDomain } = connection.getConnection()
-    const { customerId, metadata, productVersion, snapshot } = Object.assign(
-      {},
-      config
-    )
+    const { customerId, metadata, productVersion } = Object.assign({}, config)
 
     let files: File | undefined = undefined
-
-    if (snapshot) {
-      let { filename, size, format, attributeName } = DEFAULT_CAMERA_CONFIG
-      let snapshotRaw
-
-      if (snapshot === true || !snapshot.camera) {
-        snapshotRaw = await await window.threekit.player.snapshotAsync({
-          size,
-          mimeType: `image/${SNAPSHOT_FORMATS[format]}`,
-        })
-      } else {
-        filename = `${filename}${snapshot.camera || ''}`
-        size = snapshot.config?.size || DEFAULT_CAMERA_CONFIG.size
-        format = snapshot.config?.format || DEFAULT_CAMERA_CONFIG.format
-        attributeName =
-          snapshot.config?.attributeName || DEFAULT_CAMERA_CONFIG.attributeName
-
-        const camerasMap = this._getCamerasMap(attributeName)
-        if (!camerasMap) return null
-
-        const currentCamera = this._getCameraValue(attributeName)
-        const cameraPosition = getCameraPosition(window.threekit.player.camera)
-        await window.threekit.configurator.setConfiguration({
-          [attributeName]: camerasMap[snapshot.camera],
-        })
-        snapshotRaw = await await window.threekit.player.snapshotAsync({
-          size,
-          mimeType: `image/${SNAPSHOT_FORMATS[format]}`,
-        })
-        await window.threekit.configurator.setConfiguration({
-          [attributeName]: currentCamera,
-        })
-        setCameraPosition(window.threekit.player.camera, cameraPosition)
-      }
-
-      files = dataURItoFile(snapshotRaw, `${filename}.${format}`)
-    }
 
     const response = await threekitAPI.configurations.save({
       assetId: window.threekit.player.assetId,

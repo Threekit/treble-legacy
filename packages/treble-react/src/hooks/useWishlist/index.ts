@@ -6,15 +6,14 @@ import {
   clearWishlist,
   isThreekitLoaded,
 } from '../../store/threekit'
-import { IConfigurationResponse } from '../../http/configurations'
-import { ISaveConfigurationConfig } from '../../Treble'
+import { ISaveConfigurationConfig, WishlistArray } from '../../Treble'
 import { useThreekitSelector, useThreekitDispatch } from '../../store'
 import { copyToClipboard, getResumableUrl } from '../../utils'
 import message from '../../components/message'
 
 type UseWishlistHook =
   | [
-      Array<IConfigurationResponse>,
+      WishlistArray,
       (config?: ISaveConfigurationConfig) => Promise<void>,
       (idx: number) => void,
       (idx: number) => void,
