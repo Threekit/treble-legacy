@@ -53,7 +53,11 @@ const snapshotConfig = {
 }
 ```
 
-**Note: If you are providing are providing a `snapshotConfig` you will have to pass in the camera list as the first argument to the `takeSnapshots()` function.**
+:::info Note
+
+Note: If you are providing are providing a `snapshotConfig` you will have to pass in the camera list as the first argument to the `takeSnapshots()` function.
+
+:::
 
 The `snapshotConfig` is optional.
 
