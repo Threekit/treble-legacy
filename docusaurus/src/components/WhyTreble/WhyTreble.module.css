@@ -18,6 +18,7 @@
 
 .whytreble__item > div:nth-child(1) > img {
   width: 22px;
+  max-width: 22px;
 }
 
 .whytrebleitem__title {

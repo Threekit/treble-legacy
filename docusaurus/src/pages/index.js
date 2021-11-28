@@ -13,13 +13,13 @@ const FeatureList = [
     title: "Components",
     imgUrl:
       "https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-components.svg",
-    link: "/docs/treble-react-api/components/intro",
+    link: "/docs/treble-react/components/overview",
     description: <>The building blocks for engaging web experiences.</>,
   },
   {
     title: "Hooks",
     imgUrl: "https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-hooks.svg",
-    link: "/docs/treble-react-api/hooks",
+    link: "/docs/treble-react/hooks",
     description: (
       <>Threekit powered React hooks to build your own components.</>
     ),
@@ -27,7 +27,7 @@ const FeatureList = [
   {
     title: "JS API",
     imgUrl: "https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-api.svg",
-    link: "/docs/treble-js-api/introduction",
+    link: "/docs/treble-js-api/overview",
     description: (
       <>Higher level functions for all your functional requirements.</>
     ),
@@ -81,11 +81,12 @@ const TrebleNotes = [
   {
     title: "Quick start",
     note:
-      "Jump start your UI development with our project boilerplate. Get started with ",
+      "Jump start your UI development with our project boilerplate. Don't waste time thinking about bundling and environment setup and focus on bringing your experience to life.",
   },
   {
     title: "React Powered",
-    note: "Develop in React",
+    note:
+      "Our library offers a set of components and hooks that are designed to be consistent with the broadly used React conventions. If you're familiar with React, you're already familiar with Treble.",
   },
   {
     title: "Hooks all the way down",
@@ -93,8 +94,23 @@ const TrebleNotes = [
       "Hooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the hooks to power them.",
   },
   {
+    title: "Webpack 5",
+    note:
+      "Our scripts are using Webpack 5 for bundling that works across browsers and devices.",
+  },
+  {
     title: "eCommerce Optimized",
     note: "Build optimized to eCommerce embedding.",
+  },
+  {
+    title: "Treble Launchpad",
+    note:
+      "Treble launchpad is a hosting and deployment solution for eligible Threekit projects that can plug right into a Treble project.",
+  },
+  {
+    title: "Figma Design",
+    note:
+      "All our components are first designed in figma before being implemented. We always recommend wireframing a design before getting into the code of it so we built a Figma Design Kit around our components for you to use.",
   },
 ];
 

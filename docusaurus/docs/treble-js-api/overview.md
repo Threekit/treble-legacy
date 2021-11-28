@@ -3,7 +3,7 @@ sidebar_position: 1
 custom_edit_url:
 ---
 
-# Introduction
+# Overview
 
 The the `ThreekitProvider` is initialized, it runs the Threekit Player API and instantiates the Treble Class, placing both on the window object in the following structure:
 

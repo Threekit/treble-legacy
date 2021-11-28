@@ -17,7 +17,7 @@ For projects that will require embedding into an existing webpages or hosting wi
 Run the following command, replacing the `app-name` with your project's name:
 
 ```bash
-npx @threekit-tools/create-treble-app app-name
+npx create-treble-app app-name
 ```
 
 And follow along any setups with any prompts you are required to answer.

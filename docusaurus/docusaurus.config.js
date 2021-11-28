@@ -82,7 +82,7 @@ const config = {
             position: "right",
           },
           {
-            to: "/demos/intro",
+            to: "/demos/overview",
             position: "right",
             label: "Demos",
           },

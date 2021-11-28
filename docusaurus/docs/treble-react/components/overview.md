@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 custom_edit_url:
-sidebar_label: Introduction
+sidebar_label: Overview
 ---
 
 # Treble Components

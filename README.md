@@ -1,4 +1,4 @@
-# Treble Design System
+# Treble Framework
 
 ## Getting Starting
 
