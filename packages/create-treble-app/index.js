@@ -4,16 +4,27 @@ import cloneTemplate from "./scripts/clone-template.js";
 import { TEMPLATES } from "./constants.js";
 import { prepProcessArgs } from "./utils.js";
 import { missingProjectName } from "./messages/index.js";
+import enquirer from "enquirer";
 
 const argv = process.argv.slice(2);
 const preppedArgs = prepProcessArgs(argv);
 
-const template = preppedArgs.flags.template
+const templateName = preppedArgs.flags.template
   ? TEMPLATES[preppedArgs.flags.template]
   : TEMPLATES.basic;
 
-if (!preppedArgs.appName) {
-  missingProjectName();
-} else {
-  cloneTemplate(preppedArgs.appName, template);
-}
+let projectName = preppedArgs.appName;
+
+const init = async () => {
+  if (!projectName) {
+    const response = await enquirer.prompt({
+      type: "input",
+      name: "projectName",
+      message: "Please provide a name for your project?",
+    });
+    projectName = response.projectName.replace(/ /g, "-").toLowerCase();
+  }
+  cloneTemplate(projectName, templateName);
+};
+
+init();
