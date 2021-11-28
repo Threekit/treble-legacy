@@ -3,7 +3,7 @@ import { fileURLToPath } from "url";
 import fs from "fs";
 import * as messages from "../messages/index.js";
 import spawn from "cross-spawn";
-import { TEMPLATES } from "../constants";
+import { TEMPLATES } from "../constants.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
