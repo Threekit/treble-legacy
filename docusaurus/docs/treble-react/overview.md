@@ -11,8 +11,8 @@ The Treble React package follows a 'Provider' Pattern where all the React code t
 
 Treble provides 3 main family of features: Expanded functionality, including react-hooks, that provide direct ways to implement higher-level features, components built using that functionality to provide UI presentational elements for the configurator and many other features, and tools which allow us to add new and custom interactivity to the 3D.
 
-- [Threekit Provider]('/../../treble-react/threekit-provider.md')
-- [Player]('/../../treble-react/player.md')
-- [Components]('/../../treble-react/components/overview.md')
-- [Hooks]('/../../treble-react/hooks.md')
-- [Treble API]('/../../treble-js-api/treble.md')
+- [Threekit Provider](threekit-provider.md)
+- [Player](player.md)
+- [Components](components/overview.md)
+- [Hooks](treble-react/hooks.md)
+- [Treble API](../treble-js-api/treble.md)

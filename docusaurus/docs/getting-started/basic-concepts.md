@@ -44,6 +44,6 @@ The `Treble Script` are available in the `@threekit-tools/treble-scripts` packag
 
 The scripts are optimized to bundle the app into a single javascript file with a static name, ideal for embedding the final app as a portion of an existing webpage.
 
-Fine out more about in the [Available Scripts]('/../available-scripts.md') section.
+Fine out more about in the [Available Scripts](available-scripts.md) section.
 
 ## Treble Launchpad

@@ -10,6 +10,6 @@ Welcome to the Treble Demos. We've setup a few coded demos to introduce some bas
 
 **The demos include:**
 
-- [Basic Project Setup]('/../basic-setup.md')
-- [Using Form Components to construct a form]('/../building-a-form.md')
-- [Adding Widgets to the Player]('/../using-widgets.md')
+- [Basic Project Setup](basic-setup.md)
+- [Using Form Components to construct a form](building-a-form.md)
+- [Adding Widgets to the Player](/using-widgets.md)
