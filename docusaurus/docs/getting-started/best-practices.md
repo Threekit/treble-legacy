@@ -30,4 +30,4 @@ Consider the bigger picture when organizing and structuring your product catalog
 
 ### Consider Interactions on Mobile
 
-Without right-click on mobile, the interaction to rotate an object in 3D is the same as to scroll the page. We get around this by turning off vertical rotation in the Threekit player on mobile by default, however, projects often require vertical rotation even on mobile and have to design their UI aware of this and other such constraints.
+Without right-click or scroll-wheel on mobile, the interaction to rotate an object in 3D is the same as to scroll the page. We get around this by turning off vertical rotation in the Threekit player on mobile by default, however, projects often require vertical rotation even on mobile and have to design their UI aware of this and other such constraints.
