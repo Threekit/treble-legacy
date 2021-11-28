@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/create-treble-app",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "main": "index.js",
   "license": "MIT",
   "type": "module",
@@ -9,6 +9,6 @@
   },
   "dependencies": {
     "chalk": "^5.0.0",
-    "commander": "^8.3.0"
+    "cross-spawn": "^7.0.3"
   }
 }

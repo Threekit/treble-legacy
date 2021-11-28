@@ -1,0 +1,16 @@
+{
+  "name": "treble-frontend",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "treble-scripts start",
+    "build": "treble-scripts build"
+  },
+  "dependencies": {
+    "@threekit-tools/treble": "^0.0.8",
+    "@threekit-tools/treble-scripts": "^0.0.10",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
