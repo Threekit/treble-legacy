@@ -1,6 +1,6 @@
 {
-  "name": "@threekit-tools/create-treble-app",
-  "version": "0.0.19",
+  "name": "create-treble-app",
+  "version": "0.0.2",
   "main": "index.js",
   "license": "MIT",
   "type": "module",
