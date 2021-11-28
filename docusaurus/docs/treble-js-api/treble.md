@@ -8,7 +8,15 @@ custom_edit_url:
 
 **`window.threekit.treble`**
 
-## takeSnapshots()
+## Treble
+
+### saveConfiguration()
+
+```js
+await window.threekit.treble.saveConfiguration();
+```
+
+### takeSnapshots()
 
 ```js
 await window.threekit.treble.takeSnapshots(cameraList, snapshotsConfig);
@@ -18,7 +26,7 @@ The `takeSnapshots` function is used to capture snapshots of the user's current 
 
 The function can be provided a list of cameras if you need snapshots from multiple angles. You are also able to specify how you want the snapshot outputted depending on your requirements, for example a `url` if you need to share the image or a `dataUrl` if you'd like to display it in an `<img>` tag.
 
-### arg: cameraList
+#### arg: cameraList
 
 **`type cameraList: string | undefined | Array<string | undefined>`**
 
@@ -26,7 +34,7 @@ The first argument in the takeSnapshots - `camerasList` - is where you specify t
 
 As such calling the function without the `cameraList` argument (`window.threekit.treble.takeSnapshots()`) or setting it to undefined (`window.threekit.treble.takeSnapshots(undefined, snapshotConfig)`), will return a snapshot from the users current view.
 
-### arg: snapshotConfig
+#### arg: snapshotConfig
 
 ```js
 const snapshotConfig = {
@@ -49,7 +57,7 @@ const snapshotConfig = {
 
 The `snapshotConfig` is optional.
 
-### Output
+#### Output
 
 The `takeSnapshots` function returns a Promise. If the you selected `download` as your output for the snapshots, the returned promise will not return a value when it resolves. In all other instances, the Promise will resolve to return an array with each item is a single snapshot in defined output datatype (`blob | file | dataUrl | url`).
 
@@ -66,3 +74,39 @@ const snapshotUrls = await window.threekit.treble.takeSnapshots(
   { output: "url" }
 );
 ```
+
+## Wishlist
+
+The wishlist is a local browser cached Wishlist.
+
+### wishlist.getWishlist()
+
+```js
+await window.threekit.treble.wishlist.getWishlist();
+```
+
+The `wishlist.getWishlist` will return the user's wishlist.
+
+### wishlist.addItem()
+
+```js
+await window.threekit.treble.wishlist.addItem();
+```
+
+The `wishlist.addItem` function will add the users current configuration to their wishlist.
+
+### wishlist.removeItemByIdx()
+
+```js
+window.threekit.treble.wishlist.removeItemByIdx();
+```
+
+The `wishlist.removeItemByIdx` removed a single item from the user's wishlist. The item to remove is specified by passing in its index in the wishlist array into the function.
+
+### wishlist.clearWishlist()
+
+```js
+window.threekit.treble.wishlist.clearWishlist();
+```
+
+The `wishlist.clearWishlist` clears out all items from the user's wishlist.

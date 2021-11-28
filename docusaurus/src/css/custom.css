@@ -19,8 +19,9 @@
 .navbar {
   height: auto;
   box-shadow: none;
-  padding-top: 27px;
-  padding-bottom: 27px;
+  /* padding-top: 27px;
+  padding-bottom: 27px; */
+  padding: 27px 20px;
 }
 
 .navbar__link {

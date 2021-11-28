@@ -1,0 +1,23 @@
+.partof {
+  font-weight: 600;
+  font-size: 20px;
+
+  display: grid;
+  grid-template-columns: max-content max-content;
+  grid-gap: 12px;
+}
+
+.partof > div {
+  height: max-content;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.partof > div:nth-child(2) {
+  height: 28px;
+}
+
+.partof img {
+  height: 22px;
+}

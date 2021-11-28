@@ -3,6 +3,23 @@
  * and scoped locally.
  */
 
+@font-face {
+  font-family: "Aeonik";
+  src: url("https://www.threekit.com/hubfs/New%20Branding%20Images/Fonts/Aeonik-Medium.ttf")
+      format("tff"),
+    url("https://www.threekit.com/hubfs/New%20Branding%20Images/Fonts/Aeonik-Regular.woff")
+      format("woff");
+}
+
+p {
+  font-family: Aeonik, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  line-height: 1.8rem;
+}
+
 h1,
 h2,
 h3,
@@ -20,7 +37,7 @@ h5 {
 h1 {
   font-size: 48px;
   line-height: 58px;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 h3 {
@@ -29,10 +46,21 @@ h3 {
   font-weight: 400;
 }
 
+main > div {
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 80px 20px;
+}
+
+.mainalt {
+  background: #b2c980;
+}
+
 .supertitle {
   font-size: 100px;
   line-height: 120px;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0;
 }
 
@@ -59,4 +87,91 @@ h3 {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
+}
+
+.footer {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1300px;
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.gettingstarted {
+  margin-top: 80px;
+}
+
+.gettingstarted__title {
+  text-align: center;
+  font-size: 64px;
+}
+
+.gettingstarted__subtitle {
+  text-align: center;
+}
+
+.gettingstarted__actions {
+  width: max-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 120px;
+
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.gettingstarted__actions > div:nth-child(2) {
+  margin-top: 80px;
+}
+
+.gettingstarted__action {
+  padding: 30px 40px !important;
+  cursor: pointer;
+  transition: all 0.16s ease-in-out !important;
+  text-align: center;
+  height: max-content;
+  background: #f4f4f4 !important;
+  border-radius: 3px;
+}
+
+.gettingstarted__action img {
+  transition: all 0.16s ease-in-out !important;
+  height: 160px;
+}
+
+.gettingstarted__action p {
+  text-align: right;
+  margin-top: 20px;
+  font-size: 22px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  transition: all 0.16s ease-in-out !important;
+}
+
+.gettingstarted__action:hover p {
+  color: var(--ifm-navbar-link-hover-color);
+}
+
+.gettingstarted__action:hover h3 {
+  color: var(--ifm-navbar-link-hover-color);
+}
+
+.gettingstarted__action h3 {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.19;
+  transition: all 0.16s ease-in-out !important;
+}
+
+.gettingstarted__action:hover {
+  background: #f4f4f4 !important;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 25%) !important;
+}
+
+.gettingstarted__action:hover img {
+  transform: scale(1.05);
 }

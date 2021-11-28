@@ -1,8 +1,13 @@
 ---
+sidebar_position: 6
 custom_edit_url:
 ---
 
-# System Requirements
+# Requirements
+
+Treble is a React powered library and requires some experience working with React.
+
+## System Requirements
 
 To use the Treble Design System your system will require the following tools:
 

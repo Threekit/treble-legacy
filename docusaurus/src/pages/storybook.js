@@ -3,7 +3,7 @@ import Layout from "@theme/Layout";
 
 function StoybookPage() {
   return (
-    <Layout title="Hello">
+    <Layout title="Storybook">
       <iframe
         style={{
           height: "calc(100vh - 60px)",

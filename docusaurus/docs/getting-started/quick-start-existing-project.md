@@ -1,19 +1,28 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 custom_edit_url:
+sidebar_label: "Quick Start: Existing Project"
 ---
 
-# Quick Start
+# Adding Treble to an existing project
+
+## Prerequisite
+
+The Treble package can be added to any existing front-end project so long as it is using React or a React compatible framework.
 
 ## Installation
 
-Run the following command using npm:
+To add the Treble package, run the following command using npm:
 
-`npm install @threekit-tools/treble`
+```bash
+npm install @threekit-tools/treble
+```
 
 Or yarn:
 
-`yarn add @threekit-tools/treble`
+```bash
+yarn add @threekit-tools/treble
+```
 
 ## Basic Setup
 

@@ -8,7 +8,7 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 const config = {
   title: "Treble",
   tagline: "Build a web-experience for your Threekit Configurator",
-  url: "https://your-docusaurus-test-site.com",
+  url: "https://docs.treble.3kit.com",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -22,7 +22,12 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          path: "docs",
+          routeBasePath: "docs",
           sidebarPath: require.resolve("./sidebars.js"),
+          // lastVersion: "current",
+          // onlyIncludeVersions: ["current"],
+          // sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           // editUrl: "https://github.com/facebook/docusaurus/edit/main/website/",
         },
@@ -30,6 +35,19 @@ const config = {
           customCss: require.resolve("./src/css/custom.css"),
         },
       }),
+    ],
+  ],
+
+  plugins: [
+    [
+      "@docusaurus/plugin-content-docs",
+      {
+        id: "demos",
+        path: "demos",
+        routeBasePath: "demos",
+        sidebarPath: require.resolve("./sidebars.js"),
+        // ... other options
+      },
     ],
   ],
 
@@ -57,9 +75,20 @@ const config = {
             label: "Threekit Community",
             position: "right",
           },
+
+          {
+            to: "/get-started",
+            label: "Get Started",
+            position: "right",
+          },
+          {
+            to: "/demos/intro",
+            position: "right",
+            label: "Demos",
+          },
           {
             type: "doc",
-            docId: "intro",
+            docId: "welcome",
             position: "right",
             label: "Docs",
           },
