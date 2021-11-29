@@ -1,7 +1,7 @@
 const chalk = require('chalk');
 const clearConsole = require('./clearConsole');
 
-function printInstructions({ port, appName, threekitEnv, urls }) {
+function printInstructions({ port, threekitEnv }) {
   console.log();
   // console.log(`You can now view ${chalk.bold(appName)} in the browser.`);
   console.log(`You can now view your Treble App in the browser.`);

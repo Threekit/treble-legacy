@@ -45,9 +45,9 @@ const Template = () => {
   return (
     <IconsGrid>
       {Object.values(icons).map((Icon, i) => (
-        <div>
+        <div key={i}>
           <div>
-            <Icon key={i} />
+            <Icon />
           </div>
           <div>{Icon.iconName}</div>
         </div>
