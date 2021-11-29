@@ -6,6 +6,10 @@
   "bin": {
     "treble-scripts": "./bin/treble-scripts.js"
   },
+  "scripts": {
+    "lint": "eslint ./scripts ./config ./bin",
+    "format": "prettier --write ./scripts ./config ./bin"
+  },
   "dependencies": {
     "@babel/core": "^7.15.8",
     "@babel/plugin-transform-runtime": "^7.15.8",

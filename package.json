@@ -6,12 +6,17 @@
     "demos/*"
   ],
   "scripts": {
-    "install": "lerna bootstrap",
-    "start": "lerna run start",
-    "format": "prettier --write ./packages ./docusaurus ./demos"
+    "install": "lerna bootstrap --hoist",
+    "dev": "lerna run start --stream --parallel",
+    "lint": "lerna run lint",
+    "format": "lerna run format"
   },
   "devDependencies": {
     "lerna": "^4.0.0",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.27.1",
     "prettier": "^2.5.0"
   }
 }
