@@ -1,11 +1,11 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface IOption {
-  shape?: string
+  shape?: string;
 }
 
 interface IOptionWrapper extends IOption {
-  selected: boolean
+  selected: boolean;
 }
 
 export const SwatchWrapper = styled.div`
@@ -21,21 +21,21 @@ export const SwatchWrapper = styled.div`
   & > div:not(:last-child) {
     margin-right: 5px;
   }
-`
+`;
 
 export const OptionWrapperStyles = styled.div<IOptionWrapper>`
   height: 60px;
   width: 60px;
-  border-radius: ${(props) =>
+  border-radius: ${props =>
     props.shape === 'round' ? '50%' : props.theme.borderRadius};
 
   & > div:first-child {
     height: 60px;
     width: 60px;
-    border-radius: ${(props) =>
+    border-radius: ${props =>
       props.shape === 'round' ? '50%' : props.theme.borderRadius};
     border: 2px solid
-      ${(props) => (props.selected ? props.theme.primaryColor : '#00000000')};
+      ${props => (props.selected ? props.theme.primaryColor : '#00000000')};
 
     padding: 2px;
 
@@ -43,31 +43,31 @@ export const OptionWrapperStyles = styled.div<IOptionWrapper>`
     transition: all 0.3s;
 
     &:hover {
-      ${(props) =>
+      ${props =>
         props.selected
           ? ''
           : `border: 2px solid ${props.theme.primaryColor}55;`}
     }
   }
-`
+`;
 
 export const OptionThumbnail = styled.div<IOption>`
   height: 52px;
   width: 52px;
   text-align: center;
 
-  border-radius: ${(props) =>
+  border-radius: ${props =>
     props.shape === 'round' ? '50%' : props.theme.borderRadius};
   overflow: hidden;
 
-  ${(props) => (props.color ? `background: ${props.color};` : '')}
+  ${props => (props.color ? `background: ${props.color};` : '')}
 
   img {
     height: 100%;
     width: auto;
     object-fit: cover;
   }
-`
+`;
 
 export const SwatchInfoWrapper = styled.div`
   width: max-content;
@@ -77,14 +77,14 @@ export const SwatchInfoWrapper = styled.div`
   transform: translateX(-50%) translateY(-100%);
   padding-bottom: 4px;
   color: white;
-  font-family: ${(props) => props.theme.fontFamily};
+  font-family: ${props => props.theme.fontFamily};
 
   display: none;
 
   & > div:nth-child(1) {
     background: rgba(0, 0, 0, 0.6);
     padding: 4px 6px;
-    border-radius: ${(props) => props.theme.borderRadius};
+    border-radius: ${props => props.theme.borderRadius};
     max-width: 250px;
   }
 
@@ -105,7 +105,7 @@ export const SwatchInfoWrapper = styled.div`
       pointer-events: none;
     }
   }
-`
+`;
 
 export const OptionWrapper = styled(OptionWrapperStyles)`
   &:hover {
@@ -113,4 +113,4 @@ export const OptionWrapper = styled(OptionWrapperStyles)`
       display: block;
     }
   }
-`
+`;

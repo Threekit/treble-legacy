@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const ArrowRight: IIcon = () => {
   return (
@@ -23,9 +23,9 @@ export const ArrowRight: IIcon = () => {
         strokeWidth="2"
       />
     </SVG>
-  )
-}
+  );
+};
 
-ArrowRight.iconName = 'arrow-right'
+ArrowRight.iconName = 'arrow-right';
 
-export default ArrowRight
+export default ArrowRight;

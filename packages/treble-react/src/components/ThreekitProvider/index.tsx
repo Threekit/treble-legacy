@@ -1,34 +1,34 @@
-import React, { useEffect } from 'react'
-import store, { useThreekitDispatch } from '../../store'
-import { ILaunchConfig, launch } from '../../store/threekit'
+import React, { useEffect } from 'react';
+import store, { useThreekitDispatch } from '../../store';
+import { ILaunchConfig, launch } from '../../store/threekit';
 
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux';
 
-import { ThemeProvider } from 'styled-components'
-import theme from '../../theme'
-import GlobalStyle from './GlobalStyles.styles'
+import { ThemeProvider } from 'styled-components';
+import theme from '../../theme';
+import GlobalStyle from './GlobalStyles.styles';
 
 export interface ThreekitProviderProps {
-  config: ILaunchConfig
-  threekitEnv?: string
-  children: React.ReactNode
+  config: ILaunchConfig;
+  threekitEnv?: string;
+  children: React.ReactNode;
 }
 
 const App = (props: ThreekitProviderProps) => {
-  const dispatch = useThreekitDispatch()
+  const dispatch = useThreekitDispatch();
 
   useEffect(() => {
     const init = () => {
-      const threekitEnv = props.threekitEnv || process.env.THREEKIT_ENV
-      const threekitConfig = Object.assign({ threekitEnv }, props.config)
-      dispatch(launch(threekitConfig))
-    }
-    init()
-    return
-  }, [props.config, props.threekitEnv])
+      const threekitEnv = props.threekitEnv || process.env.THREEKIT_ENV;
+      const threekitConfig = Object.assign({ threekitEnv }, props.config);
+      dispatch(launch(threekitConfig));
+    };
+    init();
+    return;
+  }, [props.config, props.threekitEnv]);
 
-  return <>{props.children}</>
-}
+  return <>{props.children}</>;
+};
 
 const ThreekitProvider = (props: ThreekitProviderProps) => {
   return (
@@ -40,7 +40,7 @@ const ThreekitProvider = (props: ThreekitProviderProps) => {
         </App>
       </ThemeProvider>
     </Provider>
-  )
-}
+  );
+};
 
-export default ThreekitProvider
+export default ThreekitProvider;

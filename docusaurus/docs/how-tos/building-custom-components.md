@@ -20,15 +20,15 @@ Lets get started...
 We'll start with a simple <Buttons /> component that will render out a title, subtitle, and a set of options for the user to select from. For now we'll start with some static data for our boilerplate.
 
 ```jsx
-import React from "react";
+import React from 'react';
 
-const Buttons = (props) => {
+const Buttons = props => {
   return (
     <div>
       <div>Title</div>
       <div>Subtitle</div>
       <div>
-        {["option 1", "option 2"].map((option, i) => (
+        {['option 1', 'option 2'].map((option, i) => (
           <button key={i}>{option}</button>
         ))}
       </div>
@@ -47,13 +47,13 @@ const [attribute, setAttribute] = useAttribute('Attribute Name')
 Here, we'll use the attribute data to get the options for our <Button /> component, and pass on the assetId of the option the user selects to out change handler function.
 
 ```jsx
-import React from "react";
-import { useAttribute } from "@threekit-tools/treble";
+import React from 'react';
+import { useAttribute } from '@threekit-tools/treble';
 
-const Buttons = (props) => {
+const Buttons = props => {
   // We'll use the useAttribute hook to connect to our
   // desired attribute
-  const [attribute, setAttribute] = useAttribute("AttributeName");
+  const [attribute, setAttribute] = useAttribute('AttributeName');
 
   // We'll hide our attribute until the data for that
   // attribute loads
@@ -88,10 +88,10 @@ the attribute name to be passed into our <Buttons /> component as a prop. This
 allows us to use the same component for multiple attributes across our project.
 
 ```jsx
-import React from "react";
-import { useAttribute } from "@threekit-tools/treble";
+import React from 'react';
+import { useAttribute } from '@threekit-tools/treble';
 
-const Buttons = (props) => {
+const Buttons = props => {
   //  Instead of hard coding the attribute to use
   //  we get switch it to come from a prop
   const [attribute, setAttribute] = useAttribute(props.attribute);
@@ -121,18 +121,18 @@ const Buttons = (props) => {
 In this step we will be adding custom styles to our component, including a selected state to show which of our options is currently selected. To do this we will be using the Styled Components library.
 
 ```jsx
-import React from "react";
-import { useAttribute } from "@threekit-tools/treble";
+import React from 'react';
+import { useAttribute } from '@threekit-tools/treble';
 //  We import in our styled components library
-import styled from "styled-components";
+import styled from 'styled-components';
 
 //  We create our own custom button styles
 const ButtonWrapper = styled.button`
   height: 20px;
-  background: ${(props) => (props.selected ? "blue" : "lightgrey")};
+  background: ${props => (props.selected ? 'blue' : 'lightgrey')};
 `;
 
-const Buttons = (props) => {
+const Buttons = props => {
   //  Instead of hard coding the attribute to use
   //  we get switch it to come from a prop
   const [attribute, setAttribute] = useAttribute(props.attribute);

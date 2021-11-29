@@ -1,26 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { TwinButtonWrapper as Wrapper } from '../shared.styles'
-import Button, { BUTTON_SHAPES, BUTTON_TYPES } from '../Button'
-import { ZoomInIcon, ZoomOutIcon } from '../../icons'
-import useThreekitInitStatus from '../../hooks/useThreekitInitStatus'
-import useZoom from '../../hooks/useZoom'
-import { generateWidgetClassName as generateClassName } from '../../utils'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { TwinButtonWrapper as Wrapper } from '../shared.styles';
+import Button, { BUTTON_SHAPES, BUTTON_TYPES } from '../Button';
+import { ZoomInIcon, ZoomOutIcon } from '../../icons';
+import useThreekitInitStatus from '../../hooks/useThreekitInitStatus';
+import useZoom from '../../hooks/useZoom';
+import { generateWidgetClassName as generateClassName } from '../../utils';
 
 const ORIENTATIONS = {
   horizontal: 'horizontal',
   vertical: 'vertical',
-}
+};
 
 interface ZoomComponentProps {
-  step?: number
-  shape?: BUTTON_SHAPES
-  type?: BUTTON_TYPES
-  className?: string
+  step?: number;
+  shape?: BUTTON_SHAPES;
+  type?: BUTTON_TYPES;
+  className?: string;
 }
 
 interface ZoomProps extends ZoomComponentProps {
-  orientation?: string
+  orientation?: string;
 }
 
 export const ZoomOutComponent = (props: ZoomComponentProps) => {
@@ -32,14 +32,14 @@ export const ZoomOutComponent = (props: ZoomComponentProps) => {
       shape: 'round',
     },
     props
-  )
-  const hasLoaded = useThreekitInitStatus()
-  const [_, zoomOut] = useZoom()
-  if (!hasLoaded) return null
+  );
+  const hasLoaded = useThreekitInitStatus();
+  const [_, zoomOut] = useZoom();
+  if (!hasLoaded) return null;
 
-  const handleZoomOut = () => zoomOut(Math.abs(step))
+  const handleZoomOut = () => zoomOut(Math.abs(step));
 
-  const cls = generateClassName('zoom', className)
+  const cls = generateClassName('zoom', className);
 
   return (
     <Button
@@ -49,8 +49,8 @@ export const ZoomOutComponent = (props: ZoomComponentProps) => {
       icon={ZoomOutIcon.iconName}
       onClick={handleZoomOut}
     />
-  )
-}
+  );
+};
 
 export const ZoomInComponent = (props: ZoomComponentProps) => {
   const { step, shape, type, className } = Object.assign(
@@ -60,14 +60,14 @@ export const ZoomInComponent = (props: ZoomComponentProps) => {
       shape: 'round',
     },
     props
-  )
-  const hasLoaded = useThreekitInitStatus()
-  const [zoomIn, _] = useZoom()
-  if (!hasLoaded) return null
+  );
+  const hasLoaded = useThreekitInitStatus();
+  const [zoomIn, _] = useZoom();
+  if (!hasLoaded) return null;
 
-  const handleZoomOut = () => zoomIn(Math.abs(step))
+  const handleZoomOut = () => zoomIn(Math.abs(step));
 
-  const cls = generateClassName('zoom', className)
+  const cls = generateClassName('zoom', className);
 
   return (
     <Button
@@ -77,8 +77,8 @@ export const ZoomInComponent = (props: ZoomComponentProps) => {
       icon={ZoomInIcon.iconName}
       onClick={handleZoomOut}
     />
-  )
-}
+  );
+};
 
 export const Zoom = (props: ZoomProps) => {
   const { step, shape, type, orientation, className } = Object.assign(
@@ -90,15 +90,15 @@ export const Zoom = (props: ZoomProps) => {
       orientation: ORIENTATIONS.horizontal,
     },
     props
-  )
+  );
 
-  const cls = generateClassName('zoom', className)
+  const cls = generateClassName('zoom', className);
 
   const componentProps = {
     step,
     shape,
     type,
-  }
+  };
 
   if (orientation === ORIENTATIONS.vertical)
     return (
@@ -106,14 +106,14 @@ export const Zoom = (props: ZoomProps) => {
         <ZoomInComponent {...props} {...componentProps} />
         <ZoomOutComponent {...props} {...componentProps} />
       </Wrapper>
-    )
+    );
   return (
     <Wrapper className={cls} orientation={orientation}>
       <ZoomOutComponent {...props} {...componentProps} />
       <ZoomInComponent {...props} {...componentProps} />
     </Wrapper>
-  )
-}
+  );
+};
 
 Zoom.propTypes = {
   /**
@@ -138,7 +138,7 @@ Zoom.propTypes = {
    * include: `square`, `round`
    */
   shape: PropTypes.string,
-}
+};
 
 Zoom.defaultProps = {
   step: undefined,
@@ -146,12 +146,12 @@ Zoom.defaultProps = {
   className: '',
   shape: 'round',
   type: 'threekit',
-}
+};
 
-Zoom.componentName = 'zoom'
-Zoom.Icon = ZoomInIcon
+Zoom.componentName = 'zoom';
+Zoom.Icon = ZoomInIcon;
 
-Zoom.ZoomOut = ZoomOutComponent
-Zoom.ZoomIn = ZoomInComponent
+Zoom.ZoomOut = ZoomOutComponent;
+Zoom.ZoomIn = ZoomInComponent;
 
-export default Zoom
+export default Zoom;

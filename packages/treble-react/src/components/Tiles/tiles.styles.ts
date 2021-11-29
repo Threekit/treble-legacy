@@ -1,37 +1,37 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface ITilesWrapper {
-  columns: number
+  columns: number;
 }
 
 interface ITileWrapper {
-  selected: boolean
+  selected: boolean;
 }
 
 export const TilesWrapper = styled.div<ITilesWrapper>`
   width: 100%;
   display: grid;
-  grid-template-columns: ${(props) => `repeat(${props.columns}, 1fr)`};
+  grid-template-columns: ${props => `repeat(${props.columns}, 1fr)`};
   grid-gap: 5px;
-`
+`;
 
 export const TileWrapper = styled.div<ITileWrapper>`
   height: 100%;
-  border-radius: ${(props) => props.theme.borderRadius};
+  border-radius: ${props => props.theme.borderRadius};
   border: 1px solid
-    ${(props) => (props.selected ? props.theme.primaryColor : 'lightgrey')};
-  color: ${(props) =>
+    ${props => (props.selected ? props.theme.primaryColor : 'lightgrey')};
+  color: ${props =>
     props.selected ? props.theme.primaryColor : props.theme.textColor};
-  background: ${(props) =>
+  background: ${props =>
     props.selected ? `${props.theme.primaryColor}18` : '#fff'};
-  font-family: ${(props) => props.theme.fontFamily};
+  font-family: ${props => props.theme.fontFamily};
 
   padding: 8px 10px;
 
   cursor: pointer;
 
   &:hover {
-    background: ${(props) => `${props.theme.primaryColor}18`};
+    background: ${props => `${props.theme.primaryColor}18`};
   }
 
   & > div {
@@ -41,4 +41,4 @@ export const TileWrapper = styled.div<ITileWrapper>`
     top: 50%;
     transform: translateY(-50%);
   }
-`
+`;

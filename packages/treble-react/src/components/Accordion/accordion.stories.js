@@ -19,7 +19,7 @@ export default {
   component: Accordion,
 };
 
-const Template = (args) => (
+const Template = args => (
   <Accordion {...args}>
     {items.map((el, i) => (
       <AccordionItem key={i} label={el.label}>

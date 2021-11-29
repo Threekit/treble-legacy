@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Clipboard: IIcon = () => {
   return (
@@ -28,9 +28,9 @@ export const Clipboard: IIcon = () => {
       <path d="M7 10.5H13" className="tk-icon" strokeWidth="1" />
       <path d="M7 13.5H11" className="tk-icon" strokeWidth="1" />
     </SVG>
-  )
-}
+  );
+};
 
-Clipboard.iconName = 'clipboard'
+Clipboard.iconName = 'clipboard';
 
-export default Clipboard
+export default Clipboard;

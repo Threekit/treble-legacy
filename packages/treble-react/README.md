@@ -70,7 +70,7 @@ A basic app will include the **Threekit Provider**, to connect our components to
 To get started you can copy the code from below, populating the values in the `threekitConfig` object.
 
 ```js
-import { ThreekitProvider, Player, FlatForm } from '@threekit-tools/treble'
+import { ThreekitProvider, Player, FlatForm } from '@threekit-tools/treble';
 
 const threekitConfig = {
   preview: {
@@ -78,9 +78,9 @@ const threekitConfig = {
     assetId: '',
     publicToken: '',
   },
-}
+};
 
-const threekitEnv = 'preview'
+const threekitEnv = 'preview';
 
 const ThreekitApp = () => {
   return (
@@ -99,8 +99,8 @@ const ThreekitApp = () => {
         <FlatForm />
       </div>
     </ThreekitProvider>
-  )
-}
+  );
+};
 ```
 
 ## Components
@@ -112,11 +112,11 @@ The `<ThreekitProvider />` initializes the Threekit API used by the various comp
 The Threekit Provider requires the a config object, which includes all the credentials related a the project.
 
 ```jsx
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import { ThreekitProvider } from '@threekit-tools/treble'
-import App from './App'
+import { ThreekitProvider } from '@threekit-tools/treble';
+import App from './App';
 
 const config = {
   //  The environment specific credentials should be placed
@@ -138,16 +138,16 @@ const config = {
   showShare: true,
   // We can pass overwrites to the default theme
   theme: { primaryColor: '#54AA54' },
-}
+};
 
-const threekitEnv = 'preview'
+const threekitEnv = 'preview';
 
 ReactDOM.render(
   <ThreekitProvider config={config} threekitEnv={threekitEnv}>
     <App /> // All Threekit related code goes here
   </ThreekitProvider>,
   document.getElementById('root')
-)
+);
 ```
 
 **Threekit Provider Props**
@@ -157,7 +157,7 @@ The Threekit Provider takes two props:
 The `threekitEnv` sets which Threekit environment, `preview | admin-fts`, to use when running the app. It defaults to the **preview** environment.
 
 ```js
-const threekitEnv = 'admin-fts'
+const threekitEnv = 'admin-fts';
 ```
 
 A `config` object including the **Threekit environment credentials**, the **Player API initialization parameters** and any **theme** overrides.
@@ -179,7 +179,7 @@ const threekitEnvironmentCredentials = {
   //  (optional): The Asset Id of the Stage you wish to initialize in the
   //  Threekit Player
   stageId: '',
-}
+};
 ```
 
 The **Player API initialization parameters** should be added directly to the `config` object. More information about parameters can be found here: [Embedding the Threekit Player](https://community.threekit.com/hc/en-us/articles/4406068353307-Embedding-the-Threekit-Player).
@@ -208,7 +208,7 @@ const threekitConfig = {
   //  is a number, representing the progress ratio ( from 0.0
   //  to 1.0 ). The callback will be called whenever the loading
   //  progresses. The progress ratio is only approximate.
-  onLoadingProgress: (progress) =>
+  onLoadingProgress: progress =>
     console.log(`Progress ${parseInt(progress * 100)}`),
   //  (optional): Parameter to show/hide the built-in AR Button.
   //  Default value is false.
@@ -222,7 +222,7 @@ const threekitConfig = {
   //  (optional): Override organization's compression setting for
   //  renders in 2D player.
   compression,
-}
+};
 ```
 
 The **theme** is used to style all the component available in the Treble library. You can override any of the default values by passing in your own value for a parameter into the theme object. The default values for the theme are:
@@ -245,7 +245,7 @@ const theme = {
     '0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);',
   widgetSize: '36px',
   fontFamily: '"Open Sans", sans-serif',
-}
+};
 ```
 
 ### Player
@@ -253,16 +253,16 @@ const theme = {
 The `<Player />` component renders the **Threekit Player**.
 
 ```jsx
-import { ThreekitProvider, Player } from '@threekit-tools/treble'
-import threekitConfig from './threekit.config.js'
+import { ThreekitProvider, Player } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 const ThreekitApp = () => {
   return (
     <ThreekitProvider config={threekitConfig}>
       <Player />
     </ThreekitProvider>
-  )
-}
+  );
+};
 ```
 
 **Player Widgets**
@@ -270,12 +270,12 @@ const ThreekitApp = () => {
 The Player Component also comes with **widget containers** that can be used to position widgets or any component in pre-defined locations around the player.
 
 ```jsx
-import { ThreekitProvider, Player } from '@threekit-tools/treble'
-import threekitConfig from './threekit.config.js'
+import { ThreekitProvider, Player } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 //  We can separate out the widget container component
 //  or use the component directly from the Player component
-const { TopRightWidgets } = Player
+const { TopRightWidgets } = Player;
 
 const ThreekitApp = () => {
   return (
@@ -290,8 +290,8 @@ const ThreekitApp = () => {
         </Player.BottomRightWidgets>
       </Player>
     </ThreekitProvider>
-  )
-}
+  );
+};
 ```
 
 ### Forms
@@ -303,16 +303,16 @@ Forms can be used to render out complete configurators as a single component.
 The `<FlatForm>` component is used to render out the configurator for the initialized asset.
 
 ```jsx
-import { ThreekitProvider, FlatForm } from '@threekit-tools/treble'
-import threekitConfig from './threekit.config.js'
+import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (
     <ThreekitProvider config={threekitConfig}>
       <FlatForm />
     </ThreekitProvider>
-  )
-}
+  );
+};
 ```
 
 **Flat Form Props**
@@ -336,7 +336,7 @@ const flatFormProps = {
     //  This will prevent 'Attribute 2' from being rendered.
     'Attribute 2': undefined,
   },
-}
+};
 ```
 
 The `Flat Form` can take a prop of **`attributes`** that allow us to specify, which component to use for an attribute or if we want to hide any attributes.
@@ -349,8 +349,8 @@ We can also specify the horizontal alignment for the title by passing in one of
 By default the Form will not render reserved attributes. This can be controlled/over-written by using the prop **`includeReservedAttributes={false}`**.
 
 ```jsx
-import { ThreekitProvider, FlatForm } from '@threekit-tools/treble'
-import threekitConfig from './threekit.config.js'
+import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 const App = () => {
   const attributes = {
@@ -358,14 +358,14 @@ const App = () => {
     'Attribute 1': { component: 'swatch' },
     //  This will prevent 'Attribute 2' from being rendered.
     'Attribute 2': undefined,
-  }
+  };
 
   return (
     <ThreekitProvider config={threekitConfig}>
       <FlatForm attributes={attributes} />
     </ThreekitProvider>
-  )
-}
+  );
+};
 ```
 
 ### Widgets
@@ -379,7 +379,7 @@ All the widgets are designed to be buttons that can be placed on and around the 
 The `<Snapshots />` is a button that will trigger the `window.threekit.treble.takeSnapshot()` when pressed and download the specified snapshots.
 
 ```js
-import { ThreekitProvider, Player, Snapshots } from '@threekit-tools/treble'
+import { ThreekitProvider, Player, Snapshots } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -393,8 +393,8 @@ const Component = () => {
         </Player.TopRightWidgets>
       </Player>
     </ThreekitProvider>
-  )
-}
+  );
+};
 ```
 
 The Snapshot takes two props: `camerasList` and `snapshotsConfig`.
@@ -407,7 +407,7 @@ The `snapshotConfig` allows us to define the following values:
 const snapshotsConfig = {
   format: 'png' | 'jpeg',
   filename: 'snapshot-filename',
-}
+};
 ```
 
 **Note: These cameras must be setup to the configurator using the reserved camera attribute.**
@@ -421,7 +421,7 @@ The component is built using the useZoom hook. It provides a pair of + and - but
 It defaults to single increments changes but also accepts increment values to use instead.
 
 ```js
-import { ThreekitProvider, Player, Zoom } from '@threekit-tools/treble'
+import { ThreekitProvider, Player, Zoom } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -432,8 +432,8 @@ const Component = () => {
         </Player.MiddleRightWidgets>
       </Player>
     </ThreekitProvider>
-  )
-}
+  );
+};
 ```
 
 ### Displays
@@ -447,7 +447,7 @@ The `<ProductTitle />` component will display the value of the metadata key `_ti
 The title can also be overwritten by passing in your own title in as a prop.
 
 ```jsx
-import { ProductTitle } from '@threekit-tools/treble'
+import { ProductTitle } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -456,8 +456,8 @@ const Component = () => {
       // With a custom title
       <ProductTitle title="Custom Title" />
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Product Description
@@ -469,7 +469,7 @@ The description can also be overwritten by passing in your own description in as
 It is built using the [useMetadata() hook](#use-metadata).
 
 ```jsx
-import { Description } from '@threekit-tools/treble'
+import { Description } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -478,8 +478,8 @@ const Component = () => {
       // With a custom description
       <ProductDescription description="This is a custom description." />
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Attribute Title
@@ -489,15 +489,15 @@ The `<AttributeTitle>` will display the translated attribute name of an attribut
 It is built using the [useName() hook](#use-name).
 
 ```jsx
-import { AttributeTitle } from '@threekit-tools/treble'
+import { AttributeTitle } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
     <div>
       <AttributeTitle attribute="Attribute Name" />
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Attribute Value
@@ -525,15 +525,15 @@ It is built using the [usePrice() hook](#use-price).
 **Support for multiple Pricebooks and Currencies coming soon**
 
 ```jsx
-import { TotalPrice } from '@threekit-tools/treble'
+import { TotalPrice } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
     <div>
       <TotalPrice />
     </div>
-  )
-}
+  );
+};
 ```
 
 ### Wrappers
@@ -543,7 +543,7 @@ const Component = () => {
 The `<AwaitThreekitLoad>` wrapper, is used to wrap any content that we don't want to render until the Threekit Player initialization process is complete.
 
 ```jsx
-import { AwaitThreekitLoad } from '@threekit-tools/treble'
+import { AwaitThreekitLoad } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -554,8 +554,8 @@ const Component = () => {
         intialization is complete
       </AwaitThreekitLoad>
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Portal to Element
@@ -565,7 +565,7 @@ The `<PortalToElement>` wrapper can be used to place its content in any div anyw
 The wrapper requires an `elementId` prop to specify the id of the div to render its contents into. It also optionally takes a `strict` prop, which determines the behavior if the element to render the content into is not found. `strict={true}` will only render the contents in the HTML element matching the provided element ID, while `strict={false}` (default) will render out its contents as part of the regular React flow, if the specified element is not found.
 
 ```jsx
-import { AwaitThreekitLoad } from '@threekit-tools/treble'
+import { AwaitThreekitLoad } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -575,8 +575,8 @@ const Component = () => {
         This content will only be rendered in a div with the id 'form-container'
       </PortalToElement>
     </div>
-  )
-}
+  );
+};
 ```
 
 ### Layouts
@@ -588,13 +588,13 @@ Layouts are design organization components that we can use to introduce structur
 A Modal is used to present an actionable pop-up to the user.
 
 ```jsx
-import { useState } from 'react'
-import { Modal } from '@threekit-tools/treble'
+import { useState } from 'react';
+import { Modal } from '@threekit-tools/treble';
 
 const App = () => {
-  const [showModal, setShowModal] = useState(false)
+  const [showModal, setShowModal] = useState(false);
 
-  const handleClose = () => setShowModal(false)
+  const handleClose = () => setShowModal(false);
 
   return (
     <Modal show={showModal} handleClose={handleClose}>
@@ -602,8 +602,8 @@ const App = () => {
         Content to be placed in the modal is added as an HTML child element.
       </div>
     </Modal>
-  )
-}
+  );
+};
 ```
 
 #### Drawer
@@ -611,13 +611,13 @@ const App = () => {
 A Drawer can be used to present an actionable slide-out drawer to the user.
 
 ```jsx
-import { useState } from 'react'
-import { Drawer } from '@threekit-tools/treble'
+import { useState } from 'react';
+import { Drawer } from '@threekit-tools/treble';
 
 const App = () => {
-  const [showDrawer, setShowDrawer] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(false);
 
-  const handleClose = () => setShowDrawer(false)
+  const handleClose = () => setShowDrawer(false);
 
   return (
     <Drawer show={showDrawer} handleClose={handleClose}>
@@ -625,8 +625,8 @@ const App = () => {
         Content to be placed in the drawer is added as an HTML child element.
       </div>
     </Drawer>
-  )
-}
+  );
+};
 ```
 
 ### Hooks
@@ -638,12 +638,12 @@ The `useAttribute` hook allows us to connect a component to an Attribute in our 
 It takes the name of the attribute that you want to interact with and returns an array where the first element is the data for that attribute, as returned by the `getDisplayAttributes()` function, and the second element is a function that can be used to update the value of that attribute, by prepping and passing the value on to `setConfiguration()`.
 
 ```jsx
-import { useAttribute } from '@threekit-tools/treble'
+import { useAttribute } from '@threekit-tools/treble';
 
 const AttributeComponent = () => {
-  const [attribute, setAttribute] = useAttribute('Attribute Name')
+  const [attribute, setAttribute] = useAttribute('Attribute Name');
 
-  const selected = attribute.value
+  const selected = attribute.value;
 
   return (
     <div>
@@ -656,8 +656,8 @@ const AttributeComponent = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Use Configurator
@@ -667,44 +667,44 @@ The `useConfigurator` hook allows us to connect to all our attributes in the ini
 The hook returns an array of two items. The first item is almost identical to the value returned by `getDisplayAttributes()`. The second item is a change handler function that passes the value passed in straight through to `setConfiguration()`.
 
 ```jsx
-import { useConfigurator } from '@threekit-tools/treble'
+import { useConfigurator } from '@threekit-tools/treble';
 
 const AttributeComponent = () => {
-  const [attributes, setConfiguration] = useConfigurator()
-  return <div>Attributes Component example</div>
-}
+  const [attributes, setConfiguration] = useConfigurator();
+  return <div>Attributes Component example</div>;
+};
 ```
 
 #### Use Threekit Init Status
 
 ```jsx
-import { useThreekitInitStatus } from '@threekit-tools/treble'
+import { useThreekitInitStatus } from '@threekit-tools/treble';
 
 const Component = () => {
-  const hasLoaded = useThreekitInitStatus()
+  const hasLoaded = useThreekitInitStatus();
   return (
     <div>
       {hasLoaded ? 'Threekit API has loaded' : 'Loading in progress...'}
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Use Player Loading Status
 
 ```jsx
-import { usePlayerLoadingStatus } from '@threekit-tools/treble'
+import { usePlayerLoadingStatus } from '@threekit-tools/treble';
 
 const Component = () => {
-  const hasLoaded = usePlayerLoadingStatus()
+  const hasLoaded = usePlayerLoadingStatus();
   return (
     <div>
       {hasLoaded
         ? 'Threekit Player has rendering'
         : 'Player rendering in progress...'}
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Use Metadata
@@ -716,10 +716,10 @@ The hook returns an object with the metadata.
 It is used to build the [Description Display component](#description)
 
 ```jsx
-import { useMetadata } from '@threekit-tools/treble'
+import { useMetadata } from '@threekit-tools/treble';
 
 const MetadataComponent = () => {
-  const metadata = useMetadata()
+  const metadata = useMetadata();
   return (
     <div>
       {Object.entries(metadata).map(([key, value], i) => (
@@ -728,8 +728,8 @@ const MetadataComponent = () => {
         </div>
       ))}
     </div>
-  )
-}
+  );
+};
 ```
 
 #### Use Name
@@ -741,12 +741,12 @@ The hook a single string value.
 It is used to build the [Title Display component](#title)
 
 ```jsx
-import { useName } from '@threekit-tools/treble'
+import { useName } from '@threekit-tools/treble';
 
 const TitleComponent = () => {
-  const name = useName()
-  return <div>{name}</div>
-}
+  const name = useName();
+  return <div>{name}</div>;
+};
 ```
 
 #### Use Price
@@ -754,12 +754,12 @@ const TitleComponent = () => {
 The `usePrice` hook provides the total price of the current configuration calculated based on the pricing set on the Threekit Platform.
 
 ```jsx
-import { usePrice } from '@threekit-tools/treble'
+import { usePrice } from '@threekit-tools/treble';
 
 const PriceComponent = () => {
-  const price = usePrice()
-  return <div>${price}</div>
-}
+  const price = usePrice();
+  return <div>${price}</div>;
+};
 ```
 
 #### Use Snapshot
@@ -767,19 +767,19 @@ const PriceComponent = () => {
 The `useSnapshot` should provides functionality to takeSnapshots of the view in the Threekit Player.
 
 ```jsx
-import { useSnapshot } from '@threekit-tools/treble'
+import { useSnapshot } from '@threekit-tools/treble';
 
 const SnapshotComponent = () => {
-  const takeSnapshots = useSnapshot()
+  const takeSnapshots = useSnapshot();
 
   const handleClickSnapshot = () => {
-    takeSnapshots(undefined, { output: 'download' })
-  }
+    takeSnapshots(undefined, { output: 'download' });
+  };
 
   return (
     <button onClick={() => handleClickSnapshot()}>Download Snapshot</button>
-  )
-}
+  );
+};
 ```
 
 #### Use Zoom
@@ -793,10 +793,10 @@ The default increment value is `1`.
 It is used to build the [Zoom Widget](#zoom).
 
 ```jsx
-import { useZoom } from '@threekit-tools/treble'
+import { useZoom } from '@threekit-tools/treble';
 
 const ZoomComponent = () => {
-  const [zoomIn, zoomOut] = useZoom()
+  const [zoomIn, zoomOut] = useZoom();
   return (
     <div>
       // Changes zoom by +1
@@ -804,6 +804,6 @@ const ZoomComponent = () => {
       // Changes zoom -3
       <button onClick={() => zoomOut(3)}>Zoom Out</button>
     </div>
-  )
-}
+  );
+};
 ```

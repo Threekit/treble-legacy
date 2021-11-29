@@ -103,7 +103,7 @@ module.exports = ({ buildType, threekitEnv }) =>
       // https://twitter.com/wSokra/status/969679223278505985
       // https://github.com/facebook/create-react-app/issues/5358
       runtimeChunk: buildType === 'default' && {
-        name: (entrypoint) => `runtime-${entrypoint.name}`,
+        name: entrypoint => `runtime-${entrypoint.name}`,
       },
     },
   });

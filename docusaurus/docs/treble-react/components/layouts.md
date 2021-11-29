@@ -11,8 +11,8 @@ Layouts are design organization components that we can use to introduce structur
 A Modal is used to present an actionable pop-up to the user.
 
 ```jsx
-import { useState } from "react";
-import { Modal } from "@threekit-tools/treble";
+import { useState } from 'react';
+import { Modal } from '@threekit-tools/treble';
 
 const App = () => {
   const [showModal, setShowModal] = useState(false);
@@ -34,8 +34,8 @@ const App = () => {
 A Drawer can be used to present an actionable slide-out drawer to the user.
 
 ```jsx
-import { useState } from "react";
-import { Drawer } from "@threekit-tools/treble";
+import { useState } from 'react';
+import { Drawer } from '@threekit-tools/treble';
 
 const App = () => {
   const [showDrawer, setShowDrawer] = useState(false);

@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
-import FormComponentTitle from '../FormComponentTitle'
-import FormComponentDescription from '../FormComponentDescription'
+import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import FormComponentTitle from '../FormComponentTitle';
+import FormComponentDescription from '../FormComponentDescription';
 import {
   DropdownWrapper,
   DropdownMain,
@@ -12,78 +12,78 @@ import {
   OptionDescription,
   OptionPrice,
   IconWrapper,
-} from './dropdown.styles'
-import { CaretDownIcon } from '../../icons'
-import { generateInputClassName as generateClassName } from '../../utils'
-import { ATTRIBUTE_TYPES } from '../../constants'
+} from './dropdown.styles';
+import { CaretDownIcon } from '../../icons';
+import { generateInputClassName as generateClassName } from '../../utils';
+import { ATTRIBUTE_TYPES } from '../../constants';
 import container, {
   IFormComponentProps,
   IOption,
-} from '../containers/formInputContainer'
+} from '../containers/formInputContainer';
 
 export interface IDropdown extends IFormComponentProps<IOption> {
-  showThumbnail?: boolean
-  showPrice?: boolean
-  showDescription?: boolean
-  dropdownMaxHeight?: string
+  showThumbnail?: boolean;
+  showPrice?: boolean;
+  showDescription?: boolean;
+  dropdownMaxHeight?: string;
 }
 
 interface IThumbnail {
-  name?: string
-  imageUrl?: string
-  color?: string
-  className?: string
+  name?: string;
+  imageUrl?: string;
+  color?: string;
+  className?: string;
 }
 
 interface ITitle {
-  name?: string
-  className?: string
+  name?: string;
+  className?: string;
 }
 
 interface IDescription {
-  description?: string
-  className?: string
+  description?: string;
+  className?: string;
 }
 
 interface IPrice {
-  price?: string
-  className?: string
+  price?: string;
+  className?: string;
 }
 
 const Thumbnail = (props: IThumbnail) => {
-  const { imageUrl, color, name, className } = props
-  if (!imageUrl && !color) return <div />
+  const { imageUrl, color, name, className } = props;
+  if (!imageUrl && !color) return <div />;
   return (
     <OptionThumbnail className={`${className} option-thumbnail`} color={color}>
       {imageUrl ? <img src={imageUrl} alt={name || ''} /> : null}
     </OptionThumbnail>
-  )
-}
+  );
+};
 
 const Title = ({ name, className }: ITitle) => {
-  if (!name) return null
+  if (!name) return null;
   return (
     <OptionTitle className={`${className} option-title`}>{name}</OptionTitle>
-  )
-}
+  );
+};
 
 const Description = (props: IDescription) => {
-  const { description, className } = props
-  if (!description) return null
+  const { description, className } = props;
+  if (!description) return null;
   return (
     <OptionDescription className={`${className} option-description`}>
       {description}
     </OptionDescription>
-  )
-}
+  );
+};
 
 const Price = (props: IPrice) => {
-  const { price, className } = props
-  if (!price) return <div />
+  const { price, className } = props;
+  if (!price) return <div />;
   return (
     <OptionPrice className={`${className} option-price`}>{price}</OptionPrice>
-  )
-}
+  );
+};
 
 export const Dropdown = (props: IDropdown) => {
   const {
@@ -97,32 +97,32 @@ export const Dropdown = (props: IDropdown) => {
     showPrice,
     showDescription,
     dropdownMaxHeight,
-  } = props
+  } = props;
 
-  const [hide, setHide] = useState(true)
-  const ref = useRef<null | HTMLDivElement>(null)
+  const [hide, setHide] = useState(true);
+  const ref = useRef<null | HTMLDivElement>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent | TouchEvent) => {
-      if (!e) return
-      if (!ref.current?.contains(e.target as Node)) setHide(true)
-    }
+      if (!e) return;
+      if (!ref.current?.contains(e.target as Node)) setHide(true);
+    };
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [hide, ref])
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [hide, ref]);
 
   const handleClick = (value: string) => {
-    if (!onClick) return
-    onClick(value)
-    setHide(true)
-  }
+    if (!onClick) return;
+    onClick(value);
+    setHide(true);
+  };
 
-  const cls = generateClassName('dropdown', customClassName, title)
+  const cls = generateClassName('dropdown', customClassName, title);
 
-  const selectedOpt = options?.find((el) => el.value === value)
+  const selectedOpt = options?.find(el => el.value === value);
 
   return (
     <div className={cls}>
@@ -167,9 +167,9 @@ export const Dropdown = (props: IDropdown) => {
                   imageUrl: !showThumbnail ? undefined : el.imageUrl,
                   price: !showPrice ? undefined : el.price,
                   description: !showDescription ? undefined : el.description,
-                })
-              const selected = value === optionValue
-              const clsOpt = `${cls}-option option-${i} ${optionValue}`
+                });
+              const selected = value === optionValue;
+              const clsOpt = `${cls}-option option-${i} ${optionValue}`;
               return (
                 <OptionWrapper
                   key={i}
@@ -189,14 +189,14 @@ export const Dropdown = (props: IDropdown) => {
                   </div>
                   <Price price={price} className={clsOpt} />
                 </OptionWrapper>
-              )
+              );
             })}
           </div>
         </DropdownOptions>
       </DropdownWrapper>
     </div>
-  )
-}
+  );
+};
 
 Dropdown.propTypes = {
   /**
@@ -281,7 +281,7 @@ Dropdown.propTypes = {
    * is introduced
    */
   dropdownMaxHeight: PropTypes.string,
-}
+};
 
 Dropdown.defaultProps = {
   description: undefined,
@@ -300,12 +300,12 @@ Dropdown.defaultProps = {
   options: undefined,
   onClick: undefined,
   dropdownMaxHeight: '220px',
-}
+};
 
-Dropdown.componentName = 'dropdown'
+Dropdown.componentName = 'dropdown';
 Dropdown.compatibleAttributes = new Set([
   ATTRIBUTE_TYPES.asset,
   ATTRIBUTE_TYPES.string,
-])
+]);
 
-export default container<IDropdown>(Dropdown)
+export default container<IDropdown>(Dropdown);

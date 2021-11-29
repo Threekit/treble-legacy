@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 custom_edit_url:
-sidebar_label: "Quick Start: New Project"
+sidebar_label: 'Quick Start: New Project'
 ---
 
 # Starting a new Treble project

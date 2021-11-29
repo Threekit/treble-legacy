@@ -1,12 +1,12 @@
-import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs'
-import styled from 'styled-components'
-import { Button, TYPES } from './index'
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import styled from 'styled-components';
+import { Button, TYPES } from './index';
 
-export const TemplateDefault = (args) => (
+export const TemplateDefault = args => (
   <Button icon="cart" title="Add to Cart" {...args} />
-)
+);
 
-export const Template = (args) => (
+export const Template = args => (
   <div
     style={{
       display: 'grid',
@@ -25,7 +25,7 @@ export const Template = (args) => (
     <Button {...args} title="Add to Cart" type="accent" shape="round" />
     <Button {...args} title="Add to Cart" type="primary" shape="round" />
   </div>
-)
+);
 
 <Meta title="Form Components/Button" />
 

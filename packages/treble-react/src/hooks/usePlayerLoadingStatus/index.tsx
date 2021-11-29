@@ -1,7 +1,7 @@
-import { useThreekitSelector } from '../../store'
-import { isPlayerLoading } from '../../store/threekit'
+import { useThreekitSelector } from '../../store';
+import { isPlayerLoading } from '../../store/threekit';
 
 const usePlayerLoadingStatus = () =>
-  useThreekitSelector<boolean>(isPlayerLoading)
+  useThreekitSelector<boolean>(isPlayerLoading);
 
-export default usePlayerLoadingStatus
+export default usePlayerLoadingStatus;

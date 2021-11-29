@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Wrapper = styled.span`
   font-size: 16px;
-  font-family: ${(props) => props.theme.fontFamily};
-`
+  font-family: ${props => props.theme.fontFamily};
+`;

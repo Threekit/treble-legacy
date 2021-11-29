@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const CaretRight: IIcon = () => {
   return (
@@ -19,9 +19,9 @@ export const CaretRight: IIcon = () => {
     >
       <path d="M6.5 17L13.5 10L6.5 3" className="tk-icon" strokeWidth="2" />
     </SVG>
-  )
-}
+  );
+};
 
-CaretRight.iconName = 'caret-right'
+CaretRight.iconName = 'caret-right';
 
-export default CaretRight
+export default CaretRight;

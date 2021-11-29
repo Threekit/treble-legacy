@@ -10,28 +10,28 @@ The `<ThreekitProvider />` initializes the Threekit API used by the various comp
 The Threekit Provider requires the a `threekitConfig` object, which includes all the credentials related a the project and a `threekitEnv` value to specify which Threekit Environment to use.
 
 ```jsx
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import { ThreekitProvider } from "@threekit-tools/treble";
-import App from "./App";
+import { ThreekitProvider } from '@threekit-tools/treble';
+import App from './App';
 
 const threekitConfig = {
   preview: {
     //  These credentials DO NOT point to a real org
-    publicToken: "3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48",
-    assetId: "a9a66218-bkid-4106-96fe-a0359fdc3dc1",
-    orgId: "20df501b-1ef8-4bh0-sfda-2l59426624de",
+    publicToken: '3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48',
+    assetId: 'a9a66218-bkid-4106-96fe-a0359fdc3dc1',
+    orgId: '20df501b-1ef8-4bh0-sfda-2l59426624de',
   },
 };
 
-const threekitEnv = "preview";
+const threekitEnv = 'preview';
 
 ReactDOM.render(
   <ThreekitProvider config={config} threekitEnv={threekitEnv}>
     <App /> // All Threekit related code goes here
   </ThreekitProvider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 ```
 
@@ -40,7 +40,7 @@ ReactDOM.render(
 The `threekitEnv` sets which Threekit environment, `preview | admin-fts`, to use when running the app. It defaults to the **preview** environment.
 
 ```js
-const threekitEnv = "admin-fts";
+const threekitEnv = 'admin-fts';
 ```
 
 ## Prop: config
@@ -64,15 +64,15 @@ const threekitConfig = {
     //  tab in your org on the Threekit Platform. It should
     //  include the `localhost` domain for local development
     //  and any domains to include for production / deployment
-    publicToken: "",
+    publicToken: '',
     //  The Org Id for the Threekit Org
-    orgId: "",
+    orgId: '',
     //  The asset id of the Catalog Item you wish to initialize
     //  in the Threekit Player
-    assetId: "",
+    assetId: '',
     //  (optional): The Asset Id of the Stage you wish to initialize in the
     //  Threekit Player
-    stageId: "",
+    stageId: '',
   },
 };
 ```
@@ -91,7 +91,7 @@ The **Player API initialization parameters** should be added directly to the `th
 const threekitConfig = {
   //  (optional): determines whether to use the 3D Player (webgl) or
   //  the 2D Player (image).
-  display: "webgl" | "image",
+  display: 'webgl' | 'image',
   //  The caching options for the player. It contains the maxAge
   //  and scope for assets caching.
   cache,
@@ -111,7 +111,7 @@ const threekitConfig = {
   //  is a number, representing the progress ratio ( from 0.0
   //  to 1.0 ). The callback will be called whenever the loading
   //  progresses. The progress ratio is only approximate.
-  onLoadingProgress: (progress) =>
+  onLoadingProgress: progress =>
     console.log(`Progress ${parseInt(progress * 100)}`),
   //  (optional): Parameter to show/hide the built-in AR Button.
   //  Default value is false.
@@ -137,21 +137,21 @@ The default values for the theme are:
 ```js
 const threekitConfig = {
   theme: {
-    primaryColor: "#1890ff",
-    linkColor: "#1890ff",
-    successColor: "#52c41a",
-    warningColor: "#faad14",
-    errorColor: "#f5222d",
-    fontBaseSize: "14px",
-    headingColor: "rgba(0, 0, 0, 0.85)",
-    textColor: "rgba(0, 0, 0, 0.65)",
-    textColorSecondary: "rgba(0, 0, 0, 0.45)",
-    disabledColor: "rgba(0, 0, 0, 0.25)",
-    borderRadius: "2px",
-    borderColorBase: "#d9d9d9",
+    primaryColor: '#1890ff',
+    linkColor: '#1890ff',
+    successColor: '#52c41a',
+    warningColor: '#faad14',
+    errorColor: '#f5222d',
+    fontBaseSize: '14px',
+    headingColor: 'rgba(0, 0, 0, 0.85)',
+    textColor: 'rgba(0, 0, 0, 0.65)',
+    textColorSecondary: 'rgba(0, 0, 0, 0.45)',
+    disabledColor: 'rgba(0, 0, 0, 0.25)',
+    borderRadius: '2px',
+    borderColorBase: '#d9d9d9',
     boxShadowBase:
-      "0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);",
-    widgetSize: "36px",
+      '0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);',
+    widgetSize: '36px',
     fontFamily: '"Open Sans", sans-serif',
   },
 };
@@ -160,40 +160,40 @@ const threekitConfig = {
 ## Example
 
 ```jsx
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import { ThreekitProvider } from "@threekit-tools/treble";
-import App from "./App";
+import { ThreekitProvider } from '@threekit-tools/treble';
+import App from './App';
 
 const threekitConfig = {
   //  The environment specific credentials should be placed
   //  in an object assigned to the name of the environment
   //  Note: The token key is 'publicToken' not 'authToken'
   preview: {
-    publicToken: "3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48",
-    assetId: "a9a66218-bkid-4106-96fe-a0359fdc3dc1",
-    orgId: "20df501b-1ef8-4bh0-sfda-2l59426624de",
+    publicToken: '3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48',
+    assetId: 'a9a66218-bkid-4106-96fe-a0359fdc3dc1',
+    orgId: '20df501b-1ef8-4bh0-sfda-2l59426624de',
   },
-  "admin-fts": {
-    publicToken: "3fb4asd5d-ea38-0g05-a1c3-6cf9d8dd3d48",
-    assetId: "a9a66218-bkid-2206-96fe-a0709fdc3dc1",
-    orgId: "20df501b-1ef8-4bkm-sfda-2b99426624de",
+  'admin-fts': {
+    publicToken: '3fb4asd5d-ea38-0g05-a1c3-6cf9d8dd3d48',
+    assetId: 'a9a66218-bkid-2206-96fe-a0709fdc3dc1',
+    orgId: '20df501b-1ef8-4bkm-sfda-2b99426624de',
   },
   //  Any additional parameters to pass to the player initialization
   //  can also be added here. For example setting the showShare
   //  property
   showShare: true,
   // We can pass overwrites to the default theme
-  theme: { primaryColor: "#54AA54" },
+  theme: { primaryColor: '#54AA54' },
 };
 
-const threekitEnv = "preview";
+const threekitEnv = 'preview';
 
 ReactDOM.render(
   <ThreekitProvider config={threekitConfig} threekitEnv={threekitEnv}>
     <App /> // All Threekit related code goes here
   </ThreekitProvider>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 ```

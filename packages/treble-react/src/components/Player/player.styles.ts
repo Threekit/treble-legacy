@@ -1,28 +1,28 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface IWrapperProps {
-  height: string
-  minHeight: string
-  width: string
+  height: string;
+  minHeight: string;
+  width: string;
 }
 
 export const Wrapper = styled.div<IWrapperProps>`
-  height: ${(props) => props.height};
-  min-height: ${(props) => props.minHeight};
-  width: ${(props) => props.width};
+  height: ${props => props.height};
+  min-height: ${props => props.minHeight};
+  width: ${props => props.width};
   position: relative;
 
   user-select: none;
 
   & > div:nth-child(1) {
-    height: ${(props) => props.height};
-    min-height: ${(props) => props.minHeight};
-    width: ${(props) => props.width};
+    height: ${props => props.height};
+    min-height: ${props => props.minHeight};
+    width: ${props => props.width};
     position: absolute;
     top: 0;
     left: 0;
   }
-`
+`;
 
 export const TopLeftWidgetsWrapper = styled.div`
   position: absolute;
@@ -39,7 +39,7 @@ export const TopLeftWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-right: 0px;
   }
-`
+`;
 
 export const TopCenterWidgetsWrapper = styled.div`
   position: absolute;
@@ -57,7 +57,7 @@ export const TopCenterWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-right: 0px;
   }
-`
+`;
 
 export const TopRightWidgetsWrapper = styled.div`
   position: absolute;
@@ -74,7 +74,7 @@ export const TopRightWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-right: 0px;
   }
-`
+`;
 
 export const MiddleLeftWidgetsWrapper = styled.div`
   position: absolute;
@@ -92,7 +92,7 @@ export const MiddleLeftWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-bottom: 0px;
   }
-`
+`;
 
 export const MiddleRightWidgetsWrapper = styled.div`
   position: absolute;
@@ -110,7 +110,7 @@ export const MiddleRightWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-bottom: 0px;
   }
-`
+`;
 
 export const BottomLeftWidgetsWrapper = styled.div`
   position: absolute;
@@ -127,7 +127,7 @@ export const BottomLeftWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-right: 0px;
   }
-`
+`;
 
 export const BottomCenterWidgetsWrapper = styled.div`
   position: absolute;
@@ -145,7 +145,7 @@ export const BottomCenterWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-right: 0px;
   }
-`
+`;
 
 export const BottomRightWidgetsWrapper = styled.div`
   position: absolute;
@@ -162,4 +162,4 @@ export const BottomRightWidgetsWrapper = styled.div`
   & > div:last-child {
     margin-right: 0px;
   }
-`
+`;

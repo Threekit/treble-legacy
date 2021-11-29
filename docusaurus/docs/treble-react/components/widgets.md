@@ -13,7 +13,7 @@ All the widgets are designed to be buttons that can be placed on and around the 
 The `<Snapshots />` is a button that will trigger the `window.threekit.treble.takeSnapshot()` when pressed and download the specified snapshots.
 
 ```jsx
-import { ThreekitProvider, Player, Snapshots } from "@threekit-tools/treble";
+import { ThreekitProvider, Player, Snapshots } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -21,8 +21,8 @@ const Component = () => {
       <Player>
         <Player.TopRightWidgets>
           <Snapshots
-            cameras={[undefined, "birdsey-camera"]}
-            config={{ format: "jpeg" }}
+            cameras={[undefined, 'birdsey-camera']}
+            config={{ format: 'jpeg' }}
           />
         </Player.TopRightWidgets>
       </Player>
@@ -39,8 +39,8 @@ The `snapshotConfig` allows us to define the following values:
 
 ```js
 const snapshotsConfig = {
-  format: "png" | "jpeg",
-  filename: "snapshot-filename",
+  format: 'png' | 'jpeg',
+  filename: 'snapshot-filename',
 };
 ```
 
@@ -55,7 +55,7 @@ The component is built using the useZoom hook. It provides a pair of + and - but
 It defaults to single increments changes but also accepts increment values to use instead.
 
 ```jsx
-import { ThreekitProvider, Player, Zoom } from "@threekit-tools/treble";
+import { ThreekitProvider, Player, Zoom } from '@threekit-tools/treble';
 
 const Component = () => {
   return (

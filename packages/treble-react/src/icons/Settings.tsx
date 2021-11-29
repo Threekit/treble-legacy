@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Settings: IIcon = () => {
   return (
@@ -24,9 +24,9 @@ export const Settings: IIcon = () => {
       />
       <circle cx="10" cy="10" r="2" className="tk-icon" strokeWidth="2" />
     </SVG>
-  )
-}
+  );
+};
 
-Settings.iconName = 'settings'
+Settings.iconName = 'settings';
 
-export default Settings
+export default Settings;

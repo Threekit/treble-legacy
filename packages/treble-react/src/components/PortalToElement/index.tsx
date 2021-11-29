@@ -1,32 +1,32 @@
-import React from 'react'
-import { createPortal } from 'react-dom'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { createPortal } from 'react-dom';
+import PropTypes from 'prop-types';
 
 interface IPortalToElementProps {
-  elementId?: string
-  strict?: boolean
+  elementId?: string;
+  strict?: boolean;
 }
 
-export const PortalToElement: React.FC<IPortalToElementProps> = (props) => {
+export const PortalToElement: React.FC<IPortalToElementProps> = props => {
   const { children, elementId, strict } = Object.assign(
     { strict: false },
     props
-  )
+  );
 
   if (!elementId) {
-    if (strict) return null
-    return <>{children}</>
+    if (strict) return null;
+    return <>{children}</>;
   }
 
-  const htmlEl = document.getElementById(elementId)
+  const htmlEl = document.getElementById(elementId);
 
   if (!htmlEl) {
-    if (strict) return null
-    return <>{children}</>
+    if (strict) return null;
+    return <>{children}</>;
   }
 
-  return createPortal(children, htmlEl)
-}
+  return createPortal(children, htmlEl);
+};
 
 PortalToElement.propTypes = {
   /**
@@ -39,8 +39,8 @@ PortalToElement.propTypes = {
    * content will render out in its defualt flow.
    */
   strict: PropTypes.bool,
-}
+};
 
-PortalToElement.defaultProps = {}
+PortalToElement.defaultProps = {};
 
-export default PortalToElement
+export default PortalToElement;

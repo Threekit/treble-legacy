@@ -13,7 +13,6 @@
     "start": "tsc --watch",
     "build": "tsc",
     "clean": "rimraf dist",
-    "format": "prettier --write ./src",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o build"
   },

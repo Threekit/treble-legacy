@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const ZoomOut: IIcon = () => {
   return (
@@ -24,9 +24,9 @@ export const ZoomOut: IIcon = () => {
         strokeWidth="2"
       />
     </SVG>
-  )
-}
+  );
+};
 
-ZoomOut.iconName = 'zoom-out'
+ZoomOut.iconName = 'zoom-out';
 
-export default ZoomOut
+export default ZoomOut;

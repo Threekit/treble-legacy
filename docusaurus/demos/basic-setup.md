@@ -23,27 +23,27 @@ It includes: the **Threekit Provider**, the **Player Component** and the **Flat 
 ```jsx live
 function ThreekitApp() {
   const attributes = {
-    "Shell Color": {
-      component: "swatch",
+    'Shell Color': {
+      component: 'swatch',
     },
-    "Shell Secondary Color": {
-      component: "swatch",
+    'Shell Secondary Color': {
+      component: 'swatch',
     },
-    "Mask Color": {
-      component: "swatch",
+    'Mask Color': {
+      component: 'swatch',
     },
-    "Mask Style": {
-      component: "tiles-group",
+    'Mask Style': {
+      component: 'tiles-group',
     },
   };
 
   return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={"preview"}>
+    <ThreekitProvider config={threekitConfig} threekitEnv={'preview'}>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "auto 400px",
-          gridGap: "12px",
+          display: 'grid',
+          gridTemplateColumns: 'auto 400px',
+          gridGap: '12px',
         }}
       >
         <Player />

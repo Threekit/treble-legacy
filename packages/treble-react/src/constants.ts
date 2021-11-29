@@ -2,27 +2,27 @@
  * Dev-Kit Config
  ****************************************************/
 
-export const DEFAULT_CLASS_NAME = 'threekit-react'
-export const CLASS_NAME_PREFIX = 'tk'
+export const DEFAULT_CLASS_NAME = 'threekit-react';
+export const CLASS_NAME_PREFIX = 'tk';
 
-export const INPUT_COMPONENT_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-input`
-export const WIDGET_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-widget`
-export const LAYOUT_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-layout`
-export const TOOL_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-tool`
-export const DISPLAY_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-display`
-export const FORM_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-form`
+export const INPUT_COMPONENT_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-input`;
+export const WIDGET_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-widget`;
+export const LAYOUT_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-layout`;
+export const TOOL_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-tool`;
+export const DISPLAY_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-display`;
+export const FORM_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-form`;
 
 /*****************************************************
  * Saved Configuration Workflow
  ****************************************************/
 
-export const TK_SAVED_CONFIG_PARAM_KEY = 'tkConfigId'
+export const TK_SAVED_CONFIG_PARAM_KEY = 'tkConfigId';
 
 /*****************************************************
  * Threekit Player Initialization Defaults
  ****************************************************/
 
-export const TK_PLAYER_ROOT_DIV = 'tk-ply-root'
+export const TK_PLAYER_ROOT_DIV = 'tk-ply-root';
 
 export const DEFAULT_PLAYER_CONFIG = {
   // authToken: undefined,
@@ -40,7 +40,7 @@ export const DEFAULT_PLAYER_CONFIG = {
   // locale: undefined,
   allowMobileVerticalOrbit: false,
   // publishStage: undefined,
-}
+};
 
 /*****************************************************
  * Attributes
@@ -52,16 +52,16 @@ export const ATTRIBUTE_TYPES = {
   number: 'Number',
   color: 'Color',
   boolean: 'Boolean',
-}
+};
 
 export const SORT_OPTIONS = {
   ascending: 'ascending',
   descending: 'descending',
-}
+};
 
 export const ATTRIBUTES_RESERVED = {
   camera: '_camera',
-}
+};
 
 /*****************************************************
  * Reserved Catalog Item Metadata Properties
@@ -77,7 +77,7 @@ export const METADATA_RESERVED = {
   translate: '_translate',
   rotate: '_rotate',
   scale: '_scale',
-}
+};
 
 /*****************************************************
  * Snapshot
@@ -86,7 +86,7 @@ export const METADATA_RESERVED = {
 export const SNAPSHOT_FORMATS = {
   png: 'png',
   jpeg: 'jpeg',
-}
+};
 
 export const SNAPSHOT_OUTPUTS = {
   url: 'url',
@@ -94,10 +94,10 @@ export const SNAPSHOT_OUTPUTS = {
   dataUrl: 'dataUrl',
   blob: 'blob',
   file: 'file',
-}
+};
 
 /*****************************************************
  * Wishlist
  ****************************************************/
 
-export const WISHLIST_LOCALSTORAGE_KEY = 'tk_wishlist'
+export const WISHLIST_LOCALSTORAGE_KEY = 'tk_wishlist';

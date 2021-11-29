@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Pause: IIcon = () => {
   return (
@@ -34,9 +34,9 @@ export const Pause: IIcon = () => {
         strokeWidth="2"
       />
     </SVG>
-  )
-}
+  );
+};
 
-Pause.iconName = 'pause'
+Pause.iconName = 'pause';
 
-export default Pause
+export default Pause;

@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Wishlist: IIcon = () => {
   return (
@@ -28,9 +28,9 @@ export const Wishlist: IIcon = () => {
         strokeWidth="1"
       />
     </SVG>
-  )
-}
+  );
+};
 
-Wishlist.iconName = 'wishlist'
+Wishlist.iconName = 'wishlist';
 
-export default Wishlist
+export default Wishlist;

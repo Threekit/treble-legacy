@@ -1,28 +1,28 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
-import { Wrapper, Background, Header, Content } from './modal.styles'
-import { generateLayoutClassName as generateClassName } from '../../utils'
-import { RemoveIcon } from '../../icons'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ReactDOM from 'react-dom';
+import { Wrapper, Background, Header, Content } from './modal.styles';
+import { generateLayoutClassName as generateClassName } from '../../utils';
+import { RemoveIcon } from '../../icons';
 
 interface IModalProps {
-  title?: string
-  showHeader?: boolean
-  className?: string
-  show?: boolean
-  handleClose?: () => void
-  children?: React.ReactNode
+  title?: string;
+  showHeader?: boolean;
+  className?: string;
+  show?: boolean;
+  handleClose?: () => void;
+  children?: React.ReactNode;
 }
 
 interface IModal extends React.FC<IModalProps> {
-  componentName: string
+  componentName: string;
 }
 
-export const ModalComponent: React.FC<IModalProps> = (props) => {
-  const { title, children, handleClose, showHeader, className } = props
+export const ModalComponent: React.FC<IModalProps> = props => {
+  const { title, children, handleClose, showHeader, className } = props;
   return (
     <Wrapper
-      onClick={(e) => e.stopPropagation()}
+      onClick={e => e.stopPropagation()}
       className={`${className} modal-main`}
     >
       {showHeader ? (
@@ -35,12 +35,12 @@ export const ModalComponent: React.FC<IModalProps> = (props) => {
       ) : null}
       <Content className={`${className} modal-content`}>{children}</Content>
     </Wrapper>
-  )
-}
+  );
+};
 
-export const Modal: IModal = (props) => {
-  const { title, children, handleClose, showHeader, className } = props
-  const cls = generateClassName('modal', className)
+export const Modal: IModal = props => {
+  const { title, children, handleClose, showHeader, className } = props;
+  const cls = generateClassName('modal', className);
 
   return (
     <Background onClick={handleClose} className={`${cls} modal-background`}>
@@ -53,8 +53,8 @@ export const Modal: IModal = (props) => {
         {children}
       </ModalComponent>
     </Background>
-  )
-}
+  );
+};
 
 ModalComponent.propTypes = {
   /**
@@ -74,16 +74,18 @@ ModalComponent.propTypes = {
    * Used to add a custom class name to each of the components html elements
    */
   className: PropTypes.string,
-}
+};
 
 ModalComponent.defaultProps = {
   title: undefined,
   handleClose: undefined,
   showHeader: true,
   className: undefined,
-}
+};
 
-Modal.componentName = 'modal'
+Modal.componentName = 'modal';
 
 export default (props: IModalProps) =>
-  props.show ? ReactDOM.createPortal(<Modal {...props} />, document.body) : null
+  props.show
+    ? ReactDOM.createPortal(<Modal {...props} />, document.body)
+    : null;

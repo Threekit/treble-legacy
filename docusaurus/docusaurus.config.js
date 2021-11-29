@@ -1,30 +1,30 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require("prism-react-renderer/themes/github");
-const darkCodeTheme = require("prism-react-renderer/themes/dracula");
+const lightCodeTheme = require('prism-react-renderer/themes/github');
+const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "Treble",
-  tagline: "Build a web-experience for your Threekit Configurator",
-  url: "https://docs.treble.3kit.com",
-  baseUrl: "/",
-  onBrokenLinks: "throw",
-  onBrokenMarkdownLinks: "warn",
-  favicon: "img/favicon.ico",
-  organizationName: "Threekit", // Usually your GitHub org/user name.
-  projectName: "treble", // Usually your repo name.
-  themes: ["@docusaurus/theme-live-codeblock"],
+  title: 'Treble',
+  tagline: 'Build a web-experience for your Threekit Configurator',
+  url: 'https://docs.treble.3kit.com',
+  baseUrl: '/',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
+  favicon: 'img/favicon.ico',
+  organizationName: 'Threekit', // Usually your GitHub org/user name.
+  projectName: 'treble', // Usually your repo name.
+  themes: ['@docusaurus/theme-live-codeblock'],
   presets: [
     [
-      "@docusaurus/preset-classic",
+      '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
-          path: "docs",
-          routeBasePath: "docs",
-          sidebarPath: require.resolve("./sidebars.js"),
+          path: 'docs',
+          routeBasePath: 'docs',
+          sidebarPath: require.resolve('./sidebars.js'),
           // lastVersion: "current",
           // onlyIncludeVersions: ["current"],
           // sidebarPath: require.resolve("./sidebars.js"),
@@ -32,7 +32,7 @@ const config = {
           // editUrl: "https://github.com/facebook/docusaurus/edit/main/website/",
         },
         theme: {
-          customCss: require.resolve("./src/css/custom.css"),
+          customCss: require.resolve('./src/css/custom.css'),
         },
       }),
     ],
@@ -40,12 +40,12 @@ const config = {
 
   plugins: [
     [
-      "@docusaurus/plugin-content-docs",
+      '@docusaurus/plugin-content-docs',
       {
-        id: "demos",
-        path: "demos",
-        routeBasePath: "demos",
-        sidebarPath: require.resolve("./sidebars.js"),
+        id: 'demos',
+        path: 'demos',
+        routeBasePath: 'demos',
+        sidebarPath: require.resolve('./sidebars.js'),
         // ... other options
       },
     ],
@@ -60,39 +60,38 @@ const config = {
       navbar: {
         // title: "Treble Design System",
         logo: {
-          alt: "Threekit - Treble",
-          src:
-            "https://www.threekit.com/hubfs/Logos%20and%20Trademarks/threekit_logo_black.svg",
+          alt: 'Threekit - Treble',
+          src: 'https://www.threekit.com/hubfs/Logos%20and%20Trademarks/threekit_logo_black.svg',
         },
         items: [
           {
-            to: "https://www.threekit.com/",
-            label: "Threekit",
-            position: "right",
+            to: 'https://www.threekit.com/',
+            label: 'Threekit',
+            position: 'right',
           },
           {
-            to: "https://community.threekit.com/",
-            label: "Threekit Community",
-            position: "right",
+            to: 'https://community.threekit.com/',
+            label: 'Threekit Community',
+            position: 'right',
           },
 
           {
-            to: "/get-started",
-            label: "Get Started",
-            position: "right",
+            to: '/get-started',
+            label: 'Get Started',
+            position: 'right',
           },
           {
-            to: "/demos/overview",
-            position: "right",
-            label: "Demos",
+            to: '/demos/overview',
+            position: 'right',
+            label: 'Demos',
           },
           {
-            type: "doc",
-            docId: "welcome",
-            position: "right",
-            label: "Docs",
+            type: 'doc',
+            docId: 'welcome',
+            position: 'right',
+            label: 'Docs',
           },
-          { to: "/storybook", label: "Storybook", position: "right" },
+          { to: '/storybook', label: 'Storybook', position: 'right' },
           // {
           //   href: "https://github.com/Threekit/treble",
           //   label: "GitHub",

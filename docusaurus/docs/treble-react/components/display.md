@@ -13,7 +13,7 @@ The `<ProductTitle />` component will display the value of the metadata key `_ti
 The title can also be overwritten by passing in your own title in as a prop.
 
 ```jsx
-import { ProductTitle } from "@threekit-tools/treble";
+import { ProductTitle } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -35,7 +35,7 @@ The description can also be overwritten by passing in your own description in as
 It is built using the [useMetadata() hook](#use-metadata).
 
 ```jsx
-import { Description } from "@threekit-tools/treble";
+import { Description } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -55,7 +55,7 @@ The `<AttributeTitle>` will display the translated attribute name of an attribut
 It is built using the [useName() hook](#use-name).
 
 ```jsx
-import { AttributeTitle } from "@threekit-tools/treble";
+import { AttributeTitle } from '@threekit-tools/treble';
 
 const Component = () => {
   return (
@@ -91,7 +91,7 @@ It is built using the [usePrice() hook](#use-price).
 **Support for multiple Pricebooks and Currencies coming soon**
 
 ```jsx
-import { TotalPrice } from "@threekit-tools/treble";
+import { TotalPrice } from '@threekit-tools/treble';
 
 const Component = () => {
   return (

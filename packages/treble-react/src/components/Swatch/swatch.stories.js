@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 
-import { Swatch } from './index'
+import { Swatch } from './index';
 
 const props = {
   title: 'Swatch Attribute Title',
@@ -41,18 +41,18 @@ const props = {
       color: '#51a455',
     },
   ],
-}
+};
 
 export default {
   title: 'Form Components/Swatch',
   component: Swatch,
   argTypes: { onClick: { action: 'clicked' } },
-}
+};
 
-const Template = (args) => <Swatch {...args} />
+const Template = args => <Swatch {...args} />;
 
-export const Default = Template.bind({})
-Default.args = props
+export const Default = Template.bind({});
+Default.args = props;
 
-export const Square = Template.bind({})
-Square.args = { ...props, shape: 'square' }
+export const Square = Template.bind({});
+Square.args = { ...props, shape: 'square' };

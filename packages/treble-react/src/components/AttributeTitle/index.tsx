@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Wrapper } from './attributeTitle.styles'
-import useAttribute from '../../hooks/useAttribute'
-import { generateDisplayClassName as generateClassName } from '../../utils'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Wrapper } from './attributeTitle.styles';
+import useAttribute from '../../hooks/useAttribute';
+import { generateDisplayClassName as generateClassName } from '../../utils';
 
 interface IAttributeTitle {
-  title?: string
-  attribute?: string
-  className?: string
+  title?: string;
+  attribute?: string;
+  className?: string;
 }
 
 export const AttributeTitle = (props: IAttributeTitle) => {
@@ -15,16 +15,16 @@ export const AttributeTitle = (props: IAttributeTitle) => {
     attribute,
     title,
     className: customClassName,
-  } = Object.assign({ title: undefined, className: '' }, props)
-  const [attributeData] = useAttribute(attribute)
-  if (!title && !attributeData) return null
+  } = Object.assign({ title: undefined, className: '' }, props);
+  const [attributeData] = useAttribute(attribute);
+  if (!title && !attributeData) return null;
 
-  const cls = generateClassName('attr-title', customClassName, title)
+  const cls = generateClassName('attr-title', customClassName, title);
 
-  const preppedTitle = title || attributeData?.label
+  const preppedTitle = title || attributeData?.label;
 
-  return <Wrapper className={cls}>{preppedTitle}</Wrapper>
-}
+  return <Wrapper className={cls}>{preppedTitle}</Wrapper>;
+};
 
 AttributeTitle.propTypes = {
   /**
@@ -39,11 +39,11 @@ AttributeTitle.propTypes = {
    * Custom classNames applied to the HTML Element to apply custom CSS styling.
    */
   className: PropTypes.string,
-}
+};
 
 AttributeTitle.defaultProps = {
   title: undefined,
   className: '',
-}
+};
 
-export default AttributeTitle
+export default AttributeTitle;

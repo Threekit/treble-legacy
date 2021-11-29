@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Cart: IIcon = () => {
   return (
@@ -26,9 +26,9 @@ export const Cart: IIcon = () => {
       <circle cx="5" cy="16.5" r="1" className="tk-icon" strokeWidth="1" />
       <circle cx="15" cy="16.5" r="1" className="tk-icon" strokeWidth="1" />
     </SVG>
-  )
-}
+  );
+};
 
-Cart.iconName = 'cart'
+Cart.iconName = 'cart';
 
-export default Cart
+export default Cart;

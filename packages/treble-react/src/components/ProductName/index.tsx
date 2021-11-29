@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Wrapper } from './productName.styles'
-import useName from '../../hooks/useName'
-import { generateDisplayClassName as generateClassName } from '../../utils'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Wrapper } from './productName.styles';
+import useName from '../../hooks/useName';
+import { generateDisplayClassName as generateClassName } from '../../utils';
 
 interface ITitle {
-  title?: string
-  className?: string
-  align?: string
+  title?: string;
+  className?: string;
+  align?: string;
 }
 
 export const ProductName = (props: ITitle) => {
@@ -15,18 +15,18 @@ export const ProductName = (props: ITitle) => {
     title,
     className: customClassName,
     align,
-  } = Object.assign({ className: '', align: 'left' }, props)
-  const name = useName()
-  if (!title?.length && !name) return null
+  } = Object.assign({ className: '', align: 'left' }, props);
+  const name = useName();
+  if (!title?.length && !name) return null;
 
-  const cls = generateClassName('title', customClassName)
+  const cls = generateClassName('title', customClassName);
 
   return (
     <Wrapper align={align} className={cls}>
       {name || title}
     </Wrapper>
-  )
-}
+  );
+};
 
 ProductName.propTypes = {
   /**
@@ -41,11 +41,11 @@ ProductName.propTypes = {
    * The CSS Text alignment property. Options: 'left' | 'center' | 'right'
    */
   align: PropTypes.string,
-}
+};
 
 ProductName.defaultProps = {
   className: '',
   align: 'left',
-}
+};
 
-export default ProductName
+export default ProductName;

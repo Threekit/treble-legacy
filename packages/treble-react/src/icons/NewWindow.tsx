@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const NewWindow: IIcon = () => {
   return (
@@ -23,9 +23,9 @@ export const NewWindow: IIcon = () => {
         strokeWidth="2"
       />
     </SVG>
-  )
-}
+  );
+};
 
-NewWindow.iconName = 'new-window'
+NewWindow.iconName = 'new-window';
 
-export default NewWindow
+export default NewWindow;

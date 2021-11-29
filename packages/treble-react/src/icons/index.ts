@@ -1,47 +1,47 @@
-import React from 'react'
-import AddIcon from './Add'
-import ArrowLeftIcon from './ArrowLeft'
-import ArrowRightIcon from './ArrowRight'
-import CameraIcon from './Camera'
-import CaretDownIcon from './CaretDown'
-import CaretUpIcon from './CaretUp'
-import CaretLeftIcon from './CaretLeft'
-import CaretRightIcon from './CaretRight'
-import CartIcon from './Cart'
-import CheckmateIcon from './Checkmate'
-import ClipboardIcon from './Clipboard'
-import ColorPickerIcon from './ColorPicker'
-import CopyIcon from './Copy'
-import DeleteIcon from './Delete'
-import DoubleCaretLeftIcon from './DoubleCaretLeft'
-import DoubleCaretRightIcon from './DoubleCaretRight'
-import DownloadIcon from './Download'
-import DragIcon from './Drag'
-import EditIcon from './Edit'
-import HeartIcon from './Heart'
-import ImageIcon from './Image'
-import InfoIcon from './Info'
-import MailIcon from './Mail'
-import MenuIcon from './Menu'
-import MoreIcon from './More'
-import NewWindowIcon from './NewWindow'
-import PauseIcon from './Pause'
-import PlayIcon from './Play'
-import RedoIcon from './Redo'
-import RemoveIcon from './Remove'
-import RulerIcon from './Ruler'
-import SearchIcon from './Search'
-import SettingsIcon from './Settings'
-import ShareIcon from './Share'
-import SwitchIcon from './Switch'
-import TagIcon from './Tag'
-import UndoIcon from './Undo'
-import WishlistIcon from './Wishlist'
-import ZoomInIcon from './ZoomIn'
-import ZoomOutIcon from './ZoomOut'
+import React from 'react';
+import AddIcon from './Add';
+import ArrowLeftIcon from './ArrowLeft';
+import ArrowRightIcon from './ArrowRight';
+import CameraIcon from './Camera';
+import CaretDownIcon from './CaretDown';
+import CaretUpIcon from './CaretUp';
+import CaretLeftIcon from './CaretLeft';
+import CaretRightIcon from './CaretRight';
+import CartIcon from './Cart';
+import CheckmateIcon from './Checkmate';
+import ClipboardIcon from './Clipboard';
+import ColorPickerIcon from './ColorPicker';
+import CopyIcon from './Copy';
+import DeleteIcon from './Delete';
+import DoubleCaretLeftIcon from './DoubleCaretLeft';
+import DoubleCaretRightIcon from './DoubleCaretRight';
+import DownloadIcon from './Download';
+import DragIcon from './Drag';
+import EditIcon from './Edit';
+import HeartIcon from './Heart';
+import ImageIcon from './Image';
+import InfoIcon from './Info';
+import MailIcon from './Mail';
+import MenuIcon from './Menu';
+import MoreIcon from './More';
+import NewWindowIcon from './NewWindow';
+import PauseIcon from './Pause';
+import PlayIcon from './Play';
+import RedoIcon from './Redo';
+import RemoveIcon from './Remove';
+import RulerIcon from './Ruler';
+import SearchIcon from './Search';
+import SettingsIcon from './Settings';
+import ShareIcon from './Share';
+import SwitchIcon from './Switch';
+import TagIcon from './Tag';
+import UndoIcon from './Undo';
+import WishlistIcon from './Wishlist';
+import ZoomInIcon from './ZoomIn';
+import ZoomOutIcon from './ZoomOut';
 
 export interface IIcon extends React.FC {
-  iconName: string
+  iconName: string;
 }
 
 export {
@@ -85,7 +85,7 @@ export {
   WishlistIcon,
   ZoomInIcon,
   ZoomOutIcon,
-}
+};
 
 export default {
   [AddIcon.iconName]: AddIcon,
@@ -128,4 +128,4 @@ export default {
   [WishlistIcon.iconName]: WishlistIcon,
   [ZoomInIcon.iconName]: ZoomInIcon,
   [ZoomOutIcon.iconName]: ZoomOutIcon,
-}
+};

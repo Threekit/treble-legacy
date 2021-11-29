@@ -1,21 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Wrapper } from './flatForm.styles'
-import ProductName from '../ProductName'
-import ProductDescription from '../ProductDescription'
-import formComponents from '../formComponents'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Wrapper } from './flatForm.styles';
+import ProductName from '../ProductName';
+import ProductDescription from '../ProductDescription';
+import formComponents from '../formComponents';
 import {
   generateFormClassName as generateClassName,
   filterFormAttributes,
-} from '../../utils'
-import useConfigurator from '../../hooks/useConfigurator'
+} from '../../utils';
+import useConfigurator from '../../hooks/useConfigurator';
 
 interface FlatFormProps {
-  title?: string
-  alignTitle?: string
-  description?: string
-  className?: string
-  includeReservedAttributes: boolean
+  title?: string;
+  alignTitle?: string;
+  description?: string;
+  className?: string;
+  includeReservedAttributes: boolean;
   // attributes:
 }
 
@@ -34,17 +34,17 @@ export const FlatForm = (props: FlatFormProps) => {
       includeReservedAttributes: false,
     },
     props
-  )
-  const [attributesData] = useConfigurator()
-  if (!attributesData) return null
+  );
+  const [attributesData] = useConfigurator();
+  if (!attributesData) return null;
 
   const filterAttributes = filterFormAttributes(
     attributesData,
     attributes,
     includeReservedAttributes
-  )
+  );
 
-  const cls = generateClassName('flat-form', customClassName, title)
+  const cls = generateClassName('flat-form', customClassName, title);
 
   return (
     <Wrapper className={cls}>
@@ -58,22 +58,22 @@ export const FlatForm = (props: FlatFormProps) => {
         className={customClassName}
       />
       {filterAttributes.map((attr, i) => {
-        let Component
-        let props = (attributes || {})?.[attr.name]?.props || {}
+        let Component;
+        let props = (attributes || {})?.[attr.name]?.props || {};
         if ((attributes || {})?.[attr.name]?.component) {
           Component = Object.entries(formComponents[attr.type] || {}).find(
             ([key]) =>
               key === (attributes || {})?.[attr.name]?.component.toLowerCase()
-          )?.[1]
+          )?.[1];
         }
         if (!Component) {
-          Component = Object.values(formComponents[attr.type] || {})?.[0]
+          Component = Object.values(formComponents[attr.type] || {})?.[0];
         }
         if (!Component) {
           console.log(
             `No default component available for ${attr.type} type Attributes`
-          )
-          return null
+          );
+          return null;
         }
         return (
           <Component
@@ -82,11 +82,11 @@ export const FlatForm = (props: FlatFormProps) => {
             attribute={attr.name}
             {...props}
           />
-        )
+        );
       })}
     </Wrapper>
-  )
-}
+  );
+};
 
 FlatForm.propTypes = {
   /**
@@ -120,12 +120,12 @@ FlatForm.propTypes = {
    * Used to add a custom class name to each of the components html elements
    */
   className: PropTypes.string,
-}
+};
 
 FlatForm.defaultProps = {
   alignTitle: 'left',
   attributes: {},
   includeReservedAttributes: false,
-}
+};
 
-export default FlatForm
+export default FlatForm;

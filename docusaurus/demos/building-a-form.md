@@ -24,12 +24,12 @@ It includes: the **Threekit Provider**, the **Player Component** and the **Flat 
 ```jsx live
 function ThreekitApp() {
   return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={"preview"}>
+    <ThreekitProvider config={threekitConfig} threekitEnv={'preview'}>
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "auto 400px",
-          gridGap: "12px",
+          display: 'grid',
+          gridTemplateColumns: 'auto 400px',
+          gridGap: '12px',
         }}
       >
         <Player />

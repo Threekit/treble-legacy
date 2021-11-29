@@ -1,18 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import FormComponentTitle from '../FormComponentTitle'
-import FormComponentDescription from '../FormComponentDescription'
-import { TilesGroupWrapper, TileWrapper } from './tilesGroup.styles'
-import { FormComponentWrapper as Wrapper } from '../shared.styles'
-import { generateInputClassName as generateClassName } from '../../utils'
-import { ATTRIBUTE_TYPES } from '../../constants'
+import React from 'react';
+import PropTypes from 'prop-types';
+import FormComponentTitle from '../FormComponentTitle';
+import FormComponentDescription from '../FormComponentDescription';
+import { TilesGroupWrapper, TileWrapper } from './tilesGroup.styles';
+import { FormComponentWrapper as Wrapper } from '../shared.styles';
+import { generateInputClassName as generateClassName } from '../../utils';
+import { ATTRIBUTE_TYPES } from '../../constants';
 import container, {
   IFormComponentProps,
   IOptionShared,
-} from '../containers/formInputContainer'
+} from '../containers/formInputContainer';
 
 export interface ITilesGroup extends IFormComponentProps<IOptionShared> {
-  columns?: number
+  columns?: number;
 }
 
 export const TilesGroup = (props: ITilesGroup) => {
@@ -24,9 +24,9 @@ export const TilesGroup = (props: ITilesGroup) => {
     value,
     onClick,
     className: customClassName,
-  } = Object.assign({ stretch: true }, props)
+  } = Object.assign({ stretch: true }, props);
 
-  const cls = generateClassName('tiles-group', customClassName, title)
+  const cls = generateClassName('tiles-group', customClassName, title);
 
   return (
     <Wrapper className={cls}>
@@ -34,11 +34,11 @@ export const TilesGroup = (props: ITilesGroup) => {
       <FormComponentDescription description={description} className={cls} />
       <TilesGroupWrapper stretch={stretch}>
         {options?.map((el, i) => {
-          const { name, value: optionValue } = el
-          const selected = value === optionValue
+          const { name, value: optionValue } = el;
+          const selected = value === optionValue;
           const clsOpt = `${cls}-option option-${i} ${optionValue}${
             selected ? ' selected' : ''
-          }`
+          }`;
           return (
             <TileWrapper
               key={i}
@@ -48,12 +48,12 @@ export const TilesGroup = (props: ITilesGroup) => {
             >
               <div>{name}</div>
             </TileWrapper>
-          )
+          );
         })}
       </TilesGroupWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 TilesGroup.propTypes = {
   /**
@@ -95,7 +95,7 @@ TilesGroup.propTypes = {
    * Used to add a custom class name to each of the components html elements
    */
   className: PropTypes.string,
-}
+};
 
 TilesGroup.defaultProps = {
   description: undefined,
@@ -107,12 +107,12 @@ TilesGroup.defaultProps = {
   value: undefined,
   options: undefined,
   onClick: undefined,
-}
+};
 
-TilesGroup.componentName = 'tiles-group'
+TilesGroup.componentName = 'tiles-group';
 TilesGroup.compatibleAttributes = new Set([
   ATTRIBUTE_TYPES.asset,
   ATTRIBUTE_TYPES.string,
-])
+]);
 
-export default container<ITilesGroup>(TilesGroup)
+export default container<ITilesGroup>(TilesGroup);

@@ -1,8 +1,8 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import FormComponentTitle from '../FormComponentTitle'
-import FormComponentDescription from '../FormComponentDescription'
-import { FormComponentWrapper as Wrapper } from '../shared.styles'
+import React from 'react';
+import PropTypes from 'prop-types';
+import FormComponentTitle from '../FormComponentTitle';
+import FormComponentDescription from '../FormComponentDescription';
+import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import {
   CardsWrapper,
   CardWrapper,
@@ -10,73 +10,73 @@ import {
   CardTitle,
   CardDescription,
   CardPrice,
-} from './cards.styles'
-import { generateInputClassName as generateClassName } from '../../utils'
-import { ATTRIBUTE_TYPES } from '../../constants'
+} from './cards.styles';
+import { generateInputClassName as generateClassName } from '../../utils';
+import { ATTRIBUTE_TYPES } from '../../constants';
 import container, {
   IFormComponentProps,
   IOption,
-} from '../containers/formInputContainer'
+} from '../containers/formInputContainer';
 
 export interface ICards extends IFormComponentProps<IOption> {
-  showThumbnail?: boolean
-  showPrice?: boolean
-  showDescription?: boolean
+  showThumbnail?: boolean;
+  showPrice?: boolean;
+  showDescription?: boolean;
 }
 
 interface IThumbnail {
-  name: string
-  imageUrl?: string
-  color?: string
-  className?: string
+  name: string;
+  imageUrl?: string;
+  color?: string;
+  className?: string;
 }
 
 interface ITitle {
-  name: string
-  className?: string
+  name: string;
+  className?: string;
 }
 
 interface IDescription {
-  description?: string
-  className?: string
+  description?: string;
+  className?: string;
 }
 
 interface IPrice {
-  price?: string
-  className?: string
+  price?: string;
+  className?: string;
 }
 
 const Thumbnail = (props: IThumbnail) => {
-  const { imageUrl, color, name, className } = props
-  if (!imageUrl && !color) return null
+  const { imageUrl, color, name, className } = props;
+  if (!imageUrl && !color) return null;
   return (
     <CardThumbnail className={`${className} option-thumbnail`} color={color}>
       {imageUrl ? <img src={imageUrl} alt={name || ''} /> : null}
     </CardThumbnail>
-  )
-}
+  );
+};
 
 const Title = (props: ITitle) => {
-  const { name, className } = props
-  if (!name) return null
-  return <CardTitle className={`${className} option-title`}>{name}</CardTitle>
-}
+  const { name, className } = props;
+  if (!name) return null;
+  return <CardTitle className={`${className} option-title`}>{name}</CardTitle>;
+};
 
 const Description = (props: IDescription) => {
-  const { description, className } = props
-  if (!description) return null
+  const { description, className } = props;
+  if (!description) return null;
   return (
     <CardDescription className={`${className} option-description`}>
       {description}
     </CardDescription>
-  )
-}
+  );
+};
 
 const Price = (props: IPrice) => {
-  const { price, className } = props
-  if (!price) return null
-  return <CardPrice className={`${className} option-price`}>{price}</CardPrice>
-}
+  const { price, className } = props;
+  if (!price) return null;
+  return <CardPrice className={`${className} option-price`}>{price}</CardPrice>;
+};
 
 export const Cards = (props: ICards) => {
   const {
@@ -89,9 +89,9 @@ export const Cards = (props: ICards) => {
     showThumbnail,
     showPrice,
     showDescription,
-  } = props
+  } = props;
 
-  const cls = generateClassName('cards', customClassName, title)
+  const cls = generateClassName('cards', customClassName, title);
 
   return (
     <Wrapper className={cls}>
@@ -106,11 +106,11 @@ export const Cards = (props: ICards) => {
               imageUrl: !showThumbnail ? undefined : el.imageUrl,
               price: !showPrice ? undefined : el.price,
               description: !showDescription ? undefined : el.description,
-            })
-          const selected = value === optionValue
+            });
+          const selected = value === optionValue;
           const clsOpt = `${cls}-option option-${i} ${optionValue}${
             selected ? ' selected' : ''
-          }`
+          }`;
           return (
             <CardWrapper
               key={i}
@@ -130,12 +130,12 @@ export const Cards = (props: ICards) => {
                 <Price price={price} className={clsOpt} />
               </div>
             </CardWrapper>
-          )
+          );
         })}
       </CardsWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 Cards.propTypes = {
   /**
@@ -215,7 +215,7 @@ Cards.propTypes = {
    * for the options/
    */
   showPrice: PropTypes.bool,
-}
+};
 
 Cards.defaultProps = {
   description: undefined,
@@ -234,12 +234,12 @@ Cards.defaultProps = {
   value: undefined,
   options: undefined,
   onClick: undefined,
-}
+};
 
-Cards.componentName = 'cards'
+Cards.componentName = 'cards';
 Cards.compatibleAttributes = new Set([
   ATTRIBUTE_TYPES.asset,
   ATTRIBUTE_TYPES.string,
-])
+]);
 
-export default container<ICards>(Cards)
+export default container<ICards>(Cards);

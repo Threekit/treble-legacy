@@ -1,18 +1,18 @@
-import React from "react";
-import useBaseUrl from "@docusaurus/useBaseUrl";
-import clsx from "clsx";
-import styles from "./HomepageFeatures.module.css";
+import React from 'react';
+import useBaseUrl from '@docusaurus/useBaseUrl';
+import clsx from 'clsx';
+import styles from './HomepageFeatures.module.css';
 
 function Feature({ imgUrl, title, link, description }) {
   const url = useBaseUrl(link);
   return (
     <div
-      className={clsx("col col--4", styles.feature)}
+      className={clsx('col col--4', styles.feature)}
       onClick={() => {
         window.location.href = url;
       }}
     >
-      <div className={clsx("text--center", styles.featureImg)}>
+      <div className={clsx('text--center', styles.featureImg)}>
         <img src={imgUrl} alt={title} />
       </div>
       <div className="text--center padding-horiz--md">

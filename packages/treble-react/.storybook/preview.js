@@ -1,18 +1,18 @@
-import { addDecorator } from '@storybook/react'
-import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
-import { withThemesProvider } from 'storybook-addon-styled-component-theme'
-import { ThemeProvider } from 'styled-components'
-import theme from '../src/theme'
-import GlobalStyle from '../src/components/ThreekitProvider/GlobalStyles.styles'
-import styled from 'styled-components'
+import { addDecorator } from '@storybook/react';
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
+import { withThemesProvider } from 'storybook-addon-styled-component-theme';
+import { ThemeProvider } from 'styled-components';
+import theme from '../src/theme';
+import GlobalStyle from '../src/components/ThreekitProvider/GlobalStyles.styles';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   * {
     box-sizing: border-box;
   }
-`
+`;
 
-addDecorator(withThemesProvider([theme]), ThemeProvider)
+addDecorator(withThemesProvider([theme]), ThemeProvider);
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -25,13 +25,13 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
+};
 
 export const decorators = [
-  (Story) => (
+  Story => (
     <Wrapper>
       <GlobalStyle />
       <Story />
     </Wrapper>
   ),
-]
+];

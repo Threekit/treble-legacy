@@ -1,7 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import FormComponentTitle from '../FormComponentTitle'
-import FormComponentDescription from '../FormComponentDescription'
+import React from 'react';
+import PropTypes from 'prop-types';
+import FormComponentTitle from '../FormComponentTitle';
+import FormComponentDescription from '../FormComponentDescription';
 import {
   StripsWrapper,
   StripWrapper,
@@ -9,76 +9,78 @@ import {
   StripTitle,
   StripDescription,
   StripPrice,
-} from './strips.styles'
-import { FormComponentWrapper as Wrapper } from '../shared.styles'
-import { generateInputClassName as generateClassName } from '../../utils'
-import { ATTRIBUTE_TYPES } from '../../constants'
+} from './strips.styles';
+import { FormComponentWrapper as Wrapper } from '../shared.styles';
+import { generateInputClassName as generateClassName } from '../../utils';
+import { ATTRIBUTE_TYPES } from '../../constants';
 import container, {
   IFormComponentProps,
   IOption,
-} from '../containers/formInputContainer'
+} from '../containers/formInputContainer';
 
 export interface IStrips extends IFormComponentProps<IOption> {
-  showThumbnail?: boolean
-  showPrice?: boolean
-  showDescription?: boolean
+  showThumbnail?: boolean;
+  showPrice?: boolean;
+  showDescription?: boolean;
 }
 
 interface IThumbnail {
-  name: string
-  imageUrl?: string
-  color?: string
-  className?: string
+  name: string;
+  imageUrl?: string;
+  color?: string;
+  className?: string;
 }
 
 interface ITitle {
-  name: string
-  className?: string
+  name: string;
+  className?: string;
 }
 
 interface IDescription {
-  description?: string
-  className?: string
+  description?: string;
+  className?: string;
 }
 
 interface IPrice {
-  price?: string
-  className?: string
+  price?: string;
+  className?: string;
 }
 
 const Thumbnail = (props: IThumbnail) => {
-  const { imageUrl, color, name, className } = props
-  if (!imageUrl && !color) return null
+  const { imageUrl, color, name, className } = props;
+  if (!imageUrl && !color) return null;
   return (
     <StripThumbnail className={`${className} option-thumbnail`} color={color}>
       {imageUrl ? <img src={imageUrl} alt={name || ''} /> : null}
     </StripThumbnail>
-  )
-}
+  );
+};
 
 const Title = (props: ITitle) => {
-  const { name, className } = props
-  if (!name) return null
-  return <StripTitle className={`${className} option-title`}>{name}</StripTitle>
-}
+  const { name, className } = props;
+  if (!name) return null;
+  return (
+    <StripTitle className={`${className} option-title`}>{name}</StripTitle>
+  );
+};
 
 const Description = (props: IDescription) => {
-  const { description, className } = props
-  if (!description) return null
+  const { description, className } = props;
+  if (!description) return null;
   return (
     <StripDescription className={`${className} option-description`}>
       {description}
     </StripDescription>
-  )
-}
+  );
+};
 
 const Price = (props: IPrice) => {
-  const { price, className } = props
-  if (!price) return null
+  const { price, className } = props;
+  if (!price) return null;
   return (
     <StripPrice className={`${className} option-price`}>{price}</StripPrice>
-  )
-}
+  );
+};
 
 export const Strips = (props: IStrips) => {
   const {
@@ -91,9 +93,9 @@ export const Strips = (props: IStrips) => {
     showThumbnail,
     showPrice,
     showDescription,
-  } = props
+  } = props;
 
-  const cls = generateClassName('strips', customClassName, title)
+  const cls = generateClassName('strips', customClassName, title);
 
   return (
     <Wrapper className={cls}>
@@ -108,11 +110,11 @@ export const Strips = (props: IStrips) => {
               imageUrl: !showThumbnail ? undefined : el.imageUrl,
               price: !showPrice ? undefined : el.price,
               description: !showDescription ? undefined : el.description,
-            })
-          const selected = value === optionValue
+            });
+          const selected = value === optionValue;
           const clsOpt = `${cls}-option option-${i} ${optionValue}${
             selected ? ' selected' : ''
-          }`
+          }`;
           return (
             <StripWrapper
               key={i}
@@ -132,12 +134,12 @@ export const Strips = (props: IStrips) => {
               </div>
               <Price price={price} className={clsOpt} />
             </StripWrapper>
-          )
+          );
         })}
       </StripsWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 Strips.propTypes = {
   /**
@@ -216,7 +218,7 @@ Strips.propTypes = {
    * for the options/
    */
   showPrice: PropTypes.bool,
-}
+};
 
 Strips.defaultProps = {
   description: undefined,
@@ -235,12 +237,12 @@ Strips.defaultProps = {
   value: undefined,
   options: undefined,
   onClick: undefined,
-}
+};
 
-Strips.componentName = 'strips'
+Strips.componentName = 'strips';
 Strips.compatibleAttributes = new Set([
   ATTRIBUTE_TYPES.asset,
   ATTRIBUTE_TYPES.string,
-])
+]);
 
-export default container<IStrips>(Strips)
+export default container<IStrips>(Strips);

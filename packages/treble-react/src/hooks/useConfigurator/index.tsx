@@ -1,27 +1,27 @@
-import { getAttributes, setConfiguration } from '../../store/threekit'
-import { ISetConfiguration, IThreekitDisplayAttribute } from '../../threekit'
-import { useThreekitSelector, useThreekitDispatch } from '../../store'
+import { getAttributes, setConfiguration } from '../../store/threekit';
+import { ISetConfiguration, IThreekitDisplayAttribute } from '../../threekit';
+import { useThreekitSelector, useThreekitDispatch } from '../../store';
 
-type UseConfiguratorError = [undefined, undefined]
+type UseConfiguratorError = [undefined, undefined];
 type UseConfiguratorSuccess = [
   Record<string, IThreekitDisplayAttribute>,
   (configuration: ISetConfiguration) => void
-]
+];
 
-type UseConfiguratorHook = UseConfiguratorError | UseConfiguratorSuccess
+type UseConfiguratorHook = UseConfiguratorError | UseConfiguratorSuccess;
 
 const useConfigurator = (): UseConfiguratorHook => {
-  const dispatch = useThreekitDispatch()
+  const dispatch = useThreekitDispatch();
   const attributes = useThreekitSelector<
     undefined | Record<string, IThreekitDisplayAttribute>
-  >(getAttributes)
+  >(getAttributes);
 
-  if (!attributes) return [undefined, undefined]
+  if (!attributes) return [undefined, undefined];
 
   const handleChange = (configuration: ISetConfiguration) =>
-    dispatch(setConfiguration(configuration))
+    dispatch(setConfiguration(configuration));
 
-  return [attributes, handleChange]
-}
+  return [attributes, handleChange];
+};
 
-export default useConfigurator
+export default useConfigurator;

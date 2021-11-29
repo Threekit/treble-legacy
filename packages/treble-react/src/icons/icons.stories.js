@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
-import icons from './index'
+import icons from './index';
 
 const IconsGrid = styled.div`
   display: flex;
@@ -32,14 +32,14 @@ const IconsGrid = styled.div`
       text-transform: capitalize;
     }
   }
-`
+`;
 
 export default {
   title: 'Icons/[WIP] Default',
   parameters: {
     componentSubtitle: 'Icons as React Components.',
   },
-}
+};
 
 const Template = () => {
   return (
@@ -53,7 +53,7 @@ const Template = () => {
         </div>
       ))}
     </IconsGrid>
-  )
-}
+  );
+};
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});

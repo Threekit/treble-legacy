@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const More: IIcon = () => {
   return (
@@ -33,9 +33,9 @@ export const More: IIcon = () => {
         strokeWidth="2"
       />
     </SVG>
-  )
-}
+  );
+};
 
-More.iconName = 'more'
+More.iconName = 'more';
 
-export default More
+export default More;

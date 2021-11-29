@@ -1,6 +1,6 @@
-import { useThreekitSelector } from '../../store'
-import { getPrice, IPrice } from '../../store/threekit'
+import { useThreekitSelector } from '../../store';
+import { getPrice, IPrice } from '../../store/threekit';
 
-const usePrice = () => useThreekitSelector<undefined | IPrice>(getPrice)
+const usePrice = () => useThreekitSelector<undefined | IPrice>(getPrice);
 
-export default usePrice
+export default usePrice;

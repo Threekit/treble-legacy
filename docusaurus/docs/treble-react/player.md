@@ -8,8 +8,8 @@ custom_edit_url:
 The `<Player />` component renders the **Threekit Player**.
 
 ```jsx
-import { ThreekitProvider, Player } from "@threekit-tools/treble";
-import threekitConfig from "./threekit.config.js";
+import { ThreekitProvider, Player } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 const ThreekitApp = () => {
   return (
@@ -25,8 +25,8 @@ const ThreekitApp = () => {
 The Player Component also comes with **widget containers** that can be used to position widgets or any component in pre-defined locations around the player.
 
 ```jsx
-import { ThreekitProvider, Player } from "@threekit-tools/treble";
-import threekitConfig from "./threekit.config.js";
+import { ThreekitProvider, Player } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 //  We can separate out the widget container component
 //  or use the component directly from the Player component

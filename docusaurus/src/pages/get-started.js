@@ -1,16 +1,16 @@
-import React from "react";
-import clsx from "clsx";
-import Layout from "@theme/Layout";
-import styles from "./index.module.css";
-import useBaseUrl from "@docusaurus/useBaseUrl";
+import React from 'react';
+import clsx from 'clsx';
+import Layout from '@theme/Layout';
+import styles from './index.module.css';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 export default function GetStartedPage() {
   //   const { siteConfig } = useDocusaurusContext();
   const newProjectUrl = useBaseUrl(
-    "/docs/getting-started/quick-start-new-project"
+    '/docs/getting-started/quick-start-new-project'
   );
   const existingProjectUrl = useBaseUrl(
-    "/docs/getting-started/quick-start-existing-project"
+    '/docs/getting-started/quick-start-existing-project'
   );
   return (
     <Layout

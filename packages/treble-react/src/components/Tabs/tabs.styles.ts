@@ -1,18 +1,18 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface TabWrapper {
-  selected?: boolean
+  selected?: boolean;
 }
 
-export const Wrapper = styled.div``
+export const Wrapper = styled.div``;
 
 export const TabsWrapper = styled.div`
   display: flex;
   flex-direction: row;
 
   width: 100%;
-  border-bottom: 1px solid ${(props) => props.theme.borderColorBase};
-`
+  border-bottom: 1px solid ${props => props.theme.borderColorBase};
+`;
 
 export const Tab = styled.div<TabWrapper>`
   transform: translateY(1px);
@@ -22,22 +22,22 @@ export const Tab = styled.div<TabWrapper>`
   padding: 10px 2px;
   margin: 0px 15px;
 
-  border-bottom: ${(props) =>
+  border-bottom: ${props =>
     props.selected ? `2px solid ${props.theme.primaryColor}` : 'none'};
 
   text-align: center;
-  font-size: ${(props) => props.theme.fontBaseSize};
-  font-family: ${(props) => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontBaseSize};
+  font-family: ${props => props.theme.fontFamily};
   font-weight: 600;
-  color: ${(props) =>
+  color: ${props =>
     props.selected ? props.theme.primaryColor : props.theme.headingColor};
 
   &:hover {
-    color: ${(props) => props.theme.primaryColor};
+    color: ${props => props.theme.primaryColor};
   }
-`
+`;
 
 export const TabContent = styled.div`
   padding: 10px;
-  font-family: ${(props) => props.theme.fontFamily};
-`
+  font-family: ${props => props.theme.fontFamily};
+`;

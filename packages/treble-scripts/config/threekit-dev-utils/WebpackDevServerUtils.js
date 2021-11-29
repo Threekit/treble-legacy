@@ -48,7 +48,7 @@ module.exports.createCompiler = ({ config, port, threekitEnv, webpack }) => {
     process.exit(1);
   }
 
-  compiler.hooks.done.tap('done', async (stats) => {
+  compiler.hooks.done.tap('done', async stats => {
     clearConsole();
 
     const statsData = stats.toJson({

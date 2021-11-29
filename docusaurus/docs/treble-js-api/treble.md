@@ -74,8 +74,8 @@ The order of snapshots in the array will match the order they were defined in th
 //  URLs of an image from the user's current view and one
 //  from the 'dimensions-camera', respectively
 const snapshotUrls = await window.threekit.treble.takeSnapshots(
-  [undefined, "dimensions-camera"],
-  { output: "url" }
+  [undefined, 'dimensions-camera'],
+  { output: 'url' }
 );
 ```
 

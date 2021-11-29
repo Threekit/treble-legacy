@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
@@ -11,7 +11,7 @@ const SVG = styled.svg`
   .thin {
     stroke-width: 1;
   }
-`
+`;
 
 export const Image: IIcon = () => {
   return (
@@ -29,9 +29,9 @@ export const Image: IIcon = () => {
       />
       <circle cx="13" cy="7" r="1.5" className="tk-icon thin" />
     </SVG>
-  )
-}
+  );
+};
 
-Image.iconName = 'image'
+Image.iconName = 'image';
 
-export default Image
+export default Image;

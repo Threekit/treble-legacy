@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Checkmate: IIcon = () => {
   return (
@@ -19,9 +19,9 @@ export const Checkmate: IIcon = () => {
     >
       <path d="M2 8.5L8 14.5L18 4.5" className="tk-icon" strokeWidth="2" />
     </SVG>
-  )
-}
+  );
+};
 
-Checkmate.iconName = 'checkmate'
+Checkmate.iconName = 'checkmate';
 
-export default Checkmate
+export default Checkmate;

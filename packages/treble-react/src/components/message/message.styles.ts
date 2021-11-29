@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   background: #fff;
@@ -9,9 +9,9 @@ export const Wrapper = styled.div`
   border-radius: 2px;
   margin-top: 12px;
 
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontBaseSize};
-  color: ${(props) => props.theme.textColor};
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontBaseSize};
+  color: ${props => props.theme.textColor};
 
   display: flex;
   flex-direction: row;
@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
     top: 50%;
     transform: translateY(-50%);
   }
-`
+`;
 
 export const IconWrapper = styled.div`
   height: 20px;
@@ -36,6 +36,6 @@ export const IconWrapper = styled.div`
   overflow: hidden;
 
   .tk-icon {
-    stroke: ${(props) => props.theme.primaryColor} !important;
+    stroke: ${props => props.theme.primaryColor} !important;
   }
-`
+`;

@@ -19,7 +19,7 @@ export default {
   component: Tabs,
 };
 
-const Template = (args) => (
+const Template = args => (
   <Tabs {...args}>
     {items.map((el, i) => (
       <TabPane key={i} label={el.label}>

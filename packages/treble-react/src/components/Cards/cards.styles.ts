@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface ICardWrapperStyles {
-  selected: boolean
+  selected: boolean;
 }
 
 export const CardsWrapper = styled.div`
@@ -19,12 +19,12 @@ export const CardsWrapper = styled.div`
   & > div:not(:last-child) {
     margin-right: 5px;
   }
-`
+`;
 
 export const CardWrapperStyles = styled.div<ICardWrapperStyles>`
   /* min-height: 234px; */
   width: 170px;
-  border-radius: ${(props) => props.theme.borderRadius};
+  border-radius: ${props => props.theme.borderRadius};
   border: 1px solid lightgrey;
 
   background: #fff;
@@ -36,7 +36,7 @@ export const CardWrapperStyles = styled.div<ICardWrapperStyles>`
   justify-content: space-between;
 
   cursor: pointer;
-`
+`;
 
 export const CardThumbnail = styled.div`
   height: 120px;
@@ -44,72 +44,72 @@ export const CardThumbnail = styled.div`
   margin-bottom: 5px;
   text-align: center;
 
-  ${(props) => (props.color ? `background: ${props.color};` : '')}
+  ${props => (props.color ? `background: ${props.color};` : '')}
 
   img {
     height: 120px;
     width: auto;
     object-fit: cover;
   }
-`
+`;
 
 export const CardTitle = styled.div`
-  color: ${(props) => props.theme.textColor};
+  color: ${props => props.theme.textColor};
   font-weight: 400;
   font-size: 14px;
-  font-family: ${(props) => props.theme.fontFamily};
+  font-family: ${props => props.theme.fontFamily};
   line-height: 20px;
   text-align: center;
   transition: all 0.2s;
-`
+`;
 
 export const CardDescription = styled.div`
-  color: ${(props) => props.theme.textColorSecondary};
+  color: ${props => props.theme.textColorSecondary};
   font-weight: 400;
   font-size: 13px;
-  font-family: ${(props) => props.theme.fontFamily};
+  font-family: ${props => props.theme.fontFamily};
   line-height: 20px;
   text-align: center;
   padding-bottom: 5px;
   transition: all 0.2s;
-`
+`;
 
 export const CardPrice = styled.div`
-  color: ${(props) => props.theme.textColorSecondary};
+  color: ${props => props.theme.textColorSecondary};
   font-weight: 600;
   font-size: 14px;
-  font-family: ${(props) => props.theme.fontFamily};
+  font-family: ${props => props.theme.fontFamily};
   line-height: 20px;
   text-align: center;
   transition: all 0.2s;
-`
+`;
 
 export const CardWrapper = styled(CardWrapperStyles)`
   border: 1px solid
-    ${(props) => (props.selected ? props.theme.primaryColor : 'lightgrey')};
+    ${props => (props.selected ? props.theme.primaryColor : 'lightgrey')};
 
-  background: ${(props) =>
+  background: ${props =>
     props.selected ? `${props.theme.primaryColor}18` : '#fff'};
 
   ${CardTitle} {
-    color: ${(props) =>
+    color: ${props =>
       props.selected ? props.theme.primaryColor : props.theme.textColor};
   }
 
   ${CardDescription} {
-    color: ${(props) =>
+    color: ${props =>
       props.selected
         ? props.theme.primaryColor
         : props.theme.textColorSecondary};
   }
   ${CardPrice} {
-    color: ${(props) =>
+    color: ${props =>
       props.selected
         ? props.theme.primaryColor
         : props.theme.textColorSecondary};
   }
 
   &:hover {
-    background: ${(props) => `${props.theme.primaryColor}18`};
+    background: ${props => `${props.theme.primaryColor}18`};
   }
-`
+`;

@@ -1,11 +1,11 @@
-import { ATTRIBUTE_TYPES } from '../constants'
+import { ATTRIBUTE_TYPES } from '../constants';
 
-import Cards, { Cards as CardsComponent } from './Cards'
-import Dropdown, { Dropdown as DropdownComponent } from './Dropdown'
-import Strips, { Strips as StripsComponent } from './Strips'
-import Swatch, { Swatch as SwatchComponent } from './Swatch'
-import Tiles, { Tiles as TilesComponent } from './Tiles'
-import TilesGroup, { TilesGroup as TilesGroupComponent } from './TilesGroup'
+import Cards, { Cards as CardsComponent } from './Cards';
+import Dropdown, { Dropdown as DropdownComponent } from './Dropdown';
+import Strips, { Strips as StripsComponent } from './Strips';
+import Swatch, { Swatch as SwatchComponent } from './Swatch';
+import Tiles, { Tiles as TilesComponent } from './Tiles';
+import TilesGroup, { TilesGroup as TilesGroupComponent } from './TilesGroup';
 
 export const formComponents = {
   [ATTRIBUTE_TYPES.asset]: {
@@ -31,6 +31,6 @@ export const formComponents = {
   //     //  First option is default
   //     [ColorPickerComponent.componentName]: ColorPicker,
   //   },
-}
+};
 
-export default formComponents
+export default formComponents;

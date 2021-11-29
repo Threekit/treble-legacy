@@ -1,6 +1,6 @@
-import { useThreekitSelector } from '../../store'
-import { getName } from '../../store/threekit'
+import { useThreekitSelector } from '../../store';
+import { getName } from '../../store/threekit';
 
-const useName = () => useThreekitSelector<undefined | string>(getName)
+const useName = () => useThreekitSelector<undefined | string>(getName);
 
-export default useName
+export default useName;

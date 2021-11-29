@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 interface AccordionWrapper {
-  selected?: boolean
+  selected?: boolean;
 }
 
 export const Wrapper = styled.div<AccordionWrapper>`
@@ -33,7 +33,7 @@ export const Wrapper = styled.div<AccordionWrapper>`
       text-transform: uppercase;
       letter-spacing: 0.2em;
       font-size: 14px;
-      font-family: ${(props) => props.theme.fontFamily};
+      font-family: ${props => props.theme.fontFamily};
     }
 
     & > div:nth-child(2) {
@@ -41,12 +41,12 @@ export const Wrapper = styled.div<AccordionWrapper>`
       padding-right: 8px;
       font-size: 13px;
       letter-spacing: 0.1em;
-      font-family: ${(props) => props.theme.fontFamily};
+      font-family: ${props => props.theme.fontFamily};
     }
   }
 
   & > div:nth-child(2) {
-    max-height: ${(props) => (props.selected ? '330px' : 0)};
+    max-height: ${props => (props.selected ? '330px' : 0)};
     transition: all 0.3s;
     overflow-y: scroll;
 
@@ -59,4 +59,4 @@ export const Wrapper = styled.div<AccordionWrapper>`
       }
     }
   }
-`
+`;

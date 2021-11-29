@@ -1,7 +1,7 @@
 ---
 sidebar_position: 2
 custom_edit_url:
-sidebar_label: "Quick Start: Existing Project"
+sidebar_label: 'Quick Start: Existing Project'
 ---
 
 # Adding Treble to an existing project
@@ -31,29 +31,29 @@ A basic app will include the **Threekit Provider**, to connect our components to
 To get started you can copy the code from below, populating the values in the `threekitConfig` object.
 
 ```jsx
-import { ThreekitProvider, Player, FlatForm } from "@threekit-tools/treble";
+import { ThreekitProvider, Player, FlatForm } from '@threekit-tools/treble';
 
 const threekitConfig = {
   preview: {
-    orgId: "",
-    assetId: "",
-    publicToken: "",
+    orgId: '',
+    assetId: '',
+    publicToken: '',
   },
 };
 
-const threekitEnv = "preview";
+const threekitEnv = 'preview';
 
 const ThreekitApp = () => {
   return (
     <ThreekitProvider config={threekitConfig} threekitEnv={threekitEnv}>
       <div
         style={{
-          height: "100vh",
-          maxWidth: "1000px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "auto 400px",
-          gridGap: "12px",
+          height: '100vh',
+          maxWidth: '1000px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'auto 400px',
+          gridGap: '12px',
         }}
       >
         <Player />

@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Play: IIcon = () => {
   return (
@@ -19,9 +19,9 @@ export const Play: IIcon = () => {
     >
       <path d="M16 10L5 17L5 3L16 10Z" className="tk-icon" strokeWidth="2" />
     </SVG>
-  )
-}
+  );
+};
 
-Play.iconName = 'play'
+Play.iconName = 'play';
 
-export default Play
+export default Play;

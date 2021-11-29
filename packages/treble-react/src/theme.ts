@@ -1,11 +1,11 @@
 export const deviceSizes = {
   tablet: '800px',
-}
+};
 
 export const MEDIA_QUERIES = {
   tablet: `(max-width: ${deviceSizes.tablet})`,
   desktop: `(min-width: ${deviceSizes.tablet})`,
-}
+};
 
 const theme = {
   mediaQueries: MEDIA_QUERIES,
@@ -25,6 +25,6 @@ const theme = {
     '0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);',
   widgetSize: '36px',
   fontFamily: '"Open Sans", sans-serif',
-}
+};
 
-export default theme
+export default theme;

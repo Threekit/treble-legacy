@@ -1,9 +1,9 @@
-import chalk from "chalk";
+import chalk from 'chalk';
 
 export const missingProjectName = () => {
   console.log();
   console.log();
-  console.log(chalk.red("App name is missing..."));
+  console.log(chalk.red('App name is missing...'));
   console.log();
   console.log(`Please include a name for your Treble app by entering the `);
   console.log(`command in the following format and replacing the 'app-name'.`);
@@ -13,11 +13,11 @@ export const missingProjectName = () => {
   console.log();
 };
 
-export const preCloneTemplate = (outputDir) => {
+export const preCloneTemplate = outputDir => {
   console.log();
   console.log(outputDir);
   console.log();
-  console.log("Installing dependencies. This will take a couple of minutes.");
+  console.log('Installing dependencies. This will take a couple of minutes.');
   console.log(
     `Installing ${chalk.cyan(`react`)}, ${chalk.cyan(
       `react-dom`
@@ -29,7 +29,7 @@ export const preCloneTemplate = (outputDir) => {
 };
 
 export const preInstallDependencies = () => {
-  console.log("Installing Treble project dependencies...");
+  console.log('Installing Treble project dependencies...');
 };
 
 export const complete = (outputDir, projectName) => {
@@ -37,25 +37,25 @@ export const complete = (outputDir, projectName) => {
   console.log(
     `Success! Created ${chalk.cyan(projectName)} at ${chalk.green(outputDir)}`
   );
-  console.log("Inside that directory, you can run the following command:");
+  console.log('Inside that directory, you can run the following command:');
   console.log();
-  console.log(`  ${chalk.cyan("yarn start")}`);
+  console.log(`  ${chalk.cyan('yarn start')}`);
   console.log(
     `    Starts the local development server on ${chalk.cyan(
-      "https://localhost:3000"
+      'https://localhost:3000'
     )}.`
   );
   console.log();
-  console.log(`  ${chalk.cyan("yarn build")}`);
+  console.log(`  ${chalk.cyan('yarn build')}`);
   console.log(
     `    Bundles the app into a single static file name ${chalk.cyan(
-      "threekit-embed.js"
+      'threekit-embed.js'
     )} for production.`
   );
   console.log();
-  console.log("Get started by typing:");
+  console.log('Get started by typing:');
   console.log();
-  console.log(`${chalk.cyan("cd")} ${projectName}`);
-  console.log(chalk.cyan("yarn start"));
+  console.log(`${chalk.cyan('cd')} ${projectName}`);
+  console.log(chalk.cyan('yarn start'));
   console.log();
 };

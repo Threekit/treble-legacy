@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Ruler: IIcon = () => {
   return (
@@ -32,9 +32,9 @@ export const Ruler: IIcon = () => {
         strokeWidth="1"
       />
     </SVG>
-  )
-}
+  );
+};
 
-Ruler.iconName = 'ruler'
+Ruler.iconName = 'ruler';
 
-export default Ruler
+export default Ruler;

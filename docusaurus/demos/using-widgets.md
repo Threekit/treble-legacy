@@ -15,7 +15,7 @@ The Threekit Player doesn't place nicely with the demos feature of our documenta
 ```jsx live
 function ThreekitApp() {
   return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={"preview"}>
+    <ThreekitProvider config={threekitConfig} threekitEnv={'preview'}>
       <Player>
         <Player.TopRightWidgets>
           <Snapshots />

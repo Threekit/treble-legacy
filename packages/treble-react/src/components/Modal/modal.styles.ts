@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const Background = styled.div`
   height: 100vh;
@@ -8,7 +8,7 @@ export const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-`
+`;
 
 export const Wrapper = styled.div`
   min-width: 400px;
@@ -17,25 +17,25 @@ export const Wrapper = styled.div`
   opacity: 1;
   overflow: scroll;
   background: #fff;
-  border-radius: ${(props) => props.theme.borderRadius};
+  border-radius: ${props => props.theme.borderRadius};
 
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`
+`;
 
 export const Header = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  font-family: ${(props) => props.theme.fontFamily};
+  font-family: ${props => props.theme.fontFamily};
 
   & > div:nth-child(2) {
     cursor: pointer;
   }
-`
+`;
 
 export const Content = styled.div`
-  font-family: ${(props) => props.theme.fontFamily};
-`
+  font-family: ${props => props.theme.fontFamily};
+`;

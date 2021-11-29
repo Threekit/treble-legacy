@@ -1,34 +1,34 @@
-import React from 'react'
+import React from 'react';
 import {
   WishlistItemWrapper as Wrapper,
   WishlistThumbnail as Thumbnail,
   WishlistTitle as Title,
   WishlistActionArea as ActionArea,
-} from './wishlist.styles'
-import { Button } from '../Button'
-import { IMetadata } from '../../threekit'
+} from './wishlist.styles';
+import { Button } from '../Button';
+import { IMetadata } from '../../threekit';
 
 interface WishlistItemProps {
-  thumbnail?: string
-  metadata?: IMetadata
-  onResume: () => void
-  onShare: () => void
-  onDelete: () => void
+  thumbnail?: string;
+  metadata?: IMetadata;
+  onResume: () => void;
+  onShare: () => void;
+  onDelete: () => void;
 }
 
 export const WishlistItem = (props: WishlistItemProps) => {
-  const { thumbnail, metadata, onResume, onShare, onDelete } = props
-  const { name, _pdf } = metadata || {}
+  const { thumbnail, metadata, onResume, onShare, onDelete } = props;
+  const { name, _pdf } = metadata || {};
 
   const handleClickShare = (e: React.SyntheticEvent) => {
-    onShare()
-    e.stopPropagation()
-  }
+    onShare();
+    e.stopPropagation();
+  };
 
   const handleClickDelete = (e: React.SyntheticEvent) => {
-    onDelete()
-    e.stopPropagation()
-  }
+    onDelete();
+    e.stopPropagation();
+  };
 
   return (
     <Wrapper onClick={onResume}>
@@ -50,7 +50,7 @@ export const WishlistItem = (props: WishlistItemProps) => {
         <Button icon="delete" onClick={handleClickDelete} />
       </ActionArea>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default WishlistItem
+export default WishlistItem;

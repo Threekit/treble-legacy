@@ -1,1 +1,1 @@
-export const TEMPLATES = { basic: "basic" };
+export const TEMPLATES = { basic: 'basic' };

@@ -1,7 +1,7 @@
-import { useThreekitSelector } from '../../store'
-import { isThreekitLoaded } from '../../store/threekit'
+import { useThreekitSelector } from '../../store';
+import { isThreekitLoaded } from '../../store/threekit';
 
 const useThreekitInitStatus = () =>
-  useThreekitSelector<boolean>(isThreekitLoaded)
+  useThreekitSelector<boolean>(isThreekitLoaded);
 
-export default useThreekitInitStatus
+export default useThreekitInitStatus;

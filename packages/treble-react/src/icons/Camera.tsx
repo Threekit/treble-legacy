@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Camera: IIcon = () => {
   return (
@@ -24,9 +24,9 @@ export const Camera: IIcon = () => {
       />
       <circle cx="10" cy="11" r="3" className="tk-icon" strokeWidth="2" />
     </SVG>
-  )
-}
+  );
+};
 
-Camera.iconName = 'camera'
+Camera.iconName = 'camera';
 
-export default Camera
+export default Camera;

@@ -23,13 +23,13 @@ const updatedConfig = {
   //  For attribute types: String | Number | Color
   //  we can pass in the value we wish set set
   //  directly into the configuration object
-  "User Name": "John Doe",
+  'User Name': 'John Doe',
   //  For attribute type: Part Reference (Asset)
   //  we need to set the value to an object which
   //  includes the assetId of the catalog item
   //  we want to update the attribute's value to be
-  "Car Seat Material": {
-    assetId: "cdd124c9-4997-b5ce-3f20-c98127328eca",
+  'Car Seat Material': {
+    assetId: 'cdd124c9-4997-b5ce-3f20-c98127328eca',
   },
 };
 

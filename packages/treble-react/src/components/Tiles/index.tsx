@@ -1,18 +1,18 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import FormComponentTitle from '../FormComponentTitle'
-import FormComponentDescription from '../FormComponentDescription'
-import { TilesWrapper, TileWrapper } from './tiles.styles'
-import { FormComponentWrapper as Wrapper } from '../shared.styles'
-import { generateInputClassName as generateClassName } from '../../utils'
-import { ATTRIBUTE_TYPES } from '../../constants'
+import React from 'react';
+import PropTypes from 'prop-types';
+import FormComponentTitle from '../FormComponentTitle';
+import FormComponentDescription from '../FormComponentDescription';
+import { TilesWrapper, TileWrapper } from './tiles.styles';
+import { FormComponentWrapper as Wrapper } from '../shared.styles';
+import { generateInputClassName as generateClassName } from '../../utils';
+import { ATTRIBUTE_TYPES } from '../../constants';
 import container, {
   IFormComponentProps,
   IOptionShared,
-} from '../containers/formInputContainer'
+} from '../containers/formInputContainer';
 
 export interface ITiles extends IFormComponentProps<IOptionShared> {
-  columns?: number
+  columns?: number;
 }
 
 export const Tiles = (props: ITiles) => {
@@ -24,9 +24,9 @@ export const Tiles = (props: ITiles) => {
     onClick,
     className: customClassName,
     columns,
-  } = Object.assign({ columns: 2 }, props)
+  } = Object.assign({ columns: 2 }, props);
 
-  const cls = generateClassName('tiles', customClassName, title)
+  const cls = generateClassName('tiles', customClassName, title);
 
   return (
     <Wrapper className={cls}>
@@ -34,11 +34,11 @@ export const Tiles = (props: ITiles) => {
       <FormComponentDescription description={description} className={cls} />
       <TilesWrapper columns={columns}>
         {options?.map((el, i) => {
-          const { name, value: optionValue } = el
-          const selected = value === optionValue
+          const { name, value: optionValue } = el;
+          const selected = value === optionValue;
           const clsOpt = `${cls}-option option-${i} ${optionValue}${
             selected ? ' selected' : ''
-          }`
+          }`;
           return (
             <TileWrapper
               key={i}
@@ -48,12 +48,12 @@ export const Tiles = (props: ITiles) => {
             >
               <div>{name}</div>
             </TileWrapper>
-          )
+          );
         })}
       </TilesWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 Tiles.propTypes = {
   /**
@@ -99,7 +99,7 @@ Tiles.propTypes = {
    * Defines how many columns to organize the tiles into.
    */
   columns: PropTypes.number,
-}
+};
 
 Tiles.defaultProps = {
   description: undefined,
@@ -112,12 +112,12 @@ Tiles.defaultProps = {
   value: undefined,
   options: undefined,
   onClick: undefined,
-}
+};
 
-Tiles.componentName = 'tiles'
+Tiles.componentName = 'tiles';
 Tiles.compatibleAttributes = new Set([
   ATTRIBUTE_TYPES.asset,
   ATTRIBUTE_TYPES.string,
-])
+]);
 
-export default container<ITiles>(Tiles)
+export default container<ITiles>(Tiles);

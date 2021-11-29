@@ -1,31 +1,31 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import { WishlistIcon, HeartIcon } from '../../icons'
-import { Button, BUTTON_SHAPES, BUTTON_TYPES } from '../Button'
-import Drawer from '../Drawer'
-import { TwinButtonWrapper } from '../shared.styles'
-import { generateWidgetClassName as generateClassName } from '../../utils'
-import WishlistItem from './WishlistItem'
-import { WishlistWrapper as Wrapper } from './wishlist.styles'
-import useWishlist from '../../hooks/useWishlist'
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { WishlistIcon, HeartIcon } from '../../icons';
+import { Button, BUTTON_SHAPES, BUTTON_TYPES } from '../Button';
+import Drawer from '../Drawer';
+import { TwinButtonWrapper } from '../shared.styles';
+import { generateWidgetClassName as generateClassName } from '../../utils';
+import WishlistItem from './WishlistItem';
+import { WishlistWrapper as Wrapper } from './wishlist.styles';
+import useWishlist from '../../hooks/useWishlist';
 
 interface WidgetButtonProps {
-  title?: string
-  type?: BUTTON_TYPES
-  shape?: BUTTON_SHAPES
-  className?: string
-  onClick: () => void
+  title?: string;
+  type?: BUTTON_TYPES;
+  shape?: BUTTON_SHAPES;
+  className?: string;
+  onClick: () => void;
 }
 
 interface WishlistProps {
-  showLabel?: boolean
-  type?: BUTTON_TYPES
-  shape?: BUTTON_SHAPES
-  className?: string
+  showLabel?: boolean;
+  type?: BUTTON_TYPES;
+  shape?: BUTTON_SHAPES;
+  className?: string;
 }
 
 export const AddWishlistButton = (props: WidgetButtonProps) => {
-  const { title, type, shape, className, onClick } = props
+  const { title, type, shape, className, onClick } = props;
   return (
     <Button
       title={title}
@@ -35,11 +35,11 @@ export const AddWishlistButton = (props: WidgetButtonProps) => {
       type={type}
       shape={shape}
     />
-  )
-}
+  );
+};
 
 export const WishlistButton = (props: WidgetButtonProps) => {
-  const { title, type, shape, className, onClick } = props
+  const { title, type, shape, className, onClick } = props;
   return (
     <Button
       title={title}
@@ -49,23 +49,23 @@ export const WishlistButton = (props: WidgetButtonProps) => {
       type={type}
       shape={shape}
     />
-  )
-}
+  );
+};
 
 export const Wishlist = (props: WishlistProps) => {
-  const [showWishlist, setShowWishlist] = useState(false)
+  const [showWishlist, setShowWishlist] = useState(false);
   const [
     wishlist,
     addToWishlist,
     removeFromWishlist,
     resumeWishlistItem,
     shareWishlistItem,
-  ] = useWishlist()
-  const { className, showLabel } = props
-  const shape = props.shape || 'round'
-  const type = props.type || 'threekit'
+  ] = useWishlist();
+  const { className, showLabel } = props;
+  const shape = props.shape || 'round';
+  const type = props.type || 'threekit';
 
-  const cls = generateClassName('wishlist', className)
+  const cls = generateClassName('wishlist', className);
 
   if (
     !wishlist ||
@@ -74,17 +74,17 @@ export const Wishlist = (props: WishlistProps) => {
     !removeFromWishlist ||
     !shareWishlistItem
   )
-    return null
+    return null;
 
   const handleAddToWishlist = async () => {
-    await addToWishlist()
-    setShowWishlist(true)
-  }
+    await addToWishlist();
+    setShowWishlist(true);
+  };
 
   const handleClickResume = (idx: number) => {
-    resumeWishlistItem(idx)
-    setShowWishlist(false)
-  }
+    resumeWishlistItem(idx);
+    setShowWishlist(false);
+  };
 
   return (
     <React.Fragment>
@@ -123,23 +123,23 @@ export const Wishlist = (props: WishlistProps) => {
         </Wrapper>
       </Drawer>
     </React.Fragment>
-  )
-}
+  );
+};
 
 Wishlist.propTypes = {
   /**
    * Custom classNames applied to the HTML Element to apply custom CSS styling.
    */
   className: PropTypes.string,
-}
+};
 
 Wishlist.defaultProps = {
   classname: '',
   shape: 'round',
   type: 'threekit',
-}
+};
 
-Wishlist.componentName = 'wishlist'
-Wishlist.Icon = WishlistIcon
+Wishlist.componentName = 'wishlist';
+Wishlist.Icon = WishlistIcon;
 
-export default Wishlist
+export default Wishlist;

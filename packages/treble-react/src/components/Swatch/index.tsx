@@ -1,44 +1,44 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import FormComponentTitle from '../FormComponentTitle'
-import FormComponentDescription from '../FormComponentDescription'
+import React from 'react';
+import PropTypes from 'prop-types';
+import FormComponentTitle from '../FormComponentTitle';
+import FormComponentDescription from '../FormComponentDescription';
 import {
   SwatchWrapper,
   OptionWrapper,
   OptionThumbnail,
   SwatchInfoWrapper,
-} from './swatch.styles'
-import { FormComponentWrapper as Wrapper } from '../shared.styles'
-import { generateInputClassName as generateClassName } from '../../utils'
-import { ATTRIBUTE_TYPES } from '../../constants'
+} from './swatch.styles';
+import { FormComponentWrapper as Wrapper } from '../shared.styles';
+import { generateInputClassName as generateClassName } from '../../utils';
+import { ATTRIBUTE_TYPES } from '../../constants';
 import container, {
   IFormComponentProps,
   IOption,
-} from '../containers/formInputContainer'
+} from '../containers/formInputContainer';
 
 export interface ISwatch extends IFormComponentProps<IOption> {
-  showThumbnail?: boolean
-  showPrice?: boolean
-  showDescription?: boolean
+  showThumbnail?: boolean;
+  showPrice?: boolean;
+  showDescription?: boolean;
 }
 
 interface IThumbnail {
-  name?: string
-  imageUrl?: string
-  color?: string
-  shape?: string
-  className?: string
+  name?: string;
+  imageUrl?: string;
+  color?: string;
+  shape?: string;
+  className?: string;
 }
 
 interface ISwatchInfo {
-  title: string
-  description?: string
-  price?: string
-  className?: string
+  title: string;
+  description?: string;
+  price?: string;
+  className?: string;
 }
 
 const SwatchInfo = (props: ISwatchInfo) => {
-  const { title, price, description } = props
+  const { title, price, description } = props;
   return (
     <SwatchInfoWrapper>
       <div>
@@ -50,12 +50,12 @@ const SwatchInfo = (props: ISwatchInfo) => {
         <div />
       </div>
     </SwatchInfoWrapper>
-  )
-}
+  );
+};
 
 const Thumbnail = (props: IThumbnail) => {
-  const { imageUrl, color, name, shape, className } = props
-  if (!imageUrl && !color) return <div />
+  const { imageUrl, color, name, shape, className } = props;
+  if (!imageUrl && !color) return <div />;
   return (
     <OptionThumbnail
       className={`${className} option-thumbnail`}
@@ -64,8 +64,8 @@ const Thumbnail = (props: IThumbnail) => {
     >
       {imageUrl ? <img src={imageUrl} alt={name || ''} /> : null}
     </OptionThumbnail>
-  )
-}
+  );
+};
 
 export const Swatch = (props: ISwatch) => {
   const {
@@ -79,9 +79,9 @@ export const Swatch = (props: ISwatch) => {
     showThumbnail,
     showPrice,
     showDescription,
-  } = Object.assign({ shape: 'round' }, props)
+  } = Object.assign({ shape: 'round' }, props);
 
-  const cls = generateClassName('swatch', customClassName, title)
+  const cls = generateClassName('swatch', customClassName, title);
 
   return (
     <Wrapper className={cls}>
@@ -96,12 +96,12 @@ export const Swatch = (props: ISwatch) => {
               imageUrl: !showThumbnail ? undefined : el.imageUrl,
               price: !showPrice ? undefined : el.price,
               description: !showDescription ? undefined : el.description,
-            })
-          const selected = value === optionValue
+            });
+          const selected = value === optionValue;
           const clsOpt =
             `${cls}-option option-${i} ${optionValue}` + selected
               ? ' selected'
-              : ''
+              : '';
           return (
             <OptionWrapper
               key={i}
@@ -124,12 +124,12 @@ export const Swatch = (props: ISwatch) => {
                 description={description}
               />
             </OptionWrapper>
-          )
+          );
         })}
       </SwatchWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 Swatch.propTypes = {
   /**
@@ -214,7 +214,7 @@ Swatch.propTypes = {
    * for the options/
    */
   showPrice: PropTypes.bool,
-}
+};
 
 Swatch.defaultProps = {
   shape: 'round',
@@ -234,12 +234,12 @@ Swatch.defaultProps = {
   value: undefined,
   options: undefined,
   onClick: undefined,
-}
+};
 
-Swatch.componentName = 'swatch'
+Swatch.componentName = 'swatch';
 Swatch.compatibleAttributes = new Set([
   ATTRIBUTE_TYPES.asset,
   ATTRIBUTE_TYPES.string,
-])
+]);
 
-export default container<ISwatch>(Swatch)
+export default container<ISwatch>(Swatch);

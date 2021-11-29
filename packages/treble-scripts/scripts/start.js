@@ -36,7 +36,6 @@ devServer.startCallback(() => {
     chalk.cyan('Starting the Threekit Treble development server...\n')
   );
 });
-
 ['SIGINT', 'SIGTERM'].forEach(function (sig) {
   process.on(sig, function () {
     devServer.stop();

@@ -1,12 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IIcon } from './index'
+import React from 'react';
+import styled from 'styled-components';
+import { IIcon } from './index';
 
 const SVG = styled.svg`
   .tk-icon {
-    stroke: ${(props) => props.theme.textColor};
+    stroke: ${props => props.theme.textColor};
   }
-`
+`;
 
 export const Menu: IIcon = () => {
   return (
@@ -19,9 +19,9 @@ export const Menu: IIcon = () => {
     >
       <path d="M2 4H18M2 10H18M2 16H18" className="tk-icon" strokeWidth="2" />
     </SVG>
-  )
-}
+  );
+};
 
-Menu.iconName = 'menu'
+Menu.iconName = 'menu';
 
-export default Menu
+export default Menu;

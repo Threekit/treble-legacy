@@ -1,101 +1,101 @@
-import styled from 'styled-components'
-import { TYPES } from './index'
+import styled from 'styled-components';
+import { TYPES } from './index';
 
 interface IIconWrapper {
-  type: string
+  type: string;
 }
 
 interface IButtonWrapper {
-  fullWidth?: boolean
-  iconOnly?: boolean
-  shape: string
-  type: string
+  fullWidth?: boolean;
+  iconOnly?: boolean;
+  shape: string;
+  type: string;
 }
 
 export const ButtonWrapper = styled.div<IButtonWrapper>`
   height: 40px;
-  width: ${(props) =>
+  width: ${props =>
     props.fullWidth ? '100%' : props.iconOnly ? '40px' : 'max-content'};
-  padding: ${(props) => (props.iconOnly ? '0px' : '10px 16px')};
+  padding: ${props => (props.iconOnly ? '0px' : '10px 16px')};
   cursor: pointer;
   transition: all 0.16s ease-in-out;
   overflow: hidden;
-  font-family: ${(props) => props.theme.fontFamily};
-  font-size: ${(props) => props.theme.fontBaseSize};
+  font-family: ${props => props.theme.fontFamily};
+  font-size: ${props => props.theme.fontBaseSize};
 
-  border-radius: ${(props) =>
+  border-radius: ${props =>
     props.shape === 'round' ? '20px' : props.theme.borderRadius};
 
   border: 1px solid
-    ${(props) => {
+    ${props => {
       switch (props.type) {
         case TYPES.threekit:
-          return 'none'
+          return 'none';
         case TYPES.hollow:
-          return 'none'
+          return 'none';
         case TYPES.accent:
-          return props.theme.primaryColor
+          return props.theme.primaryColor;
         case TYPES.primary:
-          return props.theme.primaryColor
+          return props.theme.primaryColor;
         case TYPES.standard:
         default:
-          return 'lightgrey'
+          return 'lightgrey';
       }
     }};
-  background: ${(props) => {
+  background: ${props => {
     switch (props.type) {
       case TYPES.threekit:
-        return 'rgba(251, 251, 251, 0.5);'
+        return 'rgba(251, 251, 251, 0.5);';
       case TYPES.hollow:
-        return 'none'
+        return 'none';
       case TYPES.accent:
-        return '#fff'
+        return '#fff';
       case TYPES.primary:
-        return props.theme.primaryColor
+        return props.theme.primaryColor;
       case TYPES.standard:
       default:
-        return '#fff'
+        return '#fff';
     }
   }};
-  color: ${(props) => {
+  color: ${props => {
     switch (props.type) {
       case TYPES.threekit:
-        return '#000'
+        return '#000';
       case TYPES.hollow:
-        return props.theme.primaryColor
+        return props.theme.primaryColor;
       case TYPES.accent:
-        return props.theme.primaryColor
+        return props.theme.primaryColor;
       case TYPES.primary:
-        return '#fff'
+        return '#fff';
       case TYPES.standard:
       default:
-        return props.theme.textColor
+        return props.theme.textColor;
     }
   }};
 
   &:hover {
-    box-shadow: ${(props) => {
+    box-shadow: ${props => {
       switch (props.type) {
         case TYPES.threekit:
-          return '0px 0px 4px rgb(0 0 0 / 25%)'
+          return '0px 0px 4px rgb(0 0 0 / 25%)';
         default:
-          return 'none'
+          return 'none';
       }
     }};
 
-    background: ${(props) => {
+    background: ${props => {
       switch (props.type) {
         case TYPES.threekit:
-          return 'rgba(240, 240, 240, 0.75)'
+          return 'rgba(240, 240, 240, 0.75)';
         case TYPES.hollow:
-          return `${props.theme.primaryColor}18`
+          return `${props.theme.primaryColor}18`;
         case TYPES.accent:
-          return `${props.theme.primaryColor}18`
+          return `${props.theme.primaryColor}18`;
         case TYPES.primary:
-          return `${props.theme.primaryColor}cc`
+          return `${props.theme.primaryColor}cc`;
         case TYPES.standard:
         default:
-          return `#eee`
+          return `#eee`;
       }
     }};
   }
@@ -118,27 +118,27 @@ export const ButtonWrapper = styled.div<IButtonWrapper>`
       margin-left: 8px;
     }
   }
-`
+`;
 
 export const IconWrapper = styled.div<IIconWrapper>`
   height: 20px;
   width: 20px;
 
   .tk-icon {
-    stroke: ${(props) => {
+    stroke: ${props => {
       switch (props.type) {
         case TYPES.threekit:
-          return '#000'
+          return '#000';
         case TYPES.hollow:
-          return props.theme.primaryColor
+          return props.theme.primaryColor;
         case TYPES.accent:
-          return props.theme.primaryColor
+          return props.theme.primaryColor;
         case TYPES.primary:
-          return '#fff'
+          return '#fff';
         case TYPES.standard:
         default:
-          return props.theme.textColor
+          return props.theme.textColor;
       }
     }};
   }
-`
+`;

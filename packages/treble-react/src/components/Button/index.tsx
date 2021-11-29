@@ -1,26 +1,26 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { ButtonWrapper, IconWrapper } from './button.styles'
-import { generateInputClassName as generateClassName } from '../../utils'
-import icons from '../../icons'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ButtonWrapper, IconWrapper } from './button.styles';
+import { generateInputClassName as generateClassName } from '../../utils';
+import icons from '../../icons';
 
 export type BUTTON_TYPES =
   | 'hollow'
   | 'standard'
   | 'accent'
   | 'primary'
-  | 'threekit'
+  | 'threekit';
 
-export type BUTTON_SHAPES = 'round' | 'shape'
+export type BUTTON_SHAPES = 'round' | 'shape';
 
 interface IButton {
-  type: BUTTON_TYPES
-  icon?: string
-  title?: string
-  onClick?: (e: React.SyntheticEvent) => void
-  shape: BUTTON_SHAPES
-  fullWidth: boolean
-  className: string
+  type: BUTTON_TYPES;
+  icon?: string;
+  title?: string;
+  onClick?: (e: React.SyntheticEvent) => void;
+  shape: BUTTON_SHAPES;
+  fullWidth: boolean;
+  className: string;
 }
 
 export const TYPES = {
@@ -29,12 +29,12 @@ export const TYPES = {
   accent: 'accent',
   primary: 'primary',
   threekit: 'threekit',
-}
+};
 
 export const SHAPES = {
   round: 'round',
   square: 'square',
-}
+};
 
 export const Button = (props: IButton) => {
   const {
@@ -53,12 +53,12 @@ export const Button = (props: IButton) => {
       fullWidth: false,
     },
     props
-  )
+  );
 
-  const cls = generateClassName('button', customClassName, title)
-  const Icon = icon ? icons[icon] : null
+  const cls = generateClassName('button', customClassName, title);
+  const Icon = icon ? icons[icon] : null;
 
-  if (!Icon && !title?.length) return null
+  if (!Icon && !title?.length) return null;
 
   return (
     <ButtonWrapper
@@ -78,8 +78,8 @@ export const Button = (props: IButton) => {
         {title ? <div>{title}</div> : null}
       </div>
     </ButtonWrapper>
-  )
-}
+  );
+};
 
 Button.propTypes = {
   /**
@@ -116,7 +116,7 @@ Button.propTypes = {
    * Used to add a custom class name to each of the components html elements
    */
   className: PropTypes.string,
-}
+};
 
 Button.defaultProps = {
   icon: undefined,
@@ -125,8 +125,8 @@ Button.defaultProps = {
   onClick: undefined,
   fullWidth: false,
   className: undefined,
-}
+};
 
-Button.componentName = 'button'
+Button.componentName = 'button';
 
-export default Button
+export default Button;

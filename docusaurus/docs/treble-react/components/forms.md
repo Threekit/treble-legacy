@@ -11,8 +11,8 @@ Forms can be used to render out complete configurators as a single component.
 The `<FlatForm>` component is used to render out the configurator for the initialized asset.
 
 ```jsx
-import { ThreekitProvider, FlatForm } from "@threekit-tools/treble";
-import threekitConfig from "./threekit.config.js";
+import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (
@@ -28,11 +28,11 @@ const App = () => {
 ```js
 const flatFormProps = {
   //  Override title for the form
-  title: "Form Title",
+  title: 'Form Title',
   //  Override the description for the form
-  description: "This is a description for the form",
+  description: 'This is a description for the form',
   //  Alignment for the title. Options include left | center | right
-  alignTitle: "center",
+  alignTitle: 'center',
   //  Whether to include reserved Attributes.
   //  i.e. _camera (Camera Attribute)
   includeReservedAttributes: false,
@@ -40,9 +40,9 @@ const flatFormProps = {
   //  and props for the individual Attributes
   attributes: {
     //  This will render out 'Attribute 1' using the Buttons component
-    "Attribute 1": { component: "swatch" },
+    'Attribute 1': { component: 'swatch' },
     //  This will prevent 'Attribute 2' from being rendered.
-    "Attribute 2": undefined,
+    'Attribute 2': undefined,
   },
 };
 ```
@@ -57,15 +57,15 @@ We can also specify the horizontal alignment for the title by passing in one of
 By default the Form will not render reserved attributes. This can be controlled/over-written by using the prop **`includeReservedAttributes={false}`**.
 
 ```jsx
-import { ThreekitProvider, FlatForm } from "@threekit-tools/treble";
-import threekitConfig from "./threekit.config.js";
+import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
+import threekitConfig from './threekit.config.js';
 
 const App = () => {
   const attributes = {
     //  This will render out 'Attribute 1' using the Buttons component
-    "Attribute 1": { component: "swatch" },
+    'Attribute 1': { component: 'swatch' },
     //  This will prevent 'Attribute 2' from being rendered.
-    "Attribute 2": undefined,
+    'Attribute 2': undefined,
   };
 
   return (
