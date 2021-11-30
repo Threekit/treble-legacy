@@ -1,6 +1,7 @@
 ---
-sidebar_position: 2
-custom_edit_url:
+id: demo-basic-setup
+title: Basic Project Setup
+sidebar_label: Basic Setup
 hide_table_of_contents: true
 ---
 

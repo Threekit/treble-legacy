@@ -1,13 +1,14 @@
 ---
-sidebar_position: 5
-custom_edit_url:
+id: treble-react-hooks
+title: Hooks
+sidebar_label: Hooks
 ---
 
 # Hooks
 
 ## Use Attribute
 
-The `useAttribute` hook allows us to connect a component to an Attribute in our configurator.
+The `useAttribute` hook allows us to connect a component to an Attribute in our product's configurator.
 
 It takes the name of the attribute that you want to interact with and returns an array where the first element is the data for that attribute, as returned by the `getDisplayAttributes()` function, and the second element is a function that can be used to update the value of that attribute, by prepping and passing the value on to `setConfiguration()`.
 
@@ -51,6 +52,12 @@ const AttributeComponent = () => {
 
 ## Use Threekit Init Status
 
+The `useThreekitInitStatus` hook returns a single boolean value indicating if the Threekit API has initialized or not.
+
+The hook will initially return `false`. Once the Threekit API has loaded it will continue to return `true`.
+
+The Threekit Configurator, and by extension the product form, will load with the initialization of the Threekit API as the data is made available after the API loads. As such, we use this hook internally to determine if the Threekit API is ready and we should render our components or instead render some loading indicator.
+
 ```jsx
 import { useThreekitInitStatus } from '@threekit-tools/treble';
 
@@ -65,6 +72,12 @@ const Component = () => {
 ```
 
 ## Use Player Loading Status
+
+The `usePlayerLoadingStatus` hook returns a single boolean value indicating whether the Threekit Player has rendered out a product configuration or is in the process of applying and rendering a change/new product configuration.
+
+The hook will return `true` if the Player has finished its render and `false` when the configuration is changed until that change has been rendered and visualized by the Player.
+
+On more projects with large/high fidelity visual assets, there can be a slight time lag between the user making a selection and the assets for that selection being requested and rendered by the player. During this time lag, before the visuals have updated, the user can assume that their action did not go through and that nothing is happening. We can design around this by tracking when the Player is 'loading' a new configuration, as with this hook, and render a loading icon over the form-component used to change the configuration, until the load is complete. It enabled us to provide the user some feedback that their action is being handled.
 
 ```jsx
 import { usePlayerLoadingStatus } from '@threekit-tools/treble';
@@ -108,9 +121,9 @@ const MetadataComponent = () => {
 
 ## Use Name
 
-The `useName` hook provides the name of the item used to initialize the player.
+The `useName` hook provides the name of the Product used to initialize the Threekit API.
 
-The hook a single string value.
+The hook a single `string` value.
 
 It is used to build the [Title Display component](#title)
 

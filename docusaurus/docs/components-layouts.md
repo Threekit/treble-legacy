@@ -1,5 +1,7 @@
 ---
-custom_edit_url:
+id: components-layouts
+title: Layouts
+sidebar_label: Layouts
 ---
 
 # Layouts

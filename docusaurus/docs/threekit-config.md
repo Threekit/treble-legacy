@@ -1,6 +1,6 @@
 ---
-sidebar_position: 4
-custom_edit_url:
+id: threekit-config
+title: Threekit Config and Environment Credentials
 sidebar_label: Threekit Credentials
 ---
 

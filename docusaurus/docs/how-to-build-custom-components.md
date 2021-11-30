@@ -1,6 +1,7 @@
 ---
-sidebar_label: Building Components
-custom_edit_url:
+id: how-to-build-custom-components
+title: Building Custom Form Components
+sidebar_label: Building Custom Components
 ---
 
 # Building Custom Form Components

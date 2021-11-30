@@ -1,6 +1,7 @@
 ---
-sidebar_position: 1
-custom_edit_url:
+id: treble-js-overview
+title: Overview
+sidebar_label: Overview
 ---
 
 # Overview

@@ -1,10 +1,11 @@
 ---
-sidebar_position: 4
-custom_edit_url:
+id: demo-using-widgets
+title: Using Player Widgets
+sidebar_label: Using Widgets
 hide_table_of_contents: true
 ---
 
-# Using Widgets
+# Using Player Widgets
 
 :::caution note
 

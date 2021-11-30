@@ -1,6 +1,7 @@
 ---
-sidebar_position: 3
-custom_edit_url:
+id: basic-concepts
+title: Basic Concepts
+sidebar_label: Basic Concepts
 ---
 
 # Basic Concepts
@@ -44,6 +45,6 @@ The `Treble Script` are available in the `@threekit-tools/treble-scripts` packag
 
 The scripts are optimized to bundle the app into a single javascript file with a static name, ideal for embedding the final app as a portion of an existing webpage.
 
-Fine out more about in the [Available Scripts](available-scripts.md) section.
+Fine out more about in the [Available Scripts](available-scripts) section.
 
 ## Treble Launchpad

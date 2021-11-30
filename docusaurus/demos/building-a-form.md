@@ -1,8 +1,8 @@
 ---
-sidebar_position: 3
-custom_edit_url:
+id: demo-building-a-form
+title: Constructing your own Form
+sidebar_label: Building a Form
 hide_table_of_contents: true
-sidebar_label: Building your own form
 ---
 
 # Constructing your own Form

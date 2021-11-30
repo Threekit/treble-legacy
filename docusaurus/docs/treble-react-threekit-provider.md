@@ -1,6 +1,7 @@
 ---
-sidebar_position: 2
-custom_edit_url:
+id: treble-react-threekit-provider
+title: Threekit Provider
+sidebar_label: Threekit Provider
 ---
 
 # Threekit Provider
@@ -18,7 +19,8 @@ import App from './App';
 
 const threekitConfig = {
   preview: {
-    //  These credentials DO NOT point to a real org
+    //  These credentials are just examples and DO NOT
+    //  point to a real org
     publicToken: '3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48',
     assetId: 'a9a66218-bkid-4106-96fe-a0359fdc3dc1',
     orgId: '20df501b-1ef8-4bh0-sfda-2l59426624de',

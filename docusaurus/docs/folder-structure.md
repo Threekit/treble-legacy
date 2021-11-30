@@ -1,6 +1,6 @@
 ---
-# sidebar_position: 2
-custom_edit_url:
+id: folder-structure
+title: Folder Structure
 sidebar_label: Folder Structure
 ---
 

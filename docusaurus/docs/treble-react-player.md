@@ -1,6 +1,7 @@
 ---
-sidebar_position: 3
-custom_edit_url:
+id: treble-react-player
+title: Player
+sidebar_label: Player
 ---
 
 # Player

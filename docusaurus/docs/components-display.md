@@ -1,5 +1,7 @@
 ---
-custom_edit_url:
+id: components-display
+title: Display
+sidebar_label: Display
 ---
 
 # Displays

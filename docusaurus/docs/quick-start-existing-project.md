@@ -1,10 +1,10 @@
 ---
-sidebar_position: 2
-custom_edit_url:
+id: quick-start-existing-project
+title: Adding Treble to an Existing Project
 sidebar_label: 'Quick Start: Existing Project'
 ---
 
-# Adding Treble to an existing project
+# Adding Treble to an Existing Project
 
 ## Prerequisite
 

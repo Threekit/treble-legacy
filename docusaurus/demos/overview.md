@@ -1,7 +1,7 @@
 ---
-custom_edit_url:
-sidebar_position: 1
-sidebar_label: Introduction
+id: demo-overview
+title: Overview
+sidebar_label: Overview
 ---
 
 # Treble Demos
@@ -10,6 +10,6 @@ Welcome to the Treble Demos. We've setup a few coded demos to introduce some bas
 
 **The demos include:**
 
-- [Basic Project Setup](basic-setup.md)
-- [Using Form Components to construct a form](building-a-form.md)
-- [Adding Widgets to the Player](/using-widgets.md)
+- [Basic Project Setup](basic-setup)
+- [Using Form Components to construct a form](how-to-build-a-form)
+- [Adding Widgets to the Player](using-widgets)

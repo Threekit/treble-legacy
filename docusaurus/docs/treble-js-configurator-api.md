@@ -1,7 +1,7 @@
 ---
+id: treble-js-configurator-api
+title: The Threekit Configurator JS API
 sidebar_label: Configurator JS API
-sidebar_position: 2
-custom_edit_url:
 ---
 
 # The Threekit Configurator JS API

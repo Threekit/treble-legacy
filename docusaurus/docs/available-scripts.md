@@ -1,6 +1,7 @@
 ---
-sidebar_position: 5
-custom_edit_url:
+id: available-scripts
+title: Available Scripts
+sidebar_label: Available Scripts
 ---
 
 # Available Scripts

@@ -1,6 +1,6 @@
 ---
-sidebar_position: 1
-custom_edit_url:
+id: welcome
+title: Welcome
 sidebar_label: Welcome
 ---
 
@@ -16,11 +16,11 @@ Treble is a React powered framework used to build frontend web-experiences for T
 
 ## How to use these docs
 
-To start getting to know the framework would be to head over to the [Basic Concepts](getting-started/basic-concepts.md) section.
+To start getting to know the framework would be to head over to the [Basic Concepts](basic-concepts) section.
 
-You can find the React API documentation in the [Treble React](treble-react/overview.md) section.
+You can find the React API documentation in the [Treble React](treble-react-overview) section.
 
-Also available are the Threekit JS API and the Treble JS API, which the Treble React library is built on top of. Learn more about the underlying Treble JS API in the [Threekit/Treble JS API](treble-js-api/overview.md) section and the [Threekit Player API](https://community.threekit.com/hc/en-us/articles/4406068592539-Player-API-Client-side).
+Also available are the Threekit JS API and the Treble JS API, which the Treble React library is built on top of. Learn more about the underlying Treble JS API in the [Threekit/Treble JS API](treble-js-overview) section and the [Threekit Player API](https://community.threekit.com/hc/en-us/articles/4406068592539-Player-API-Client-side).
 
 ## Less talk, more code.
 

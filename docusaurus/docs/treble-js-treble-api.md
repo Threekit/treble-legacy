@@ -1,7 +1,7 @@
 ---
+id: treble-js-treble-api
+title: The Threekit Treble JS API
 sidebar_label: Treble JS API
-sidebar_position: 4
-custom_edit_url:
 ---
 
 # The Threekit Treble JS API

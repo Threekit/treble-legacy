@@ -1,5 +1,7 @@
 ---
-custom_edit_url:
+id: components-wrappers
+title: Wrappers
+sidebar_label: Wrappers
 ---
 
 # Wrappers

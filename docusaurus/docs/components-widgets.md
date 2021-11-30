@@ -1,5 +1,7 @@
 ---
-custom_edit_url:
+id: components-widgets
+title: Widgets
+sidebar_label: Widgets
 ---
 
 # Widgets

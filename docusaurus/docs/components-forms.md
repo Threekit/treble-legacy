@@ -1,5 +1,7 @@
 ---
-custom_edit_url:
+id: components-forms
+title: Forms
+sidebar_label: Forms
 ---
 
 # Forms

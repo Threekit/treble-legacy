@@ -1,6 +1,6 @@
 ---
-sidebar_position: 1
-custom_edit_url:
+id: quick-start-new-project
+title: Starting a new Treble Project
 sidebar_label: 'Quick Start: New Project'
 ---
 
@@ -35,7 +35,7 @@ yarn install
 
 Rename the `.env.template` file to `.env` and populate all the credentials.
 
-**For more information about the Threekit credentials and their setup, [click here](threekit-config.md).**
+**For more information about the Threekit credentials and their setup, [click here](threekit-config).**
 
 ## Start the development server
 
@@ -49,4 +49,4 @@ Your app will be available on: `http://localhost:3000`
 
 By default the App will try to use the preview environment of the Threekit Platform. To use another environment pass in the environment name as a flag into the run script. e.g. `yarn start --admin-fts`
 
-**For more information about the available scripts, [click here](available-scripts.md).**
+**For more information about the available scripts, [click here](available-scripts).**

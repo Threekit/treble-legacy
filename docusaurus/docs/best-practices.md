@@ -1,5 +1,7 @@
 ---
-custom_edit_url:
+id: best-practices
+title: Best Practices
+sidebar_label: Best Practices
 ---
 
 # Best Practices
