@@ -6,12 +6,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 
 export default function GetStartedPage() {
   //   const { siteConfig } = useDocusaurusContext();
-  const newProjectUrl = useBaseUrl(
-    '/docs/getting-started/quick-start-new-project'
-  );
-  const existingProjectUrl = useBaseUrl(
-    '/docs/getting-started/quick-start-existing-project'
-  );
+  const newProjectUrl = useBaseUrl('/docs/quick-start-new-project');
+  const existingProjectUrl = useBaseUrl('/docs/quick-start-existing-project');
   return (
     <Layout
       title="Getting Started"
