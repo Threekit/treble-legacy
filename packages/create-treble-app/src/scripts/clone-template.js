@@ -69,7 +69,7 @@ export default async function cloneTemplate(
   projectName,
   templateName = TEMPLATES.basic
 ) {
-  const templatePath = path.resolve(__dirname, '..', 'templates', templateName);
+  const templatePath = path.resolve(__dirname, '../../templates', templateName);
   const outputDir = path.resolve(process.cwd(), projectName);
   const skipFiles = ['node_modules', 'dist', 'build'];
 

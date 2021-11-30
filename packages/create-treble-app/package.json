@@ -5,11 +5,11 @@
   "license": "MIT",
   "type": "module",
   "bin": {
-    "create-treble-app": "index.js"
+    "create-treble-app": "src/index.js"
   },
   "scripts": {
-    "lint": "eslint ./messages ./scripts",
-    "format": "prettier --write ./messages ./scripts"
+    "lint": "eslint ./src",
+    "format": "prettier --write ./src"
   },
   "dependencies": {
     "chalk": "^5.0.0",

@@ -3,7 +3,7 @@
 import cloneTemplate from './scripts/clone-template.js';
 import { TEMPLATES } from './constants.js';
 import { prepProcessArgs } from './utils.js';
-import { missingProjectName } from './messages/index.js';
+// import { missingProjectName } from './messages/index.js';
 import enquirer from 'enquirer';
 
 const argv = process.argv.slice(2);
