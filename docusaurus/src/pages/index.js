@@ -13,13 +13,13 @@ const FeatureList = [
     title: 'Components',
     imgUrl:
       'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-components.svg',
-    link: '/docs/treble-react/components/overview',
+    link: '/docs/components-overview',
     description: <>The building blocks for engaging web experiences.</>,
   },
   {
     title: 'Hooks',
     imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-hooks.svg',
-    link: '/docs/treble-react/hooks',
+    link: '/docs/treble-react-hooks',
     description: (
       <>Threekit powered React hooks to build your own components.</>
     ),
@@ -27,7 +27,7 @@ const FeatureList = [
   {
     title: 'JS API',
     imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-api.svg',
-    link: '/docs/treble-js-api/overview',
+    link: '/docs/treble-js-overview',
     description: (
       <>Higher level functions for all your functional requirements.</>
     ),
@@ -38,7 +38,7 @@ const ResourceList = [
   {
     title: 'Prep for your project',
     imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-prep.svg',
-    link: '/docs/treble-react-api/docs/intro',
+    link: '/docs/treble-react-overview',
     description: (
       <>Get started quickly with our comprehensive project overview.</>
     ),
@@ -47,7 +47,7 @@ const ResourceList = [
     title: 'Tutorials & training',
     imgUrl:
       'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-training.svg',
-    link: '/docs/treble-react-api/docs/intro',
+    link: '/docs/treble-react-overview',
     description: <>A self-led training process for the Threekit platform.</>,
   },
   {
@@ -73,7 +73,7 @@ const CardsList = [
     title: 'Basic Concepts',
     description: 'Learn about core features and functionality.',
     linkText: 'Learn Here ->',
-    link: 'docs/basic-concepts',
+    link: '/docs/basic-concepts',
   },
 ];
 
