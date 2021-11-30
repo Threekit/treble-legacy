@@ -18,6 +18,15 @@ module.exports = {
   },
   plugins: ['react', 'eslint-plugin-react'],
   rules: {
+    /**
+     * ESlint overrides
+     */
+    'no-use-before-define': 'off',
+    'no-warning-comments': 'off',
+    /**
+     * React
+     */
     'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
   },
 };
