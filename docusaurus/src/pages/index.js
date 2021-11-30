@@ -73,26 +73,30 @@ const CardsList = [
     title: 'Basic Concepts',
     description: 'Learn about core features and functionality.',
     linkText: 'Learn Here ->',
-    link: 'docs/getting-started/basic-concepts',
+    link: 'docs/basic-concepts',
   },
 ];
 
 const TrebleNotes = [
   {
     title: 'Quick start',
-    note: "Jump start your UI development with our project boilerplate. Don't waste time thinking about bundling and environment setup and focus on bringing your experience to life.",
+    note:
+      "Jump start your UI development with our project boilerplate. Don't waste time thinking about bundling and environment setup and focus on bringing your experience to life.",
   },
   {
     title: 'React Powered',
-    note: "Our library offers a set of components and hooks that are designed to be consistent with the broadly used React conventions. If you're familiar with React, you're already familiar with Treble.",
+    note:
+      "Our library offers a set of components and hooks that are designed to be consistent with the broadly used React conventions. If you're familiar with React, you're already familiar with Treble.",
   },
   {
     title: 'Hooks all the way down',
-    note: 'Hooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the hooks to power them.',
+    note:
+      'Hooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the hooks to power them.',
   },
   {
     title: 'Webpack 5',
-    note: 'Our scripts are using Webpack 5 for bundling that works across browsers and devices.',
+    note:
+      'Our scripts are using Webpack 5 for bundling that works across browsers and devices.',
   },
   {
     title: 'eCommerce Optimized',
@@ -100,11 +104,13 @@ const TrebleNotes = [
   },
   {
     title: 'Treble Launchpad',
-    note: 'Treble launchpad is a hosting and deployment solution for eligible Threekit projects that can plug right into a Treble project.',
+    note:
+      'Treble launchpad is a hosting and deployment solution for eligible Threekit projects that can plug right into a Treble project.',
   },
   {
     title: 'Figma Design',
-    note: 'All our components are first designed in figma before being implemented. We always recommend wireframing a design before getting into the code of it so we built a Figma Design Kit around our components for you to use.',
+    note:
+      'All our components are first designed in figma before being implemented. We always recommend wireframing a design before getting into the code of it so we built a Figma Design Kit around our components for you to use.',
   },
 ];
 
