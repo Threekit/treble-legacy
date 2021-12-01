@@ -9,7 +9,8 @@
   },
   "scripts": {
     "lint": "eslint ./src",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "dev": "node src/index.js"
   },
   "dependencies": {
     "chalk": "^5.0.0",

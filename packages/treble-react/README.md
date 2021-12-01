@@ -2,6 +2,8 @@
 
 **All you need to build a Web Experience for your Threekit Configurator.**
 
+## Overview
+
 The **Treble Design System** is a feature-rich React library of components, hooks, and added functionality needed to build an intuitive and engaging web experience for a Threekit Configurator.
 
 We have everything you need to get started!
@@ -16,6 +18,7 @@ We have everything you need to get started!
 ## Table of Contents
 
 - [Treble React](#treble-react)
+  - [Overview](#overview)
   - [Table of Contents](#table-of-contents)
   - [Getting Started](#getting-started)
     - [Installation](#installation)

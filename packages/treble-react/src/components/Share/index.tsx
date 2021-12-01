@@ -10,19 +10,24 @@ interface ShareProps {
   shape?: BUTTON_SHAPES;
   type?: BUTTON_TYPES;
   className?: string;
+  message?: string;
 }
 
 export const Share = (props: ShareProps) => {
-  const { shape, type, className } = Object.assign(
-    { type: 'threekit', shape: 'round' },
+  const { shape, type, className, message } = Object.assign(
+    { type: 'threekit', shape: 'round', message: 'Link copied!' },
     props
   );
 
   const hasLoaded = useThreekitInitStatus();
   const handleShare = useShare();
-  if (!hasLoaded) return null;
+  if (!hasLoaded || !handleShare) return null;
 
   const cls = generateClassName('share', className);
+
+  const handleClick = () => {
+    handleShare(message);
+  };
 
   return (
     <Button
@@ -30,7 +35,7 @@ export const Share = (props: ShareProps) => {
       shape={shape}
       type={type}
       icon={ShareIcon.iconName}
-      onClick={handleShare}
+      onClick={handleClick}
     />
   );
 };
@@ -47,12 +52,18 @@ Share.propTypes = {
    * include: `square`, `round`
    */
   shape: PropTypes.string,
+  /**
+   * Used to set an overwrite of the message presented to the user
+   * when the share URL has been successfully copied.
+   */
+  message: PropTypes.string,
 };
 
 Share.defaultProps = {
   className: '',
   shape: 'round',
   type: 'threekit',
+  message: 'Link copied!',
 };
 
 export default Share;

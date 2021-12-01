@@ -4,7 +4,7 @@ title: Modal
 sidebar_label: Modal
 ---
 
-## Modal
+# Modal
 
 ```jsx
 <Modal />

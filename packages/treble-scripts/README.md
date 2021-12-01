@@ -1,10 +1,12 @@
 # Treble Scripts
 
-**Scripts to support development of your Threekit Treble Web-App**
+**Scripts to support development of your Threekit Treble web-app**
 
 ## Getting Started
 
-### Installation
+Treble Scripts are a set of scripts to support development of a React project generally and a Treble project specifically. They include all the webpack dependencies and configurations that you'll need to run a local server for development and build your React app for deployment.
+
+## Installation
 
 Run the following command using npm:
 
