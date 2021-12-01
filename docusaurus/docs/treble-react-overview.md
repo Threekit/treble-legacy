@@ -22,31 +22,31 @@ The Threekit Provider should only be used once in a project. All other component
 
 To use the Threekit Provider and configure the Threekit API correctly we have to pass in a `credentials` object as a prop. We can optionally also pass in a `playerConfig` object to define the Threekit Player configuration for our project, a `theme` object to override any of the default theme settings, and finally the `threekitEnv` as 'preview' or 'admin-fts' depending on the Threekit environment we want to use.
 
-You can find out more about the Threekit Provider by [clicking here](/treble-react-threekit-provider).
+You can find out more about the Threekit Provider by [clicking here](treble-react-threekit-provider).
 
 ### The Player
 
 The Player component renders out the Threekit 2D/3D Player as well as any Widgets placed on it.
 
-You can find out more about the Player Component by [clicking here](/treble-react-player).
+You can find out more about the Player Component by [clicking here](treble-react-player).
 
 ### Hooks
 
 Our hooks are the functional building blocks of our components and any project. They provide a way for components to connect statefuly to the Threekit API. We build all our components using hooks, so if you ever need a new UI component for an existing UX feature, you can use our hooks and focus on just the UI component and its styling.
 
-You can find out more about our Hooks by [clicking here](/treble-react-hooks).
+You can find out more about our Hooks by [clicking here](treble-react-hooks).
 
 ### Forms
 
 Forms provide single component solutions to rendering out entire configurator forms as a single contiguous element.
 
-You can find out more about Forms by [clicking here](/forms-overview)
+You can find out more about Forms by [clicking here](forms-overview)
 
 ### Form Components
 
 Form Components are the interactive UI components for the user to interact with the Attributes. These include components like `Swatches`, `TextInput`, `ColorPicker`, etc. Together the Form components are used to build the Form for the Product Configurator.
 
-You can find out more about Form Components by [clicking here](/form-components-overview)
+You can find out more about Form Components by [clicking here](form-components-overview)
 
 ### Widgets
 
@@ -54,19 +54,19 @@ Widgets offer us additional functional features that we can use to enhance the u
 
 The pattern linking all widgets is that they are implemented and triggered by a button placed on the Threekit Player itself. If a Widget feature requires additional UI or interactions, we hide them from the user by default and only make them available when the widget's button on the player is clicked. This was we avoid cluttering the UI, presenting information only when its relevant.
 
-You can find out more about Widgets components by [clicking here](/widgets-overview)
+You can find out more about Widgets components by [clicking here](widgets-overview)
 
 ### Wrappers
 
 Wrappers allow us to wrap a block of React code and apply some function to it.
 
-You can find out more about the Wrapper components by [clicking here](/wrappers-overview)
+You can find out more about the Wrapper components by [clicking here](wrappers-overview)
 
 ### Display Components
 
 Display components are used to display specific data from the Threekit API to the user, following the default styling for that data.
 
-You can find out more about Display components by [clicking here](/display-overview)
+You can find out more about Display components by [clicking here](display-overview)
 
 ### Layout Components
 
@@ -74,4 +74,4 @@ Layout components offer solutions to organize and structure your UI with compone
 
 Since layout components are purely for presentational organization, they are not connected to the Threekit API and can be even be used outside of the Threekit Provider.
 
-You can find out more about Layouts by [clicking here](/display-layouts)
+You can find out more about Layouts by [clicking here](display-overview)
