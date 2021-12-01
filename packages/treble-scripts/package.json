@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble-scripts",
-  "version": "0.0.12-alpha.16+2e16bcf",
+  "version": "0.0.13",
   "main": "index.js",
   "license": "MIT",
   "bin": {
