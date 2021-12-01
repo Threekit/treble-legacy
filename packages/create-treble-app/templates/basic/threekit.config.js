@@ -1,4 +1,4 @@
-export default {
+const credentials = {
   preview: {
     assetId: process.env.THREEKIT_PREVIEW_ASSET_ID,
     stageId: process.env.THREEKIT_PREVIEW_STAGE_ID,
@@ -11,6 +11,9 @@ export default {
     orgId: process.env.THREEKIT_ADMIN_FTS_ORG_ID,
     publicToken: process.env.THREEKIT_ADMIN_FTS_PUBLIC_TOKEN,
   },
+};
+
+const playerConfig = {
   showConfigurator: false,
   initialConfiguration: undefined,
   showLoadingThumbnail: false,
@@ -21,4 +24,9 @@ export default {
   // locale: undefined,
   allowMobileVerticalOrbit: false,
   // publishStage: undefined,
+};
+
+export default {
+  credentials,
+  playerConfig,
 };

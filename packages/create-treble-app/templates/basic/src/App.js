@@ -9,7 +9,7 @@ import threekitConfig from '../threekit.config.js';
 
 const App = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <div className="tk-treble-player">
         <Player>
           <Player.TopRightWidgets>

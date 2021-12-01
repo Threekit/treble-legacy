@@ -31,8 +31,10 @@ const App = () => {
     },
   };
 
+  // return <div>Hello</div>;
+
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <div className="tk-treble-player">
         <Player>
           <Player.TopRightWidgets>
@@ -41,32 +43,8 @@ const App = () => {
             <Share />
           </Player.TopRightWidgets>
         </Player>
+        <FlatForm />
       </div>
-      <PortalToElement elementId="tk-treble-form" strict={true}>
-        {/* <FlatForm attributes={attributes} /> */}
-        <Tabs>
-          <Tabs.TabPane label="Shell">
-            <TilesGroup attribute="Shell Style" />
-            <Swatch attribute="Shell Color" />
-            <Swatch attribute="Shell Secondary Color" />
-          </Tabs.TabPane>
-          <Tabs.TabPane label="Mask">
-            <Tiles attribute="Mask Style" />
-            <Swatch attribute="Mask Color" />
-          </Tabs.TabPane>
-        </Tabs>
-        {/* <Accordion>
-          <Accordion.AccordionItem label="Shell">
-            <TilesGroup attribute="Shell Style" />
-            <Swatch attribute="Shell Color" />
-            <Swatch attribute="Shell Secondary Color" />
-          </Accordion.AccordionItem>
-          <Accordion.AccordionItem label="Mask">
-            <Tiles attribute="Mask Style" />
-            <Swatch attribute="Mask Color" />
-          </Accordion.AccordionItem>
-        </Accordion> */}
-      </PortalToElement>
     </ThreekitProvider>
   );
 };
