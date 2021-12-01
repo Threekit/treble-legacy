@@ -6,13 +6,15 @@ sidebar_label: 'Quick Start: Existing Project'
 
 # Adding Treble to an Existing Project
 
-## Prerequisite
+:::info Prerequisite
 
-The Treble package can be added to any existing front-end project so long as it is using React or a React compatible framework.
+The Treble React NPM package can be added to any existing front-end project so long as it is using React or a React compatible framework.
+
+:::
 
 ## Installation
 
-To add the Treble package, run the following command using npm:
+To add the Treble to an existing project, run the following command using npm:
 
 ```bash
 npm install @threekit-tools/treble
@@ -28,12 +30,18 @@ yarn add @threekit-tools/treble
 
 A basic app will include the **Threekit Provider**, to connect our components to the Threekit API, A **Player Component**, to render our 3D visuals, and a **Form** to let the user configure the visualized product.
 
-To get started you can copy the code from below, populating the values in the `threekitConfig` object.
+To get started you can **copy the code from below**, populating the values in the `credentials` object accordingly.
+
+:::info Threekit Environment Credentials
+
+The credentials for the Threekit Provider have to come from the Threekit Platform. For more information about these credentials you can, [find out more here](/threekit-config)
+
+:::
 
 ```jsx
 import { ThreekitProvider, Player, FlatForm } from '@threekit-tools/treble';
 
-const threekitConfig = {
+const credentials = {
   preview: {
     orgId: '',
     assetId: '',
@@ -43,9 +51,9 @@ const threekitConfig = {
 
 const threekitEnv = 'preview';
 
-const ThreekitApp = () => {
+function ThreekitApp() {
   return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={threekitEnv}>
+    <ThreekitProvider credentials={credentials} threekitEnv={threekitEnv}>
       <div
         style={{
           height: '100vh',
@@ -61,5 +69,7 @@ const ThreekitApp = () => {
       </div>
     </ThreekitProvider>
   );
-};
+}
+
+export default ThreekitApp;
 ```

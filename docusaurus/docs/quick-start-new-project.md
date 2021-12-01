@@ -14,21 +14,20 @@ For projects that will require embedding into an existing webpages or hosting wi
 
 ## Create Treble App
 
-Run the following command, replacing the `app-name` with your project's name:
+In your local Terminal CLI, get started with the `create-treble-app` command:
 
 ```bash
-npx create-treble-app app-name
+npx create-treble-app@latest
 ```
 
 And follow along any setups with any prompts you are required to answer.
 
-This will create a project boilerplate in the current directory with the project name you provided.
+This will create a project boilerplate in the current directory with the project name you provided and install all the required dependencies.
 
-Once the boilerplate has been setup we will **navigating into the project folder** and **install all the project's dependencies** with the follow commands:
+Once the boilerplate has been setup we will **navigating into the project folder** with the follow commands:
 
 ```bash
 cd ./app-name
-yarn install
 ```
 
 ## Setup Threekit credentials

@@ -6,6 +6,18 @@ sidebar_label: Threekit Provider
 
 # Threekit Provider
 
+:::info Required
+
+The `ThreekitProvider` is required for using any of the Treble components or API.
+
+:::
+
+```jsx
+<ThreekitProvider />
+```
+
+## Overview
+
 The `<ThreekitProvider />` initializes the Threekit API used by the various components in the Treble library. It should be wrapped around the portion of the React app where the Treble components and hooks are being used.
 
 The Threekit Provider requires the a `threekitConfig` object, which includes all the credentials related a the project and a `threekitEnv` value to specify which Threekit Environment to use.
@@ -159,7 +171,7 @@ const threekitConfig = {
 };
 ```
 
-## Example
+## Code Example
 
 ```jsx
 import React from 'react';
@@ -199,3 +211,71 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
+
+```js
+const threekitConfig = {
+  //  The name of the object should be the environment
+  //  you want to use: preview | admin-fts
+  preview: {
+    //  The public auth token created in the settings
+    //  tab in your org on the Threekit Platform. It should
+    //  include the `localhost` domain for local development
+    //  and any domains to include for production / deployment
+    publicToken: '',
+    //  The Org Id for the Threekit Org
+    orgId: '',
+    //  The asset id of the Catalog Item you wish to initialize
+    //  in the Threekit Player
+    assetId: '',
+    //  (optional): The Asset Id of the Stage you wish to initialize in the
+    //  Threekit Player
+    stageId: '',
+  },
+};
+```
+
+## Props
+
+#### Threekit Provider Props
+
+| Property                | Description                                                                                                                 | Type                     | Default   |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------- |
+| **threekitEnv**         | The Threekit Platform Environment to use                                                                                    | `preview` \| `admin-fts` | `preview` |
+| **threekitCredentials** | The credentials for your Threekit Environment.`Theme` object, `Threekit Credentials` and the `Player Initialization Config` | `ThreekitCredentials`    | `-`       |
+| **playerConfig**        | The Threekit Player initialization config object.                                                                           | `ThreekitPlayerConfig`   | `-`       |
+| **theme**               | The theme overrides.                                                                                                        | `Theme`                  | `-`       |
+
+## Threekit Credentials
+
+| Property        | Description                                                                                                                                                                                                                                 | Type             | Default |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------- |
+| **publicToken** | The public auth token created in the settings tab of your Threekit Platform Org on the relevant Threekit Environment. It should include the `localhost` domain for local development and any domain to include for deployment / production. | `string (uuid4)` | `-`     |
+| **orgId**       | The Threekit Org ID                                                                                                                                                                                                                         | `string (uuid4)` | `-`     |
+| **assetId**     | The Asset ID for the Threekit Product you'd like to initialize. ID                                                                                                                                                                          | `string (uuid4)` | `-`     |
+| **stageId**     | (optional) The Asset Id of the Stage you wish to initialize.                                                                                                                                                                                | `string (uuid4)` | `-`     |
+
+## Player Initialization Config
+
+| Property                     | Description                                                                                                                                                                                           | Type                         | Default |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------- |
+| **display**                  | (optional) Determines whether to use the 3D Player (`webgl`) or the 2D Player (`image`)                                                                                                               | `webgl` \| `image`           | `webgl` |
+| **cache**                    | (optional) The caching options for the player. It contains the maxAge and scope for assets caching.                                                                                                   | string                       | `-`     |
+| **showConfiguration**        | (optional) Determines if we render the default Threekit configurator.                                                                                                                                 | boolean                      | `false` |
+| **initialConfiguration**     | (optional) An override for the configuration to initialize our asset with.                                                                                                                            | `ConfigurationObject`        | `{}`    |
+| **showAR**                   | (optional) Parameter to show/hide the built-in AR Button.                                                                                                                                             | boolean                      | `false` |
+| **showShare**                | (optional) Parameter to show/hide the built-in Share Button.                                                                                                                                          | boolean                      | `false` |
+| **allowMobileVerticalOrbit** | (optional) Toggles vertical orbit on mobile devices on or off.                                                                                                                                        | boolean                      | `false` |
+| **showLoadingThumbnail**     | (optional) Determines whether to display a snapshot while the player is loading.                                                                                                                      | boolean                      | `true`  |
+| **showLoadingProgress**      | (optional) Determines if we show the progress bar during load.                                                                                                                                        | boolean                      | `true`  |
+| **onLoadingProgress**        | (optional) Takes a callback as its value. The callback's only argument is a number, representing the progress ratio ( from 0.0 to 1.0 ). The callback will be called whenever the loading progresses. | `(progress: number) => void` | `-`     |
+| **compression**              | (optional) Override the organization's compression setting for renders in 2D player.                                                                                                                  | boolean                      | `false` |
+
+## Theme
+
+| Property         | Description                                                                      | Type   | Default   |
+| ---------------- | -------------------------------------------------------------------------------- | ------ | --------- |
+| **primaryColor** | The primary accent color used for all the selection and hover states for the UI. | string | `#1890ff` |
+| **linkColor**    | The color to render out `<a>` tag links.                                         | string | `#1890ff` |
+| **successColor** | The color used for success messaging.                                            | string | `#1890ff` |
+| **warningColor** | The color used for warning messaging.                                            | string | `#faad14` |
+| **errorColor**   | The color used for error messaging.                                              | string | `#f5222d` |

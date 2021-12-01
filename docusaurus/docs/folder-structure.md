@@ -12,10 +12,17 @@ After setup your project's folder structure should look like this:
 
 ```
 my-treble-app/
+  threekit.config.js
   README.md
   node_modules/
   package.json
   .env.template
+  .eslintrc.js
+  .prettierrc
+  .gitignore
+  .vscode
+    settings.json
+    extensions.json
   public/
     index.html
     favicon.ico
@@ -23,8 +30,6 @@ my-treble-app/
     App.js
     index.css
     index.js
-  custom-scripts/
-    wobble.js
 ```
 
 For the project to build, these files must exist with exact filenames:
@@ -35,3 +40,7 @@ For the project to build, these files must exist with exact filenames:
 The Treble React package is used in the `src/App.js` file.
 
 Only files and directories included in the `src` folder will be included in the default `treble-scripts` webpack compilation.
+
+## Formatting and Linting
+
+We have prettier and eslint added as dependencies to handle linting and formatting.
