@@ -76,10 +76,12 @@ To get started you can copy the code from below, populating the values in the `t
 import { ThreekitProvider, Player, FlatForm } from '@threekit-tools/treble';
 
 const threekitConfig = {
-  preview: {
-    orgId: '',
-    assetId: '',
-    publicToken: '',
+  credentials: {
+    preview: {
+      orgId: '',
+      assetId: '',
+      publicToken: '',
+    },
   },
 };
 
@@ -87,7 +89,7 @@ const threekitEnv = 'preview';
 
 const ThreekitApp = () => {
   return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={threekitEnv}>
+    <ThreekitProvider {...threekitConfig} threekitEnv={threekitEnv}>
       <div
         style={{
           height: '100vh',
@@ -189,42 +191,44 @@ The **Player API initialization parameters** should be added directly to the `co
 
 ```js
 const threekitConfig = {
-  //  (optional): determines whether to use the 3D Player (webgl) or
-  //  the 2D Player (image).
-  display: 'webgl' | 'image',
-  //  The caching options for the player. It contains the maxAge
-  //  and scope for assets caching.
-  cache,
-  //  (optional): Determines if we render the default Threekit
-  //  configurator.
-  showConfigurator: true | false,
-  //  (optional): An override for the configuration to initialize
-  //  our asset with.
-  initialConfiguration: {},
-  //  (optional): parameter to display a snapshot while the player
-  //  is loading. Default value is false
-  showLoadingThumbnail: true | false,
-  //  (optional): Determines if we show the progress bar during
-  //  load. Default value is true.
-  showLoadingProgress: true | false,
-  //  Takes a callback as its value. The callback's only argument
-  //  is a number, representing the progress ratio ( from 0.0
-  //  to 1.0 ). The callback will be called whenever the loading
-  //  progresses. The progress ratio is only approximate.
-  onLoadingProgress: progress =>
-    console.log(`Progress ${parseInt(progress * 100)}`),
-  //  (optional): Parameter to show/hide the built-in AR Button.
-  //  Default value is false.
-  showAR,
-  //  (optional): Parameter to show/hide the built-in Share
-  //  Button. Default value is false.
-  showShare,
-  //  (optional): toggles vertical orbit on mobile devices on or
-  //  off. Default value is false.
-  allowMobileVerticalOrbit: true | false,
-  //  (optional): Override organization's compression setting for
-  //  renders in 2D player.
-  compression,
+  playerConfig: {
+    //  (optional): determines whether to use the 3D Player (webgl) or
+    //  the 2D Player (image).
+    display: 'webgl' | 'image',
+    //  The caching options for the player. It contains the maxAge
+    //  and scope for assets caching.
+    cache,
+    //  (optional): Determines if we render the default Threekit
+    //  configurator.
+    showConfigurator: true | false,
+    //  (optional): An override for the configuration to initialize
+    //  our asset with.
+    initialConfiguration: {},
+    //  (optional): parameter to display a snapshot while the player
+    //  is loading. Default value is false
+    showLoadingThumbnail: true | false,
+    //  (optional): Determines if we show the progress bar during
+    //  load. Default value is true.
+    showLoadingProgress: true | false,
+    //  Takes a callback as its value. The callback's only argument
+    //  is a number, representing the progress ratio ( from 0.0
+    //  to 1.0 ). The callback will be called whenever the loading
+    //  progresses. The progress ratio is only approximate.
+    onLoadingProgress: progress =>
+      console.log(`Progress ${parseInt(progress * 100)}`),
+    //  (optional): Parameter to show/hide the built-in AR Button.
+    //  Default value is false.
+    showAR,
+    //  (optional): Parameter to show/hide the built-in Share
+    //  Button. Default value is false.
+    showShare,
+    //  (optional): toggles vertical orbit on mobile devices on or
+    //  off. Default value is false.
+    allowMobileVerticalOrbit: true | false,
+    //  (optional): Override organization's compression setting for
+    //  renders in 2D player.
+    compression,
+  },
 };
 ```
 
@@ -261,7 +265,7 @@ import threekitConfig from './threekit.config.js';
 
 const ThreekitApp = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <Player />
     </ThreekitProvider>
   );
@@ -282,7 +286,7 @@ const { TopRightWidgets } = Player;
 
 const ThreekitApp = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <Player>
         <TopRightWidgets>
           <div>This will show up in the top-right of the player</div>
@@ -311,7 +315,7 @@ import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <FlatForm />
     </ThreekitProvider>
   );
@@ -364,7 +368,7 @@ const App = () => {
   };
 
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <FlatForm attributes={attributes} />
     </ThreekitProvider>
   );
