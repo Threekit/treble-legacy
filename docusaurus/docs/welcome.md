@@ -43,7 +43,7 @@ For a more details on how to use Treble head over to out Getting Started section
 The **Hello World** Treble apps. This snipped will load the Threekit Player with the product defined in the Threekit Config object.
 
 ```jsx live
-<ThreekitProvider config={threekitConfig} threekitEnv={threekitEnv}>
+<ThreekitProvider {...threekitConfig} threekitEnv={threekitEnv}>
   <Player />
 </ThreekitProvider>
 ```

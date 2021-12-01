@@ -35,7 +35,7 @@ import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <FlatForm />
     </ThreekitProvider>
   );
@@ -59,7 +59,7 @@ const App = () => {
   };
 
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <FlatForm attributes={attributes} />
     </ThreekitProvider>
   );
@@ -94,7 +94,7 @@ const flatFormProps = {
 
 const App = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <FlatForm {...flatFormProps} />
     </ThreekitProvider>
   );

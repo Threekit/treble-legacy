@@ -39,7 +39,7 @@ function ThreekitApp() {
   };
 
   return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={'preview'}>
+    <ThreekitProvider {...threekitConfig} threekitEnv={'preview'}>
       <div
         style={{
           display: 'grid',

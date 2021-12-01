@@ -9,7 +9,7 @@ import React from 'react';
 import * as Treble from '@threekit-tools/treble';
 
 const threekitEnv = 'preview';
-const threekitConfig = {
+const credentials = {
   preview: {
     assetId: 'b6740d58-e077-4997-8a63-ceb2086ceb0b',
     orgId: 'dc454d74-5bfe-4bd9-b6da-ee6cb029562a',
@@ -22,7 +22,7 @@ const ReactLiveScope = {
   React,
   ...React,
   ...Treble,
-  threekitConfig,
+  threekitConfig: { credentials },
   threekitEnv,
 };
 

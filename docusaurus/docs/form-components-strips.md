@@ -48,7 +48,7 @@ import threekitConfig from './threekit.config.js';
 
 const ThreekitApp = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <Player />
       <div>
         <Strips attribute="exterior-material">

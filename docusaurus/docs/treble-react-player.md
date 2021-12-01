@@ -45,7 +45,7 @@ import threekitConfig from './threekit.config.js';
 
 const ThreekitApp = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <Player />
     </ThreekitProvider>
   );
@@ -66,7 +66,7 @@ const { TopRightWidgets } = Player;
 
 const ThreekitApp = () => {
   return (
-    <ThreekitProvider config={threekitConfig}>
+    <ThreekitProvider {...threekitConfig}>
       <Player>
         <TopRightWidgets>
           <div>This will show up in the top-right of the player</div>

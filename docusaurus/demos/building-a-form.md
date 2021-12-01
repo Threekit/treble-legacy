@@ -24,7 +24,7 @@ It includes: the **Threekit Provider**, the **Player Component** and the **Flat 
 ```jsx live
 function ThreekitApp() {
   return (
-    <ThreekitProvider config={threekitConfig} threekitEnv={'preview'}>
+    <ThreekitProvider {...threekitConfig} threekitEnv={'preview'}>
       <div
         style={{
           display: 'grid',
