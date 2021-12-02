@@ -16,7 +16,7 @@ The `useName` hook provides the name of the Product used to initialize the Three
 
 The hook a single `string` value.
 
-It is used to build the [Title Display component](displays-title)
+It is used to build the [Product Name Display component](display-product-name)
 
 ## Code Examples
 

@@ -16,7 +16,7 @@ The `useMetadata` hook provides the metadata present on the item used to initial
 
 The hook returns an object with the metadata.
 
-It is used to build the [Description Display component](displays-description)
+It is used to build the [Product Description Display component](display-product-description)
 
 ## Code Examples
 

@@ -34,7 +34,7 @@ To get started you can **copy the code from below**, populating the values in th
 
 :::info Threekit Environment Credentials
 
-The credentials for the Threekit Provider have to come from the Threekit Platform. For more information about these credentials you can, [find out more here](threekit-config)
+The credentials for the Threekit Provider have to come from the Threekit Platform. For more information about these credentials you can, [find out more here](threekit-credentials)
 
 :::
 

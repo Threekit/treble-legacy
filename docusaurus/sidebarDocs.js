@@ -41,6 +41,7 @@ const docs = [
         collapsible: true,
         label: 'Hooks',
         items: [
+          'hooks-overview',
           'hooks-use-attribute',
           'hooks-use-configurator',
           'hooks-use-name',

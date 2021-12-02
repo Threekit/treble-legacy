@@ -34,7 +34,7 @@ cd ./app-name
 
 Rename the `.env.template` file to `.env` and populate all the credentials.
 
-**For more information about the Threekit credentials and their setup, [click here](threekit-config).**
+**For more information about the Threekit credentials and their setup, [click here](threekit-credentials).**
 
 ## Start the development server
 

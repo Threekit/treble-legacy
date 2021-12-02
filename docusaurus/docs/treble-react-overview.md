@@ -42,7 +42,7 @@ You can find out more about the Player Component by [clicking here](treble-react
 
 Our hooks are the functional building blocks of our components and any project. They provide a way for components to connect statefuly to the Threekit API. We build all our components using hooks, so if you ever need a new UI component for an existing UX feature, you can use our hooks and focus on just the UI component and its styling.
 
-You can find out more about our Hooks by [clicking here](treble-react-hooks).
+You can find out more about our Hooks by [clicking here](hooks-overview).
 
 ### Forms
 
