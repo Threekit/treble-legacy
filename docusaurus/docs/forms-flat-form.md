@@ -107,6 +107,8 @@ const App = () => {
 | ----------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------- | -------------------------------------- |
 | **title**                     | Override value for the 'Form Title'.                                      | string                                                | Name of the initialized product        |
 | **description**               | Override value for the 'Form Description'.                                | string                                                | Description of the initialized product |
+| **hideTitle**                 | Determines whether to show or hide the 'Form Title'.                      | boolean                                               | `false`                                |
+| **hideDescription**           | Determines whether to show or hide the 'Form Description'.                | boolean                                               | `false`                                |
 | **alignTitle**                | CSS alignment of the text for the 'Form Title'                            | `left` \| `right` \| `center`                         | `center`                               |
 | **includeReservedAttributes** | Determines whether to display the reserved attributes in the form or not. | `true` \| `false`                                     | `false`                                |
 | **attributes**                | Object of attributes definitions for the form.                            | `Record<AttributeName, AttributeObject \| undefined>` | `{}`                                   |

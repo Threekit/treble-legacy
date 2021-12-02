@@ -18,9 +18,24 @@ The `ThreekitProvider` is required for using any of the Treble components or API
 
 ## Overview
 
-The `<ThreekitProvider />` initializes the Threekit API used by the various components in the Treble library. It should be wrapped around the portion of the React app where the Treble components and hooks are being used.
+The `<ThreekitProvider />` initializes the Threekit API used by the various components and hooks in the Treble library. It should be wrapped around the portion of the React app where the Treble components and hooks are being used.
 
-The Threekit Provider requires the a `threekitConfig` object, which includes all the credentials related a the project and a `threekitEnv` value to specify which Threekit Environment to use.
+The Threekit Provider is where we pass in all our Threekit setup and initialization parameters that are used throughout our app. It takes the accepts the following props:
+
+- **Credentials** - Threekit credentials for the all environments that will be used
+- **Threekit Environment** - Which environment's credentials to use at runtime
+- **Player Config [Optional]** - Parameters that will be passed to the Threekit Player API for initialization
+- **Theme [Optional]** - Overrides to the default theme
+
+We normally organize the `credentials`, `playerConfig` and `theme` props into a single object called `threekitConfig` and pass that to the ThreekitProvider as a destructured prop,
+
+e.g. `<ThreeekitProvider {...threekitConfig}></ThreekitProvider>`
+
+however you can also pass the objects in as individual props...
+
+`<ThreekitProvider credentials={credentials} playerConfig={playerConfig}></ThreekitProvider>`
+
+You can find more details on each of these props below.
 
 ```jsx
 import React from 'react';
@@ -38,7 +53,6 @@ const threekitConfig = {
       assetId: 'a9a66218-bkid-4106-96fe-a0359fdc3dc1',
       orgId: '20df501b-1ef8-4bh0-sfda-2l59426624de',
     },
-    admin-fts: {}
   }
 };
 
@@ -52,46 +66,38 @@ ReactDOM.render(
 );
 ```
 
-## Prop: Threekit Provider Props
+## Props
 
-The `threekitEnv` sets which Threekit environment, `preview | admin-fts`, to use when running the app. It defaults to the **preview** environment.
+### threekitEnv
+
+The `threekitEnv` sets the Threekit environment, `preview | admin-fts`, for Treble to use when running the app. It defaults to the **preview** environment.
 
 ```js
 const threekitEnv = 'admin-fts';
 ```
 
-## Prop: config
+### credentials
 
-The `config` object includes:
-
-- An object for each **Threekit environment credentials**
-- The **Player API initialization parameters**
-- An object for any **theme** overrides.
-
-### Threekit Environment Credentials
-
-The Threekit environment credentials include all variables that are specific to the Threekit Environment you are using. These include:
+The credentials include all parameters and authentication tokens that are specific to the Threekit Environment, `preview` / `admin-fts`, you are using. These include:
 
 ```js
-const threekitConfig = {
+const credentials = {
   //  The name of the object should be the environment
   //  you want to use: preview | admin-fts
-  credentials: {
-    preview: {
-      //  The public auth token created in the settings
-      //  tab in your org on the Threekit Platform. It should
-      //  include the `localhost` domain for local development
-      //  and any domains to include for production / deployment
-      publicToken: '',
-      //  The Org Id for the Threekit Org
-      orgId: '',
-      //  The asset id of the Catalog Item you wish to initialize
-      //  in the Threekit Player
-      assetId: '',
-      //  (optional): The Asset Id of the Stage you wish to initialize in the
-      //  Threekit Player
-      stageId: '',
-    },
+  preview: {
+    //  The public auth token created in the settings
+    //  tab in your org on the Threekit Platform. It should
+    //  include the `localhost` domain for local development
+    //  and any domains to include for production / deployment
+    publicToken: '',
+    //  The Org Id for the Threekit Org
+    orgId: '',
+    //  The asset id of the Catalog Item you wish to initialize
+    //  in the Threekit Player
+    assetId: '',
+    //  (optional): The Asset Id of the Stage you wish to initialize in the
+    //  Threekit Player
+    stageId: '',
   },
 };
 ```
@@ -251,14 +257,14 @@ const threekitConfig = {
 
 #### Threekit Provider Props
 
-| Property                | Description                                                                                                                 | Type                     | Default   |
-| ----------------------- | --------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------- |
-| **threekitEnv**         | The Threekit Platform Environment to use                                                                                    | `preview` \| `admin-fts` | `preview` |
-| **threekitCredentials** | The credentials for your Threekit Environment.`Theme` object, `Threekit Credentials` and the `Player Initialization Config` | `ThreekitCredentials`    | `-`       |
-| **playerConfig**        | The Threekit Player initialization config object.                                                                           | `ThreekitPlayerConfig`   | `-`       |
-| **theme**               | The theme overrides.                                                                                                        | `Theme`                  | `-`       |
+| Property         | Description                                       | Type                     | Default   |
+| ---------------- | ------------------------------------------------- | ------------------------ | --------- |
+| **threekitEnv**  | The Threekit Platform Environment to use          | `preview` \| `admin-fts` | `preview` |
+| **credentials**  | The credentials for your Threekit Environment.    | `ThreekitCredentials`    | `-`       |
+| **playerConfig** | The Threekit Player initialization config object. | `ThreekitPlayerConfig`   | `-`       |
+| **theme**        | The theme overrides.                              | `Theme`                  | `-`       |
 
-## Threekit Credentials
+## Credentials
 
 | Property        | Description                                                                                                                                                                                                                                 | Type             | Default |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------- |
@@ -267,7 +273,7 @@ const threekitConfig = {
 | **assetId**     | The Asset ID for the Threekit Product you'd like to initialize. ID                                                                                                                                                                          | `string (uuid4)` | `-`     |
 | **stageId**     | (optional) The Asset Id of the Stage you wish to initialize.                                                                                                                                                                                | `string (uuid4)` | `-`     |
 
-## Player Initialization Config
+## Player Config
 
 | Property                     | Description                                                                                                                                                                                           | Type                         | Default |
 | ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- | ------- |

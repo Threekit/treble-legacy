@@ -25,7 +25,9 @@ The Player component also includes layout containers for placing `Widgets` onto 
 - BottomCenterWidgets
 - BottomLeftWidgets
 
-The containers are available on the Player itself and can be used directly from the component if needed, e.g. `<Player.TopRightWidgets> </Player.TopRightWidgets>`
+The containers are available on the Player itself and can be used directly from the component if needed,
+
+e.g. `<Player.TopRightWidgets> </Player.TopRightWidgets>`
 
 :::info Player needs a height
 
@@ -83,8 +85,8 @@ const ThreekitApp = () => {
 
 ## Props
 
-| Property      | Description                                            | Type   | Default  |
-| ------------- | ------------------------------------------------------ | ------ | -------- |
-| **height**    | The height for the Player component.                   | string | `70vh`   |
-| **width**     | The width for the Player component links.              | string | `100%`   |
-| **minHeight** | The minimum height for the Player component messaging. | string | `#600px` |
+| Property      | Description                                            | Type   | Default |
+| ------------- | ------------------------------------------------------ | ------ | ------- |
+| **height**    | The height for the Player component.                   | string | `70vh`  |
+| **width**     | The width for the Player component links.              | string | `100%`  |
+| **minHeight** | The minimum height for the Player component messaging. | string | `600px` |
