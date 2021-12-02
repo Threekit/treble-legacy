@@ -12,8 +12,10 @@ import useConfigurator from '../../hooks/useConfigurator';
 
 interface FlatFormProps {
   title?: string;
+  hideTitle?: boolean;
   alignTitle?: string;
   description?: string;
+  hideDescription?: boolean;
   className?: string;
   includeReservedAttributes: boolean;
   // attributes:
@@ -22,8 +24,10 @@ interface FlatFormProps {
 export const FlatForm = (props: FlatFormProps) => {
   const {
     title,
+    hideTitle,
     alignTitle,
     description,
+    hideDescription,
     attributes,
     className: customClassName,
     includeReservedAttributes,
@@ -31,6 +35,8 @@ export const FlatForm = (props: FlatFormProps) => {
     {
       alignTitle: 'center',
       attributes: {},
+      hideTitle: false,
+      hideDescription: false,
       includeReservedAttributes: false,
     },
     props
@@ -48,15 +54,19 @@ export const FlatForm = (props: FlatFormProps) => {
 
   return (
     <Wrapper className={cls}>
-      <ProductName
-        align={alignTitle}
-        title={title}
-        className={customClassName}
-      />
-      <ProductDescription
-        description={description}
-        className={customClassName}
-      />
+      {hideTitle ? null : (
+        <ProductName
+          align={alignTitle}
+          title={title}
+          className={customClassName}
+        />
+      )}
+      {hideDescription ? null : (
+        <ProductDescription
+          description={description}
+          className={customClassName}
+        />
+      )}
       {filterAttributes.map((attr, i) => {
         let Component;
         let props = (attributes || {})?.[attr.name]?.props || {};

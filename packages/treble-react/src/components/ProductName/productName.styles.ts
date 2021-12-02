@@ -5,7 +5,7 @@ interface IWrapper {
 }
 
 export const Wrapper = styled.div<IWrapper>`
-  font-size: 20px;
+  font-size: 32px;
   font-weight: 600;
   margin-bottom: 8px;
   text-align: ${props => props.align || 'left'};
