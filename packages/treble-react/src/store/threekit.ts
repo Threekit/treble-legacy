@@ -3,12 +3,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // import { createSelector } from 'reselect'
 import { RootState, ThreekitDispatch } from './index';
 import {
-  IConfiguration,
   ISetConfiguration,
-  // IThreekitConfigurator,
   IThreekitDisplayAttribute,
   IMetadata,
-  DISPLAY_OPTIONS,
+  ThreekitInitConfig,
 } from '../threekit';
 import threekitAPI from '../api';
 import { getParams, createThreekitScriptEl } from '../utils';
@@ -28,35 +26,24 @@ import { IConfigurationResponse } from '../http/configurations';
 export interface IThreekitCredentials {
   publicToken: string;
   assetId: string;
+  configurationId?: string;
   orgId: string;
   stageId?: string;
   publishStage?: string;
   threekitDomain?: string;
 }
 
-export interface ILaunchConfig {
+export interface ILaunchConfig
+  extends Omit<
+    ThreekitInitConfig,
+    'el' | 'authToken' | 'orgId' | 'assetId' | 'stageId'
+  > {
   //  Threekit Env to use
   threekitEnv?: string;
   //  Threekit Env specific credentials
   preview: IThreekitCredentials;
   'admin-fts': IThreekitCredentials;
-  //  Custom Configuration (For preset)
-  configurationId?: string;
-  //  Threekit Player Init
   elementId?: string;
-  public: string;
-  cache?: string;
-  showConfigurator?: boolean;
-  initialConfiguration?: IConfiguration;
-  showLoadingThumbnail?: boolean;
-  showLoadingProgress?: boolean;
-  onLoadingProgress?: boolean;
-  showAR?: boolean;
-  showShare?: boolean;
-  locale?: string;
-  allowMobileVerticalOrbit?: boolean;
-  publishStage?: string;
-  display?: DISPLAY_OPTIONS;
   //  Language Stuff
   language?: string | undefined;
 }
@@ -109,7 +96,7 @@ const createPlayerLoaderEl = (elementId: string): HTMLElement => {
 export interface ThreekitState {
   //  HTML Player element's ID
   playerElId: undefined | string;
-  //  Name of the Intialized Item
+  //  Name of the Initialized Item
   name: undefined | string;
   //  Initialized item's metadata
   metadata: undefined | IMetadata;
@@ -131,7 +118,7 @@ export interface ThreekitState {
 const initialState: ThreekitState = {
   //  Player HTML element
   playerElId: undefined,
-  //  Name of the Intialized Item
+  //  Name of the Initialized Item
   name: undefined,
   //  Initialized item's metadata
   metadata: undefined,
@@ -160,15 +147,15 @@ const { actions, reducer } = createSlice({
     setPlayerLoading: (state, action: PayloadAction<boolean>) => {
       state.isPlayerLoading = action.payload;
     },
-    //  Intialized Item's Name
+    //  Initialized Item's Name
     setPlayerElement: (state, action: PayloadAction<string>) => {
       state.playerElId = action.payload;
     },
-    //  Intialized Item's Name
+    //  Initialized Item's Name
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
-    //  Intialized Item's Metadata
+    //  Initialized Item's Metadata
     setMetadata: (state, action: PayloadAction<IMetadata>) => {
       state.metadata = action.payload;
     },
@@ -340,8 +327,6 @@ export const launch =
     const {
       //  Threekit Env specific credentials,
       threekitEnv,
-      //  User saved configuration
-      configurationId,
       //  Threekit Player Init
       elementId,
       // cache,
@@ -366,6 +351,7 @@ export const launch =
       publicToken: authToken,
       orgId,
       stageId,
+      configurationId,
     } = threekitCredentials;
 
     //  Connection
