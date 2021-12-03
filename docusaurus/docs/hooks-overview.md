@@ -1,6 +1,6 @@
 ---
 id: hooks-overview
-title: Overview
+title: Hooks
 sidebar_label: Overview
 ---
 

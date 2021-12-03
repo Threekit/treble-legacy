@@ -30,6 +30,7 @@ my-treble-app/
     App.js
     index.css
     index.js
+    components/
 ```
 
 For the project to build, these files must exist with exact filenames:
