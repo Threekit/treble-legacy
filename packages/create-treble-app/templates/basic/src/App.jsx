@@ -1,10 +1,9 @@
-import React from 'react';
 import {
   ThreekitProvider,
   Player,
   PortalToElement,
   FlatForm,
-  Snapshots,
+  Share,
 } from '@threekit-tools/treble';
 import threekitConfig from '../threekit.config.js';
 
@@ -14,11 +13,11 @@ const App = () => {
       <div className="tk-treble-player">
         <Player>
           <Player.TopRightWidgets>
-            <Snapshots />
+            <Share />
           </Player.TopRightWidgets>
         </Player>
       </div>
-      <PortalToElement elementId="tk-treble-form" strict={true}>
+      <PortalToElement to="tk-treble-form" strict={true}>
         <FlatForm />
       </PortalToElement>
     </ThreekitProvider>

@@ -20,6 +20,7 @@ const init = async () => {
     const response = await enquirer.prompt({
       type: 'input',
       name: 'projectName',
+      initial: 'treble-app',
       message: 'Please provide a name for your project?',
     });
     projectName = response.projectName.replace(/ /g, '-').toLowerCase();
