@@ -62,7 +62,7 @@ const Thumbnail = (props: IThumbnail) => {
       color={color}
       shape={shape}
     >
-      {imageUrl ? <img src={imageUrl} alt={name || ''} /> : null}
+      {imageUrl ? <img src={imageUrl} alt={name || ''} /> : <span />}
     </OptionThumbnail>
   );
 };

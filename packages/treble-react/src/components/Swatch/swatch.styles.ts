@@ -55,6 +55,7 @@ export const OptionThumbnail = styled.div<IOption>`
   height: 52px;
   width: 52px;
   text-align: center;
+  display: block;
 
   border-radius: ${props =>
     props.shape === 'round' ? '50%' : props.theme.borderRadius};

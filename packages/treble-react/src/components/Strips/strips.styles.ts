@@ -40,6 +40,7 @@ export const StripThumbnail = styled.div`
   height: 48px;
   width: 48px;
   margin-right: 5px;
+  display: block;
 
   position: relative;
   top: 50%;

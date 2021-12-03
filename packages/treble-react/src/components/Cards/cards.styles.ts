@@ -43,6 +43,7 @@ export const CardThumbnail = styled.div`
   width: 100%;
   margin-bottom: 5px;
   text-align: center;
+  display: block;
 
   ${props => (props.color ? `background: ${props.color};` : '')}
 

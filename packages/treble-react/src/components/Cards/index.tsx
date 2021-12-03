@@ -51,7 +51,7 @@ const Thumbnail = (props: IThumbnail) => {
   if (!imageUrl && !color) return null;
   return (
     <CardThumbnail className={`${className} option-thumbnail`} color={color}>
-      {imageUrl ? <img src={imageUrl} alt={name || ''} /> : null}
+      {imageUrl ? <img src={imageUrl} alt={name || ''} /> : <span />}
     </CardThumbnail>
   );
 };
