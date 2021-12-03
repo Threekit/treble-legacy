@@ -9,7 +9,18 @@ module.exports = {
     rules: [
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [['tailwindcss'], ['autoprefixer']],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.less$/i,
@@ -46,6 +57,9 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
   },
   plugins: [
     //  Loads in the .env file as well as CLI variables

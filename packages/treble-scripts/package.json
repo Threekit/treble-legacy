@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble-scripts",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "main": "index.js",
   "license": "MIT",
   "bin": {
@@ -33,7 +33,10 @@
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^4.5.0",
     "webpack-merge": "^5.8.0",
-    "webpack-node-externals": "^3.0.0"
+    "webpack-node-externals": "^3.0.0",
+    "postcss": "^8.4.4",
+    "postcss-loader": "^6.2.1",
+    "tailwindcss": "^2.2.19"
   },
   "gitHead": "2e16bcf98f81e16bb1768072fdb3968122e7966f"
 }
