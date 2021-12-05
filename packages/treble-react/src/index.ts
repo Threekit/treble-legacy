@@ -44,6 +44,12 @@ import Zoom from './components/Zoom';
 import Snapshots from './components/Snapshots';
 import Wishlist from './components/Wishlist';
 import Share from './components/Share';
+//  Icons
+import icons from './icons';
+export * from './icons';
+//  Products - Multi-configurtors
+import ProductLoader from './components/ProductLoader';
+import ProductLayout from './components/ProductLayout';
 
 export {
   //  Hooks
@@ -92,4 +98,9 @@ export {
   Snapshots,
   Wishlist,
   Share,
+  //  icons
+  icons,
+  //  Products - Multi-configurtors
+  ProductLoader,
+  ProductLayout,
 };
