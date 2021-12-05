@@ -26,7 +26,12 @@ const playerConfig = {
   // publishStage: undefined,
 };
 
+const products = {
+  ctx: require.context('./src/products', false, /.product.(jsx)$/),
+};
+
 export default {
   credentials,
   playerConfig,
+  products,
 };

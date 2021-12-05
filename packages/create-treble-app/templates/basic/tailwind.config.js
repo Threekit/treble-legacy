@@ -1,9 +1,8 @@
 module.exports = {
-  purge: ['./public/index.html', './src/**/*.{js,jsx,ts,tsx}'],
-  mode: 'jit',
-  variants: {
+  presets: [require('@threekit-tools/treble/tailwind-presets')],
+  variants: {},
+  theme: {
     extend: {},
   },
-  theme: {},
   plugins: [],
 };
