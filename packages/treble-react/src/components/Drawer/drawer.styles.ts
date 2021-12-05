@@ -24,6 +24,7 @@ export const Wrapper = styled.div<IWrapper>`
   background: #fff;
   border-radius: ${props => props.theme.borderRadius};
   opacity: 1;
+  z-index: 10;
 
   transform: translateX(${props => (props.show ? '0%' : '100%')});
   transition: all ${props => props.transitionDuration};

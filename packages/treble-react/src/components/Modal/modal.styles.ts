@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
   min-height: 200px;
   opacity: 1;
   overflow: scroll;
+  z-index: 10;
   background: #fff;
   border-radius: ${props => props.theme.borderRadius};
 
