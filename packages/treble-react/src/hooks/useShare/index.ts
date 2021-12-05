@@ -3,16 +3,21 @@ import { isThreekitLoaded } from '../../store/threekit';
 import message from '../../components/message';
 import { copyToClipboard } from '../../utils';
 
-const useShare = (): undefined | (() => Promise<void>) => {
+type UseShareHook =
+  | undefined
+  | ((msg: string | undefined) => Promise<undefined | string>);
+
+const useShare = (): UseShareHook => {
   const isLoaded = useThreekitSelector<boolean>(isThreekitLoaded);
 
   if (!isLoaded) return undefined;
 
-  const handleShare = async () => {
+  const handleShare = async (msg: string | undefined = 'Link copied') => {
     const configuration = await window.threekit.treble.saveConfiguration();
-    if (!configuration) return;
+    if (!configuration) return Promise.resolve(undefined);
     copyToClipboard(configuration.resumableUrl);
-    message.info('Link copied!');
+    if (msg?.length) message.info(msg);
+    return Promise.resolve(configuration?.resumableUrl || undefined);
   };
 
   return handleShare;
