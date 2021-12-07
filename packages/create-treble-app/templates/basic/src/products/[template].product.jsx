@@ -6,9 +6,11 @@ import {
   FlatForm,
 } from '@threekit-tools/treble';
 
+const products = { 'product-identifier': { preview: '%ASSET_ID%' } };
+
 export default function Product() {
   return (
-    <ProductLayout products={{ productId: '%ASSET_ID%' }}>
+    <ProductLayout products={products}>
       <div className="tk-treble-player">
         <Player>
           <Player.TopRightWidgets>

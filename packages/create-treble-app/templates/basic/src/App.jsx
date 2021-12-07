@@ -5,11 +5,10 @@ import {
   FlatForm,
   Share,
 } from '@threekit-tools/treble';
-import threekitConfig from '../threekit.config.js';
 
 const App = () => {
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <div className="tk-treble-player">
         <Player>
           <Player.TopRightWidgets>
