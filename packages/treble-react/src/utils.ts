@@ -18,8 +18,9 @@ import {
   FORM_CLASS_NAME,
   TK_SAVED_CONFIG_PARAM_KEY,
 } from './constants';
+import { ITrebleConfig } from './threekit';
 
-interface ICameraPostion {
+interface ICameraPosition {
   position: ICoordinates;
   quaternion: IQuaternion;
 }
@@ -221,7 +222,7 @@ export const getCameraPosition = (cameraApi: IThreekitCamera) => ({
 
 export const setCameraPosition = (
   cameraApi: IThreekitCamera,
-  cameraPosition: ICameraPostion
+  cameraPosition: ICameraPosition
 ) => {
   cameraApi.setPosition(cameraPosition.position);
   cameraApi.setQuaternion(cameraPosition.quaternion);
@@ -377,4 +378,35 @@ export const filterFormAttributes = (
     }
     return true;
   });
+};
+
+export const isUuid = (str?: string) => {
+  if (!str || typeof str !== 'string') return false;
+  const check = new RegExp(
+    /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
+  );
+  return check.test(str);
+};
+
+export const loadTrebleConfig = () => {
+  let config: Partial<ITrebleConfig> = {};
+  try {
+    const project = require('@app-root/threekit.config.js').default;
+    if (project) config.project = project;
+  } catch (e) {
+    console.log(e);
+  }
+  try {
+    const player = require('@app-root/.treble/player.config.js').default;
+    if (player) config.player = player;
+  } catch (e) {
+    console.log(e);
+  }
+  try {
+    const treble = require('@app-root/.treble/treble.config.js').default;
+    if (treble) config.treble = treble;
+  } catch (e) {
+    console.log(e);
+  }
+  return config;
 };

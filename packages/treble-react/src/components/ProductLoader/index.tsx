@@ -1,29 +1,30 @@
 import React, { Children } from 'react';
 import ThreekitProvider, { ThreekitProviderProps } from '../ThreekitProvider';
-
-interface IProducts {
-  ctx: __WebpackModuleApi.RequireContext;
-}
+import { getParams, loadTrebleConfig } from '../../utils';
+import { TK_PRODUCT_ID_PARAM_KEY } from '../../constants';
+import { IProducts } from '../../threekit';
 
 interface ProductLoaderProps extends Omit<ThreekitProviderProps, 'children'> {
-  productId: string;
-  products: IProducts;
+  productId?: string;
 }
 
-const productAssetId: Record<string, string> = {};
+const productsMap: Record<string, IProducts> = {};
 const productComponents: Array<React.FC> = [];
 const productToComponentMap: Record<string, number> = {};
 
 export default function ProductLoader(props: ProductLoaderProps) {
-  const { productId, products, credentials, playerConfig, theme, threekitEnv } =
+  const { project, productId, playerConfig, threekitEnv, locale, theme } =
     props;
-  if (!productId || !products) return null;
+
+  const config = loadTrebleConfig();
+
+  if (!config.treble?.productsCtx) return null;
 
   if (!productComponents.length) {
-    products.ctx.keys().forEach(fileName => {
+    config.treble.productsCtx.keys().forEach(fileName => {
       if (!fileName.includes('product.js')) return;
       if (fileName.includes('].product.js')) return;
-      productComponents.push(products.ctx(fileName).default);
+      productComponents.push(config.treble?.productsCtx(fileName).default);
     });
 
     Children.forEach(
@@ -33,44 +34,52 @@ export default function ProductLoader(props: ProductLoaderProps) {
         if (jsx.type.name !== 'ProductLayout') return;
         if (!jsx.props.products) return;
 
-        let products: Record<string, string>;
+        let products: Record<string, IProducts> = jsx.props.products;
 
-        if (Array.isArray(jsx.props.products))
-          products = (jsx.props.products as Array<string>).reduce(
-            (output, id) => Object.assign(output, { [id]: id }),
-            {}
-          );
-        else if (typeof jsx.props.products === 'string') {
-          const prdStr = jsx.props.products as string;
-          products = { [prdStr]: prdStr };
-        } else {
-          products = jsx.props.products as Record<string, string>;
-        }
-
-        Object.entries(products).forEach(([key, assetId]) => {
-          productAssetId[key] = assetId;
-          productToComponentMap[key] = i;
+        Object.entries(products).forEach(([prodKey, prodObj]) => {
+          productsMap[prodKey] = prodObj;
+          productToComponentMap[prodKey] = i;
         });
       }
     );
   }
 
-  const Product = productComponents[productToComponentMap[props.productId]];
+  const params = getParams();
+
+  let id: undefined | string = productId;
+
+  if (!id && params[TK_PRODUCT_ID_PARAM_KEY]) {
+    id = Object.keys(productToComponentMap).find(
+      el => params[TK_PRODUCT_ID_PARAM_KEY] === el
+    );
+  }
+
+  if (!id) return null;
+
+  const Product = productComponents[productToComponentMap[id]];
   if (!Product) return null;
-  const assetId = productAssetId[props.productId];
 
-  const env = threekitEnv || 'preview';
+  // const assetId =
+  //   typeof productAssetId[id] === 'string'
+  //     ? productAssetId[id]
+  //     : productAssetId[env][id];
 
-  const preppedCredentials = Object.assign({}, credentials);
-  preppedCredentials[env] = Object.assign(preppedCredentials[env], {
-    assetId,
+  // const preppedCredentials = Object.assign({}, project?.credentials);
+  // preppedCredentials[env] = Object.assign(preppedCredentials[env], {
+  //   assetId,
+  // });
+
+  const preppedProject = Object.assign({}, project, {
+    products: productsMap[id],
   });
 
   return (
     <ThreekitProvider
-      credentials={preppedCredentials}
-      playerConfig={Object.assign({}, playerConfig)}
+      project={preppedProject}
+      locale={locale}
+      playerConfig={playerConfig}
       theme={theme}
+      threekitEnv={threekitEnv}
     >
       <Product />
     </ThreekitProvider>

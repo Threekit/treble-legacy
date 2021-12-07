@@ -13,6 +13,12 @@ export const DISPLAY_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-di
 export const FORM_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-form`;
 
 /*****************************************************
+ * Treble Products Workflow
+ ****************************************************/
+
+export const TK_PRODUCT_ID_PARAM_KEY = 'tkProduct';
+
+/*****************************************************
  * Saved Configuration Workflow
  ****************************************************/
 

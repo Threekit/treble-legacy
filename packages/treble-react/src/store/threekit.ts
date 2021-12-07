@@ -6,10 +6,18 @@ import {
   ISetConfiguration,
   IThreekitDisplayAttribute,
   IMetadata,
-  ThreekitInitConfig,
+  IProject,
+  ICredentials,
+  IProducts,
+  IPlayerConfig,
 } from '../threekit';
 import threekitAPI from '../api';
-import { getParams, createThreekitScriptEl } from '../utils';
+import {
+  isUuid,
+  getParams,
+  createThreekitScriptEl,
+  loadTrebleConfig,
+} from '../utils';
 import {
   DEFAULT_PLAYER_CONFIG,
   TK_SAVED_CONFIG_PARAM_KEY,
@@ -23,29 +31,11 @@ import { IConfigurationResponse } from '../http/configurations';
  * Types and Interfaces
  ****************************************************/
 
-export interface IThreekitCredentials {
-  publicToken: string;
-  assetId: string;
-  configurationId?: string;
-  orgId: string;
-  stageId?: string;
-  publishStage?: string;
-  threekitDomain?: string;
-}
-
-export interface ILaunchConfig
-  extends Omit<
-    ThreekitInitConfig,
-    'el' | 'authToken' | 'orgId' | 'assetId' | 'stageId'
-  > {
-  //  Threekit Env to use
-  threekitEnv?: string;
-  //  Threekit Env specific credentials
-  preview: IThreekitCredentials;
-  'admin-fts': IThreekitCredentials;
-  elementId?: string;
-  //  Language Stuff
-  language?: string | undefined;
+export interface ILaunchConfig {
+  threekitEnv: string;
+  locale: string;
+  project: IProject;
+  playerConfig: IPlayerConfig;
 }
 
 interface IPriceConfig {
@@ -322,37 +312,63 @@ export const getWishlist = (state: RootState) => state.threekit.wishlist;
  ****************************************************/
 
 export const launch =
-  (launchConfig: ILaunchConfig) => async (dispatch: ThreekitDispatch) => {
+  (launchConfig?: Partial<ILaunchConfig>) =>
+  async (dispatch: ThreekitDispatch) => {
     if (window.threekit) return;
-    const {
-      //  Threekit Env specific credentials,
-      threekitEnv,
-      //  Threekit Player Init
-      elementId,
-      // cache,
-      showConfigurator,
-      initialConfiguration: initialConfigurationRaw,
-      showLoadingThumbnail,
-      showLoadingProgress,
-      onLoadingProgress,
-      showAR,
-      showShare,
-      locale,
-      allowMobileVerticalOrbit,
-      publishStage,
-      display,
-    } = Object.assign(DEFAULT_PLAYER_CONFIG, launchConfig);
 
-    const threekitCredentials = launchConfig[threekitEnv || 'preview'];
+    const config = loadTrebleConfig();
+
+    const credentials: ICredentials = Object.assign(
+      {},
+      config.project?.credentials || {},
+      launchConfig?.project?.credentials || {}
+    );
+    const products: IProducts = Object.assign(
+      {},
+      config.project?.products || {},
+      launchConfig?.project?.products || {}
+    );
+    if (!Object.keys(credentials).length || !Object.keys(products).length)
+      return console.error('Missing credentials');
+
+    const threekitEnv: string =
+      launchConfig?.threekitEnv || process.env.THREEKIT_ENV || 'preview';
+
+    const playerConfig: IPlayerConfig = Object.assign(
+      {},
+      DEFAULT_PLAYER_CONFIG,
+      config.player,
+      launchConfig?.playerConfig
+    );
+
+    const envCredentials = credentials[threekitEnv];
+    const product = products[threekitEnv];
     const threekitDomainRaw =
-      threekitCredentials.threekitDomain || `${threekitEnv}.threekit.com`;
-    const {
-      assetId,
-      publicToken: authToken,
-      orgId,
-      stageId,
-      configurationId,
-    } = threekitCredentials;
+      envCredentials.threekitDomain || `${threekitEnv}.threekit.com`;
+    const { orgId, publicToken: authToken } = envCredentials;
+    let initialConfigurationRaw: Record<string, any> | undefined;
+    let assetId: string | undefined;
+    let stageId: string | undefined;
+    let configurationId: string | undefined;
+
+    if (typeof product === 'string') {
+      if (isUuid(product)) assetId = product;
+      else configurationId = product;
+    } else {
+      if (isUuid(product.assetId)) assetId = product.assetId;
+      else configurationId = product.assetId;
+      stageId = product.stageId;
+    }
+
+    //  We get or create the player HTML element
+    let el;
+    if (playerConfig.elementId) {
+      el = document.getElementById(playerConfig.elementId);
+      if (el) dispatch(setPlayerElement(playerConfig.elementId));
+    } else {
+      el = createPlayerLoaderEl(TK_PLAYER_ROOT_DIV);
+      dispatch(setPlayerElement(TK_PLAYER_ROOT_DIV));
+    }
 
     //  Connection
     connection.connect({
@@ -389,15 +405,7 @@ export const launch =
       }
     }
 
-    //  We get or create the player HTML element
-    let el;
-    if (elementId) {
-      el = document.getElementById(elementId);
-      if (el) dispatch(setPlayerElement(elementId));
-    } else {
-      el = createPlayerLoaderEl(TK_PLAYER_ROOT_DIV);
-      dispatch(setPlayerElement(TK_PLAYER_ROOT_DIV));
-    }
+    if (!updatedAssetId) return console.error('missing assetId');
 
     //  We create the threekit script
     await createThreekitScriptEl(threekitDomain);
@@ -405,21 +413,13 @@ export const launch =
     const [player, translations, pricebook] = await Promise.all([
       window.threekitPlayer({
         el: el as HTMLElement,
+        // Variables to sort out
         authToken,
-        // cache,
         stageId,
         assetId: updatedAssetId,
-        showConfigurator,
         initialConfiguration,
-        showLoadingThumbnail,
-        showLoadingProgress,
-        onLoadingProgress,
-        showAR,
-        showShare,
-        locale,
-        allowMobileVerticalOrbit,
-        publishStage,
-        display,
+        //
+        ...playerConfig,
       }),
       threekitAPI.products.fetchTranslations(),
       threekitAPI.price.getPricebooksList(),
@@ -431,8 +431,8 @@ export const launch =
       treble: new Treble({ player }),
     };
 
-    if (launchConfig.language) {
-      dispatch(setLanguage(launchConfig.language));
+    if (launchConfig?.locale) {
+      dispatch(setLanguage(launchConfig.locale));
       dispatch(setTranslations(translations));
     }
 

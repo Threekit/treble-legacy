@@ -274,7 +274,7 @@ export interface ThreekitInitConfig {
   stageId?: string;
   orgId?: string;
   showConfigurator?: boolean;
-  initialConfiguration?: object;
+  initialConfiguration?: Record<string, any>;
   showAR?: boolean;
   showShare?: boolean;
   showLoadingThumbnail?: boolean;
@@ -284,6 +284,49 @@ export interface ThreekitInitConfig {
   allowMobileVerticalOrbit?: boolean;
   publishStage?: string;
   display?: DISPLAY_OPTIONS;
+}
+
+/***************************************************
+ *  Treble Declarations
+ **************************************************/
+
+export interface IFrameworkConfig {
+  productsCtx: __WebpackModuleApi.RequireContext;
+}
+
+export interface ICredential {
+  orgId: string;
+  publicToken: string;
+  publishStage?: string;
+  threekitDomain?: string;
+}
+export interface ICredentials extends Record<string, ICredential> {}
+
+export interface IPlayerConfig
+  extends Omit<
+    ThreekitInitConfig,
+    'el' | 'authToken' | 'orgId' | 'assetId' | 'stageId' | 'locale'
+  > {
+  elementId?: string;
+}
+
+export interface IProduct
+  extends Pick<
+    ThreekitInitConfig,
+    'assetId' | 'stageId' | 'initialConfiguration'
+  > {}
+
+export interface IProducts extends Record<string, string | Partial<IProduct>> {}
+
+export interface IProject {
+  credentials: ICredentials;
+  products: IProducts;
+}
+
+export interface ITrebleConfig {
+  project: IProject;
+  treble: IFrameworkConfig;
+  player: IPlayerConfig;
 }
 
 /***************************************************

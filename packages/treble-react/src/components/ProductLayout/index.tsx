@@ -1,7 +1,8 @@
 import React from 'react';
+import { IProducts } from '../../threekit';
 
-interface ProductLayoutProps {
-  products: string | Array<string> | Record<string, string>;
+export interface ProductLayoutProps {
+  products: Record<string, IProducts>;
 }
 
 const ProductLayout: React.FC<ProductLayoutProps> = props => {

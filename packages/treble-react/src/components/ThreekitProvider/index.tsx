@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import store, { useThreekitDispatch } from '../../store';
-import {
-  ILaunchConfig,
-  launch,
-  IThreekitCredentials,
-} from '../../store/threekit';
+import { launch, ILaunchConfig } from '../../store/threekit';
 
 import { Provider } from 'react-redux';
 
@@ -12,20 +8,12 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../../theme';
 import GlobalStyle from './GlobalStyles.styles';
 
-interface ICredentials {
-  preview: IThreekitCredentials;
-  'admin-fts': IThreekitCredentials;
-}
-
 interface Theme {
   [key: string]: string | number;
 }
 
-export interface ThreekitProviderProps {
-  credentials: ICredentials;
-  playerConfig?: ILaunchConfig;
+export interface ThreekitProviderProps extends Partial<ILaunchConfig> {
   theme?: Theme;
-  threekitEnv?: string;
   children: React.ReactNode;
 }
 
@@ -34,17 +22,12 @@ const App = (props: ThreekitProviderProps) => {
 
   useEffect(() => {
     const init = () => {
-      const threekitEnv = props.threekitEnv || process.env.THREEKIT_ENV;
-      const threekitConfig = Object.assign(
-        { threekitEnv },
-        props.credentials,
-        props.playerConfig
-      );
-      dispatch(launch(threekitConfig));
+      const { playerConfig, project, locale, threekitEnv } = props;
+      dispatch(launch({ playerConfig, project, locale, threekitEnv }));
     };
     init();
     return;
-  }, [props.credentials, props.threekitEnv, , props.playerConfig]);
+  }, [props.project, props.threekitEnv, , props.playerConfig]);
 
   return <>{props.children}</>;
 };
@@ -55,8 +38,8 @@ const ThreekitProvider = (props: ThreekitProviderProps) => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App
-          theme={props.theme}
-          credentials={props.credentials}
+          locale={props.locale}
+          project={props.project}
           playerConfig={props.playerConfig}
           threekitEnv={props.threekitEnv}
         >
