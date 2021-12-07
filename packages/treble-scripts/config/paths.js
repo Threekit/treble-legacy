@@ -14,6 +14,7 @@ const appIndexJs = resolveApp('src/index.js');
 const nodeModules = resolveApp('node_modules');
 
 module.exports = {
+  appDirectory,
   appBuild,
   storybookBuild,
   appPublic,

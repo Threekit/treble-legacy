@@ -60,6 +60,9 @@ module.exports = {
   },
   resolve: {
     extensions: ['*', '.js', '.jsx'],
+    alias: {
+      '@app-root': paths.appDirectory,
+    },
   },
   plugins: [
     //  Loads in the .env file as well as CLI variables
