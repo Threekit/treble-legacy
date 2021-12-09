@@ -2,7 +2,7 @@
 name: Proposal
 about: Suggest an idea for improving Treble
 title: ''
-labels: needs triage
+labels: 'issue: proposal, needs triage'
 assignees: ''
 
 ---
