@@ -99,9 +99,9 @@ export const Swatch = (props: ISwatch) => {
             });
           const selected = value === optionValue;
           const clsOpt =
-            `${cls}-option option-${i} ${optionValue}` + selected
+            `${cls}-option option-${i} ${optionValue}` + (selected
               ? ' selected'
-              : '';
+              : '');
           return (
             <OptionWrapper
               key={i}
