@@ -49,7 +49,7 @@ import Share from './components/Share';
 import icons from './icons';
 export * from './icons';
 //  Products - Multi-configurtors
-import ProductLoader from './components/ProductLoader';
+import TrebleApp from './components/TrebleApp';
 import ProductLayout from './components/ProductLayout';
 
 export {
@@ -103,6 +103,6 @@ export {
   //  icons
   icons,
   //  Products - Multi-configurtors
-  ProductLoader,
+  TrebleApp,
   ProductLayout,
 };
