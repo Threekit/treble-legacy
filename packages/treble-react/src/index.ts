@@ -10,6 +10,7 @@ import useZoom from './hooks/useZoom';
 import useSnapshot from './hooks/useSnapshot';
 import useWishlist from './hooks/useWishlist';
 import useShare from './hooks/useShare';
+import usePlayerPortal from './hooks/usePlayerPortal';
 //  Components
 import ThreekitProvider from './components/ThreekitProvider';
 import Player from './components/Player';
@@ -64,6 +65,7 @@ export {
   useSnapshot,
   useWishlist,
   useShare,
+  usePlayerPortal,
   //  Components
   ThreekitProvider,
   Player,

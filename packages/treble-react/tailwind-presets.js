@@ -78,5 +78,60 @@ module.exports = {
 
       addComponents(widgetBtn);
     }),
+    plugin(function ({ addComponents }) {
+      const playerWidgets = {
+        '.player-wgts': {
+          position: 'absolute',
+          display: 'flex',
+          flexDirection: 'row',
+        },
+
+        '.wgt-top-left': {
+          top: '20px',
+          left: '20px',
+        },
+
+        '.wgt-top-center': {
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        },
+
+        '.wgt-top-right': {
+          top: '20px',
+          right: '20px',
+        },
+
+        '.wgt-middle-left': {
+          top: '50%',
+          left: '20px',
+          transform: 'translateX(-50%, -50%)',
+        },
+
+        '.wgt-middle-right': {
+          top: '50%',
+          right: '20px',
+          transform: 'translateX(-50%, -50%)',
+        },
+
+        '.wgt-bottom-left': {
+          bottom: '20px',
+          left: '20px',
+        },
+
+        '.wgt-bottom-center': {
+          bottom: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        },
+
+        '.wgt-bottom-right': {
+          bottom: '20px',
+          right: '20px',
+        },
+      };
+
+      addComponents(playerWidgets);
+    }),
   ],
 };
