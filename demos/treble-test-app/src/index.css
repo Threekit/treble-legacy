@@ -1,3 +1,6 @@
+@tailwind components;
+@tailwind utilities;
+
 .tk-treble-app {
   display: grid;
   grid-template-columns: auto 400px;
