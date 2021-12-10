@@ -24,11 +24,7 @@ export const Wrapper = styled.div<IWrapperProps>`
   }
 `;
 
-export const TopLeftWidgetsWrapper = styled.div`
-  position: absolute;
-  top: 20px;
-  left: 20px;
-
+const WidgetWrapperBase = styled.div`
   display: flex;
   flex-direction: row;
 
@@ -41,125 +37,54 @@ export const TopLeftWidgetsWrapper = styled.div`
   }
 `;
 
-export const TopCenterWidgetsWrapper = styled.div`
+export const TopLeftWidgetsWrapper = styled(WidgetWrapperBase)`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+`;
+
+export const TopCenterWidgetsWrapper = styled(WidgetWrapperBase)`
   position: absolute;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
-
-  display: flex;
-  flex-direction: row;
-
-  & > div {
-    margin-right: 8px;
-  }
-
-  & > div:last-child {
-    margin-right: 0px;
-  }
 `;
 
-export const TopRightWidgetsWrapper = styled.div`
+export const TopRightWidgetsWrapper = styled(WidgetWrapperBase)`
   position: absolute;
   top: 20px;
   right: 20px;
-
-  display: flex;
-  flex-direction: row;
-
-  & > div {
-    margin-right: 8px;
-  }
-
-  & > div:last-child {
-    margin-right: 0px;
-  }
 `;
 
-export const MiddleLeftWidgetsWrapper = styled.div`
+export const MiddleLeftWidgetsWrapper = styled(WidgetWrapperBase)`
   position: absolute;
   top: 50%;
   left: 20px;
   transform: translateY(-50%);
-
-  display: flex;
-  flex-direction: column;
-
-  & > div {
-    margin-bottom: 8px;
-  }
-
-  & > div:last-child {
-    margin-bottom: 0px;
-  }
 `;
 
-export const MiddleRightWidgetsWrapper = styled.div`
+export const MiddleRightWidgetsWrapper = styled(WidgetWrapperBase)`
   position: absolute;
   top: 50%;
   right: 20px;
   transform: translateY(-50%);
-
-  display: flex;
-  flex-direction: column;
-
-  & > div {
-    margin-bottom: 8px;
-  }
-
-  & > div:last-child {
-    margin-bottom: 0px;
-  }
 `;
 
-export const BottomLeftWidgetsWrapper = styled.div`
+export const BottomLeftWidgetsWrapper = styled(WidgetWrapperBase)`
   position: absolute;
   bottom: 20px;
   left: 20px;
-
-  display: flex;
-  flex-direction: row;
-
-  & > div {
-    margin-right: 8px;
-  }
-
-  & > div:last-child {
-    margin-right: 0px;
-  }
 `;
 
-export const BottomCenterWidgetsWrapper = styled.div`
+export const BottomCenterWidgetsWrapper = styled(WidgetWrapperBase)`
   position: absolute;
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-
-  display: flex;
-  flex-direction: row;
-
-  & > div {
-    margin-right: 8px;
-  }
-
-  & > div:last-child {
-    margin-right: 0px;
-  }
 `;
 
-export const BottomRightWidgetsWrapper = styled.div`
+export const BottomRightWidgetsWrapper = styled(WidgetWrapperBase)`
   position: absolute;
   bottom: 20px;
   right: 20px;
-
-  display: flex;
-  flex-direction: row;
-
-  & > div {
-    margin-right: 8px;
-  }
-
-  & > div:last-child {
-    margin-right: 0px;
-  }
 `;

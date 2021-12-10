@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useRef } from 'react';
 import {
   Wrapper,
   TopLeftWidgetsWrapper,
@@ -11,8 +10,8 @@ import {
   BottomCenterWidgetsWrapper,
   BottomRightWidgetsWrapper,
 } from './player.styles';
-import { getPlayerElementId } from '../../store/threekit';
 import { DEFAULT_CLASS_NAME, CLASS_NAME_PREFIX } from '../../constants';
+import usePlayerPortal from '../../hooks/usePlayerPortal';
 
 export interface IProps {
   children: React.ReactNode;
@@ -31,45 +30,22 @@ const className = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-player`;
 const Player = (props: PlayerProps) => {
   const { height, width, minHeight, children } = Object.assign(
     {
-      height: '70vh',
+      height: '100%',
       minHeight: '600px',
       width: '100%',
     },
     props
   );
+  const hasMoved = useRef<boolean>(false);
 
-  const playerElementId = useSelector(getPlayerElementId);
+  const portalPlayerTo = usePlayerPortal();
 
   useEffect(() => {
-    const attachPlayerToComponent = (moveToElementId: string) => {
-      const addPlayer = (tryCount: number = 0) => {
-        if (tryCount >= 10) return;
-
-        let playerEl;
-        let playerWrapperEl;
-        if (playerElementId) {
-          playerEl = document.getElementById(playerElementId);
-          playerWrapperEl = document.getElementById(moveToElementId);
-        }
-
-        if (!playerEl || !playerWrapperEl) {
-          setTimeout(() => {
-            addPlayer(tryCount + 1);
-          }, 0.05 * 1000);
-          return;
-        }
-
-        if (!playerEl) throw new Error('Initial Player element not found');
-        if (!playerWrapperEl) throw new Error('Move To element not found');
-
-        playerWrapperEl.appendChild(playerEl);
-      };
-
-      addPlayer();
-    };
-    attachPlayerToComponent(PLAYER_DIV_ID);
-    return;
-  }, [playerElementId]);
+    if (portalPlayerTo && !hasMoved.current) {
+      portalPlayerTo(PLAYER_DIV_ID);
+      hasMoved.current = true;
+    }
+  });
 
   return (
     <Wrapper
