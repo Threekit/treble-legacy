@@ -98,10 +98,9 @@ export const Swatch = (props: ISwatch) => {
               description: !showDescription ? undefined : el.description,
             });
           const selected = value === optionValue;
-          const clsOpt =
-            `${cls}-option option-${i} ${optionValue}` + (selected
-              ? ' selected'
-              : '');
+          const clsOpt = `${cls}-option option-${i} ${optionValue}${
+            selected ? ' selected' : ''
+          }`;
           return (
             <OptionWrapper
               key={i}
