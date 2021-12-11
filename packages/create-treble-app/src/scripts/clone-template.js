@@ -1,6 +1,6 @@
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
+import fs from 'fs-extra';
 import * as messages from '../messages/index.js';
 import spawn from 'cross-spawn';
 import { TEMPLATES } from '../constants.js';
@@ -65,6 +65,22 @@ function installDependencies(dir) {
   });
 }
 
+async function renameGitIgnore(outputDir) {
+  // We need to rename the gitignore file to .gitignore
+  if (
+    !fs.existsSync(path.join(outputDir, '.gitignore')) &&
+    fs.existsSync(path.join(outputDir, 'gitignore'))
+  ) {
+    await fs.move(
+      path.join(outputDir, 'gitignore'),
+      path.join(outputDir, '.gitignore')
+    );
+  }
+  if (fs.pathExistsSync(path.join(outputDir, 'gitignore'))) {
+    fs.removeSync(path.join(outputDir, 'gitignore'));
+  }
+}
+
 export default async function cloneTemplate(
   projectName,
   templateName = TEMPLATES.basic
@@ -82,6 +98,7 @@ export default async function cloneTemplate(
     updatePackageJson(outputDir, projectName);
     messages.preInstallDependencies();
     await installDependencies(outputDir);
+    await renameGitIgnore(outputDir);
     messages.complete(outputDir, projectName);
   } catch (e) {
     console.log(e);
