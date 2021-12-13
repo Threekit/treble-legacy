@@ -1,5 +1,5 @@
 ---
-id: treble-react-player
+id: components-player
 title: Player
 sidebar_label: Player
 ---

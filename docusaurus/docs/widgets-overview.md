@@ -8,6 +8,6 @@ sidebar_label: Overview
 
 ## Overview
 
-The **Widgets** offer a wide range of functionality and interactivity for the user to engage with including Downloadable Snapshots, Zoom Buttons, Save-to-Wishlist etc.
+Widgets offer us additional functional features that we can use to enhance the user's experience. They can cover a vast range of functionality including: **Zoom**, **Share**, managing a **Wishlist**, etc.
 
-All the widgets are designed to be buttons that can be placed on and around the Threekit Player. Placing the Widgets on the Player component enhances their visibility for the end user, builds consistent experiences with our player and minimizes/simplifies the Threekit UI footprint when embedding into an existing page.
+The pattern linking all widgets is that they are implemented and triggered by a button placed on the Threekit Player itself. If a Widget feature requires additional UI or interactions, we hide them from the user by default and only make them available when the widget's button on the player is clicked. This was we avoid cluttering the UI, presenting information only when its relevant.

@@ -5,6 +5,8 @@
   display: grid;
   grid-template-columns: max-content max-content;
   grid-gap: 12px;
+
+  user-select: none;
 }
 
 .partof > div {
@@ -20,4 +22,5 @@
 
 .partof img {
   height: 22px;
+  cursor: pointer;
 }

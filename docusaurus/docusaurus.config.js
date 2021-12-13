@@ -60,8 +60,7 @@ const config = {
         // title: "Treble Design System",
         logo: {
           alt: 'Threekit - Treble',
-          src:
-            'https://www.threekit.com/hubfs/Logos%20and%20Trademarks/threekit_logo_black.svg',
+          src: 'https://www.threekit.com/hubfs/Logos%20and%20Trademarks/threekit_logo_black.svg',
         },
         items: [
           {
@@ -74,12 +73,11 @@ const config = {
             label: 'Threekit Community',
             position: 'right',
           },
-
-          {
-            to: '/get-started',
-            label: 'Get Started',
-            position: 'right',
-          },
+          // {
+          //   to: '/get-started',
+          //   label: 'Get Started',
+          //   position: 'right',
+          // },
           {
             to: 'demos/demo-overview',
             // type: 'doc',

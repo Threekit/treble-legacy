@@ -1,45 +1,14 @@
 ---
-id: treble-react-threekit-config
-title: Threekit Config
-sidebar_label: threekit.config.js
+id: main-concepts-player-config
+title: Player Config
+sidebar_label: player.config.js
 ---
 
-# Threekit Config
-
-```js
-const threekitConfig = {
-  credentials: {},
-  playerConfig: {},
-  theme: {},
-};
-```
+# Player Config
 
 ## Overview
 
-The `threekit.config.js` object is the a single object that contains all the required credentials and parameters required to initialize and run a Treble App.
-
-The Threekit Config is made up of 3 objects:
-
-- `credentials` - The various Threekit Platform environment specific credentials
-- `playerConfig` - Includes all the parameters passed through to the the Threekit Player API at initialization
-- `theme` - The override for any of the theme value
-
-## Threekit Config
-
-### Credentials
-
-The credentials include all the parameters and authentication tokens that are specific to a Threekit environment, such as `preview` or `admin-fts`.
-
-| Property        | Description                                                                                                                                                                                                                                 | Type             | Default |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------- |
-| **publicToken** | The public auth token created in the settings tab of your Threekit Platform Org on the relevant Threekit Environment. It should include the `localhost` domain for local development and any domain to include for deployment / production. | `string (uuid4)` | `-`     |
-| **orgId**       | The Threekit Org ID                                                                                                                                                                                                                         | `string (uuid4)` | `-`     |
-| **assetId**     | The Asset ID for the Threekit Product you'd like to initialize. ID                                                                                                                                                                          | `string (uuid4)` | `-`     |
-| **stageId**     | (optional) The Asset Id of the Stage you wish to initialize.                                                                                                                                                                                | `string (uuid4)` | `-`     |
-
-### Player Config
-
-The `playerConfig` object includes all the **Player API initialization parameters** that are passed directly to the Threekit Player API. These exclude all the environment specific parameters and values which are handled in the `credentials`.
+The `player.config.js` file, located at `.treble/player.config.js`, contains the **Player API initialization parameters** that are passed directly to the Threekit Player API. These exclude all the environment specific parameters and values which are handled in the credentials in `threekit.config.js`.
 
 More information about parameters can be found here: [Embedding the Threekit Player](https://community.threekit.com/hc/en-us/articles/4406068353307-Embedding-the-Threekit-Player).
 
@@ -57,38 +26,9 @@ More information about parameters can be found here: [Embedding the Threekit Pla
 | **onLoadingProgress**        | (optional) Takes a callback as its value. The callback's only argument is a number, representing the progress ratio ( from 0.0 to 1.0 ). The callback will be called whenever the loading progresses. | `(progress: number) => void` | `-`     |
 | **compression**              | (optional) Override the organization's compression setting for renders in 2D player.                                                                                                                  | boolean                      | `false` |
 
-### Theme
-
-The `theme` object allows you to pass in overrides to the default theme values used by the components throughout this library.
-
-| Property         | Description                                                                      | Type   | Default   |
-| ---------------- | -------------------------------------------------------------------------------- | ------ | --------- |
-| **primaryColor** | The primary accent color used for all the selection and hover states for the UI. | string | `#1890ff` |
-| **linkColor**    | The color to render out `<a>` tag links.                                         | string | `#1890ff` |
-| **successColor** | The color used for success messaging.                                            | string | `#1890ff` |
-| **warningColor** | The color used for warning messaging.                                            | string | `#faad14` |
-| **errorColor**   | The color used for error messaging.                                              | string | `#f5222d` |
-
 ## Sample Code
 
-A sample of a full `threekit.config.js`
-
-```js
-const credentials = {
-  preview: {
-    assetId: process.env.THREEKIT_PREVIEW_ASSET_ID,
-    stageId: process.env.THREEKIT_PREVIEW_STAGE_ID,
-    orgId: process.env.THREEKIT_PREVIEW_ORG_ID,
-    publicToken: process.env.THREEKIT_PREVIEW_PUBLIC_TOKEN,
-  },
-  'admin-fts': {
-    assetId: process.env.THREEKIT_ADMIN_FTS_ASSET_ID,
-    stageId: process.env.THREEKIT_PREVIEW_STAGE_ID,
-    orgId: process.env.THREEKIT_ADMIN_FTS_ORG_ID,
-    publicToken: process.env.THREEKIT_ADMIN_FTS_PUBLIC_TOKEN,
-  },
-};
-
+```jsx
 const playerConfig: {
     //  (optional): determines whether to use the 3D Player (webgl) or
     //  the 2D Player (image).
@@ -127,30 +67,4 @@ const playerConfig: {
     //  renders in 2D player.
     compression,
   }
-
-  const theme = {
-    primaryColor: '#1890ff',
-    linkColor: '#1890ff',
-    successColor: '#52c41a',
-    warningColor: '#faad14',
-    errorColor: '#f5222d',
-    fontBaseSize: '14px',
-    headingColor: 'rgba(0, 0, 0, 0.85)',
-    textColor: 'rgba(0, 0, 0, 0.65)',
-    textColorSecondary: 'rgba(0, 0, 0, 0.45)',
-    disabledColor: 'rgba(0, 0, 0, 0.25)',
-    borderRadius: '2px',
-    borderColorBase: '#d9d9d9',
-    boxShadowBase:
-      '0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);',
-    widgetSize: '36px',
-    fontFamily: '"Open Sans", sans-serif',
-  }
-
-export default {
-  credentials,
-  playerConfig,
-  theme
-};
-
 ```

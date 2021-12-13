@@ -1,18 +1,20 @@
 ---
-id: available-scripts
+id: main-concepts-scripts
 title: Available Scripts
 sidebar_label: Available Scripts
 ---
 
 # Available Scripts
 
-:::caution Note
+## Overview
 
-Treble scripts are only included if you followed the 'create new Treble project' approach. If you added Treble React to an existing project, it should work with your existing bundling scripts.
+The Treble Framework comes loaded with the `@threekit-tools/treble-scripts` package to facilitate the development and deployment of a Treble App. It gives the ability to run the following scripts/commands straight from our projects root directory.
+
+:::info Threekit Environment
+
+If no Threekit environment is explicitly provided the scripts will default to using the Threekit `Preview` environment.
 
 :::
-
-The `create-treble-app` project comes loaded with the `@threekit-tools/treble-scripts` package that you can run from the project's root directory. You can run:
 
 ### `yarn start`
 
@@ -28,7 +30,7 @@ yarn start --admin-fts
 
 ### `yarn build`
 
-Builds your app into the `build` folder.
+Bundles your app into the `build` folder.
 
 The React portion of the app is bundled into a single javascript bundle file with the name `threekit-embed.js`. Having a static name for across deployment allows us to redeploy without having to update the embed script tag for our app.
 

@@ -8,4 +8,4 @@ sidebar_label: Overview
 
 ## Overview
 
-Display components can be used to display specific information anywhere in the UI.
+Display components are used to display specific data from the Threekit API to the user, following the default styling for that data.

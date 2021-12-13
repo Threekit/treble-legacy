@@ -18,6 +18,8 @@ It takes the name of the attribute that you want to interact with and returns an
 
 ## Code Examples
 
+#### For a Asset/Part Reference type Attribute
+
 ```jsx
 import { useAttribute } from '@threekit-tools/treble';
 
@@ -31,7 +33,32 @@ const AttributeComponent = () => {
       <div>{attribute.label}</div>
       <div>
         {attribute.values.map((option, i) => (
-          <div key={i} onClick={setAttribute(option.assetId)}>
+          <div key={i} onClick={() => setAttribute(option.assetId)}>
+            {option.label}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+```
+
+#### For a String type Attribute with a defined option set
+
+```jsx
+import { useAttribute } from '@threekit-tools/treble';
+
+const AttributeComponent = () => {
+  const [attribute, setAttribute] = useAttribute('Attribute Name');
+
+  const selected = attribute.value;
+
+  return (
+    <div>
+      <div>{attribute.label}</div>
+      <div>
+        {attribute.values.map((option, i) => (
+          <div key={i} onClick={() => setAttribute(option.value)}>
             {option.label}
           </div>
         ))}

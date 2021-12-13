@@ -8,4 +8,4 @@ sidebar_label: Overview
 
 ## Overview
 
-Forms can be used to render out complete configurators as a single component.
+Forms provide single component solutions to rendering out entire configurator forms as a single contiguous element.

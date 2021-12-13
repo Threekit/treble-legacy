@@ -8,4 +8,6 @@ sidebar_label: Overview
 
 ## Overview
 
-Layouts are organization components that can be used to introduce structure and visual hierarchy to the UI. Most Layout components have no inherent connection to the Threekit API and can be used freely outside of the ThreekitProvider if needed.
+Layout components offer solutions to organize and structure your UI with components like **Modals**, **Drawers**, **Accordions** etc.
+
+Since layout components are purely for presentational organization, they are not connected to the Threekit API and can be even be used outside of the Threekit Provider or Page Layout context.

@@ -1,14 +1,14 @@
 ---
-id: treble-react-threekit-provider
+id: components-threekit-provider
 title: Threekit Provider
 sidebar_label: Threekit Provider
 ---
 
 # Threekit Provider
 
-:::info Required
+:::info Multi-products
 
-The `ThreekitProvider` is required for using any of the Treble components or API.
+You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The ThreekitProvider component will setup the ThreekitProvider for you internally.
 
 :::
 
@@ -29,7 +29,7 @@ The Threekit Provider is where we pass in all our Threekit setup and initializat
 
 We normally organize the `credentials`, `playerConfig` and `theme` props into a single object called `threekitConfig` and pass that to the ThreekitProvider as a destructured prop,
 
-e.g. `<ThreeekitProvider {...threekitConfig}></ThreekitProvider>`
+e.g. `<ThreekitProvider {...threekitConfig}></ThreekitProvider>`
 
 however you can also pass the objects in as individual props...
 
