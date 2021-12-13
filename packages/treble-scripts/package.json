@@ -7,8 +7,9 @@
     "treble-scripts": "./bin/treble-scripts.js"
   },
   "scripts": {
-    "lint": "eslint ./scripts ./config ./bin",
-    "format": "prettier --write ./scripts ./config ./bin"
+    "lint": "eslint ./scripts ./config ./bin ./tests",
+    "format": "prettier --write ./scripts ./config ./bin ./tests",
+    "test": "jest"
   },
   "dependencies": {
     "@babel/core": "^7.15.8",
@@ -27,17 +28,21 @@
     "interpolate-html-plugin": "^4.0.0",
     "less-loader": "^10.2.0",
     "node-notifier": "^10.0.0",
+    "postcss": "^8.4.4",
+    "postcss-loader": "^6.2.1",
     "sass-loader": "^12.3.0",
     "style-loader": "^3.3.1",
+    "tailwindcss": "^2.2.19",
     "terser-webpack-plugin": "^5.2.5",
     "webpack": "^5.64.2",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^4.5.0",
     "webpack-merge": "^5.8.0",
-    "webpack-node-externals": "^3.0.0",
-    "postcss": "^8.4.4",
-    "postcss-loader": "^6.2.1",
-    "tailwindcss": "^2.2.19"
+    "webpack-node-externals": "^3.0.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-jest": "^25.3.0",
+    "jest": "^27.4.4"
   },
   "gitHead": "2e16bcf98f81e16bb1768072fdb3968122e7966f"
 }
