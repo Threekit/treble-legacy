@@ -1,0 +1,21 @@
+name: run-tests
+
+on:
+  [push]
+
+jobs:
+  jest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: "Use NodeJS 16"
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Install modules
+        run: yarn
+      - name: Run tests
+        run: lerna run test --npm-client yarn
