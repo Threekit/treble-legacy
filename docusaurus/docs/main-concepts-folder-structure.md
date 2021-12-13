@@ -37,7 +37,13 @@ my-treble-app/
     products/
 ```
 
-For the project to run and build, these files must exist with exact filenames:
+For the app to run and build, these files must exist with exact filenames:
 
 - `public/index.html` is the page template
 - `src/index.js` is the JavaScript entry point
+- `threekit.config.js` has the Threekit credentials
+- `.treble` directory with the Treble Apps config files
+
+For a multi-product Treble App, the Product Layouts must be stored in the `src/products` folder.
+
+We recommend storing your credentials in the `.env` file so they are not checked into the git repository. To do thi, rename the `.env.template` file to `.env` and populate the credential in the file.

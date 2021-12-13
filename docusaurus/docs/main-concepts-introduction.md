@@ -30,7 +30,7 @@ To start learning more about Treble React you can jump right into the the docume
 
 The Treble Scripts are similar in use and function to the `react-scripts` you get as part of the create-react-app project boilerplate. They include the webpack configurations and all scripts needed for setting up our local development server and building for deployment.
 
-Find out more about in the [Available Scripts](available-scripts) section.
+Find out more about in the [Available Scripts](main-concepts-scripts) section.
 
 ### Treble JS API
 
