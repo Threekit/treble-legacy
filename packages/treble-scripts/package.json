@@ -8,6 +8,7 @@
   },
   "scripts": {
     "lint": "eslint ./scripts ./config ./bin",
+    "check-format": "prettier -c ./scripts ./config ./bin",
     "format": "prettier --write ./scripts ./config ./bin"
   },
   "dependencies": {
