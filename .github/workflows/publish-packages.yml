@@ -1,35 +1,35 @@
-name: Publish Packages
+# repurposed https://dev.to/xaviercanchal/automatic-versioning-in-a-lerna-monorepo-using-github-actions-4hij
+
+name: publish
 
 on:
-  push:
-    branches: main
+  [push]
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+    - name: "Checkout"
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: "Use NodeJS 16"
+      uses: actions/setup-node@v2
+      with:
+        node-version: "16"
+    - name: Install modules
+      run: yarn
+    - name: "Version and publish"
+      env:
+        NPM_AUTH_TOKEN: ${{ secrets.NPMJS_AUTH_TOKEN }}
+      run: |
+        npm config set @threekit-tools:registry https://registry.npmjs.org/
+        npm config set //registry.npmjs.org/:_authToken ${NPM_AUTH_TOKEN}
 
-      - name: "Use NodeJS 16"
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
+        if [ ${{ github.base_ref }} = main ]; then
+          lerna version --conventional-commits --no-changelog --no-private --conventional-graduate --yes
+        else
+          lerna version --conventional-commits --no-changelog --no-private --conventional-prerelease --preid ${{ github.base_ref }} --yes
+        fi
 
-      - name: "Setup npm"
-        run: |
-          echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }} > .npmrc
-
-      - name: Install dependencies
-        run: |
-          npm i
-          npx lerna bootstrap
-
-      - name: Run build # Run tests of all packages
-        run: npx lerna run build
-
-      - name: Publish # Run tests of all packages
-        run: npx lerna publish --canary --yes
+        lerna publish from-git --yes
