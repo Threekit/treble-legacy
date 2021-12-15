@@ -36,7 +36,7 @@ In the `/.env` file, add in your Threekit Platform public token and Org ID for t
 
 In the `/threekit.config.js` file, add in an assetId for the relevant environment
 
-**For more information about the Threekit credentials and their setup, [click here](threekit-credentials).**
+**For more information about the Threekit credentials and their setup, [click here](main-concepts-credentials).**
 
 ## Start the development server
 
@@ -50,4 +50,4 @@ Your app will be available on: `http://localhost:3000`
 
 By default the App will try to use the preview environment of the Threekit Platform. To use another environment pass in the environment name as a flag into the run script. e.g. `yarn start --admin-fts`
 
-**For more information about the available scripts, [click here](available-scripts).**
+**For more information about the available scripts, [click here](main-concepts-scripts).**

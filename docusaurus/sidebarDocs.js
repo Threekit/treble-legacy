@@ -38,6 +38,7 @@ const docs = [
     collapsible: true,
     label: 'Components',
     items: [
+      'components-overview',
       'components-treble-app',
       'components-product-layout',
       'components-threekit-provider',

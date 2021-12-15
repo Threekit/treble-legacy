@@ -1,0 +1,23 @@
+name: check-formatting
+
+on:
+  [push]
+
+jobs:
+  eslint-prettier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: "Use NodeJS 16"
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: Install modules
+        run: yarn
+      - name: Check ESLint
+        run: lerna run lint --npm-client yarn
+      - name: Check Prettier
+        run: lerna run check-format --npm-client yarn
