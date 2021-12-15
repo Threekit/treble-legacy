@@ -46,9 +46,9 @@ the selected value be passed in as well.
 import { ThreekitProvider, Player, Strips } from '@threekit-tools/treble';
 import threekitConfig from './threekit.config.js';
 
-const ThreekitApp = () => {
+const App = () => {
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <Player />
       <div>
         <Strips attribute="exterior-material">

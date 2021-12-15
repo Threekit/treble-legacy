@@ -14,7 +14,9 @@ sidebar_label: Player
 
 The `<Player />` component renders the **Threekit 2D/3D Player**.
 
-The Player component also includes layout containers for placing `Widgets` onto the player itself. The container must be used as a child of the Player component; with its own children/content being placed in the location the widget container specified.
+The Player also includes layout containers for placing `Widgets` onto the player itself. The container must be used as a child of the Player component; with its own children/content being placed in the location the widget container specified.
+
+The available Widget containers are:
 
 - TopRightWidgets
 - TopCenterWidgets
@@ -35,7 +37,7 @@ The Player requires that it always have a defined height 1px or greater. We reco
 
 :::
 
-### Code Examples
+## Code Examples
 
 #### Basic Setup
 
@@ -45,9 +47,9 @@ The basic implementation of the Player component
 import { ThreekitProvider, Player } from '@threekit-tools/treble';
 import threekitConfig from './threekit.config.js';
 
-const ThreekitApp = () => {
+const App = () => {
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <Player />
     </ThreekitProvider>
   );
@@ -59,24 +61,24 @@ const ThreekitApp = () => {
 Example of how to use the widget containers.
 
 ```jsx
-import { ThreekitProvider, Player } from '@threekit-tools/treble';
+import { ThreekitProvider, Player, Share, Zoom } from '@threekit-tools/treble';
 import threekitConfig from './threekit.config.js';
 
 //  We can separate out the widget container component
 //  or use the component directly from the Player component
 const { TopRightWidgets } = Player;
 
-const ThreekitApp = () => {
+const App = () => {
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <Player>
         <TopRightWidgets>
-          <div>This will show up in the top-right of the player</div>
+          <Share />
         </TopRightWidgets>
 
-        <Player.BottomRightWidgets>
-          <div>This will show up in the bottom-right of the player</div>
-        </Player.BottomRightWidgets>
+        <Player.BottomCenterWidgets>
+          <Zoom />
+        </Player.BottomCenterWidgets>
       </Player>
     </ThreekitProvider>
   );

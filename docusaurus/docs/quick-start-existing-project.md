@@ -51,7 +51,7 @@ const credentials = {
 
 const threekitEnv = 'preview';
 
-function ThreekitApp() {
+function App() {
   return (
     <ThreekitProvider credentials={credentials} threekitEnv={threekitEnv}>
       <div
@@ -71,5 +71,5 @@ function ThreekitApp() {
   );
 }
 
-export default ThreekitApp;
+export default App;
 ```

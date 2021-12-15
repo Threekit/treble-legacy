@@ -20,21 +20,21 @@ In your local Terminal CLI, get started with the `create-treble-app` command:
 npx create-treble-app@latest
 ```
 
-And follow along any setups with any prompts you are required to answer.
+And follow along with any prompts you are required to answer.
 
-This will create a project boilerplate in the current directory with the project name you provided and install all the required dependencies.
+This will create a Treble App boilerplate in the current directory with the project name you provided and install all the required dependencies.
 
 Once the boilerplate has been setup we will **navigating into the project folder** with the follow commands:
 
 ```bash
-cd ./app-name
+cd ./treble-app
 ```
 
 ## Credentials setup
 
-In the `/.env` file, add in your Threekit Platform public token and Org ID for the relevant environments.
+Rename the `.env.template` file to `.env` file, add in your Threekit Platform public token and Org ID for the relevant environments.
 
-In the `/threekit.config.js` file, add in an assetId for the relevant environment
+In the `/threekit.config.js` file, add in an assetId for the relevant environments.
 
 **For more information about the Threekit credentials and their setup, [click here](main-concepts-credentials).**
 

@@ -8,7 +8,7 @@ sidebar_label: Threekit Provider
 
 :::info Multi-products
 
-You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The ThreekitProvider component will setup the ThreekitProvider for you internally.
+You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The PlayerLayout component will setup the ThreekitProvider for you internally.
 
 :::
 
