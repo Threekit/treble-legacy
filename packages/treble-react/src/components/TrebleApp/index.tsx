@@ -31,7 +31,7 @@ export default function TrebleApp(props: TrebleAppProps) {
       Object.values(productComponents).map(el => el({})),
       (jsx, i) => {
         if (!jsx) return;
-        if (jsx.type.name !== 'ProductLayout') return;
+        // if (jsx.type.name !== 'ProductLayout') return;
         if (!jsx.props.products) return;
 
         let products: Record<string, IProducts> = jsx.props.products;
