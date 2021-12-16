@@ -4,8 +4,6 @@ const chalk = require('chalk');
 const paths = require('../paths');
 
 const {
-  name,
-  version,
   dependencies,
   // engines: { node: requiredVersion },
 } = require(paths.pkgJson);
