@@ -21,6 +21,11 @@ jobs:
         with:
           node-version: '16'
 
+      - run: yarn
+        working-directory: ./docusaurus
+      - run: yarn build
+        working-directory: ./docusaurus
+
       - name: Login
         uses: google-github-actions/setup-gcloud@master
         with:
