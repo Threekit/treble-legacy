@@ -6,39 +6,21 @@ on:
 
 jobs:
   build:
-    name: Build Docusaurus
-    runs-on: ubuntu-latest
-    steps:
-      - name: "Checkout"
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: "Use NodeJS 16"
-        uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-
-      - run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}" > .npmrc
-      - run: yarn
-        working-directory: ./docusaurus
-      - run: yarn build
-        working-directory: ./docusaurus
-
-      - name: Create build artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: build-dir
-          path: ./docusaurus/build
-          retention-days: 5
-
-  deploy:
-    name: Build and deploys Docusaurus Docker image
-    needs: build
+    name: Publish Docusaurus
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: gcr.io/${{ secrets.GCP_PROJECT_ID }}/treble--docs
     steps:
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: 'Use NodeJS 16'
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
       - name: Login
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -48,17 +30,6 @@ jobs:
 
       - name: Configure Docker
         run: gcloud auth configure-docker --quiet
-
-      - name: Checks out Threekit/treble-launchpad
-        uses: actions/checkout@v2
-        with:
-          repository: Threekit/treble-launchpad
-
-      - name: Download a build artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: build-dir
-          path: build
 
       - name: Build Docker image
         run: docker build . -t $IMAGE_NAME
