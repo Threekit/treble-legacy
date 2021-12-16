@@ -1,18 +1,39 @@
 const chalk = require('chalk');
+const boxen = require('boxen');
 const clearConsole = require('./clearConsole');
+const notifier = require('./checkForUpdates');
+
+const boxenOptions = {
+  padding: 1,
+  margin: 1,
+  align: 'left',
+  borderColor: 'yellow',
+  borderStyle: 'round',
+};
 
 function printInstructions({ port, threekitEnv }) {
+  const updateMessage = notifier();
   console.log();
   // console.log(`You can now view ${chalk.bold(appName)} in the browser.`);
   console.log(`You can now view your Treble App in the browser.`);
   console.log();
 
-  console.log(
-    `  ${chalk.bold('Local:')}                    http://localhost:${port}`
-  );
-  console.log(
-    `  ${chalk.bold('Threekit Environment:')}     ${chalk.green(threekitEnv)}`
-  );
+  if (updateMessage) {
+    console.log(updateMessage);
+  } else {
+    console.log(
+      boxen(
+        `
+  ${chalk.bold('Local:')}                    http://localhost:${port}
+  ${chalk.bold('Threekit Environment:')}     ${chalk.green(threekitEnv)}
+    `,
+        boxenOptions
+      )
+    );
+  }
+
+  console.log();
+  // console.log(notifier());
 
   // if (urls.lanUrlForTerminal) {
   //   console.log(
