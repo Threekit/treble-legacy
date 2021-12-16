@@ -1,8 +1,9 @@
 {
   "name": "@threekit-tools/treble-scripts",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "main": "index.js",
   "license": "MIT",
+  "module": "",
   "bin": {
     "treble-scripts": "./bin/treble-scripts.js"
   },
@@ -19,6 +20,7 @@
     "autoprefixer": "^10.4.0",
     "babel-jest": "^27.3.1",
     "babel-loader": "^8.2.3",
+    "boxen": "5.0.1",
     "chalk": "^4.1.2",
     "copy-webpack-plugin": "^9.0.1",
     "cross-spawn": "^7.0.3",
@@ -34,6 +36,7 @@
     "style-loader": "^3.3.1",
     "tailwindcss": "^2.2.19",
     "terser-webpack-plugin": "^5.2.5",
+    "update-notifier": "^5.1.0",
     "webpack": "^5.64.2",
     "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^4.5.0",
