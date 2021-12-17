@@ -27,7 +27,7 @@ const App = (props: ThreekitProviderProps) => {
     };
     init();
     return;
-  }, [props.project, props.threekitEnv, , props.playerConfig]);
+  }, [props.project, props.threekitEnv, props.playerConfig]);
 
   return <>{props.children}</>;
 };

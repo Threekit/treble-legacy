@@ -20,6 +20,7 @@ export interface ISwatch extends IFormComponentProps<IOption> {
   showThumbnail?: boolean;
   showPrice?: boolean;
   showDescription?: boolean;
+  size?: string;
 }
 
 interface IThumbnail {
@@ -28,6 +29,7 @@ interface IThumbnail {
   color?: string;
   shape?: string;
   className?: string;
+  size: string;
 }
 
 interface ISwatchInfo {
@@ -54,13 +56,14 @@ const SwatchInfo = (props: ISwatchInfo) => {
 };
 
 const Thumbnail = (props: IThumbnail) => {
-  const { imageUrl, color, name, shape, className } = props;
+  const { imageUrl, color, name, shape, size, className } = props;
   if (!imageUrl && !color) return <div />;
   return (
     <OptionThumbnail
       className={`${className} option-thumbnail`}
       color={color}
       shape={shape}
+      size={size}
     >
       {imageUrl ? <img src={imageUrl} alt={name || ''} /> : <span />}
     </OptionThumbnail>
@@ -79,7 +82,8 @@ export const Swatch = (props: ISwatch) => {
     showThumbnail,
     showPrice,
     showDescription,
-  } = Object.assign({ shape: 'round' }, props);
+    size,
+  } = Object.assign({ shape: 'round', size: '60px' }, props);
 
   const cls = generateClassName('swatch', customClassName, title);
 
@@ -108,6 +112,7 @@ export const Swatch = (props: ISwatch) => {
               selected={selected}
               className={clsOpt}
               shape={shape}
+              size={size}
             >
               <div>
                 <Thumbnail
@@ -115,6 +120,7 @@ export const Swatch = (props: ISwatch) => {
                   color={color}
                   shape={shape}
                   className={clsOpt}
+                  size={size}
                 />
               </div>
               <SwatchInfo
@@ -158,6 +164,12 @@ Swatch.propTypes = {
   /**
    * Handles the user seletion by passing the value of the selected
    * option as the argument into the onClick callback.
+   */
+  size: PropTypes.string,
+  /**
+   * The size of the for a swatch option. The size should be a valid CSS
+   * height/width property.
+   *
    */
   onClick: PropTypes.func,
   /**

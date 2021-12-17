@@ -1,7 +1,7 @@
 import React, { Children } from 'react';
 import ThreekitProvider, { ThreekitProviderProps } from '../ThreekitProvider';
 import { getParams, loadTrebleConfig } from '../../utils';
-import { TK_PRODUCT_ID_PARAM_KEY } from '../../constants';
+import { TK_PRODUCT_ID_PARAM_KEY, IS_TREBLE_SCRIPTS } from '../../constants';
 import { IProducts } from '../../threekit';
 
 interface TrebleAppProps extends Omit<ThreekitProviderProps, 'children'> {
@@ -16,9 +16,14 @@ export default function TrebleApp(props: TrebleAppProps) {
   const { project, productId, playerConfig, threekitEnv, locale, theme } =
     props;
 
-  const config = loadTrebleConfig();
+  const config = IS_TREBLE_SCRIPTS ? loadTrebleConfig() : {};
 
-  if (!config.treble?.productsCtx) return null;
+  console.log(config);
+
+  if (!config.treble?.productsCtx) {
+    console.error('Treble Config is not setup correctly');
+    return null;
+  }
 
   if (!productComponents.length) {
     config.treble.productsCtx.keys().forEach(fileName => {
@@ -31,7 +36,6 @@ export default function TrebleApp(props: TrebleAppProps) {
       Object.values(productComponents).map(el => el({})),
       (jsx, i) => {
         if (!jsx) return;
-        // if (jsx.type.name !== 'ProductLayout') return;
         if (!jsx.props.products) return;
 
         let products: Record<string, IProducts> = jsx.props.products;

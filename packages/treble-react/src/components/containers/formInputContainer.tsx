@@ -161,6 +161,7 @@ function formComponentContainer<P extends IFormContainerProps>(
     const isLoading = usePlayerLoadingStatus();
 
     const [attributeData, setAttribute] = useAttribute(attribute);
+    if (!attribute) return <FormComponent {...props} />;
     if (!attributeData) return null;
 
     if (!FormComponent.compatibleAttributes.has(attributeData.type)) {

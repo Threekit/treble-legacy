@@ -391,19 +391,19 @@ export const isUuid = (str?: string) => {
 export const loadTrebleConfig = () => {
   let config: Partial<ITrebleConfig> = {};
   try {
-    const project = require('@app-root/threekit.config.js').default;
+    const project = require(`/threekit.config.js`).default;
     if (project) config.project = project;
   } catch (e) {
     console.log(e);
   }
   try {
-    const player = require('@app-root/.treble/player.config.js').default;
+    const player = require('/.treble/player.config.js').default;
     if (player) config.player = player;
   } catch (e) {
     console.log(e);
   }
   try {
-    const treble = require('@app-root/.treble/treble.config.js').default;
+    const treble = require('/.treble/treble.config.js').default;
     if (treble) config.treble = treble;
   } catch (e) {
     console.log(e);
