@@ -10,6 +10,7 @@ module.exports = ({ threekitEnv }) =>
     stats: 'none',
     plugins: [
       new webpack.DefinePlugin({
+        'process.env.TREBLE_SCRIPTS': JSON.stringify(true),
         'process.env.THREEKIT_ENV': JSON.stringify(threekitEnv),
       }),
       // Makes some environment variables available in index.html.
