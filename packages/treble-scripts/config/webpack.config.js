@@ -27,7 +27,7 @@ module.exports = (env, threekitEnv) => {
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
       isDev && require.resolve('style-loader'),
-      isProd && {
+      false && {
         loader: MiniCssExtractPlugin.loader,
         // css is located in `static/css`, use '../../' to locate index.html folder
         // in production `paths.publicUrlOrPath` can be a relative path
@@ -405,7 +405,7 @@ module.exports = (env, threekitEnv) => {
       // It will be an empty string unless you specify "homepage"
       // in `package.json`, in which case it will be the pathname of that URL.
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, process.env),
-      isProd &&
+      false &&
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional
