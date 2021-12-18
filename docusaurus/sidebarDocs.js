@@ -10,6 +10,7 @@ const docs = [
     label: 'Main Concepts',
     items: [
       'main-concepts-introduction',
+      'main-concepts-treble-react',
       'main-concepts-folder-structure',
       'main-concepts-best-practices',
       'main-concepts-scripts',
