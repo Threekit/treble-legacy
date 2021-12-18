@@ -4,14 +4,18 @@ import { usePlayerPortal } from '@threekit-tools/treble';
 const PLAYER_DIV_ID = 'tk-player-component';
 
 export default function Player(props) {
-  const portalPlayerTo = usePlayerPortal();
   const hasMoved = useRef(false);
+  const [portalPlayerTo, portalBack] = usePlayerPortal();
 
   useEffect(() => {
     if (portalPlayerTo && !hasMoved.current) {
       portalPlayerTo(PLAYER_DIV_ID);
       hasMoved.current = true;
     }
+
+    return () => {
+      if (portalBack) portalBack();
+    };
   });
 
   return (

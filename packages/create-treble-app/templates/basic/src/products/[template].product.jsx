@@ -6,7 +6,9 @@ import {
   FlatForm,
 } from '@threekit-tools/treble';
 
-const products = { 'product-identifier': { preview: '%ASSET_ID%' } };
+const products = {
+  'product-identifier': { preview: { assetId: '%ASSET_ID%' } },
+};
 
 export default function Product() {
   return (
