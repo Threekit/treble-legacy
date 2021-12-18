@@ -18,8 +18,6 @@ export default function TrebleApp(props: TrebleAppProps) {
 
   const config = IS_TREBLE_SCRIPTS ? loadTrebleConfig() : {};
 
-  console.log(config);
-
   if (!config.treble?.productsCtx) {
     console.error('Treble Config is not setup correctly');
     return null;

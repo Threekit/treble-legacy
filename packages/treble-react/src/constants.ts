@@ -31,6 +31,7 @@ export const TK_SAVED_CONFIG_PARAM_KEY = 'tkConfigId';
  * Threekit Player Initialization Defaults
  ****************************************************/
 
+export const TK_PLAYER_LOADER_DIV = 'tk-ply-loader';
 export const TK_PLAYER_ROOT_DIV = 'tk-ply-root';
 
 export const DEFAULT_PLAYER_CONFIG = {
