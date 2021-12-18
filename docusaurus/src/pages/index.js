@@ -65,12 +65,12 @@ const CardsList = [
     title: 'Quick start',
     description: 'Launch a new project and run starter code in a few steps.',
     linkText: 'Get Started ->',
-    link: '/get-started',
+    link: '/docs/tutorial-setup',
   },
   {
     image:
       'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-coreconcepts.svg',
-    title: 'Basic Concepts',
+    title: 'Main Concepts',
     description: 'Learn about core features and functionality.',
     linkText: 'Learn Here ->',
     link: '/docs/main-concepts-introduction',

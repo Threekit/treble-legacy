@@ -6,7 +6,7 @@ sidebar_label: Product Layout
 
 # Product Layout
 
-```js
+```jsx
 <ProductLayout />
 ```
 
@@ -25,15 +25,14 @@ Product Layout files must be named to match the following pattern: `*.product.js
 ## Code Examples
 
 ```jsx
-import ReactDOM from 'react-dom';
 import { ProductLayout, Player, FlatForm } from '@threekit-tools/treble';
 
 const products = {
   'helmet-small': {
-    preview: '<ASSET ID>',
+    preview: { assetId: '<ASSET ID>' },
   },
   'helmet-large': {
-    preview: '<ASSET ID>',
+    preview: { assetId: '<ASSET ID>' },
   },
 };
 

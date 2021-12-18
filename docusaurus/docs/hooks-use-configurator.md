@@ -7,7 +7,7 @@ sidebar_label: useConfigurator
 # Use Configurator
 
 ```jsx
-const [attributes, setConfiguration] = useConfigurator('Attribute Name');
+const [attributes, setConfiguration] = useConfigurator();
 ```
 
 ## Overview

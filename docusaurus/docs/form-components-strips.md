@@ -44,7 +44,6 @@ the selected value be passed in as well.
 
 ```jsx
 import { ThreekitProvider, Player, Strips } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (

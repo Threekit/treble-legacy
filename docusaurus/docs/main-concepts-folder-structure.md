@@ -16,7 +16,7 @@ my-treble-app/
   README.md
   node_modules/
   package.json
-  .env.template
+  .env
   .eslintrc.js
   .prettierrc
   .gitignore
@@ -46,4 +46,4 @@ For the app to run and build, these files must exist with exact filenames:
 
 For a multi-product Treble App, the Product Layouts must be stored in the `src/products` folder.
 
-We recommend storing your credentials in the `.env` file so they are not checked into the git repository. To do thi, rename the `.env.template` file to `.env` and populate the credential in the file.
+We recommend storing your credentials in the `.env` file so they are not checked into the git repository.

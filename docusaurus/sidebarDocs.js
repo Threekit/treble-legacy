@@ -39,9 +39,9 @@ const docs = [
     label: 'Components',
     items: [
       'components-overview',
+      'components-threekit-provider',
       'components-treble-app',
       'components-product-layout',
-      'components-threekit-provider',
       'components-player',
       {
         type: 'category',
@@ -86,7 +86,13 @@ const docs = [
         type: 'category',
         collapsible: false,
         label: 'Layouts',
-        items: ['layouts-overview', 'layouts-drawer', 'layouts-modal'],
+        items: [
+          'layouts-overview',
+          'layouts-drawer',
+          'layouts-modal',
+          'layouts-accordion',
+          'layouts-tabs',
+        ],
       },
       {
         type: 'category',
@@ -109,6 +115,7 @@ const docs = [
     label: 'Hooks',
     items: [
       'hooks-overview',
+      'hooks-use-player-portal',
       'hooks-use-attribute',
       'hooks-use-configurator',
       'hooks-use-name',

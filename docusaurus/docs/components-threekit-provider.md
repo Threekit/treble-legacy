@@ -27,7 +27,7 @@ Treble React follows a **provider pattern**, with the `<ThreekitProvider />` as 
 - **All credentials and setup parameters go into the Threekit Provider**. By default the provider will look for all the relevant credentials and parameters in `threekit.config.js` and `.treble` respectively.
 - **The Threekit Provider defines the context for a Treble App**, where all components and hooks that you use must be inside/descendants of the ThreekitProvider component.
 
-By default, the ThreekitProvider gets the **credentials**, **products** (`threekit.config.js`), **playerConfig**, and **trebleConfig** (`.treble`) from their respective files itself. It's recommended that you update these files to your project requirements. However, the ThreekitProvider supports receiving all the data as props as well. Any data passed in as a prop will override the data read from the config files.
+By default, the ThreekitProvider gets the **project** (`threekit.config.js`), **playerConfig**, and **trebleConfig** (`.treble`) from their respective files itself. It's recommended that you update these files to your project requirements. However, the ThreekitProvider supports receiving all the data as props as well. Any data passed in as a prop will override the data read from the config files.
 
 ## Code Examples
 
@@ -57,18 +57,19 @@ import ReactDOM from 'react-dom';
 import { ThreekitProvider } from '@threekit-tools/treble';
 import App from './App';
 
-const credentials = {
-  preview: {
-    //  These credentials are just examples and DO NOT
-    //  point to a real org
-    publicToken: '3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48',
-    orgId: '20df501b-1ef8-4bh0-sfda-2l59426624de',
+const projects = {
+  credentials: {
+    preview: {
+      //  These credentials are just examples and DO NOT
+      //  point to a real org
+      publicToken: '3fb4asd5d-ea38-4a05-a2g3-6cf9d8dd3d48',
+      orgId: '20df501b-1ef8-4bh0-sfda-2l59426624de',
+    },
   },
-};
-
-const products = {
-  preview: {
-    assetId: 'a9a66218-bkid-4106-96fe-a0359fdc3dc1',
+  products: {
+    preview: {
+      assetId: 'a9a66218-bkid-4106-96fe-a0359fdc3dc1',
+    },
   },
 };
 
@@ -80,9 +81,8 @@ const threekitEnv = 'preview';
 
 ReactDOM.render(
   <ThreekitProvider
+    project={project}
     threekitEnv={threekitEnv}
-    credentials={credentials}
-    products={products}
     playerConfig={playerConfig}
   >
     <App />
@@ -93,10 +93,9 @@ ReactDOM.render(
 
 ## Props
 
-| Property         | Description                                                                                                                                                                                                                                                                                                                              | Type                     | Default   |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------- |
-| **threekitEnv**  | The Threekit Platform Environment to use. This environment must have its relevant credentials and products included in the respective objects.                                                                                                                                                                                           | `preview` \| `admin-fts` | `preview` |
-| **credentials**  | The credentials for the relevant Threekit Environment. To learn more about the credentials object [click here](main-concepts-threekit-config#credentials) or for information on getting your project's credentials [click here](main-concepts-credentials).                                                                              | `ThreekitCredentials`    | `-`       |
-| **products**     | The product to use for the relevant Threekit Environment. To learn more about the products object [click here](main-concepts-threekit-config#products)                                                                                                                                                                                   | `ThreekitCredentials`    | `-`       |
-| **playerConfig** | The Threekit Player initialization config object. By default, this is the file `.treble/player.config.js`. It is recommended that you edit the file to your project needs, however, you can also pass in an override as this prop. You can find more information about the playerConfig by [clicking here](main-concepts-player-config). | `ThreekitPlayerConfig`   | `-`       |
-| **theme**        | The theme override. To learn more about using the theme, [click here](main-concepts-theme). overrides.                                                                                                                                                                                                                                   | `Theme`                  | `-`       |
+| Property         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | Type                     | Default   |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------ | --------- |
+| **threekitEnv**  | The Threekit Platform Environment to use. This environment must have its relevant credentials and products included in the respective objects.                                                                                                                                                                                                                                                                                                                                                                   | `preview` \| `admin-fts` | `preview` |
+| **project**      | The project contains both the `credentials` and the `products`. The credentials for the relevant Threekit Environment. To learn more about the credentials object [click here](main-concepts-threekit-config#credentials) or for information on getting your project's credentials [click here](main-concepts-credentials). The products object specifies the product to use for the relevant Threekit Environment. To learn more about the products object [click here](main-concepts-threekit-config#products) | `ThreekitCredentials`    | `-`       |
+| **playerConfig** | The Threekit Player initialization config object. By default, this is the file `.treble/player.config.js`. It is recommended that you edit the file to your project needs, however, you can also pass in an override as this prop. You can find more information about the playerConfig by [clicking here](main-concepts-player-config).                                                                                                                                                                         | `ThreekitPlayerConfig`   | `-`       |
+| **theme**        | The theme override. To learn more about using the theme, [click here](main-concepts-theme). overrides.                                                                                                                                                                                                                                                                                                                                                                                                           | `Theme`                  | `-`       |

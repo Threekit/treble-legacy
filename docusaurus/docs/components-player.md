@@ -45,7 +45,6 @@ The basic implementation of the Player component
 
 ```jsx
 import { ThreekitProvider, Player } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (
@@ -62,7 +61,6 @@ Example of how to use the widget containers.
 
 ```jsx
 import { ThreekitProvider, Player, Share, Zoom } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 //  We can separate out the widget container component
 //  or use the component directly from the Player component

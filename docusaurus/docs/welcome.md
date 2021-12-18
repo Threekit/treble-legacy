@@ -20,7 +20,7 @@ To **get more familiar with the Treble framework** you can head over to the [Mai
 
 If you want to dive right in and **build your own Treble App** you can follow the [step-by-step tutorial](tutorial-setup).
 
-Or if you're looking for **detailed documentation** on a specific **component**, **hook** or **API** you can jump right into the relevant section through the sidebar navigation.
+Or if you're looking for **detailed documentation** on a specific [component](components-overview), [hook](hooks-overview) or [API](treble-js-treble-api) you can jump right into the relevant section through the sidebar navigation.
 
 ## Less talk, more code!
 

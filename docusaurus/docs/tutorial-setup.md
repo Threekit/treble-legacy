@@ -27,14 +27,16 @@ This will create a Treble App boilerplate in the current directory with the proj
 Once the boilerplate has been setup we will **navigating into the project folder** with the follow commands:
 
 ```bash
-cd ./treble-app
+cd ./my-treble-app
 ```
+
+**For more information about the folder structure of a Treble App, [click here](main-concepts-folder-structure).**
 
 ## Credentials setup
 
-Rename the `.env.template` file to `.env` file, add in your Threekit Platform public token and Org ID for the relevant environments.
+In the `.env` file, add your Threekit Platform public token and Org ID for the relevant environments.
 
-In the `/threekit.config.js` file, add in an assetId for the relevant environments.
+In the `threekit.config.js` file, add in an assetId for the relevant environments.
 
 **For more information about the Threekit credentials and their setup, [click here](main-concepts-credentials).**
 
