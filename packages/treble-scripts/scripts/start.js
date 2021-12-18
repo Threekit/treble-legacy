@@ -1,4 +1,4 @@
-const configFactory = require('../config/webpack.dev');
+const configFactory = require('../config/webpack.config');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const clearConsole = require('../config/threekit-dev-utils/clearConsole');
@@ -9,13 +9,16 @@ const chalk = require('chalk');
 const createDevServerConfig = require('../config/webpackDevServer.config');
 
 //  Variables setup
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
+
 const argv = process.argv.slice(2);
 const portIdx =
   argv.indexOf('--port') !== -1 ? argv.indexOf('--port') : argv.indexOf('-p');
 const ENV = argv.includes('--admin-fts') ? 'admin-fts' : 'preview';
 const PORT = process.env.PORT || portIdx !== -1 ? argv[portIdx + 1] : 3000;
 
-const config = configFactory({ threekitEnv: ENV });
+const config = configFactory('development', ENV);
 const serverConfig = createDevServerConfig({ port: PORT });
 
 const compiler = createCompiler({
