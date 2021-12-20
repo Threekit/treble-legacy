@@ -23,13 +23,12 @@ jobs:
       env:
         NPM_AUTH_TOKEN: ${{ secrets.NPMJS_AUTH_TOKEN }}
       run: |
+        git config user.name "${{ github.actor }}"
+        git config user.email "${{ github.actor}}@users.noreply.github.com"
         npm config set @threekit-tools:registry https://registry.npmjs.org/
         npm config set //registry.npmjs.org/:_authToken ${NPM_AUTH_TOKEN}
 
-        if [ ${{ github.base_ref }} = main ]; then
+        if [ ${GITHUB_REF} == refs/heads/main ]; then
           lerna version --conventional-commits --no-changelog --no-private --conventional-graduate --yes
-        else
-          lerna version --conventional-commits --no-changelog --no-private --conventional-prerelease --preid ${{ github.base_ref }} --yes
         fi
-
         lerna publish from-git --yes
