@@ -31,11 +31,10 @@ Using the `FlatForm` without any props will render out the Product configurator 
 
 ```jsx
 import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <FlatForm />
     </ThreekitProvider>
   );
@@ -48,7 +47,6 @@ In most situations we will want to specify which Form Component each attribute s
 
 ```jsx
 import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const App = () => {
   const attributes = {
@@ -59,7 +57,7 @@ const App = () => {
   };
 
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <FlatForm attributes={attributes} />
     </ThreekitProvider>
   );
@@ -70,7 +68,6 @@ const App = () => {
 
 ```jsx
 import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const flatFormProps = {
   //  Override title for the form
@@ -94,7 +91,7 @@ const flatFormProps = {
 
 const App = () => {
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <FlatForm {...flatFormProps} />
     </ThreekitProvider>
   );

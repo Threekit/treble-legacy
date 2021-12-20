@@ -22,6 +22,7 @@ import {
   DEFAULT_PLAYER_CONFIG,
   TK_SAVED_CONFIG_PARAM_KEY,
   TK_PLAYER_ROOT_DIV,
+  TK_PLAYER_LOADER_DIV,
 } from '../constants';
 import { ITranslationMap } from '../api/products';
 import Treble, { ISaveConfigurationConfig, WishlistArray } from '../Treble';
@@ -68,7 +69,7 @@ const createPlayerLoaderEl = (elementId: string): HTMLElement => {
   playerElement.style.height = '100%';
 
   const playerLoader = document.createElement('div');
-  playerLoader.setAttribute('id', 'tk-player-loader');
+  playerLoader.setAttribute('id', TK_PLAYER_LOADER_DIV);
   playerLoader.appendChild(playerElement);
   playerLoader.style.opacity = '0';
   playerLoader.style.height = '1px';

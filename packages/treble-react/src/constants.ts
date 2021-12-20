@@ -1,5 +1,5 @@
 /*****************************************************
- * Dev-Kit Config
+ * Treble Config
  ****************************************************/
 
 export const DEFAULT_CLASS_NAME = 'threekit-react';
@@ -11,6 +11,9 @@ export const LAYOUT_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-lay
 export const TOOL_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-tool`;
 export const DISPLAY_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-display`;
 export const FORM_CLASS_NAME = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-form`;
+
+export const IS_TREBLE_SCRIPTS =
+  process.env.TREBLE_SCRIPTS?.toString() === 'true';
 
 /*****************************************************
  * Treble Products Workflow
@@ -28,6 +31,7 @@ export const TK_SAVED_CONFIG_PARAM_KEY = 'tkConfigId';
  * Threekit Player Initialization Defaults
  ****************************************************/
 
+export const TK_PLAYER_LOADER_DIV = 'tk-ply-loader';
 export const TK_PLAYER_ROOT_DIV = 'tk-ply-root';
 
 export const DEFAULT_PLAYER_CONFIG = {

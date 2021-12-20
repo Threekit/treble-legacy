@@ -22,7 +22,7 @@ Treble React is the core library of the Treble Framework. It includes all the ho
 
 The Threekit 2D/3D Player is available in the Treble React package.
 
-To start learning more about Treble React you can jump right into the the documentation for the [components](components-overview) of the [hooks](hooks-overview).
+To start learning more about the Treble React [click here](main-concepts-treble-react), or you can jump right into the the documentation for the [components](components-overview) of the [hooks](hooks-overview).
 
 ### Treble Scripts Package
 
@@ -30,7 +30,7 @@ To start learning more about Treble React you can jump right into the the docume
 
 The Treble Scripts are similar in use and function to the `react-scripts` you get as part of the create-react-app project boilerplate. They include the webpack configurations and all scripts needed for setting up our local development server and building for deployment.
 
-Find out more about in the [Available Scripts](available-scripts) section.
+Find out more about in the [Available Scripts](main-concepts-scripts) section.
 
 ### Treble JS API
 

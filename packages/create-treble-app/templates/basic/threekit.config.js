@@ -12,12 +12,14 @@ export default {
 
   products: {
     preview: {
-      assetId: process.env.THREEKIT_PREVIEW_ASSET_ID,
-      stageId: process.env.THREEKIT_PREVIEW_STAGE_ID,
+      assetId: undefined,
+      configurationId: undefined,
+      stageId: undefined,
     },
     'admin-fts': {
-      assetId: process.env.THREEKIT_ADMIN_FTS_ASSET_ID,
-      stageId: process.env.THREEKIT_PREVIEW_STAGE_ID,
+      assetId: undefined,
+      configurationId: undefined,
+      stageId: undefined,
     },
   },
 };

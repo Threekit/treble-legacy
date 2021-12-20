@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface IOption {
   shape?: string;
+  size?: string;
 }
 
 interface IOptionWrapper extends IOption {
@@ -24,14 +25,14 @@ export const SwatchWrapper = styled.div`
 `;
 
 export const OptionWrapperStyles = styled.div<IOptionWrapper>`
-  height: 60px;
-  width: 60px;
+  height: ${props => props.size || '60px'};
+  width: ${props => props.size || '60px'};
   border-radius: ${props =>
     props.shape === 'round' ? '50%' : props.theme.borderRadius};
 
   & > div:first-child {
-    height: 60px;
-    width: 60px;
+    height: ${props => props.size || '60px'};
+    width: ${props => props.size || '60px'};
     border-radius: ${props =>
       props.shape === 'round' ? '50%' : props.theme.borderRadius};
     border: 2px solid
@@ -52,8 +53,8 @@ export const OptionWrapperStyles = styled.div<IOptionWrapper>`
 `;
 
 export const OptionThumbnail = styled.div<IOption>`
-  height: 52px;
-  width: 52px;
+  height: ${props => (props.size ? `calc(${props.size} - 8px)` : '52px')};
+  width: ${props => (props.size ? `calc(${props.size} - 8px)` : '52px')};
   text-align: center;
   display: block;
 

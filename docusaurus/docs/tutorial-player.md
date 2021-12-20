@@ -10,6 +10,18 @@ sidebar_label: '2. Setting up the Player'
 
 The `<Player>` component, available as both a native component and custom component, should be used to render out the Threekit 3D/2D Player. Only a single Player component can be rendered in the DOM at any given time.
 
+```jsx
+import { ThreekitProvider, Player } from '@threekit-tools/treble';
+
+const TrebleApp = () => {
+  return (
+    <ThreekitProvider>
+      <Player />
+    </ThreekitProvider>
+  );
+};
+```
+
 All styling and CSS related to the Player should be applied directly in the Player component and its relevant styles directly.
 
 :::info Player Component sizing limitation

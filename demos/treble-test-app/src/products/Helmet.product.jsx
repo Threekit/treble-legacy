@@ -10,8 +10,8 @@ import Tabs, { TabPane } from '../components/Tabs';
 import Strips from '../components/Strips';
 
 const products = {
-  helmet: 'b6740d58-e077-4997-8a63-ceb2086ceb0b',
-  'helmet-alt': 'e84c60a7-d561-435b-8b9b-869246121ab4',
+  helmet: { preview: 'b6740d58-e077-4997-8a63-ceb2086ceb0b' },
+  'helmet-alt': { preview: 'e84c60a7-d561-435b-8b9b-869246121ab4' },
 };
 
 export default function HelmetProductPage() {

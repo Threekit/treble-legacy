@@ -19,7 +19,7 @@ const FeatureList = [
   {
     title: 'Hooks',
     imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-hooks.svg',
-    link: '/docs/treble-react-hooks',
+    link: '/docs/hooks-overview',
     description: (
       <>Threekit powered React hooks to build your own components.</>
     ),
@@ -27,7 +27,7 @@ const FeatureList = [
   {
     title: 'JS API',
     imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-api.svg',
-    link: '/docs/treble-js-overview',
+    link: '/docs/treble-js-treble-api',
     description: (
       <>Higher level functions for all your functional requirements.</>
     ),
@@ -65,52 +65,46 @@ const CardsList = [
     title: 'Quick start',
     description: 'Launch a new project and run starter code in a few steps.',
     linkText: 'Get Started ->',
-    link: '/get-started',
+    link: '/docs/tutorial-setup',
   },
   {
     image:
       'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-coreconcepts.svg',
-    title: 'Basic Concepts',
+    title: 'Main Concepts',
     description: 'Learn about core features and functionality.',
     linkText: 'Learn Here ->',
-    link: '/docs/basic-concepts',
+    link: '/docs/main-concepts-introduction',
   },
 ];
 
 const TrebleNotes = [
   {
     title: 'Quick start',
-    note:
-      "Jump start your UI development with our project boilerplate. Don't waste time thinking about bundling and environment setup and focus on bringing your experience to life.",
+    note: 'Jump start your UI development with our project boilerplate. Let Treble take care of the environment setup and bundling scripts so you can focus on bringing your experience to life.',
   },
   {
     title: 'React Powered',
-    note:
-      "Our library offers a set of components and hooks that are designed to be consistent with the broadly used React conventions. If you're familiar with React, you're already familiar with Treble.",
+    note: "Our library offers a set of components and hooks that are designed to be consistent with the broadly used React conventions. If you're familiar with React, you're already familiar with Treble.",
   },
   {
     title: 'Hooks all the way down',
-    note:
-      'Hooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the hooks to power them.',
+    note: 'Hooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the hooks to power them.',
   },
   {
     title: 'Webpack 5',
-    note:
-      'Our scripts are using Webpack 5 for bundling that works across browsers and devices.',
+    note: 'Powered by the latest version of webpack, our scripts will optimize your bundle support across browsers and devices.',
   },
   {
     title: 'eCommerce Optimized',
-    note: 'Build optimized to eCommerce embedding.',
+    note: 'Treble bundles out to a single static file for easy embedding in any web or eCommerce environment',
   },
   {
     title: 'Treble Launchpad',
-    note:
-      'Treble launchpad is a hosting and deployment solution for eligible Threekit projects that can plug right into a Treble project.',
+    note: 'Treble launchpad provides a hosting and deployment solution for eligible Threekit projects that plugs right into a Treble project.',
   },
   {
-    title: 'Figma Design',
-    note:
-      'All our components are first designed in figma before being implemented. We always recommend wireframing a design before getting into the code of it so we built a Figma Design Kit around our components for you to use.',
+    title: 'Figma Wireframing',
+    note: 'All our components being as figma designs. We always recommend wireframing a design before getting into the code of it so we built a Figma Design Kit around our components for you to use.',
   },
 ];
 

@@ -12,6 +12,7 @@ const appSrc = resolveApp('src');
 const appIndexJs = resolveApp('src/index.js');
 
 const nodeModules = resolveApp('node_modules');
+const pkgJson = resolveApp('package.json');
 
 module.exports = {
   appDirectory,
@@ -22,4 +23,5 @@ module.exports = {
   appSrc,
   appIndexJs,
   nodeModules,
+  pkgJson,
 };

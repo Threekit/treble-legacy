@@ -261,11 +261,10 @@ The `<Player />` component renders the **Threekit Player**.
 
 ```jsx
 import { ThreekitProvider, Player } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const ThreekitApp = () => {
   return (
-    <ThreekitProvider {...threekitConfig}>
+    <ThreekitProvider>
       <Player />
     </ThreekitProvider>
   );
@@ -278,7 +277,6 @@ The Player Component also comes with **widget containers** that can be used to p
 
 ```jsx
 import { ThreekitProvider, Player } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 //  We can separate out the widget container component
 //  or use the component directly from the Player component
@@ -311,7 +309,6 @@ The `<FlatForm>` component is used to render out the configurator for the initia
 
 ```jsx
 import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const App = () => {
   return (
@@ -357,7 +354,6 @@ By default the Form will not render reserved attributes. This can be controlled/
 
 ```jsx
 import { ThreekitProvider, FlatForm } from '@threekit-tools/treble';
-import threekitConfig from './threekit.config.js';
 
 const App = () => {
   const attributes = {

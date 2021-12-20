@@ -38,13 +38,17 @@ const Player = (props: PlayerProps) => {
   );
   const hasMoved = useRef<boolean>(false);
 
-  const portalPlayerTo = usePlayerPortal();
+  const [portalPlayerTo, portalBack] = usePlayerPortal();
 
   useEffect(() => {
     if (portalPlayerTo && !hasMoved.current) {
       portalPlayerTo(PLAYER_DIV_ID);
       hasMoved.current = true;
     }
+
+    return () => {
+      if (portalBack) portalBack();
+    };
   });
 
   return (

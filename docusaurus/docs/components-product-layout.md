@@ -6,15 +6,15 @@ sidebar_label: Product Layout
 
 # Product Layout
 
-```js
+```jsx
 <ProductLayout />
 ```
 
 ## Overview
 
-The `<ProductLayout>` component is used to wrap a single UI for one-or-more products, in order for them to be accessible in the `<TrebleApp>` component.
+The `<ProductLayout />` component is used to create a UI layout for one-or-many products and make them accessible to the `<TrebleApp />`. The component contains no visual/UI elements of its own and is purely for facilitating a multi-product setup.
 
-The ProductLayout products prop which specifies which products from the Threekit Platform this product layout should be used to display.
+To create a Product Layout, you would build your UI view as normal and wrap the whole view inside the `<ProductLayout />` component. Each product in the ProductLayout must have its own **productId**, which must be unique across all products. Its through this productId that we define which product for our App to load.
 
 :::caution File Names
 
@@ -25,15 +25,14 @@ Product Layout files must be named to match the following pattern: `*.product.js
 ## Code Examples
 
 ```jsx
-import ReactDOM from 'react-dom';
 import { ProductLayout, Player, FlatForm } from '@threekit-tools/treble';
 
 const products = {
   'helmet-small': {
-    preview: '<ASSET ID>',
+    preview: { assetId: '<ASSET ID>' },
   },
   'helmet-large': {
-    preview: '<ASSET ID>',
+    preview: { assetId: '<ASSET ID>' },
   },
 };
 
@@ -57,6 +56,6 @@ export default function HelmetProduct() {
 
 ## Props
 
-| Name     | Descriptions                                                | Type   | Default |
-| -------- | ----------------------------------------------------------- | ------ | ------- |
-| products | All the products that this Product Layout will be used for. | string | -       |
+| Name     | Descriptions                                                               | Type         | Default |
+| -------- | -------------------------------------------------------------------------- | ------------ | ------- |
+| products | An object, defining the products that the Product Layout will be used for. | `ProductObj` | -       |

@@ -1,8 +1,7 @@
-import threekitConfig from '../threekit.config.js';
-import { ProductLoader } from '@threekit-tools/treble';
+import { TrebleApp } from '@threekit-tools/treble';
 
 const App = () => {
-  return <ProductLoader {...threekitConfig} productId="helmet" />;
+  return <TrebleApp />;
 };
 
 export default App;

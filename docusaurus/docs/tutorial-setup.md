@@ -20,23 +20,25 @@ In your local Terminal CLI, get started with the `create-treble-app` command:
 npx create-treble-app@latest
 ```
 
-And follow along any setups with any prompts you are required to answer.
+And follow along with any prompts you are required to answer.
 
-This will create a project boilerplate in the current directory with the project name you provided and install all the required dependencies.
+This will create a Treble App boilerplate in the current directory with the project name you provided and install all the required dependencies.
 
 Once the boilerplate has been setup we will **navigating into the project folder** with the follow commands:
 
 ```bash
-cd ./app-name
+cd ./my-treble-app
 ```
+
+**For more information about the folder structure of a Treble App, [click here](main-concepts-folder-structure).**
 
 ## Credentials setup
 
-In the `/.env` file, add in your Threekit Platform public token and Org ID for the relevant environments.
+In the `.env` file, add your Threekit Platform public token and Org ID for the relevant environments.
 
-In the `/threekit.config.js` file, add in an assetId for the relevant environment
+In the `threekit.config.js` file, add in an assetId for the relevant environments.
 
-**For more information about the Threekit credentials and their setup, [click here](threekit-credentials).**
+**For more information about the Threekit credentials and their setup, [click here](main-concepts-credentials).**
 
 ## Start the development server
 
@@ -50,4 +52,4 @@ Your app will be available on: `http://localhost:3000`
 
 By default the App will try to use the preview environment of the Threekit Platform. To use another environment pass in the environment name as a flag into the run script. e.g. `yarn start --admin-fts`
 
-**For more information about the available scripts, [click here](available-scripts).**
+**For more information about the available scripts, [click here](main-concepts-scripts).**

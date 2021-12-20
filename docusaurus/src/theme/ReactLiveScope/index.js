@@ -19,7 +19,7 @@ const project = {
     preview: {
       assetId: 'b6740d58-e077-4997-8a63-ceb2086ceb0b',
       orgId: 'dc454d74-5bfe-4bd9-b6da-ee6cb029562a',
-      publicToken: 'cac124c9-3f60-4097-b5ce-c98127328eca',
+      publicToken: 'c37e4b54-523f-4cbe-9994-0c5fb424f5ab',
     },
   },
 };
