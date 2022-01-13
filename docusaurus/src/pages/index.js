@@ -11,14 +11,13 @@ import WhyTreble from '../components/WhyTreble';
 const FeatureList = [
   {
     title: 'Components',
-    imgUrl:
-      'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-components.svg',
+    SVG: require('../../static/img/icon-iso-components.svg').default,
     link: '/docs/components-overview',
     description: <>The building blocks for engaging web experiences.</>,
   },
   {
     title: 'Hooks',
-    imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-hooks.svg',
+    SVG: require('../../static/img/icon-iso-hooks.svg').default,
     link: '/docs/hooks-overview',
     description: (
       <>Threekit powered React hooks to build your own components.</>
@@ -26,7 +25,7 @@ const FeatureList = [
   },
   {
     title: 'JS API',
-    imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-api.svg',
+    SVG: require('../../static/img/icon-iso-api.svg').default,
     link: '/docs/treble-js-treble-api',
     description: (
       <>Higher level functions for all your functional requirements.</>
@@ -37,7 +36,7 @@ const FeatureList = [
 const ResourceList = [
   {
     title: 'Prep for your project',
-    imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-prep.svg',
+    SVG: require('../../static/img/icon-iso-prep.svg').default,
     link: '/docs/treble-react-overview',
     description: (
       <>Get started quickly with our comprehensive project overview.</>
@@ -45,14 +44,13 @@ const ResourceList = [
   },
   {
     title: 'Tutorials & training',
-    imgUrl:
-      'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-training.svg',
+    SVG: require('../../static/img/icon-iso-training.svg').default,
     link: '/docs/treble-react-overview',
     description: <>A self-led training process for the Threekit platform.</>,
   },
   {
     title: 'Figma library',
-    imgUrl: 'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-design.svg',
+    SVG: require('../../static/img/icon-iso-design.svg').default,
     link: 'https://www.figma.com/community/file/1027317639278516141',
     description: <>View Threekit’s recommended UI design system.</>,
   },
@@ -60,16 +58,14 @@ const ResourceList = [
 
 const CardsList = [
   {
-    image:
-      'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-quickstart.svg',
+    SVG: require('../../static/img/icon-iso-quickstart.svg').default,
     title: 'Quick start',
     description: 'Launch a new project and run starter code in a few steps.',
     linkText: 'Get Started ->',
     link: '/docs/tutorial-setup',
   },
   {
-    image:
-      'https://treble.threekit.com/hubfs/TK20/Icons/icon-iso-coreconcepts.svg',
+    SVG: require('../../static/img/icon-iso-coreconcepts.svg').default,
     title: 'Main Concepts',
     description: 'Learn about core features and functionality.',
     linkText: 'Learn Here ->',

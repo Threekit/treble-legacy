@@ -3,7 +3,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl';
 import clsx from 'clsx';
 import styles from './HomepageFeatures.module.css';
 
-function Feature({ imgUrl, title, link, description }) {
+function Feature({ SVG, title, link, description }) {
   const url = useBaseUrl(link);
   return (
     <div
@@ -13,7 +13,7 @@ function Feature({ imgUrl, title, link, description }) {
       }}
     >
       <div className={clsx('text--center', styles.featureImg)}>
-        <img src={imgUrl} alt={title} />
+        <SVG />
       </div>
       <div className="text--center padding-horiz--md">
         <h3>{title}</h3>
