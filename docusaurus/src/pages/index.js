@@ -28,7 +28,7 @@ const FeatureList = [
     SVG: require('../../static/img/icon-iso-api.svg').default,
     link: '/docs/treble-js-treble-api',
     description: (
-      <>Higher level functions for all your functional requirements.</>
+      <>Higher level functions for all your projects requirements.</>
     ),
   },
 ];
@@ -37,7 +37,7 @@ const ResourceList = [
   {
     title: 'Prep for your project',
     SVG: require('../../static/img/icon-iso-prep.svg').default,
-    link: '/docs/treble-react-overview',
+    link: '/docs/tutorial-setup',
     description: (
       <>Get started quickly with our comprehensive project overview.</>
     ),
@@ -45,7 +45,7 @@ const ResourceList = [
   {
     title: 'Tutorials & training',
     SVG: require('../../static/img/icon-iso-training.svg').default,
-    link: '/docs/treble-react-overview',
+    link: 'https://www.youtube.com/watch?v=JR4UYYY8wwk',
     description: <>A self-led training process for the Threekit platform.</>,
   },
   {
@@ -83,8 +83,8 @@ const TrebleNotes = [
     note: "Our library offers a set of components and hooks that are designed to be consistent with the broadly used React conventions. If you're familiar with React, you're already familiar with Treble.",
   },
   {
-    title: 'Hooks all the way down',
-    note: 'Hooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the hooks to power them.',
+    title: 'Webhooks all the way down',
+    note: 'Webhooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the webhooks to power them.',
   },
   {
     title: 'Webpack 5',
@@ -100,7 +100,7 @@ const TrebleNotes = [
   },
   {
     title: 'Figma Wireframing',
-    note: 'All our components being as figma designs. We always recommend wireframing a design before getting into the code of it so we built a Figma Design Kit around our components for you to use.',
+    note: 'All our components being as Figma designs. We always recommend wireframing a design before getting into the code of it so we built a Figma Design Kit around our components for you to use.',
   },
 ];
 

@@ -69,7 +69,6 @@ main > div {
   margin-right: auto;
   max-width: 1300px;
   background-image: url('../../static/img/treble-background.jpg');
-  /* background-image: url('https://treble.threekit.com/hubfs/Treble/treble-background.jpg'); */
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;

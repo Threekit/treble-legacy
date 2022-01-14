@@ -1,7 +1,7 @@
 ---
 id: tutorial-form
 title: Building your configurator form
-sidebar_label: '2. Building the form'
+sidebar_label: '3. Building the form'
 ---
 
 # Building your configurator form
@@ -51,7 +51,7 @@ You can find more information about the FlatForm by [clicking here](forms-flat-f
 
 ## Build your own Form
 
-While the FlatForm is a good place to start, working with the form as a single component will most likely prove to be too limiting. For most projects we will want more control over the presentation of our form, including the ability to visually organize the attributes differently, or use custom components instead of the provided native ones. In such cases we would want to construct the form ourselves.
+While the FlatForm component is a good place to start, working with the form as a single component might prove to be too limiting. For most projects we will want more control over the presentation of our form, including the ability to visually organize the attributes differently, or use custom components instead of the provided native ones. In such cases we would want to construct the form ourselves.
 
 We can start by using the native Form Components provided by Treble, assigning each one an Attribute to present. These are the same components used in the `<FlatForm />`.
 
@@ -82,9 +82,9 @@ These component's styling can be updated by providing a [custom theme](main-conc
 
 ## Using custom components
 
-If we need more control over the components, for example to change their structure or content, then its time to switch over to the custom components. As part of the Treble boilerplate we provide a set of custom components located in `src/components`. These components are similar to many of the native components in Treble, only these can be edited, expanded and copied very easily for the projects needs.
+If we need more control over the individual components in our form, for example to change their structure or content, then its time to switch over to the custom components. As part of the Treble boilerplate we provide a set of custom components located in `src/components`. These components are similar to many of the native components in Treble, only these can be edited, expanded and copied very easily for the projects needs.
 
-Our custom components are styled using [tailwindCSS](https://tailwindcss.com/), however, you're free to import and use any library/package you're comfortable working with.
+Our custom components are styled using [tailwindCSS](https://tailwindcss.com/), however, you're free to use vanilla CSS or import and use any library/package you're comfortable working with for styling.
 
 ```jsx
 import { ThreekitProvider, Player } from '@threekit-tools/treble';

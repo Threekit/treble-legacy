@@ -7,6 +7,19 @@ const docs = [
   {
     type: 'category',
     collapsible: true,
+    label: 'Tutorial',
+    items: [
+      'tutorial-setup',
+      'tutorial-player',
+      'tutorial-form',
+      'tutorial-widgets',
+      'tutorial-multi-products',
+      'tutorial-embedding',
+    ],
+  },
+  {
+    type: 'category',
+    collapsible: true,
     label: 'Main Concepts',
     items: [
       'main-concepts-introduction',
@@ -18,20 +31,6 @@ const docs = [
       'main-concepts-theme',
       'main-concepts-threekit-config',
       'main-concepts-player-config',
-    ],
-  },
-  {
-    type: 'category',
-    // id: 'quick-start-new-project',
-    collapsible: true,
-    label: 'Tutorial',
-    items: [
-      'tutorial-setup',
-      'tutorial-player',
-      'tutorial-form',
-      'tutorial-widgets',
-      'tutorial-multi-products',
-      'tutorial-embedding',
     ],
   },
   {
