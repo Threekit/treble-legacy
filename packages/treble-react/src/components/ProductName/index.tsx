@@ -23,7 +23,7 @@ export const ProductName = (props: ITitle) => {
 
   return (
     <Wrapper align={align} className={cls}>
-      {name || title}
+      {title || name}
     </Wrapper>
   );
 };

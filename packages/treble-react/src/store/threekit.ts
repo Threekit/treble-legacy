@@ -32,11 +32,18 @@ import { IConfigurationResponse } from '../http/configurations';
  * Types and Interfaces
  ****************************************************/
 
+interface EventHandlers {
+  postConfigurationChange?: (
+    attributes: Array<IThreekitDisplayAttribute>
+  ) => void | Promise<void>;
+}
+
 export interface ILaunchConfig {
   threekitEnv: string;
   locale: string;
   project: IProject;
   playerConfig: IPlayerConfig;
+  eventHandlers: EventHandlers;
 }
 
 interface IPriceConfig {
@@ -79,6 +86,12 @@ const createPlayerLoaderEl = (elementId: string): HTMLElement => {
   document.body.appendChild(playerLoader);
   return playerElement;
 };
+
+/*****************************************************
+ * Constants and Event Handlers
+ ****************************************************/
+
+let EVENTS: EventHandlers = {};
 
 /*****************************************************
  * State
@@ -437,6 +450,9 @@ export const launch =
       dispatch(setTranslations(translations));
     }
 
+    if (launchConfig?.eventHandlers)
+      EVENTS = Object.assign(EVENTS, launchConfig.eventHandlers);
+
     if (pricebook.length) {
       const priceConfig = {
         id: pricebook[0].id,
@@ -470,6 +486,11 @@ export const setConfiguration =
     await window.threekit.configurator.setConfiguration(config);
     const updatedAttributes =
       window.threekit.configurator.getDisplayAttributes();
+
+    if (EVENTS.postConfigurationChange) {
+      await EVENTS.postConfigurationChange(updatedAttributes);
+    }
+
     dispatch(setAttributes(updatedAttributes));
     dispatch(setPlayerLoading(false));
   };

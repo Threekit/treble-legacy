@@ -5,7 +5,8 @@ import CaretDown from '../../icons/CaretDown';
 interface AccordionItemProps extends React.FC {
   selected: boolean;
   label: string;
-  handleClick: () => void;
+  handleSelect: () => void;
+  onClick: () => void;
 }
 
 interface AccordionProps<T> {
@@ -13,10 +14,10 @@ interface AccordionProps<T> {
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = props => {
-  const { selected, handleClick, label, children } = props;
+  const { selected, handleSelect, label, children } = props;
   return (
     <Wrapper selected={selected}>
-      <div onClick={handleClick}>
+      <div onClick={handleSelect}>
         <div>{label}</div>
         <div></div>
         <div>
@@ -47,7 +48,10 @@ export const Accordion = (props: AccordionProps<AccordionItemProps>) => {
     if (child.type !== AccordionItem) return null;
     return React.cloneElement(child, {
       selected: selected === idx,
-      handleClick: () => handleSelect(idx),
+      handleSelect: () => {
+        if (child.props.onClick) child.props.onClick();
+        handleSelect(idx);
+      },
     });
   });
 };
