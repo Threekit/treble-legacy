@@ -20,7 +20,7 @@ export default function Player(props) {
 
   return (
     <div className="h-full">
-      <div id={PLAYER_DIV_ID} />
+      <div id={PLAYER_DIV_ID} className="h-full" />
       {props.children}
     </div>
   );
