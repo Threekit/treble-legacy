@@ -83,8 +83,8 @@ const TrebleNotes = [
     note: "Our library offers a set of components and hooks that are designed to be consistent with the broadly used React conventions. If you're familiar with React, you're already familiar with Treble.",
   },
   {
-    title: 'Webhooks all the way down',
-    note: 'Webhooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the webhooks to power them.',
+    title: 'React-hooks all the way down',
+    note: 'React-hooks power all our components. If you plan to build your own components for the project your can focus on the design and UI and let us provide the hooks to power them.',
   },
   {
     title: 'Webpack 5',

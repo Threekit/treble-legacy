@@ -4,7 +4,7 @@ title: Total Price
 sidebar_label: Total Price
 ---
 
-# Product Title
+# Total Price
 
 ```jsx
 <Price />
