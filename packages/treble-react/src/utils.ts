@@ -341,10 +341,9 @@ export const translateAttribute = (
 };
 
 export const selectionToConfiguration = (
-  value: string | number | IConfigurationColor,
+  value: string | number | boolean | IConfigurationColor,
   attributeType: string
 ) => {
-  if (!value) return undefined;
   switch (attributeType) {
     case ATTRIBUTE_TYPES.number:
     case ATTRIBUTE_TYPES.string:

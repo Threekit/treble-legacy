@@ -34,7 +34,9 @@ import { IConfigurationResponse } from '../http/configurations';
 
 interface EventHandlers {
   postConfigurationChange?: (
-    attributes: Array<IThreekitDisplayAttribute>
+    updatedAttributes: Array<IThreekitDisplayAttribute>,
+    configurationChange: ISetConfiguration,
+    previousConfiguration: Array<IThreekitDisplayAttribute>
   ) => void | Promise<void>;
 }
 
@@ -482,13 +484,19 @@ export const launch =
 //  Configurator
 export const setConfiguration =
   (config: ISetConfiguration) => async (dispatch: ThreekitDispatch) => {
+    const previousConfiguration =
+      window.threekit.configurator.getDisplayAttributes();
     dispatch(setPlayerLoading(true));
     await window.threekit.configurator.setConfiguration(config);
     const updatedAttributes =
       window.threekit.configurator.getDisplayAttributes();
 
     if (EVENTS.postConfigurationChange) {
-      await EVENTS.postConfigurationChange(updatedAttributes);
+      await EVENTS.postConfigurationChange(
+        updatedAttributes,
+        config,
+        previousConfiguration
+      );
     }
 
     dispatch(setAttributes(updatedAttributes));

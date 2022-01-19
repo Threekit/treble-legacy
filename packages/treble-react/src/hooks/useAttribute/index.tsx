@@ -7,7 +7,7 @@ import {
   IThreekitDisplayAttribute,
 } from '../../threekit';
 
-export type AttributeValue = string | number | IConfigurationColor;
+export type AttributeValue = string | number | boolean | IConfigurationColor;
 
 type UseAttributeError = [undefined, undefined];
 type UseAttributeSuccess = [
@@ -28,7 +28,6 @@ const useAttribute = (attributeName?: string): UseAttributeHook => {
 
   const handleChange = (value: AttributeValue) => {
     const preppedValue = selectionToConfiguration(value, attribute.type);
-    if (!preppedValue) return;
     dispatch(
       setConfiguration({
         [attributeName]: preppedValue,

@@ -22,8 +22,11 @@ const App = (props: ThreekitProviderProps) => {
 
   useEffect(() => {
     const init = () => {
-      const { playerConfig, project, locale, threekitEnv } = props;
-      dispatch(launch({ playerConfig, project, locale, threekitEnv }));
+      const { playerConfig, project, locale, threekitEnv, eventHandlers } =
+        props;
+      dispatch(
+        launch({ playerConfig, project, locale, threekitEnv, eventHandlers })
+      );
     };
     init();
     return;
@@ -42,6 +45,7 @@ const ThreekitProvider = (props: ThreekitProviderProps) => {
           project={props.project}
           playerConfig={props.playerConfig}
           threekitEnv={props.threekitEnv}
+          eventHandlers={props.eventHandlers}
         >
           {props.children}
         </App>
