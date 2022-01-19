@@ -13,6 +13,8 @@ const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
 );
 
+const outputCssFile = true;
+
 // style files regexes
 const cssRegex = /\.css$/;
 const cssModuleRegex = /\.module\.css$/;
@@ -27,7 +29,7 @@ module.exports = (env, threekitEnv) => {
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
       isDev && require.resolve('style-loader'),
-      false && {
+      outputCssFile && {
         loader: MiniCssExtractPlugin.loader,
         // css is located in `static/css`, use '../../' to locate index.html folder
         // in production `paths.publicUrlOrPath` can be a relative path
@@ -405,7 +407,7 @@ module.exports = (env, threekitEnv) => {
       // It will be an empty string unless you specify "homepage"
       // in `package.json`, in which case it will be the pathname of that URL.
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, process.env),
-      false &&
+      outputCssFile &&
         new MiniCssExtractPlugin({
           // Options similar to the same options in webpackOptions.output
           // both options are optional

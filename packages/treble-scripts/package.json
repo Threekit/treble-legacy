@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble-scripts",
-  "version": "0.0.24",
+  "version": "0.0.26",
   "main": "index.js",
   "license": "MIT",
   "module": "",
@@ -27,6 +27,7 @@
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.3.0",
     "dotenv-webpack": "^7.0.3",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.4.0",
     "interpolate-html-plugin": "^4.0.0",
     "less-loader": "^10.2.0",
@@ -48,9 +49,9 @@
     "webpack-dev-server": "^4.6.0"
   },
   "devDependencies": {
-    "webpack-cli": "^4.7.2",
     "eslint-plugin-jest": "^25.3.0",
-    "jest": "^27.4.4"
+    "jest": "^27.4.4",
+    "webpack-cli": "^4.7.2"
   },
   "gitHead": "2e16bcf98f81e16bb1768072fdb3968122e7966f"
 }
