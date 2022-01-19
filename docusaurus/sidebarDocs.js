@@ -127,6 +127,12 @@ const docs = [
       'hooks-use-player-loading-status',
     ],
   },
+  {
+    type: 'category',
+    collapsible: true,
+    label: 'How Tos',
+    items: ['how-to-sort-options'],
+  },
   'treble-js-treble-api',
 ];
 
