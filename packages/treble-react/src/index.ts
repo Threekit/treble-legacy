@@ -31,7 +31,7 @@ import TotalPrice from './components/TotalPrice';
 //  Messaging
 import message from './components/message';
 //  Layouts
-import Modal from './components/TotalPrice';
+import Modal from './components/Modal';
 import Drawer from './components/Drawer';
 import Accordion from './components/Accordion';
 import Tabs from './components/Tabs';
