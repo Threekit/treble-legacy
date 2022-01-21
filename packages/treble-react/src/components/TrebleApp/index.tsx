@@ -13,8 +13,15 @@ const productComponents: Array<React.FC> = [];
 const productToComponentMap: Record<string, number> = {};
 
 export default function TrebleApp(props: TrebleAppProps) {
-  const { project, productId, playerConfig, threekitEnv, locale, theme } =
-    props;
+  const {
+    project,
+    productId,
+    playerConfig,
+    threekitEnv,
+    locale,
+    theme,
+    eventHandlers,
+  } = props;
 
   const config = IS_TREBLE_SCRIPTS ? loadTrebleConfig() : {};
 
@@ -74,6 +81,7 @@ export default function TrebleApp(props: TrebleAppProps) {
       playerConfig={playerConfig}
       theme={theme}
       threekitEnv={threekitEnv}
+      eventHandlers={eventHandlers}
     >
       <Product />
     </ThreekitProvider>

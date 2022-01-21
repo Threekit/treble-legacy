@@ -1,18 +1,24 @@
 import React, { useState } from 'react';
 import { Wrapper, TabsWrapper, Tab, TabContent } from './tabs.styles';
 
-interface TabPaneProps extends React.FC {
+interface ITabPaneProps {
   label: string;
   onClick: () => void;
 }
 
 interface TabsProps<T> {
-  children: React.FunctionComponentElement<T>;
+  children:
+    | React.FunctionComponentElement<T>
+    | Array<React.FunctionComponentElement<T>>;
 }
 
-const TabPane: React.FC = props => <>{props.children}</>;
+interface ITabs {
+  TabPane: React.FC<ITabPaneProps>;
+}
 
-export const Tabs = ({ children }: TabsProps<TabPaneProps>) => {
+const TabPane: React.FC<ITabPaneProps> = props => <>{props.children}</>;
+
+export const Tabs: ITabs = ({ children }: TabsProps<ITabPaneProps>) => {
   const [selected, setSelected] = useState<undefined | number>(0);
 
   const handleSelect = (idx: number) => setSelected(idx);
