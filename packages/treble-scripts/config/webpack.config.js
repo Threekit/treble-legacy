@@ -5,13 +5,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const resolve = require('resolve');
 const Dotenv = require('dotenv-webpack');
 const paths = require('./paths');
+const fs = require('fs');
 
 const imageInlineSizeLimit = parseInt(
   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
 );
+
+const useTypeScript = fs.existsSync(paths.tsConfig);
 
 const outputCssFile = true;
 
@@ -147,7 +152,21 @@ module.exports = (env, threekitEnv) => {
       ],
     },
     resolve: {
-      extensions: ['*', '.js', '.jsx'],
+      extensions: [
+        'web.mjs',
+        'mjs',
+        'web.js',
+        'js',
+        'web.ts',
+        'ts',
+        'web.tsx',
+        'tsx',
+        'json',
+        'web.jsx',
+        'jsx',
+      ]
+        .map(ext => `.${ext}`)
+        .filter(ext => useTypeScript || !ext.includes('ts')),
     },
     module: {
       strictExportPresence: true,
@@ -413,6 +432,47 @@ module.exports = (env, threekitEnv) => {
           // both options are optional
           filename: 'treble-app.css',
           //   chunkFilename: 'css/[name].[contenthash:8].chunk.css',
+        }),
+      useTypeScript &&
+        new ForkTsCheckerWebpackPlugin({
+          async: isDev,
+          typescript: {
+            typescriptPath: resolve.sync('typescript', {
+              basedir: paths.appNodeModules,
+            }),
+            configOverwrite: {
+              compilerOptions: {
+                sourceMap: isProd ? false : isDev,
+                skipLibCheck: true,
+                inlineSourceMap: false,
+                declarationMap: false,
+                noEmit: true,
+                incremental: true,
+                tsBuildInfoFile: paths.appTsBuildInfoFile,
+              },
+            },
+            context: paths.appPath,
+            diagnosticOptions: {
+              syntactic: true,
+            },
+            mode: 'write-references',
+            // profile: true,
+          },
+          issue: {
+            include: [
+              { file: '../**/src/**/*.{ts,tsx}' },
+              { file: '**/src/**/*.{ts,tsx}' },
+            ],
+            exclude: [
+              { file: '**/src/**/__tests__/**' },
+              { file: '**/src/**/?(*.){spec|test}.*' },
+              { file: '**/src/setupProxy.*' },
+              { file: '**/src/setupTests.*' },
+            ],
+          },
+          logger: {
+            infrastructure: 'silent',
+          },
         }),
     ].filter(Boolean),
   };
