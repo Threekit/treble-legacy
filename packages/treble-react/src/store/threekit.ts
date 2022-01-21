@@ -371,9 +371,10 @@ export const launch =
       if (isUuid(product)) assetId = product;
       else configurationId = product;
     } else {
-      if (isUuid(product.assetId)) assetId = product.assetId;
-      else configurationId = product.assetId;
       stageId = product.stageId;
+      if (product.configurationId) configurationId = product.configurationId;
+      else if (isUuid(product.assetId)) assetId = product.assetId;
+      else configurationId = product.assetId;
     }
 
     //  We get or create the player HTML element
@@ -420,7 +421,6 @@ export const launch =
         updatedAssetId = configuration.data.productId;
       }
     }
-
     if (!updatedAssetId) return console.error('missing assetId');
 
     //  We create the threekit script
@@ -433,9 +433,8 @@ export const launch =
         authToken,
         stageId,
         assetId: updatedAssetId,
-        initialConfiguration,
-        //
         ...playerConfig,
+        initialConfiguration,
       }),
       threekitAPI.products.fetchTranslations(),
       threekitAPI.price.getPricebooksList(),

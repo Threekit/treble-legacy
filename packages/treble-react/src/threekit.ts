@@ -314,7 +314,9 @@ export interface IProduct
   extends Pick<
     ThreekitInitConfig,
     'assetId' | 'stageId' | 'initialConfiguration'
-  > {}
+  > {
+  configurationId?: string;
+}
 
 export interface IProducts extends Record<string, string | Partial<IProduct>> {}
 
