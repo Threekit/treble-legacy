@@ -32,10 +32,13 @@ We will also need add a `<script>` tag to request and execute our built Treble A
 
 #### Multi HTML elements
 
-```html
+```html {2,5-7}
+<head>
+  <link rel="stylesheet" href="https://treble-app.com/treble-app.css" />
+</head>
 <body>
   <div id="tk-treble-root"></div>
   <div id="tk-treble-form"></div>
-  <script src="https://treble-app.com/threekit-embed.js" defer></script>
+  <script src="https://treble-app.com/treble-app.js" defer></script>
 </body>
 ```
