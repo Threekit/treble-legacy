@@ -36,10 +36,11 @@ function updatePackageJson(outputDir, projectName) {
   fs.writeFileSync(pkgPath, JSON.stringify(pkgPrepped, null, 2));
 }
 
-function installDependencies(dir) {
+function installDependencies(dir, config) {
   return new Promise((resolve, reject) => {
     let command = 'yarnpkg';
     let args = ['add'];
+    const isTypeScript = config;
 
     let packages = [
       'react',
@@ -47,6 +48,14 @@ function installDependencies(dir) {
       '@threekit-tools/treble',
       '@threekit-tools/treble-scripts',
     ];
+
+    if (isTypeScript)
+      packages.push(
+        '@types/node',
+        '@types/react',
+        '@types/react-dom',
+        'typescript'
+      );
 
     let flag = ['--cwd', dir];
 
@@ -88,6 +97,7 @@ export default async function cloneTemplate(
   const templatePath = path.resolve(__dirname, '../../templates', templateName);
   const outputDir = path.resolve(process.cwd(), projectName);
   const skipFiles = ['node_modules', 'dist', 'build'];
+  const isTypeScript = templateName === TEMPLATES.typescript;
 
   messages.preCloneTemplate(outputDir);
 
@@ -97,7 +107,7 @@ export default async function cloneTemplate(
   try {
     updatePackageJson(outputDir, projectName);
     messages.preInstallDependencies();
-    await installDependencies(outputDir);
+    await installDependencies(outputDir, { isTypeScript });
     await renameGitIgnore(outputDir);
     messages.complete(outputDir, projectName);
   } catch (e) {

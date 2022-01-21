@@ -48,9 +48,9 @@ export const complete = (outputDir, projectName) => {
   console.log();
   console.log(`  ${chalk.cyan('yarn build')}`);
   console.log(
-    `    Bundles the app into a single static file name ${chalk.cyan(
-      'threekit-embed.js'
-    )} for production.`
+    `    Bundles the app into a two static files named ${chalk.cyan(
+      'treble-app.js'
+    )} and ${chalk.cyan('treble-app.css')}, ready for production.`
   );
   console.log();
   console.log('Get started by typing:');
