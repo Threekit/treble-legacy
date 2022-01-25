@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const InterpolateHtmlPlugin = require('./threekit-dev-utils/InterpolateHtmlPlugin');
+// const getCSSModuleLocalIdent = require('./threekit-dev-utils/getCSSModuleLocalIdent');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -36,11 +37,6 @@ module.exports = (env, threekitEnv) => {
       isDev && require.resolve('style-loader'),
       outputCssFile && {
         loader: MiniCssExtractPlugin.loader,
-        // css is located in `static/css`, use '../../' to locate index.html folder
-        // in production `paths.publicUrlOrPath` can be a relative path
-        // options: paths.publicUrlOrPath.startsWith('.')
-        //   ? { publicPath: '../../' }
-        //   : {},
       },
       {
         loader: require.resolve('css-loader'),
@@ -346,7 +342,8 @@ module.exports = (env, threekitEnv) => {
                   importLoaders: 3,
                   sourceMap: isDev,
                   modules: {
-                    mode: 'local',
+                    mode: 'icss',
+                    // mode: 'local',
                     // getLocalIdent: getCSSModuleLocalIdent,
                   },
                 },
