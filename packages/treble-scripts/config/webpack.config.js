@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const InterpolateHtmlPlugin = require('./threekit-dev-utils/InterpolateHtmlPlugin');
-// const getCSSModuleLocalIdent = require('./threekit-dev-utils/getCSSModuleLocalIdent');
+const getCSSModuleLocalIdent = require('./threekit-dev-utils/getCSSModuleLocalIdent');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -34,7 +34,7 @@ module.exports = (env, threekitEnv) => {
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
     const loaders = [
-      isDev && require.resolve('style-loader'),
+      // isDev && require.resolve('style-loader'),
       outputCssFile && {
         loader: MiniCssExtractPlugin.loader,
       },
@@ -307,7 +307,8 @@ module.exports = (env, threekitEnv) => {
                 sourceMap: isDev,
                 modules: {
                   mode: 'local',
-                  //   getLocalIdent: getCSSModuleLocalIdent,
+                  getLocalIdent: getCSSModuleLocalIdent,
+                  exportLocalsConvention: 'camelCase',
                 },
               }),
             },
@@ -342,9 +343,9 @@ module.exports = (env, threekitEnv) => {
                   importLoaders: 3,
                   sourceMap: isDev,
                   modules: {
-                    mode: 'icss',
-                    // mode: 'local',
-                    // getLocalIdent: getCSSModuleLocalIdent,
+                    mode: 'local',
+                    getLocalIdent: getCSSModuleLocalIdent,
+                    exportLocalsConvention: 'camelCase',
                   },
                 },
                 'sass-loader'
