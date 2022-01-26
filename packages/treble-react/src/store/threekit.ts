@@ -446,6 +446,12 @@ export const launch =
       treble: new Treble({ player }),
     };
 
+    window.threekit.player.on('setConfiguration', () => {
+      dispatch(
+        setAttributes(window.threekit.configurator.getDisplayAttributes())
+      );
+    });
+
     if (launchConfig?.locale) {
       dispatch(setLanguage(launchConfig.locale));
       dispatch(setTranslations(translations));
