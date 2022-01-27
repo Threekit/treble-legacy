@@ -36,9 +36,8 @@ const Player = (props: PlayerProps) => {
     },
     props
   );
-  const hasMoved = useRef<boolean>(false);
-
   const [portalPlayerTo, portalBack] = usePlayerPortal();
+  const hasMoved = useRef<boolean>(false);
 
   useEffect(() => {
     if (portalPlayerTo && !hasMoved.current) {
@@ -47,9 +46,12 @@ const Player = (props: PlayerProps) => {
     }
 
     return () => {
-      if (portalBack) portalBack();
+      if (portalBack) {
+        portalBack();
+        hasMoved.current = false;
+      }
     };
-  });
+  }, [portalPlayerTo]);
 
   return (
     <Wrapper

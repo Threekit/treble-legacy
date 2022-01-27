@@ -39,8 +39,6 @@ const usePlayerPortal = (): UsePlayerPortal => {
   };
 
   const returnPlayer = () => {
-    TK_PLAYER_LOADER_DIV;
-
     if (!htmlElements.current.player)
       htmlElements.current.player = document.getElementById(playerElementId);
 
