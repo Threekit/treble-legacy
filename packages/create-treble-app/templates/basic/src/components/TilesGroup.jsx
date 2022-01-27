@@ -5,7 +5,7 @@ export default function TilesGroup(props) {
   if (!attribute) return <></>;
   return (
     <div className="w-full mb-5">
-      <h3 className="text-xl mb-4">{attribute?.label}</h3>
+      <h3 className="text-xl mb-4">{props.title || attribute?.label}</h3>
       <div className="w-full flex flex-row items-stretch content-start">
         {attribute?.values.map((item, i) => {
           const selected = item.assetId
@@ -14,6 +14,7 @@ export default function TilesGroup(props) {
           return (
             <button
               key={i}
+              type="button"
               onClick={() =>
                 setAttribute(item.assetId ? item.assetId : item.value)
               }

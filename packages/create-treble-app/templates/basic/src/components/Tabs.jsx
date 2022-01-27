@@ -18,6 +18,7 @@ function Tabs({ children }) {
           if (child.type !== TabPane) return null;
           return (
             <button
+              type="button"
               className={`w-max py-1 px-4 mx-4 cursor-pointer text-lg font-medium bg-white transform translate-y-px border-0 ${
                 selected === idx
                   ? 'border-b-2 border-solid border-primary text-primary'
