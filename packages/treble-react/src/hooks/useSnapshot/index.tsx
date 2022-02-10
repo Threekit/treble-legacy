@@ -1,12 +1,12 @@
 import { ISnapshotsCameras, ITakeSnapshotsConfig } from '../../Treble';
 import { useThreekitSelector } from '../../store';
-import { isThreekitLoaded } from '../../store/threekit';
+import { isThreekitInitialized } from '../../store/treble';
 
 const useSnapshot = (
   cameras: ISnapshotsCameras,
   config: ITakeSnapshotsConfig
 ) => {
-  const isLoaded = useThreekitSelector<boolean>(isThreekitLoaded);
+  const isLoaded = useThreekitSelector<boolean>(isThreekitInitialized);
 
   if (!isLoaded) return undefined;
 

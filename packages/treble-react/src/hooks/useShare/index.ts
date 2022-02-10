@@ -1,5 +1,5 @@
 import { useThreekitSelector } from '../../store';
-import { isThreekitLoaded } from '../../store/threekit';
+import { isThreekitInitialized } from '../../store/treble';
 import message from '../../components/message';
 import { copyToClipboard } from '../../utils';
 
@@ -8,7 +8,7 @@ type UseShareHook =
   | ((msg: string | undefined) => Promise<undefined | string>);
 
 const useShare = (): UseShareHook => {
-  const isLoaded = useThreekitSelector<boolean>(isThreekitLoaded);
+  const isLoaded = useThreekitSelector<boolean>(isThreekitInitialized);
 
   if (!isLoaded) return undefined;
 

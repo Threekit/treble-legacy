@@ -1,0 +1,83 @@
+import { createSlice, createAction } from '@reduxjs/toolkit';
+import { RootState, ThreekitDispatch } from './index';
+
+/*****************************************************
+ * Types and Interfaces
+ ****************************************************/
+
+export interface PriceState {
+  id: undefined | string;
+  currency: undefined | string;
+  price: undefined | number;
+}
+
+export interface IPriceConfig {
+  id: string;
+  currency: string;
+}
+
+export interface IPrice {
+  currency: string;
+  price: number;
+}
+
+/*****************************************************
+ * Actions
+ ****************************************************/
+
+//  Actions to be used only internally
+export const setPriceConfig = createAction<IPriceConfig>('setPriceConfig');
+export const setPrice = createAction<number>('setPrice');
+
+/*****************************************************
+ * State
+ ****************************************************/
+
+const initialState: PriceState = {
+  //  Selected language
+  id: undefined,
+  currency: undefined,
+  price: undefined,
+};
+
+const { reducer } = createSlice({
+  name: 'price',
+  initialState,
+  extraReducers: builder => {
+    builder.addCase(setPriceConfig, (state, action) => {
+      const { id, currency } = action.payload;
+      state.id = id;
+      state.currency = currency;
+      state.price = window.threekit.configurator.getPrice(id, currency);
+    });
+    builder.addCase(setPrice, (state, action) => {
+      state.price = action.payload;
+    });
+  },
+  reducers: {},
+});
+
+/*****************************************************
+ * Standard Selectors
+ ****************************************************/
+
+export const getPrice = (state: RootState): undefined | IPrice => {
+  const { price, currency } = state.price;
+  if (!price || !currency) return undefined;
+  return { price, currency };
+};
+
+/*****************************************************
+ * Complex Actions
+ ****************************************************/
+
+export const updatePrice =
+  () => (dispatch: ThreekitDispatch, getState: () => RootState) => {
+    const { price } = getState();
+    if (!price.id || !price.currency) return;
+    dispatch(
+      setPrice(window.threekit.configurator.getPrice(price.id, price.currency))
+    );
+  };
+
+export default reducer;

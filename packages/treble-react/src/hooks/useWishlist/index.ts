@@ -4,8 +4,8 @@ import {
   removeFromWishlist,
   resumeFromWishlist,
   clearWishlist,
-  isThreekitLoaded,
-} from '../../store/threekit';
+} from '../../store/wishlist';
+import { isThreekitInitialized } from '../../store/treble';
 import { ISaveConfigurationConfig, WishlistArray } from '../../Treble';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 import { copyToClipboard, getResumableUrl } from '../../utils';
@@ -24,7 +24,7 @@ type UseWishlistHook =
 
 const useWishlist = (): UseWishlistHook => {
   const dispatch = useThreekitDispatch();
-  const isLoaded = useThreekitSelector<boolean>(isThreekitLoaded);
+  const isLoaded = useThreekitSelector<boolean>(isThreekitInitialized);
   const wishlist = useThreekitSelector(getWishlist);
 
   if (!isLoaded)

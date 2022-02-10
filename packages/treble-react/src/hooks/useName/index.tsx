@@ -1,5 +1,5 @@
 import { useThreekitSelector } from '../../store';
-import { getName } from '../../store/threekit';
+import { getName } from '../../store/product';
 
 const useName = () => useThreekitSelector<undefined | string>(getName);
 

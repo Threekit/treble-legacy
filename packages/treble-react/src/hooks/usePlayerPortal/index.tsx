@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { getPlayerElementId } from '../../store/threekit';
+import { getPlayerElementId } from '../../store/treble';
 import { TK_PLAYER_LOADER_DIV } from '../../constants';
 
 interface IHtmlElements {

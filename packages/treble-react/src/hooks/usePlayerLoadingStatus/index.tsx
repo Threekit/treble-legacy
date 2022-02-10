@@ -1,5 +1,5 @@
 import { useThreekitSelector } from '../../store';
-import { isPlayerLoading } from '../../store/threekit';
+import { isPlayerLoading } from '../../store/treble';
 
 const usePlayerLoadingStatus = () =>
   useThreekitSelector<boolean>(isPlayerLoading);

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import store, { useThreekitDispatch } from '../../store';
-import { launch, ILaunchConfig } from '../../store/threekit';
+import createStore, { useThreekitDispatch } from '../../store';
+import { Reducer } from 'redux';
+import { launch, ILaunchConfig } from '../../store/treble';
 
 import { Provider } from 'react-redux';
 
@@ -14,6 +15,7 @@ interface Theme {
 
 export interface ThreekitProviderProps extends Partial<ILaunchConfig> {
   theme?: Theme;
+  reducer?: Record<string, Reducer>;
   children: React.ReactNode;
 }
 
@@ -37,7 +39,7 @@ const App = (props: ThreekitProviderProps) => {
 
 const ThreekitProvider = (props: ThreekitProviderProps) => {
   return (
-    <Provider store={store}>
+    <Provider store={createStore(props.reducer)}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App

@@ -1,5 +1,5 @@
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
-import { getAttributes, setConfiguration } from '../../store/threekit';
+import { getAttributes, setConfiguration } from '../../store/attributes';
 import { selectionToConfiguration } from '../../utils';
 import {
   IConfigurationColor,

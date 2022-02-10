@@ -1,7 +1,7 @@
 import { useThreekitSelector } from '../../store';
-import { isThreekitLoaded } from '../../store/threekit';
+import { isThreekitInitialized } from '../../store/treble';
 
 const useThreekitInitStatus = () =>
-  useThreekitSelector<boolean>(isThreekitLoaded);
+  useThreekitSelector<boolean>(isThreekitInitialized);
 
 export default useThreekitInitStatus;

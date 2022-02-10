@@ -1,4 +1,4 @@
-import { getAttributes, setConfiguration } from '../../store/threekit';
+import { getAttributes, setConfiguration } from '../../store/attributes';
 import { ISetConfiguration, IThreekitDisplayAttribute } from '../../threekit';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 
