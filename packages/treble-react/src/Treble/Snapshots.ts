@@ -215,34 +215,6 @@ class Snapshots implements ISnapshots {
         return Promise.resolve(snapshotsRaw);
     }
 
-    // function getSnapshot() {
-    //   return window.threekit.player.snapshotAsync({
-    //     size,
-    //     mimeType: `image/${SNAPSHOT_FORMATS[format]}`,
-    //   })
-    // }
-
-    // function getSnapshots(
-    //   cameras: Array<string | undefined>,
-    //   camerasMap: CamerasMap
-    // ) {
-    //   let snapshots: Array<string> = []
-    //   return cameras.reduce((snapshotPromise, camera) => {
-    //     return snapshotPromise.then(
-    //       () =>
-    //         new Promise(async (resolve) => {
-    //           if (camera)
-    //             await window.threekit.configurator.setConfiguration({
-    //               [attributeName]: camerasMap[camera],
-    //             })
-    //           const snapshotStr = await getSnapshot()
-    //           snapshots.push(snapshotStr)
-    //           resolve(snapshots)
-    //         })
-    //     )
-    //   }, Promise.resolve(snapshots))
-    // }
-
     async function saveSnapshotToPlatform(snapshot: string, filename: string) {
       const files = dataURItoFile(snapshot, filename);
 

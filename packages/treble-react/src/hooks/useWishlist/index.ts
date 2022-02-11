@@ -14,7 +14,7 @@ import message from '../../components/message';
 type UseWishlistHook =
   | [
       WishlistArray,
-      (config?: ISaveConfigurationConfig) => Promise<void>,
+      (config?: ISaveConfigurationConfig) => void,
       (idx: number) => void,
       (idx: number) => void,
       (idx: number) => void,

@@ -10,7 +10,9 @@ interface AccordionItemProps extends React.FC {
 }
 
 interface AccordionProps<T> {
-  children: React.FunctionComponentElement<T>;
+  children:
+    | React.FunctionComponentElement<T>
+    | Array<React.FunctionComponentElement<T>>;
 }
 
 const AccordionItem: React.FC<AccordionItemProps> = props => {

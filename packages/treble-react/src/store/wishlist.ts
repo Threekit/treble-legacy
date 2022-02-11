@@ -1,8 +1,6 @@
-import { createAction, createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
 import { ISaveConfigurationConfig, WishlistArray } from '../Treble';
-import { IConfigurationResponse } from '../http/configurations';
-import { setConfiguration } from './attributes';
 
 /*****************************************************
  * Types and Interfaces
@@ -20,8 +18,34 @@ const initialState: WishlistState = [];
  * Standard Selectors
  ****************************************************/
 
-export const setWishlist =
-  createAction<Array<IConfigurationResponse>>('setWishlist');
+export const refreshWishlist = createAsyncThunk(
+  'treble/wishlist/refresh-data',
+  async () => {
+    const wishlistData = await window.threekit.treble.wishlist.getWishlist();
+    return wishlistData;
+  }
+);
+
+export const addToWishlist = createAsyncThunk(
+  'treble/wishlist/add-item',
+  async (config: ISaveConfigurationConfig) => {
+    const wishlistData = await window.threekit.treble.wishlist.addItem(config);
+    return wishlistData;
+  }
+);
+
+export const clearWishlist = createAction('treble/wishlist/clear', () => {
+  const wishlistData = window.threekit.treble.wishlist.clearWishlist();
+  return { payload: wishlistData };
+});
+
+export const removeFromWishlist = createAction(
+  'treble/wishlist/remove-item',
+  (idx: number) => {
+    const wishlistData = window.threekit.treble.wishlist.removeItemByIdx(idx);
+    return { payload: wishlistData };
+  }
+);
 
 /*****************************************************
  * Slice
@@ -32,9 +56,17 @@ const { reducer } = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(setWishlist, (state, action) => {
-      state = action.payload;
-      return state;
+    builder.addCase(refreshWishlist.fulfilled, (_, action) => {
+      return action.payload;
+    });
+    builder.addCase(addToWishlist.fulfilled, (_, action) => {
+      return action.payload;
+    });
+    builder.addCase(removeFromWishlist, (_, action) => {
+      return action.payload;
+    });
+    builder.addCase(clearWishlist, (_, action) => {
+      return action.payload;
     });
   },
 });
@@ -46,29 +78,12 @@ const { reducer } = createSlice({
 //  Wishlist
 export const getWishlist = (state: RootState) => state.wishlist;
 
-export const addToWishlist =
-  (config: ISaveConfigurationConfig) => async (dispatch: ThreekitDispatch) => {
-    const wishlistData = await window.threekit.treble.wishlist.addItem(config);
-    dispatch(setWishlist(wishlistData));
-  };
-
-export const removeFromWishlist =
-  (idx: number) => (dispatch: ThreekitDispatch) => {
-    const wishlistData = window.threekit.treble.wishlist.removeItemByIdx(idx);
-    dispatch(setWishlist(wishlistData));
-  };
-
 export const resumeFromWishlist =
-  (idx: number) => (dispatch: ThreekitDispatch, getState: () => RootState) => {
+  (idx: number) => (_: ThreekitDispatch, getState: () => RootState) => {
     const { wishlist } = getState();
     const savedConfiguration = wishlist[idx];
     if (!savedConfiguration) return;
-    dispatch(setConfiguration(savedConfiguration.variant));
+    window.threekit.configurator.setConfiguration(savedConfiguration.variant);
   };
-
-export const clearWishlist = () => (dispatch: ThreekitDispatch) => {
-  const wishlistData = window.threekit.treble.wishlist.clearWishlist();
-  dispatch(setWishlist(wishlistData));
-};
 
 export default reducer;

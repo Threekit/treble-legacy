@@ -1,5 +1,6 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
+import threekitAPI from '../api';
 
 /*****************************************************
  * Types and Interfaces
@@ -26,8 +27,23 @@ export interface IPrice {
  ****************************************************/
 
 //  Actions to be used only internally
-export const setPriceConfig = createAction<IPriceConfig>('setPriceConfig');
-export const setPrice = createAction<number>('setPrice');
+export const setPriceConfig = createAction<IPriceConfig>(
+  'treble/price/set-price-config'
+);
+export const setPrice = createAction<number>('treble/price/set-price');
+
+export const initPrice = () => async (dispatch: ThreekitDispatch) => {
+  const pricebook = await threekitAPI.price.getPricebooksList();
+
+  const id = pricebook[0].id;
+  const currency = pricebook[0].currencies[0];
+
+  if (pricebook.length) {
+    dispatch(setPriceConfig({ id, currency }));
+    const price = window.threekit.configurator.getPrice(id, currency);
+    dispatch(setPrice(price));
+  }
+};
 
 /*****************************************************
  * State
@@ -48,10 +64,11 @@ const { reducer } = createSlice({
       const { id, currency } = action.payload;
       state.id = id;
       state.currency = currency;
-      state.price = window.threekit.configurator.getPrice(id, currency);
+      return state;
     });
     builder.addCase(setPrice, (state, action) => {
       state.price = action.payload;
+      return state;
     });
   },
   reducers: {},

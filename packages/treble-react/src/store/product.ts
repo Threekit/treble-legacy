@@ -1,5 +1,5 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
-import { RootState } from './index';
+import { RootState, ThreekitDispatch } from './index';
 import { IMetadata } from '../threekit';
 
 /*****************************************************
@@ -18,8 +18,19 @@ export interface ProductState {
  ****************************************************/
 
 //  Actions to be used only internally
-export const setName = createAction<string>('setName');
-export const setMetadata = createAction<IMetadata>('setMetadata');
+export const setName = createAction<string>('treble/product/set-name');
+export const setMetadata = createAction<IMetadata>(
+  'treble/product/set-metadata'
+);
+
+export const initProduct = () => (dispatch: ThreekitDispatch) => {
+  const name = window.threekit.player.scene.get({
+    id: window.threekit.player.assetId,
+  }).name;
+  const metadata = window.threekit.configurator.getMetadata();
+  dispatch(setName(name));
+  dispatch(setMetadata(metadata));
+};
 
 /*****************************************************
  * State
@@ -36,12 +47,11 @@ const { reducer } = createSlice({
   name: 'product',
   initialState,
   extraReducers: builder => {
-    //  Language
     builder.addCase(setName, (state, action) => {
-      state.name = action.payload;
+      return { ...state, name: action.payload };
     });
     builder.addCase(setMetadata, (state, action) => {
-      state.metadata = action.payload;
+      return { ...state, metadata: action.payload };
     });
   },
   reducers: {},

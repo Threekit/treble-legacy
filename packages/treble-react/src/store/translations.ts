@@ -1,6 +1,7 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
-import { RootState } from './index';
+import { RootState, ThreekitDispatch } from './index';
 import { ITranslationMap } from '../api/products';
+import threekitAPI from '../api';
 
 /*****************************************************
  * Types and Interfaces
@@ -16,8 +17,19 @@ export interface TranslationsState {
  ****************************************************/
 
 //  Actions to be used only internally
-export const setTranslations = createAction<ITranslationMap>('setTranslations');
-export const setLanguage = createAction<string>('setLanguage');
+export const setTranslations = createAction<ITranslationMap>(
+  'treble/translations/set-translations'
+);
+export const setLanguage = createAction<string>(
+  'treble/translations/set-language'
+);
+export const initTranslations =
+  (language?: string) => async (dispatch: ThreekitDispatch) => {
+    const translations = await threekitAPI.products.fetchTranslations();
+
+    dispatch(setTranslations(translations));
+    if (language) dispatch(setLanguage(language));
+  };
 
 /*****************************************************
  * State
@@ -33,7 +45,6 @@ const { reducer } = createSlice({
   name: 'translations',
   initialState,
   extraReducers: builder => {
-    //  Language
     builder.addCase(setTranslations, (state, action) => {
       state.translations = action.payload;
     });

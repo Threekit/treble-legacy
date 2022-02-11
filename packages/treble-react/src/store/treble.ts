@@ -23,11 +23,11 @@ import {
   ISetConfiguration,
 } from '../threekit';
 import Treble from '../Treble';
-import { setTranslations, setLanguage } from './translations';
 import { setAttributes } from './attributes';
-import { setPriceConfig, updatePrice } from './price';
-import { setWishlist } from './wishlist';
-import { setName, setMetadata } from './product';
+import { initPrice, updatePrice } from './price';
+import { refreshWishlist } from './wishlist';
+import { initTranslations } from './translations';
+import { initProduct } from './product';
 
 /*****************************************************
  * Types and Interfaces
@@ -110,10 +110,14 @@ const initialState: TrebleState = {
  ****************************************************/
 
 export const setThreekitInitialized = createAction<undefined>(
-  'setThreekitInitialized'
+  'treble/set-threekit-initialized'
 );
-export const setPlayerLoading = createAction<boolean>('setPlayerLoading');
-export const setPlayerElement = createAction<string>('setPlayerElement');
+export const setPlayerLoading = createAction<boolean>(
+  'treble/set-player-loading'
+);
+export const setPlayerElement = createAction<string>(
+  'treble/set-player-element'
+);
 
 /*****************************************************
  * Slice
@@ -254,19 +258,15 @@ export const launch =
     //  We create the threekit script
     await createThreekitScriptEl(threekitDomain);
 
-    const [player, translations, pricebook] = await Promise.all([
-      window.threekitPlayer({
-        el: el as HTMLElement,
-        // Variables to sort out
-        authToken,
-        stageId,
-        assetId: updatedAssetId,
-        ...playerConfig,
-        initialConfiguration,
-      }),
-      threekitAPI.products.fetchTranslations(),
-      threekitAPI.price.getPricebooksList(),
-    ]);
+    const player = await window.threekitPlayer({
+      el: el as HTMLElement,
+      // Variables to sort out
+      authToken,
+      stageId,
+      assetId: updatedAssetId,
+      ...playerConfig,
+      initialConfiguration,
+    });
 
     window.threekit = {
       player,
@@ -274,45 +274,22 @@ export const launch =
       treble: new Treble({ player, orgId }),
     };
 
-    dispatch(
-      setAttributes(window.threekit.configurator.getDisplayAttributes())
-    );
+    dispatch(setThreekitInitialized());
+    dispatch(setPlayerLoading(false));
 
-    window.threekit.player.on('setConfiguration', e => {
-      console.log(e);
+    window.threekit.player.on('setConfiguration', () => {
       dispatch(
         setAttributes(window.threekit.configurator.getDisplayAttributes())
       );
       dispatch(updatePrice());
     });
 
-    if (launchConfig?.locale) {
-      dispatch(setLanguage(launchConfig.locale));
-      dispatch(setTranslations(translations));
-    }
+    EVENTS = Object.assign(EVENTS, launchConfig?.eventHandlers);
 
-    if (launchConfig?.eventHandlers)
-      EVENTS = Object.assign(EVENTS, launchConfig.eventHandlers);
-
-    if (pricebook.length) {
-      const priceConfig = {
-        id: pricebook[0].id,
-        currency: pricebook[0].currencies[0],
-      };
-      dispatch(setPriceConfig(priceConfig));
-    }
-
-    const productName = window.threekit.player.scene.get({
-      id: window.threekit.player.assetId,
-    }).name;
-    dispatch(setName(productName));
-    dispatch(setMetadata(window.threekit.configurator.getMetadata()));
-
-    dispatch(setThreekitInitialized());
-    dispatch(setPlayerLoading(false));
-
-    const wishlistData = await window.threekit.treble.wishlist.getWishlist();
-    dispatch(setWishlist(wishlistData));
+    dispatch(initTranslations(launchConfig?.locale));
+    dispatch(initPrice());
+    dispatch(initProduct());
+    dispatch(refreshWishlist());
 
     return;
   };

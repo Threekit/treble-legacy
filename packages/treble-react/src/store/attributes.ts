@@ -1,7 +1,7 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
 import { ISetConfiguration, IThreekitDisplayAttribute } from '../threekit';
-import { setPlayerLoading } from './treble';
+import { setPlayerLoading, setThreekitInitialized } from './treble';
 
 /*****************************************************
  * Types and Interfaces
@@ -9,15 +9,20 @@ import { setPlayerLoading } from './treble';
 
 export type AttributesState = Record<string, IThreekitDisplayAttribute>;
 
-// export interface AttributesState {
-//   attributes: Record<string, IThreekitDisplayAttribute>;
-// }
 /*****************************************************
  * Actions
  ****************************************************/
 
-export const setAttributes =
-  createAction<Array<IThreekitDisplayAttribute>>('setAttributes');
+export const setAttributes = createAction(
+  'treble/attributes/set-attributes',
+  (attributes: Array<IThreekitDisplayAttribute>) => {
+    const payload = attributes.reduce(
+      (output, attr) => Object.assign(output, { [attr.name]: attr }),
+      {} as Record<string, IThreekitDisplayAttribute>
+    );
+    return { payload };
+  }
+);
 
 /*****************************************************
  * State and Data
@@ -34,12 +39,15 @@ const { reducer } = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(setAttributes, (state, action) => {
-      state = action.payload.reduce(
+    builder.addCase(setThreekitInitialized, () => {
+      const attributes = window.threekit.configurator.getDisplayAttributes();
+      return attributes.reduce(
         (output, attr) => Object.assign(output, { [attr.name]: attr }),
         {} as Record<string, IThreekitDisplayAttribute>
       );
-      return state;
+    });
+    builder.addCase(setAttributes, (_, action) => {
+      return action.payload;
     });
   },
 });
@@ -52,8 +60,6 @@ const { reducer } = createSlice({
 export const getAttributes = (
   state: RootState
 ): undefined | Record<string, IThreekitDisplayAttribute> => {
-  //   const { isThreekitLoaded, attributes, language, translations } =
-  //     state.threekit;
   const { attributes } = state;
   const { isThreekitInitialized } = state.treble;
   const { language, translations } = state.translations;
