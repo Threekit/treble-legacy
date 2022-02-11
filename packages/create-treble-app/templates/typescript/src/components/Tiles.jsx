@@ -5,7 +5,7 @@ export default function Tiles(props) {
   if (!attribute) return <></>;
   return (
     <div className="mb-5">
-      <h3 className="text-xl mb-4">{attribute?.label}</h3>
+      <h3 className="text-xl mb-4">{props.title || attribute?.label}</h3>
       <div className="grid grid-cols-2 gap-1">
         {attribute?.values.map((item, i) => {
           const selected = item.assetId
@@ -14,6 +14,7 @@ export default function Tiles(props) {
           return (
             <button
               key={i}
+              type="button"
               onClick={() =>
                 setAttribute(item.assetId ? item.assetId : item.value)
               }

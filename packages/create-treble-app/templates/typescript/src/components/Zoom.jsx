@@ -13,10 +13,10 @@ export default function Zoom() {
 
   return (
     <>
-      <button onClick={() => zoomOut(1)} className="trbl-wgt-btn">
+      <button type="button" onClick={() => zoomOut(1)} className="trbl-wgt-btn">
         <ZoomOutIcon />
       </button>
-      <button onClick={() => zoomIn(1)} className="trbl-wgt-btn">
+      <button type="button" onClick={() => zoomIn(1)} className="trbl-wgt-btn">
         <ZoomInIcon />
       </button>
     </>

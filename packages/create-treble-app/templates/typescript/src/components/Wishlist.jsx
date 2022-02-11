@@ -34,10 +34,15 @@ export default function Wishlist() {
   };
   return (
     <>
-      <button className="trbl-wgt-btn" onClick={() => setShowWishlist(true)}>
+      <button
+        type="button"
+        className="trbl-wgt-btn"
+        onClick={() => setShowWishlist(true)}
+      >
         <WishlistIcon />
       </button>
       <button
+        type="button"
         className="trbl-wgt-btn"
         onClick={() => handleAddToWishlist(true)}
       >
@@ -63,18 +68,21 @@ export default function Wishlist() {
               <div className="">{item.label}</div>
               <div className="flex flex-row space-x-1 mt-2">
                 <button
+                  type="button"
                   onClick={() => handleClickResume(i)}
                   className={`${BASE_BTN_STYLES} flex-grow text-base border-primary text-primary hover:bg-primary hover:text-white`}
                 >
                   Resume
                 </button>
                 <button
+                  type="button"
                   onClick={() => shareWishlistItem(i)}
                   className={ICON_BTN_STYLES}
                 >
                   <ShareIcon />
                 </button>
                 <button
+                  type="button"
                   onClick={() => removeFromWishlist(i)}
                   className={ICON_BTN_STYLES}
                 >

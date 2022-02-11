@@ -4,7 +4,7 @@ export default {
   showLoadingThumbnail: false,
   showLoadingProgress: true,
   // onLoadingProgress: undefined,
-  showAR: false,
+  showAR: true,
   showShare: false,
   // locale: undefined,
   allowMobileVerticalOrbit: false,
