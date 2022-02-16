@@ -18,7 +18,8 @@ import {
   FORM_CLASS_NAME,
   TK_SAVED_CONFIG_PARAM_KEY,
 } from './constants';
-import { ITrebleConfig } from './threekit';
+import { ITrebleConfig, IAttributeTypes } from './threekit';
+import { RawAttributeValue } from './hooks/useAttribute';
 
 interface ICameraPosition {
   position: ICoordinates;
@@ -29,7 +30,6 @@ interface IAttributeComponentProps {
   component?: string;
   props?: { [key: string]: any };
 }
-
 interface IAttributesComponentProps {
   [attributeName: string]: undefined | false | IAttributeComponentProps;
 }
@@ -341,8 +341,8 @@ export const translateAttribute = (
 };
 
 export const selectionToConfiguration = (
-  value: string | number | boolean | IConfigurationColor,
-  attributeType: string
+  value: RawAttributeValue,
+  attributeType: IAttributeTypes
 ) => {
   switch (attributeType) {
     case ATTRIBUTE_TYPES.number:

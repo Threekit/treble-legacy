@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import useAttribute, { AttributeValue } from '../../hooks/useAttribute';
+import useAttribute, { RawAttributeValue } from '../../hooks/useAttribute';
 import usePlayerLoadingStatus from '../../hooks/usePlayerLoadingStatus';
 import {
   IAttributeColor,
@@ -27,13 +27,19 @@ export interface IOption extends IOptionShared {
   imageUrl?: string;
   // label: string;
 }
-
-export interface IFormContainerProps {
+interface MetadataKeys {
+  imgBaseUrl?: string;
+  metadataKeyThumbnail?: string;
+  metadataKeyPrice?: string;
+  metadataKeyDescription?: string;
+}
+export interface IFormContainerProps
+  extends Pick<
+    MetadataKeys,
+    'metadataKeyThumbnail' | 'metadataKeyPrice' | 'metadataKeyDescription'
+  > {
   attribute?: string;
 
-  metadataKeyThumbnail?: string;
-  metadataKeyDescription?: string;
-  metadataKeyPrice?: string;
   hideAttributeTitle?: string;
   sort?: string;
 
@@ -44,24 +50,16 @@ export interface IFormContainerProps {
   className?: string;
 }
 
-export interface IFormComponentProps<T extends IOptionShared> {
-  title?: string;
-  description?: string;
-  value?: string;
-  onClick?: (value: string) => void;
-  className?: string;
+export interface IFormComponentProps<T extends IOptionShared | undefined>
+  extends Pick<
+    IFormContainerProps,
+    'title' | 'description' | 'value' | 'onClick' | 'className'
+  > {
   options: null | undefined | Array<T>;
 }
 
 export interface IFormComponent<P> extends FunctionComponent<P> {
   compatibleAttributes: Set<string>;
-}
-
-interface MetadataKeys {
-  imgBaseUrl?: string;
-  metadataKeyThumbnail?: string;
-  metadataKeyPrice?: string;
-  metadataKeyDescription?: string;
 }
 
 interface IPrepAttributeConfig {
@@ -178,7 +176,7 @@ function formComponentContainer<P extends IFormContainerProps>(
       sort,
     });
 
-    const handleSetAttribute = (value: AttributeValue) =>
+    const handleSetAttribute = (value: RawAttributeValue) =>
       setAttribute && setAttribute(value);
 
     let preppedProps = { ...props };

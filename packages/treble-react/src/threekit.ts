@@ -6,7 +6,9 @@ type PRIVATE_APIS = 'scene' | 'player';
 
 export type DISPLAY_OPTIONS = 'webgl' | 'image';
 
-type IAttributeTypes = 'String' | 'Asset' | 'Color' | 'Number';
+export type IAttributeTypes = 'String' | 'Asset' | 'Color' | 'Number';
+
+export type AssetType = 'upload' | 'item';
 
 export type IMetadata = Record<string, string | number | null>;
 
@@ -114,7 +116,7 @@ export interface IDisplayAttributeAssetValue extends IConfigurationAssetValue {
 //  Generic Asset Type Attribute
 export interface IAttributeAssetBase<V>
   extends IAttributeBase<'Asset', IConfigurationAsset> {
-  assetType: string;
+  assetType: AssetType;
   blacklist: [];
   defaultValue: IConfigurationAsset;
   hiddenValues?: Array<string>;
@@ -125,6 +127,7 @@ export interface IAttributeAssetBase<V>
 //  Asset Type Attribute - getDisplayAttributes()
 export type IDisplayAttributeAsset =
   IAttributeAssetBase<IDisplayAttributeAssetValue>;
+
 export type IAttributeAsset = IAttributeAssetBase<IConfigurationAssetValue>;
 
 /****** String TYPE ATTRIBUTE *******/

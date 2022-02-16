@@ -9,6 +9,8 @@ import {
   filterFormAttributes,
 } from '../../utils';
 import useConfigurator from '../../hooks/useConfigurator';
+import { IDisplayAttributeAsset } from '../../threekit';
+import { ASSET_TYPES } from '../../constants';
 
 interface FlatFormProps {
   title?: string;
@@ -70,18 +72,25 @@ export const FlatForm = (props: FlatFormProps) => {
       {filterAttributes.map((attr, i) => {
         let Component;
         let props = (attributes || {})?.[attr.name]?.props || {};
+        let type: string = attr.type;
+        if (
+          type === 'Asset' &&
+          (attr as IDisplayAttributeAsset).assetType === ASSET_TYPES.upload
+        ) {
+          type = (attr as IDisplayAttributeAsset).assetType;
+        }
         if ((attributes || {})?.[attr.name]?.component) {
-          Component = Object.entries(formComponents[attr.type] || {}).find(
+          Component = Object.entries(formComponents[type] || {}).find(
             ([key]) =>
               key === (attributes || {})?.[attr.name]?.component.toLowerCase()
           )?.[1];
         }
         if (!Component) {
-          Component = Object.values(formComponents[attr.type] || {})?.[0];
+          Component = Object.values(formComponents[type] || {})?.[0];
         }
         if (!Component) {
           console.log(
-            `No default component available for ${attr.type} type Attributes`
+            `No default component available for ${type} type Attributes`
           );
           return null;
         }

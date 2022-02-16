@@ -1,18 +1,25 @@
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 import { getAttributes, setConfiguration } from '../../store/attributes';
 import { selectionToConfiguration } from '../../utils';
+import { ASSET_TYPES } from '../../constants';
 import {
-  IConfigurationColor,
   ISetConfiguration,
   IThreekitDisplayAttribute,
+  IConfigurationColor,
 } from '../../threekit';
+import threekitAPI from '../../api';
 
-export type AttributeValue = string | number | boolean | IConfigurationColor;
+export type RawAttributeValue =
+  | string
+  | number
+  | boolean
+  | IConfigurationColor
+  | File;
 
 type UseAttributeError = [undefined, undefined];
 type UseAttributeSuccess = [
   IThreekitDisplayAttribute,
-  (val: AttributeValue) => void
+  (val: RawAttributeValue) => Promise<void>
 ];
 
 type UseAttributeHook = UseAttributeError | UseAttributeSuccess;
@@ -26,8 +33,16 @@ const useAttribute = (attributeName?: string): UseAttributeHook => {
   const attribute = attributes[attributeName];
   if (!attribute) return [undefined, undefined];
 
-  const handleChange = (value: AttributeValue) => {
-    const preppedValue = selectionToConfiguration(value, attribute.type);
+  const handleChange = async (value: RawAttributeValue) => {
+    let preppedValue;
+    if (
+      attribute.type === 'Asset' &&
+      attribute.assetType === ASSET_TYPES.upload
+    ) {
+      const assetId = await threekitAPI.catalog.uploadAsset(value as File);
+      if (assetId)
+        preppedValue = selectionToConfiguration(assetId, attribute.type);
+    } else preppedValue = selectionToConfiguration(value, attribute.type);
     dispatch(
       setConfiguration({
         [attributeName]: preppedValue,

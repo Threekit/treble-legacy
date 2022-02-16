@@ -64,6 +64,11 @@ export const ATTRIBUTE_TYPES = {
   boolean: 'Boolean',
 };
 
+export const ASSET_TYPES = {
+  item: 'item',
+  upload: 'upload',
+};
+
 export const SORT_OPTIONS = {
   ascending: 'ascending',
   descending: 'descending',

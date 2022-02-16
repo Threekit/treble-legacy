@@ -22,6 +22,7 @@ import Strips from './components/Strips';
 import Swatch from './components/Swatch';
 import Tiles from './components/Tiles';
 import TilesGroup from './components/TilesGroup';
+import Upload from './components/Upload';
 //  Display
 import ProductName from './components/ProductName';
 import ProductDescription from './components/ProductDescription';
@@ -77,6 +78,7 @@ export {
   Swatch,
   Tiles,
   TilesGroup,
+  Upload,
   //  Display
   ProductName,
   ProductDescription,
