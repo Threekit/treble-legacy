@@ -1,6 +1,11 @@
 import threekitAPI from '../api';
 import connection from '../connection';
-import { IThreekitPlayer, IMetadata } from '../threekit';
+import {
+  IThreekitPlayer,
+  IMetadata,
+  IConfiguration,
+  ISetConfiguration,
+} from '../threekit';
 import { TK_SAVED_CONFIG_PARAM_KEY } from '../constants';
 import { getParams, objectToQueryStr } from '../utils';
 import Wishlist, { IWishlist } from './Wishlist';
@@ -8,6 +13,8 @@ import Snapshots from './Snapshots';
 
 interface ITreble {
   player: IThreekitPlayer;
+  orgId: string;
+  initialConfiguration: IConfiguration;
 }
 
 export interface ISaveConfigurationConfig {
@@ -20,17 +27,19 @@ class Treble {
   _api: typeof threekitAPI;
   _player: IThreekitPlayer;
   wishlist: IWishlist;
+  private _initialConfiguration: string;
   private _snapshots: Snapshots;
   takeSnapshots: Snapshots['takeSnapshots'];
 
-  constructor({ player }: ITreble) {
+  constructor({ player, orgId, initialConfiguration }: ITreble) {
     //  Threekit API
     this._api = threekitAPI;
     this._player = player;
-    this.wishlist = Wishlist();
+    this.wishlist = Wishlist(orgId);
     this._snapshots = new Snapshots();
     this.takeSnapshots = this._snapshots.takeSnapshots;
-    // this._player = player.enableApi('player')
+    // this._player = player.enableApi('player');
+    this._initialConfiguration = JSON.stringify(initialConfiguration);
   }
 
   saveConfiguration = async (config?: ISaveConfigurationConfig) => {
@@ -64,6 +73,29 @@ class Treble {
           }
         : undefined
     );
+  };
+
+  getNestedConfigurator = (address: string | Array<string>) => {
+    const player = window.threekit.player.enableApi('player');
+    const addressArr = Array.isArray(address) ? address : [address];
+    return addressArr.reduce((configurator, attributeName) => {
+      const itemId = configurator.getAppliedConfiguration(attributeName);
+      return window.threekit.player.scene.get({
+        id: itemId,
+        evalNode: true,
+      }).configurator;
+    }, player.getConfigurator());
+  };
+
+  resetConfiguration = (configuration?: ISetConfiguration) => {
+    const initialConfiguration: IConfiguration = JSON.parse(
+      this._initialConfiguration
+    );
+    const updateConfiguration = Object.assign(
+      initialConfiguration,
+      configuration
+    );
+    window.threekit.configurator.setConfiguration(updateConfiguration);
   };
 }
 

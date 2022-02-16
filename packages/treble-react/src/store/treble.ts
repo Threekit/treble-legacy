@@ -268,10 +268,16 @@ export const launch =
       initialConfiguration,
     });
 
+    const configurator = await player.getConfigurator();
+
     window.threekit = {
       player,
-      configurator: await player.getConfigurator(),
-      treble: new Treble({ player, orgId }),
+      configurator,
+      treble: new Treble({
+        player,
+        orgId,
+        initialConfiguration: configurator.getConfiguration(),
+      }),
     };
 
     dispatch(setThreekitInitialized());
