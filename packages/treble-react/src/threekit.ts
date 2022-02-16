@@ -282,11 +282,19 @@ export interface ThreekitInitConfig {
   showShare?: boolean;
   showLoadingThumbnail?: boolean;
   showLoadingProgress?: boolean;
-  onLoadingProgress?: boolean;
+  onLoadingProgress?: (progress: number) => void;
   locale?: string;
   allowMobileVerticalOrbit?: boolean;
   publishStage?: string;
   display?: DISPLAY_OPTIONS;
+  classnames?: {
+    loading?: string;
+    mobile?: string;
+    share?: string | { button: string; popup: string };
+    fullscreen?: string;
+    ar?: string | { button: string; popup: string };
+    help?: string;
+  };
 }
 
 /***************************************************
