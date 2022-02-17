@@ -1,14 +1,15 @@
 import React, { createRef, useState } from 'react';
-import { UploadWrapper } from './upload.styles';
 import { ATTRIBUTE_TYPES } from '../../constants';
 import FormComponentTitle from '../FormComponentTitle';
 import FormComponentDescription from '../FormComponentDescription';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
+import { ImageIcon, SpinnerIcon } from '../../icons';
 import container, {
   IFormComponentProps,
   IOptionShared,
 } from '../containers/formInputContainer';
+import { UploadWrapper, UploadingWrapper } from './upload.styles';
 
 export interface IUpload
   extends Pick<
@@ -26,19 +27,33 @@ export const Upload = (props: IUpload) => {
     onChange,
     className: customClassName,
   } = props;
-  const [uploading, setUploading] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [filename, setFilename] = useState<string | undefined>(undefined);
   const inputRef = createRef<HTMLInputElement>();
 
   const cls = generateClassName('upload', customClassName, title);
 
   const handleClick = () => {
+    if (isUploading) return;
     inputRef.current?.click();
   };
 
   const handleUpload = async (file: File) => {
-    setUploading(true);
+    setIsUploading(true);
     await onChange(file);
-    setUploading(false);
+    setIsUploading(false);
+    setFilename(file.name);
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const imgEl = document.getElementById('trbl-upload-img');
+      if (!imgEl) return;
+      // @ts-ignore
+      imgEl.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -55,11 +70,32 @@ export const Upload = (props: IUpload) => {
           }}
         />
         <button type="button" onClick={handleClick}>
-          {value?.length
-            ? 'Uploaded'
-            : uploading
-            ? 'Uploading...'
-            : 'Upload a file'}
+          {isUploading ? (
+            <UploadingWrapper>
+              <div>
+                <SpinnerIcon size="28px" />
+              </div>
+              <div>Uploading...</div>
+            </UploadingWrapper>
+          ) : value?.length ? (
+            <UploadingWrapper>
+              <div>
+                <img src="#" id="trbl-upload-img" />
+              </div>
+              <div>
+                <div>{filename}</div>
+                <div>Upload another file.</div>
+              </div>
+            </UploadingWrapper>
+          ) : (
+            <div>
+              <div>
+                <ImageIcon />
+              </div>
+              <div>Click to upload</div>
+              <div>Supported file types: PNG, JPEG, SVG</div>
+            </div>
+          )}
         </button>
       </UploadWrapper>
     </Wrapper>

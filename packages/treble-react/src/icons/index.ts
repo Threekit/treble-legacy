@@ -39,6 +39,7 @@ import UndoIcon from './Undo';
 import WishlistIcon from './Wishlist';
 import ZoomInIcon from './ZoomIn';
 import ZoomOutIcon from './ZoomOut';
+import SpinnerIcon from './Spinner';
 
 export interface IIcon extends React.FC {
   iconName: string;
@@ -85,6 +86,7 @@ export {
   WishlistIcon,
   ZoomInIcon,
   ZoomOutIcon,
+  SpinnerIcon,
 };
 
 export default {
@@ -128,4 +130,5 @@ export default {
   [WishlistIcon.iconName]: WishlistIcon,
   [ZoomInIcon.iconName]: ZoomInIcon,
   [ZoomOutIcon.iconName]: ZoomOutIcon,
+  [SpinnerIcon.iconName]: SpinnerIcon,
 };
