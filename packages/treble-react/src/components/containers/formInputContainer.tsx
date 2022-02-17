@@ -46,14 +46,15 @@ export interface IFormContainerProps
   title?: string;
   description?: string;
   value?: string;
-  onClick?: (value: string) => void;
+  onClick?: (value: RawAttributeValue) => Promise<void>;
+  onChange?: (value: RawAttributeValue) => Promise<void>;
   className?: string;
 }
 
 export interface IFormComponentProps<T extends IOptionShared | undefined>
   extends Pick<
     IFormContainerProps,
-    'title' | 'description' | 'value' | 'onClick' | 'className'
+    'title' | 'description' | 'value' | 'onClick' | 'onChange' | 'className'
   > {
   options: null | undefined | Array<T>;
 }

@@ -8,10 +8,15 @@ import Tiles, { Tiles as TilesComponent } from './Tiles';
 import TilesGroup, { TilesGroup as TilesGroupComponent } from './TilesGroup';
 import Upload, { Upload as UploadComponent } from './Upload';
 // import UploadArea, { UploadArea as UploadAreaComponent } from './UploadArea';
+import TextInput, { TextInput as TextInputComponent } from './TextInput';
 
+export const FORM_COMPONENT_TYPES = {
+  stringInput: 'string-input',
+};
+
+//  First option for each attribute type is the default value
 export const formComponents = {
   [ATTRIBUTE_TYPES.asset]: {
-    //  First option is default
     [StripsComponent.componentName]: Strips,
     [CardsComponent.componentName]: Cards,
     [DropdownComponent.componentName]: Dropdown,
@@ -20,14 +25,16 @@ export const formComponents = {
     [TilesGroupComponent.componentName]: TilesGroup,
   },
   [ATTRIBUTE_TYPES.string]: {
-    //  First option is default
     [TilesComponent.componentName]: Tiles,
     [DropdownComponent.componentName]: Dropdown,
     [CardsComponent.componentName]: Cards,
     [StripsComponent.componentName]: Strips,
     [SwatchComponent.componentName]: Swatch,
     [TilesGroupComponent.componentName]: TilesGroup,
-    // [TextInputComponent.componentName]: TextInput,
+    [TextInputComponent.componentName]: TextInput,
+  },
+  [FORM_COMPONENT_TYPES.stringInput]: {
+    [TextInputComponent.componentName]: TextInput,
   },
   [ASSET_TYPES.upload]: {
     [UploadComponent.componentName]: Upload,

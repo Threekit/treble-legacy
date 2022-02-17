@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Wrapper } from './flatForm.styles';
 import ProductName from '../ProductName';
 import ProductDescription from '../ProductDescription';
-import formComponents from '../formComponents';
+import formComponents, { FORM_COMPONENT_TYPES } from '../formComponents';
 import {
   generateFormClassName as generateClassName,
   filterFormAttributes,
@@ -73,11 +73,10 @@ export const FlatForm = (props: FlatFormProps) => {
         let Component;
         let props = (attributes || {})?.[attr.name]?.props || {};
         let type: string = attr.type;
-        if (
-          type === 'Asset' &&
-          (attr as IDisplayAttributeAsset).assetType === ASSET_TYPES.upload
-        ) {
+        if (attr.type === 'Asset' && attr.assetType === ASSET_TYPES.upload) {
           type = (attr as IDisplayAttributeAsset).assetType;
+        } else if (attr.type === 'String' && attr.values.length === 0) {
+          type = FORM_COMPONENT_TYPES.stringInput;
         }
         if ((attributes || {})?.[attr.name]?.component) {
           Component = Object.entries(formComponents[type] || {}).find(
