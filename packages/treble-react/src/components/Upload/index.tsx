@@ -1,22 +1,27 @@
-import React, { createRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ATTRIBUTE_TYPES } from '../../constants';
 import FormComponentTitle from '../FormComponentTitle';
 import FormComponentDescription from '../FormComponentDescription';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { ImageIcon, SpinnerIcon } from '../../icons';
+import { SpinnerIcon, AddIcon, DeleteIcon } from '../../icons';
 import container, {
   IFormComponentProps,
   IOptionShared,
 } from '../containers/formInputContainer';
-import { UploadWrapper, UploadingWrapper } from './upload.styles';
+import {
+  UploadWrapper,
+  IconWrapper,
+  ImageWrapper,
+  ImageActionArea,
+} from './upload.styles';
 
 export interface IUpload
   extends Pick<
     IFormComponentProps<IOptionShared>,
     'title' | 'description' | 'className' | 'value'
   > {
-  onChange: (file: File) => Promise<void>;
+  onChange: (file: File | undefined) => Promise<void>;
 }
 
 export const Upload = (props: IUpload) => {
@@ -28,29 +33,30 @@ export const Upload = (props: IUpload) => {
     className: customClassName,
   } = props;
   const [isUploading, setIsUploading] = useState(false);
-  const [filename, setFilename] = useState<string | undefined>(undefined);
-  const inputRef = createRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
 
   const cls = generateClassName('upload', customClassName, title);
 
   const handleClick = () => {
     if (isUploading) return;
+    if (value?.length) return;
     inputRef.current?.click();
   };
 
-  const handleUpload = async (file: File) => {
+  const handleUpload = async (file: File | undefined) => {
     setIsUploading(true);
     await onChange(file);
     setIsUploading(false);
-    setFilename(file.name);
+
+    if (!file) return;
 
     const reader = new FileReader();
 
     reader.onload = () => {
-      const imgEl = document.getElementById('trbl-upload-img');
-      if (!imgEl) return;
+      if (!imgRef.current) return;
       // @ts-ignore
-      imgEl.src = reader.result;
+      imgRef.current.src = reader.result;
     };
 
     reader.readAsDataURL(file);
@@ -60,7 +66,10 @@ export const Upload = (props: IUpload) => {
     <Wrapper>
       <FormComponentTitle title={title} className={cls} />
       <FormComponentDescription description={description} className={cls} />
-      <UploadWrapper className={cls}>
+      <UploadWrapper
+        className={cls}
+        uploaded={!!(!isUploading && value?.length)}
+      >
         <input
           type="file"
           ref={inputRef}
@@ -71,30 +80,35 @@ export const Upload = (props: IUpload) => {
         />
         <button type="button" onClick={handleClick}>
           {isUploading ? (
-            <UploadingWrapper>
-              <div>
+            <>
+              <IconWrapper>
                 <SpinnerIcon size="28px" />
-              </div>
+              </IconWrapper>
               <div>Uploading...</div>
-            </UploadingWrapper>
+            </>
           ) : value?.length ? (
-            <UploadingWrapper>
+            <ImageWrapper>
               <div>
-                <img src="#" id="trbl-upload-img" />
+                <img ref={imgRef} src="#" />
               </div>
-              <div>
-                <div>{filename}</div>
-                <div>Upload another file.</div>
-              </div>
-            </UploadingWrapper>
+              <ImageActionArea>
+                <div
+                  onClick={e => {
+                    handleUpload(undefined);
+                    e.stopPropagation();
+                  }}
+                >
+                  <DeleteIcon />
+                </div>
+              </ImageActionArea>
+            </ImageWrapper>
           ) : (
-            <div>
-              <div>
-                <ImageIcon />
-              </div>
-              <div>Click to upload</div>
-              <div>Supported file types: PNG, JPEG, SVG</div>
-            </div>
+            <>
+              <IconWrapper>
+                <AddIcon />
+              </IconWrapper>
+              <div>Upload</div>
+            </>
           )}
         </button>
       </UploadWrapper>

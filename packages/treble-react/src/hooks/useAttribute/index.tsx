@@ -14,7 +14,8 @@ export type RawAttributeValue =
   | number
   | boolean
   | IConfigurationColor
-  | File;
+  | File
+  | undefined;
 
 type UseAttributeError = [undefined, undefined];
 type UseAttributeSuccess = [
@@ -39,9 +40,12 @@ const useAttribute = (attributeName?: string): UseAttributeHook => {
       attribute.type === 'Asset' &&
       attribute.assetType === ASSET_TYPES.upload
     ) {
-      const assetId = await threekitAPI.catalog.uploadAsset(value as File);
-      if (assetId)
-        preppedValue = selectionToConfiguration(assetId, attribute.type);
+      if (!value) preppedValue = selectionToConfiguration('', attribute.type);
+      else {
+        const assetId = await threekitAPI.catalog.uploadAsset(value as File);
+        if (assetId)
+          preppedValue = selectionToConfiguration(assetId, attribute.type);
+      }
     } else preppedValue = selectionToConfiguration(value, attribute.type);
     dispatch(
       setConfiguration({

@@ -3,10 +3,11 @@ import styled, { keyframes } from 'styled-components';
 
 interface ISpinnerProps {
   size?: string;
+  thickness?: string;
 }
 
 function Spinner(props: ISpinnerProps) {
-  return <Wrapper size={props.size} />;
+  return <Wrapper size={props.size} thickness={props.thickness} />;
 }
 
 const spin = keyframes`
@@ -19,7 +20,7 @@ const Wrapper = styled.div<ISpinnerProps>`
   display: inline-block;
   width: ${props => props.size || '40px'};
   height: ${props => props.size || '40px'};
-  border: 5px solid rgba(0, 0, 0, 0.3);
+  border: ${props => props.thickness || '5px'} solid rgba(0, 0, 0, 0.3);
   border-radius: 50%;
   border-top-color: #000;
   animation: ${spin} 1s ease-in-out infinite;

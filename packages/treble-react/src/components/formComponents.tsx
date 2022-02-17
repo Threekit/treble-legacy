@@ -7,6 +7,7 @@ import Swatch, { Swatch as SwatchComponent } from './Swatch';
 import Tiles, { Tiles as TilesComponent } from './Tiles';
 import TilesGroup, { TilesGroup as TilesGroupComponent } from './TilesGroup';
 import Upload, { Upload as UploadComponent } from './Upload';
+// import UploadArea, { UploadArea as UploadAreaComponent } from './UploadArea';
 
 export const formComponents = {
   [ATTRIBUTE_TYPES.asset]: {
@@ -30,6 +31,7 @@ export const formComponents = {
   },
   [ASSET_TYPES.upload]: {
     [UploadComponent.componentName]: Upload,
+    // [UploadAreaComponent.componentName]: UploadArea,
   },
   //   [ATTRIBUTE_TYPES.color]: {
   //     //  First option is default
