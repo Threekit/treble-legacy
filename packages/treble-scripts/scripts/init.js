@@ -11,7 +11,7 @@ function installDependencies(root, dependencies, isTypescript) {
   return new Promise((resolve, reject) => {
     const command = 'yarnpkg';
     const args = ['add', '--exact'];
-    const packages = [COMPONENTS_PACKAGE];
+    const packages = [COMPONENTS_PACKAGE, 'express', 'cors', 'morgan'];
     const devDependencies = [
       'eslint',
       'eslint-config-prettier',
@@ -38,6 +38,8 @@ function installDependencies(root, dependencies, isTypescript) {
     // if (verbose) {
     //   args.push('--verbose');
     // }
+
+    console.log('Installing Treble project dependencies...');
 
     const child = spawn(command, args, { stdio: 'inherit' });
     child.on('close', code => {
@@ -132,6 +134,7 @@ function enrichPackageJson(root, isTypescript) {
       build: 'treble-scripts build',
       format: 'prettier --write ./src',
       lint: 'eslint ./src',
+      serve: 'node server',
     }));
 
   fs.writeFileSync(
@@ -163,4 +166,28 @@ module.exports = async function init([
   await removeTemplateDependencies([templateName, COMPONENTS_PACKAGE]);
   await enrichPackageJson(root, isTypescript);
   await renameGitIgnore(root);
+
+  console.log();
+  console.log(`Success! Created ${chalk.cyan(name)} at ${chalk.green(root)}`);
+  console.log('Inside that directory, you can run the following command:');
+  console.log();
+  console.log(`  ${chalk.cyan('yarn start')}`);
+  console.log(
+    `    Starts the local development server on ${chalk.cyan(
+      'https://localhost:3000'
+    )}.`
+  );
+  console.log();
+  console.log(`  ${chalk.cyan('yarn build')}`);
+  console.log(
+    `    Bundles the app into a two static files named ${chalk.cyan(
+      'treble-app.js'
+    )} and ${chalk.cyan('treble-app.css')}, ready for production.`
+  );
+  console.log();
+  console.log('Get started by typing:');
+  console.log();
+  console.log(`${chalk.cyan('cd')} ${name}`);
+  console.log(chalk.cyan('yarn start'));
+  console.log();
 };

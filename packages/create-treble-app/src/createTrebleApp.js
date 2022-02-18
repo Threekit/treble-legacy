@@ -47,6 +47,19 @@ function installTreble(root) {
     args.push('--cwd');
     args.push(root);
 
+    console.log();
+    console.log(root);
+    console.log();
+    console.log('Installing dependencies. This will take a couple of minutes.');
+    console.log(
+      `Installing ${chalk.cyan(`react`)}, ${chalk.cyan(
+        `react-dom`
+      )}, ${chalk.cyan(`@threekit-tools/treble`)} and ${chalk.cyan(
+        `@threekit-tools/treble-scripts`
+      )}...`
+    );
+    console.log();
+
     const installProcess = spawn(command, args, { stdio: 'inherit' });
     installProcess.on('close', code => {
       if (code !== 0) {
@@ -102,7 +115,7 @@ function initTreble(name, root, originalDirectory, templateName) {
   });
 }
 
-export default async function createApp() {
+export default async function createTrebleApp() {
   const templateName = preppedArgs.flags?.template || undefined;
   let name = preppedArgs.appName;
   const originalDirectory = process.cwd();
@@ -126,23 +139,3 @@ export default async function createApp() {
   process.chdir(root);
   initTreble(name, root, originalDirectory, templateName);
 }
-
-/**
- *
- * Create Treble App
- *
- * Create directory
- * Setup package.json (part 1)
- * Install treble + treble-scripts
- * Run @threekit-tools/treble-scripts/init.js
- *
- *
- * Treble Scripts
- *
- * Download dependencies + template + components
- * Copy template + components
- * Uninstall template + components
- * Setup package.json (part 2)
- * rename gitignore
- *
- */
