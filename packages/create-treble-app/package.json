@@ -1,6 +1,6 @@
 {
   "name": "create-treble-app",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "main": "index.js",
   "license": "MIT",
   "type": "module",

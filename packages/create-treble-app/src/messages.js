@@ -1,5 +1,21 @@
 import chalk from 'chalk';
 
+export const nodeVersionError = nodeVersion => {
+  console.error(
+    'You are running Node ' +
+      nodeVersion +
+      '.\n' +
+      'Create React App requires Node 14 or higher. \n' +
+      'Please update your version of Node.'
+  );
+};
+
+export const creatingTrebleApp = root => {
+  console.log();
+  console.log(`Creating a new Treble app in ${chalk.green(root)}.`);
+  console.log();
+};
+
 export const missingProjectName = () => {
   console.log();
   console.log();
