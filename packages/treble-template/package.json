@@ -1,0 +1,9 @@
+{
+  "name": "@threekit-tools/treble-template",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "The base template for Create Treble App.",
+  "engines": {
+    "node": ">=14"
+  }
+}
