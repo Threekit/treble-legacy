@@ -149,13 +149,14 @@ module.exports = async function init([
   template,
 ]) {
   let templateName = template || DEFAULT_TEMPLATE;
-  const dependencies = [templateName];
   let isTypescript = false;
 
   if (templateName.toLowerCase() === 'typescript') {
     isTypescript = true;
     templateName = TYPESCRIPT_TEMPLATE;
   }
+
+  const dependencies = [templateName];
 
   await installDependencies(root, dependencies, isTypescript);
   await copyTemplate(root, templateName);
