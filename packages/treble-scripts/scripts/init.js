@@ -5,6 +5,7 @@ const chalk = require('chalk');
 
 const COMPONENTS_PACKAGE = '@threekit-tools/treble-components';
 const DEFAULT_TEMPLATE = '@threekit-tools/treble-template';
+const TYPESCRIPT_TEMPLATE = '@threekit-tools/treble-template-typescript';
 
 function installDependencies(root, dependencies, isTypescript) {
   return new Promise((resolve, reject) => {
@@ -147,9 +148,14 @@ module.exports = async function init([
   originalDirectory,
   template,
 ]) {
-  const templateName = template || DEFAULT_TEMPLATE;
+  let templateName = template || DEFAULT_TEMPLATE;
   const dependencies = [templateName];
-  const isTypescript = false;
+  let isTypescript = false;
+
+  if (templateName.toLowerCase() === 'typescript') {
+    isTypescript = true;
+    templateName = TYPESCRIPT_TEMPLATE;
+  }
 
   await installDependencies(root, dependencies, isTypescript);
   await copyTemplate(root, templateName);
