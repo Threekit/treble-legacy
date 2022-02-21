@@ -148,6 +148,7 @@ function enrichPackageJson(root, isTypescript) {
 module.exports = async function init([
   name,
   root,
+  // eslint-disable-next-line
   originalDirectory,
   template,
 ]) {
