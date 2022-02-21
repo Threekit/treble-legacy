@@ -132,10 +132,15 @@ export default async function createTrebleApp() {
 
   const root = path.resolve(name);
 
-  await createAppDir(name, root);
-  await createPackageJson(root);
-  await installTreble(root);
+  if (name === '.') {
+    name = undefined;
+  } else {
+    await createAppDir(name, root);
+    await createPackageJson(root);
+  }
 
+  await installTreble(root);
   process.chdir(root);
+
   initTreble(name, root, originalDirectory, templateName);
 }

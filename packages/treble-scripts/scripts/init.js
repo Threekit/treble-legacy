@@ -168,7 +168,9 @@ module.exports = async function init([
   await renameGitIgnore(root);
 
   console.log();
-  console.log(`Success! Created ${chalk.cyan(name)} at ${chalk.green(root)}`);
+  if (name)
+    console.log(`Success! Created ${chalk.cyan(name)} at ${chalk.green(root)}`);
+  else console.log(`Success! Created your Treble App.`);
   console.log('Inside that directory, you can run the following command:');
   console.log();
   console.log(`  ${chalk.cyan('yarn start')}`);
@@ -187,7 +189,7 @@ module.exports = async function init([
   console.log();
   console.log('Get started by typing:');
   console.log();
-  console.log(`${chalk.cyan('cd')} ${name}`);
+  if (name) console.log(`${chalk.cyan('cd')} ${name}`);
   console.log(chalk.cyan('yarn start'));
   console.log();
 };
