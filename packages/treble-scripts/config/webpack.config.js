@@ -190,6 +190,12 @@ module.exports = (env, threekitEnv) => {
                   maxSize: imageInlineSizeLimit,
                 },
               },
+              use: {
+                loader: require.resolve('file-loader'),
+                options: {
+                  name: 'static/media/[name].[ext]',
+                },
+              },
             },
             {
               test: /\.svg$/,
@@ -209,7 +215,7 @@ module.exports = (env, threekitEnv) => {
                 {
                   loader: require.resolve('file-loader'),
                   options: {
-                    name: 'static/media/[name].[hash].[ext]',
+                    name: 'static/media/[name].[ext]',
                   },
                 },
               ],
