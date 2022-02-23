@@ -53,7 +53,7 @@ export const generateToolClassName = generateClassName(TOOL_CLASS_NAME);
 export const generateDisplayClassName = generateClassName(DISPLAY_CLASS_NAME);
 export const generateFormClassName = generateClassName(FORM_CLASS_NAME);
 
-export const IsJsonString = (str: string): boolean => {
+export const isJsonString = (str: string): boolean => {
   try {
     JSON.parse(str);
   } catch (e) {
@@ -70,7 +70,7 @@ export const objectToQueryStr = (obj: Record<string, any>): string => {
   return Object.entries(obj).reduce<string>((output, [key, val], i) => {
     if (i) output += '&';
     if (val !== undefined)
-      output += `${key}=${IsJsonString(val) ? JSON.stringify(val) : val}`;
+      output += `${key}=${isJsonString(val) ? JSON.stringify(val) : val}`;
     return output;
   }, '?');
 };
@@ -81,7 +81,7 @@ export const getParams = () => {
     let [key, value] = part.split('=');
     if (!key?.length) return output;
     const preppedValue = decodeURIComponent(value);
-    output[decodeURIComponent(key)] = IsJsonString(preppedValue)
+    output[decodeURIComponent(key)] = isJsonString(preppedValue)
       ? JSON.parse(preppedValue)
       : preppedValue;
     return output;

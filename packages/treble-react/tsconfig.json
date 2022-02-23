@@ -21,5 +21,13 @@
     "strictFunctionTypes": false
   },
   "include": ["src"],
-  "exclude": ["node_modules", "lib", "dist"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.spec.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
+  ]
 }

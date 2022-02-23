@@ -27,7 +27,7 @@ export interface ISceneQuery {
   child?: string;
   parent?: boolean;
   includeParent?: boolean;
-  from?: ISceneQuery;
+  from?: string | ISceneQuery;
   hasPlug?: string;
   operator?: any;
   operatorIndex?: number;
@@ -44,6 +44,7 @@ export interface ISceneQuery {
 }
 
 export interface ISceneResult {
+  id: string;
   name: string;
   configurator: IThreekitPrivateConfigurator;
 }
@@ -224,6 +225,8 @@ export interface IThreekitScene {
     RENDERED: 'rendered';
   };
   get: (query: ISceneQuery | string) => ISceneResult;
+  find: (query: ISceneQuery | string) => ISceneResult;
+  set: (query: ISceneQuery | string, transform: ICoordinates) => void;
 }
 
 export interface IThreekitTools {

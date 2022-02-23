@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble",
-  "version": "0.0.57",
+  "version": "0.0.57-animation",
   "author": "Amaan Saeed",
   "license": "MIT",
   "files": [
@@ -13,6 +13,14 @@
   "publishConfig": {
     "directory": "dist"
   },
+  "jest": {
+    "verbose": true,
+    "globals": {
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
+    }
+  },
   "scripts": {
     "start": "tsc --watch",
     "build": "tsc",
@@ -21,7 +29,8 @@
     "build-storybook": "build-storybook -o build",
     "lint": "eslint ./src",
     "check-format": "prettier -c ./src",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "test": "jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
@@ -40,18 +49,24 @@
     "@storybook/addon-links": "^6.3.12",
     "@storybook/addon-storysource": "^6.3.12",
     "@storybook/react": "^6.3.12",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.3",
+    "@types/jest": "^27.4.1",
     "@types/node": "^16.10.3",
     "@types/react": ">=17.0.27",
     "@types/react-dom": ">=17.0.9",
     "@types/redux-logger": "^3.0.9",
     "@types/styled-components": "^5.1.15",
     "@types/webpack-env": "^1.16.3",
+    "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.2",
+    "jest": "^27.5.1",
     "react": ">=17.0.2",
     "react-dom": ">=17.0.2",
     "rimraf": "^3.0.2",
     "serve": "^12.0.1",
     "storybook-addon-styled-component-theme": "^2.0.0",
+    "ts-jest": "^27.1.3",
     "typescript": ">=4.4.4"
   },
   "gitHead": "2e16bcf98f81e16bb1768072fdb3968122e7966f"
