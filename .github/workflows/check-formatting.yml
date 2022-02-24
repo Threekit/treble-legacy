@@ -1,4 +1,4 @@
-name: check-formatting
+name: Check formatting
 
 on: [push]
 
