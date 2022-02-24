@@ -6,7 +6,8 @@ import {
   clearWishlist,
 } from '../../store/wishlist';
 import { isThreekitInitialized } from '../../store/treble';
-import { ISaveConfigurationConfig, WishlistArray } from '../../Treble';
+import { WishlistArray } from '../../Treble';
+import { ISaveConfiguration } from '../../api/configurations';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 import { copyToClipboard, getResumableUrl } from '../../utils';
 import message from '../../components/message';
@@ -14,7 +15,7 @@ import message from '../../components/message';
 type UseWishlistHook =
   | [
       WishlistArray,
-      (config?: ISaveConfigurationConfig) => void,
+      (config?: Omit<ISaveConfiguration, 'configurator'>) => void,
       (idx: number) => void,
       (idx: number) => void,
       (idx: number) => void,
@@ -30,8 +31,9 @@ const useWishlist = (): UseWishlistHook => {
   if (!isLoaded)
     return [undefined, undefined, undefined, undefined, undefined, undefined];
 
-  const handleAddToWishlist = (config: ISaveConfigurationConfig) =>
-    dispatch(addToWishlist(config));
+  const handleAddToWishlist = (
+    config: Omit<ISaveConfiguration, 'configurator'>
+  ) => dispatch(addToWishlist(config));
 
   const handleRemoveFromWishlist = (idx: number) => {
     dispatch(removeFromWishlist(idx));

@@ -16,6 +16,7 @@ export interface IConfigurationResponse {
   shortId: string;
   thumbnail: null | string;
   variant: IConfiguration;
+  attachments: Record<string, string>;
 }
 
 interface IConfigurationsResponse extends IMultiPageResponse {

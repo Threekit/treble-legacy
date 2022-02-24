@@ -256,6 +256,25 @@ export const dataURItoFile = (dataURI: string, filename: string): File => {
   return new File([u8arr], filename, { type: mime });
 };
 
+export const downloadSnapshot = async (snapshot: string, filename: string) => {
+  const blob = dataURItoBlob(snapshot);
+  const blobUrl = URL.createObjectURL(blob);
+  const link = document.createElement('a'); // Or maybe get it from the current document
+  link.href = blobUrl;
+  link.download = filename;
+  const clickHandler = () => {
+    setTimeout(() => {
+      URL.revokeObjectURL(blobUrl);
+      link.removeEventListener('click', clickHandler);
+    }, 150);
+  };
+
+  link.addEventListener('click', clickHandler);
+  document.body.appendChild(link);
+
+  link.click();
+};
+
 export const copyToClipboard = (
   data: string | Record<string, string | number | boolean>
 ) => {

@@ -35,10 +35,10 @@ export const setPrice = createAction<number>('treble/price/set-price');
 export const initPrice = () => async (dispatch: ThreekitDispatch) => {
   const pricebook = await threekitAPI.price.getPricebooksList();
 
-  const id = pricebook[0].id;
-  const currency = pricebook[0].currencies[0];
-
   if (pricebook.length) {
+    const id = pricebook[0].id;
+    const currency = pricebook[0].currencies[0];
+
     dispatch(setPriceConfig({ id, currency }));
     const price = window.threekit.configurator.getPrice(id, currency);
     dispatch(setPrice(price));

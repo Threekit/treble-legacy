@@ -2,13 +2,13 @@ import http from '../http';
 import { IConfigurationResponse } from '../http/configurations';
 import { IConfiguration, IMetadata } from '../threekit';
 
-interface ISaveConfiguration {
+export interface ISaveConfiguration {
   assetId: string;
   customerId?: string;
   configuration: IConfiguration;
   metadata?: IMetadata;
   productVersion?: string;
-  files?: File;
+  attachments?: Record<string, File>;
 }
 
 export const save = async (saveConfig: ISaveConfiguration) => {
@@ -18,7 +18,7 @@ export const save = async (saveConfig: ISaveConfiguration) => {
     configuration,
     metadata,
     productVersion,
-    files,
+    attachments,
   } = saveConfig;
   let error: string | undefined;
   if (!assetId) error = 'Requires Asset Id';
@@ -32,9 +32,18 @@ export const save = async (saveConfig: ISaveConfiguration) => {
   if (metadata && Object.keys(metadata))
     fd.append('metadata', JSON.stringify(metadata));
   if (customerId) fd.append('customerId', customerId);
-  if (files) fd.append('files', files);
+  if (attachments && Object.keys(attachments).length) {
+    let attachmentsPrepped = {};
+    Object.entries(attachments).forEach(([key, file]) => {
+      fd.append('files', file);
+      attachmentsPrepped = Object.assign({}, attachmentsPrepped, {
+        [key]: file.name,
+      });
+    });
+    fd.append('attachments', JSON.stringify(attachmentsPrepped));
+  }
 
-  return await http.configurations.postConfiguration(fd);
+  return http.configurations.postConfiguration(fd);
 };
 
 export const fetch = (configurationId: string) => {

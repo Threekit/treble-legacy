@@ -18,6 +18,7 @@ import {
   regularToKebabCase,
   setCameraPosition,
   getCameraPosition,
+  downloadSnapshot,
 } from '../utils';
 
 export type ISnapshotsCameras = undefined | string | Array<string | undefined>;
@@ -146,7 +147,7 @@ class Snapshots implements ISnapshots {
     camerasList: ISnapshotsCameras,
     snapshotsConfig: ITakeSnapshotsConfig
   ) => {
-    const { threekitDomain } = connection.getConnection();
+    const { threekitDomain, orgId } = connection.getConnection();
     const filename =
       snapshotsConfig?.filename || DEFAULT_CAMERA_CONFIG.filename;
     const size = snapshotsConfig?.size || DEFAULT_CAMERA_CONFIG.size;
@@ -179,18 +180,23 @@ class Snapshots implements ISnapshots {
 
     switch (output) {
       case SNAPSHOT_OUTPUTS.url:
-        const savedSnapshots = await Promise.all(
-          snapshotsRaw.map((snapshotBlob, idx) => {
-            const cameraName = camerasList?.[idx]
-              ? `-${regularToKebabCase(camerasList[idx] || 'default')}`
-              : '';
-            return saveSnapshotToPlatform(
-              snapshotBlob,
-              `${filename}${cameraName}.${format}`
-            );
-          })
+        const attachments = snapshotsRaw.reduce((output, el, idx) => {
+          const cameraName = camerasList?.[idx]
+            ? regularToKebabCase(camerasList[idx] || 'default')
+            : '';
+          const file = dataURItoFile(el, `${filename}-${cameraName}.${format}`);
+          return Object.assign(output, { [cameraName]: file });
+        }, {});
+        const response = await threekitAPI.configurations.save({
+          assetId: window.threekit.player.assetId,
+          configuration: window.threekit.configurator.getConfiguration(),
+          attachments,
+        });
+        const urlsArray = Object.keys(response.data.attachments).map(
+          key =>
+            `${threekitDomain}/api/configurations/${response.data.shortId}/files/${key}?orgId=${orgId}`
         );
-        return Promise.resolve(savedSnapshots);
+        return Promise.resolve(urlsArray);
       case SNAPSHOT_OUTPUTS.download:
         snapshotsRaw.forEach((snapshotBlob, idx) => {
           const cameraName = camerasList?.[idx]
@@ -213,37 +219,6 @@ class Snapshots implements ISnapshots {
       case SNAPSHOT_OUTPUTS.dataUrl:
       default:
         return Promise.resolve(snapshotsRaw);
-    }
-
-    async function saveSnapshotToPlatform(snapshot: string, filename: string) {
-      const files = dataURItoFile(snapshot, filename);
-
-      const response = await threekitAPI.configurations.save({
-        assetId: window.threekit.player.assetId,
-        configuration: window.threekit.configurator.getConfiguration(),
-        files,
-      });
-
-      return `${threekitDomain}/api/files/hash/${response.data.thumbnail}`;
-    }
-
-    async function downloadSnapshot(snapshot: string, filename: string) {
-      const blob = dataURItoBlob(snapshot);
-      const blobUrl = URL.createObjectURL(blob);
-      const link = document.createElement('a'); // Or maybe get it from the current document
-      link.href = blobUrl;
-      link.download = filename;
-      const clickHandler = () => {
-        setTimeout(() => {
-          URL.revokeObjectURL(blobUrl);
-          link.removeEventListener('click', clickHandler);
-        }, 150);
-      };
-
-      link.addEventListener('click', clickHandler);
-      document.body.appendChild(link);
-
-      link.click();
     }
   };
 }

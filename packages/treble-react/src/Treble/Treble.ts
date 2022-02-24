@@ -2,25 +2,19 @@ import threekitAPI from '../api';
 import connection from '../connection';
 import {
   IThreekitPlayer,
-  IMetadata,
   IConfiguration,
   ISetConfiguration,
 } from '../threekit';
 import { TK_SAVED_CONFIG_PARAM_KEY } from '../constants';
 import { getParams, objectToQueryStr } from '../utils';
-import Wishlist, { IWishlist } from './Wishlist';
+import createWishlist, { IWishlist } from './Wishlist';
 import Snapshots from './Snapshots';
+import { ISaveConfiguration } from '../api/configurations';
 
 interface ITreble {
   player: IThreekitPlayer;
   orgId: string;
   initialConfiguration: IConfiguration;
-}
-
-export interface ISaveConfigurationConfig {
-  customerId?: string;
-  metadata?: IMetadata;
-  productVersion?: string;
 }
 
 class Treble {
@@ -35,18 +29,21 @@ class Treble {
     //  Threekit API
     this._api = threekitAPI;
     this._player = player;
-    this.wishlist = Wishlist(orgId);
+    this.wishlist = createWishlist(orgId);
     this._snapshots = new Snapshots();
     this.takeSnapshots = this._snapshots.takeSnapshots;
     // this._player = player.enableApi('player');
     this._initialConfiguration = JSON.stringify(initialConfiguration);
   }
 
-  saveConfiguration = async (config?: ISaveConfigurationConfig) => {
+  saveConfiguration = async (
+    config?: Omit<ISaveConfiguration, 'configuration'>
+  ) => {
     const { threekitDomain } = connection.getConnection();
-    const { customerId, metadata, productVersion } = Object.assign({}, config);
-
-    let files: File | undefined = undefined;
+    const { customerId, metadata, productVersion, attachments } = Object.assign(
+      {},
+      config
+    );
 
     const response = await threekitAPI.configurations.save({
       assetId: window.threekit.player.assetId,
@@ -54,7 +51,7 @@ class Treble {
       customerId,
       metadata,
       productVersion,
-      files,
+      attachments,
     });
 
     const params = Object.assign(getParams(), {

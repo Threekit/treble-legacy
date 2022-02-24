@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
-import { ISaveConfigurationConfig, WishlistArray } from '../Treble';
+import { WishlistArray } from '../Treble';
+import { ISaveConfiguration } from '../api/configurations';
 
 /*****************************************************
  * Types and Interfaces
@@ -28,7 +29,7 @@ export const refreshWishlist = createAsyncThunk(
 
 export const addToWishlist = createAsyncThunk(
   'treble/wishlist/add-item',
-  async (config: ISaveConfigurationConfig) => {
+  async (config: Omit<ISaveConfiguration, 'configurator'>) => {
     const wishlistData = await window.threekit.treble.wishlist.addItem(config);
     return wishlistData;
   }
