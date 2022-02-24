@@ -26,16 +26,19 @@ import { useAttribute } from '@threekit-tools/treble';
 const AttributeComponent = () => {
   const [attribute, setAttribute] = useAttribute('Attribute Name');
 
-  const selected = attribute.value;
-
   return (
     <div>
-      <div>{attribute.label}</div>
+      <h2>{attribute.label}</h2>
       <div>
         {attribute.values.map((option, i) => (
-          <div key={i} onClick={() => setAttribute(option.assetId)}>
+          <button
+            key={i}
+            type="button"
+            onClick={() => setAttribute(option.assetId)}
+            selected={option.assetId === attribute.value.assetId}
+          >
             {option.label}
-          </div>
+          </button>
         ))}
       </div>
     </div>
@@ -55,13 +58,37 @@ const AttributeComponent = () => {
 
   return (
     <div>
-      <div>{attribute.label}</div>
+      <h2>{attribute.label}</h2>
       <div>
         {attribute.values.map((option, i) => (
-          <div key={i} onClick={() => setAttribute(option.value)}>
+          <button
+            type="button"
+            key={i}
+            onClick={() => setAttribute(option.value)}
+            selected={option.value === attribute.value}
+          >
             {option.label}
-          </div>
+          </button>
         ))}
+      </div>
+    </div>
+  );
+};
+```
+
+#### For an Image Upload type Attribute with a defined option set
+
+```jsx
+import { useAttribute } from '@threekit-tools/treble';
+
+const AttributeComponent = () => {
+  const [attribute, setAttribute] = useAttribute('Attribute Name');
+
+  return (
+    <div>
+      <h2>{attribute.label}</h2>
+      <div>
+        <input type="file" onChange={e => setAttribute(e.target.files[0])} />
       </div>
     </div>
   );
