@@ -5,7 +5,7 @@ on:
     branches: main
 
 jobs:
-  build:
+  publish-docusaurus:
     name: Publish Docusaurus
     runs-on: ubuntu-latest
     env:
