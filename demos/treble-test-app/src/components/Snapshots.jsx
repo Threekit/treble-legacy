@@ -14,7 +14,7 @@ export default function Snapshots(props) {
   if (!hasLoaded) return null;
 
   return (
-    <button onClick={takeSnapshot} className="trbl-wgt-btn">
+    <button type="button" onClick={takeSnapshot} className="trbl-wgt-btn">
       <DownloadIcon />
     </button>
   );

@@ -1,4 +1,4 @@
-import { useState, Children, cloneElement } from 'react';
+import { useState, Children } from 'react';
 
 export function TabPane(props) {
   return <>{props.children}</>;
@@ -7,7 +7,7 @@ export function TabPane(props) {
 function Tabs({ children }) {
   const [selected, setSelected] = useState(0);
 
-  const handleSelect = (idx) => setSelected(idx === selected ? undefined : idx);
+  const handleSelect = idx => setSelected(idx);
 
   if (!children) return null;
 
@@ -18,13 +18,17 @@ function Tabs({ children }) {
           if (child.type !== TabPane) return null;
           return (
             <button
+              type="button"
               className={`w-max py-1 px-4 mx-4 cursor-pointer text-lg font-medium bg-white transform translate-y-px border-0 ${
                 selected === idx
                   ? 'border-b-2 border-solid border-primary text-primary'
                   : ''
               }`}
               selected={selected === idx}
-              onClick={() => handleSelect(idx)}
+              onClick={() => {
+                child.props?.onClick?.();
+                handleSelect(idx);
+              }}
             >
               {child.props.label}
             </button>
@@ -35,10 +39,7 @@ function Tabs({ children }) {
         {Children.map(children, (child, idx) => {
           if (child.type !== TabPane) return null;
           if (selected !== idx) return null;
-          return cloneElement(child, {
-            selected: selected === idx,
-            handleClick: () => handleSelect(idx),
-          });
+          return child;
         })}
       </div>
     </div>

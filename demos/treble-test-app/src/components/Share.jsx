@@ -17,7 +17,7 @@ export default function Share(props) {
   if (!hasLoaded) return null;
 
   return (
-    <button onClick={handleClick} className="trbl-wgt-btn">
+    <button type="button" onClick={handleClick} className="trbl-wgt-btn">
       <ShareIcon />
     </button>
   );

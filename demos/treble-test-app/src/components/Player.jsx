@@ -4,7 +4,7 @@ import { usePlayerPortal } from '@threekit-tools/treble';
 const PLAYER_DIV_ID = 'tk-player-component';
 
 export default function Player(props) {
-  const portalPlayerTo = usePlayerPortal();
+  const [portalPlayerTo, portalBack] = usePlayerPortal();
   const hasMoved = useRef(false);
 
   useEffect(() => {
@@ -12,11 +12,18 @@ export default function Player(props) {
       portalPlayerTo(PLAYER_DIV_ID);
       hasMoved.current = true;
     }
-  });
+
+    return () => {
+      if (portalBack) {
+        portalBack();
+        hasMoved.current = false;
+      }
+    };
+  }, [portalPlayerTo]);
 
   return (
-    <div className="h-full">
-      <div id={PLAYER_DIV_ID} />
+    <div className="h-full max-w-screen-sm">
+      <div id={PLAYER_DIV_ID} className="h-full" />
       {props.children}
     </div>
   );

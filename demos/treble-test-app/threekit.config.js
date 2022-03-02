@@ -1,4 +1,6 @@
 export default {
+  serverUrl: process.env.SERVER_URL,
+
   credentials: {
     preview: {
       orgId: process.env.THREEKIT_PREVIEW_ORG_ID,
@@ -17,7 +19,7 @@ export default {
     },
     'admin-fts': {
       assetId: process.env.THREEKIT_ADMIN_FTS_ASSET_ID,
-      stageId: process.env.THREEKIT_PREVIEW_STAGE_ID,
+      stageId: process.env.THREEKIT_ADMIN_FTS_STAGE_ID,
     },
   },
 };
