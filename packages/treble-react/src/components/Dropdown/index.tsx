@@ -91,7 +91,6 @@ export const Dropdown = (props: IDropdown) => {
     description,
     options,
     value,
-    onClick,
     className: customClassName,
     showThumbnail,
     showPrice,
@@ -113,12 +112,6 @@ export const Dropdown = (props: IDropdown) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [hide, ref]);
-
-  const handleClick = (value: string) => {
-    if (!onClick) return;
-    onClick(value);
-    setHide(true);
-  };
 
   const cls = generateClassName('dropdown', customClassName, title);
 
@@ -160,20 +153,30 @@ export const Dropdown = (props: IDropdown) => {
         <DropdownOptions hide={hide} dropdownMaxHeight={dropdownMaxHeight}>
           <div>
             {options?.map((el, i) => {
-              const { imageUrl, color, name, description, price, optionValue } =
-                Object.assign({}, el, {
-                  optionValue: el.value,
-                  color: !showThumbnail ? undefined : el.color,
-                  imageUrl: !showThumbnail ? undefined : el.imageUrl,
-                  price: !showPrice ? undefined : el.price,
-                  description: !showDescription ? undefined : el.description,
-                });
-              const selected = value === optionValue;
+              const {
+                imageUrl,
+                color,
+                name,
+                description,
+                price,
+                optionValue,
+                selected,
+                handleSelect,
+              } = Object.assign({}, el, {
+                optionValue: el.value,
+                color: !showThumbnail ? undefined : el.color,
+                imageUrl: !showThumbnail ? undefined : el.imageUrl,
+                price: !showPrice ? undefined : el.price,
+                description: !showDescription ? undefined : el.description,
+              });
               const clsOpt = `${cls}-option option-${i} ${optionValue}`;
               return (
                 <OptionWrapper
                   key={i}
-                  onClick={() => handleClick(optionValue)}
+                  onClick={() => {
+                    handleSelect();
+                    setHide(true);
+                  }}
                   className={clsOpt}
                   selected={selected}
                 >

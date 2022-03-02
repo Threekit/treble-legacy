@@ -87,8 +87,6 @@ export const Strips = (props: IStrips) => {
     title,
     description,
     options,
-    value,
-    onClick,
     className: customClassName,
     showThumbnail,
     showPrice,
@@ -103,22 +101,29 @@ export const Strips = (props: IStrips) => {
       <FormComponentDescription description={description} className={cls} />
       <StripsWrapper>
         {options?.map((el, i) => {
-          const { imageUrl, color, name, description, price, optionValue } =
-            Object.assign({}, el, {
-              optionValue: el.value,
-              color: !showThumbnail ? undefined : el.color,
-              imageUrl: !showThumbnail ? undefined : el.imageUrl,
-              price: !showPrice ? undefined : el.price,
-              description: !showDescription ? undefined : el.description,
-            });
-          const selected = value === optionValue;
+          const {
+            imageUrl,
+            color,
+            name,
+            description,
+            price,
+            optionValue,
+            selected,
+            handleSelect,
+          } = Object.assign({}, el, {
+            optionValue: el.value,
+            color: !showThumbnail ? undefined : el.color,
+            imageUrl: !showThumbnail ? undefined : el.imageUrl,
+            price: !showPrice ? undefined : el.price,
+            description: !showDescription ? undefined : el.description,
+          });
           const clsOpt = `${cls}-option option-${i} ${optionValue}${
             selected ? ' selected' : ''
           }`;
           return (
             <StripWrapper
               key={i}
-              onClick={() => onClick && onClick(optionValue)}
+              onClick={handleSelect}
               selected={selected}
               className={clsOpt}
             >

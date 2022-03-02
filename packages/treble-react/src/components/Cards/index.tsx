@@ -83,8 +83,6 @@ export const Cards = (props: ICards) => {
     title,
     description,
     options,
-    value,
-    onClick,
     className: customClassName,
     showThumbnail,
     showPrice,
@@ -99,22 +97,29 @@ export const Cards = (props: ICards) => {
       <FormComponentDescription description={description} className={cls} />
       <CardsWrapper>
         {options?.map((el, i) => {
-          const { imageUrl, color, name, description, price, optionValue } =
-            Object.assign({}, el, {
-              optionValue: el.value,
-              color: !showThumbnail ? undefined : el.color,
-              imageUrl: !showThumbnail ? undefined : el.imageUrl,
-              price: !showPrice ? undefined : el.price,
-              description: !showDescription ? undefined : el.description,
-            });
-          const selected = value === optionValue;
+          const {
+            imageUrl,
+            color,
+            name,
+            description,
+            price,
+            optionValue,
+            selected,
+            handleSelect,
+          } = Object.assign({}, el, {
+            optionValue: el.value,
+            color: !showThumbnail ? undefined : el.color,
+            imageUrl: !showThumbnail ? undefined : el.imageUrl,
+            price: !showPrice ? undefined : el.price,
+            description: !showDescription ? undefined : el.description,
+          });
           const clsOpt = `${cls}-option option-${i} ${optionValue}${
             selected ? ' selected' : ''
           }`;
           return (
             <CardWrapper
               key={i}
-              onClick={() => onClick && onClick(optionValue)}
+              onClick={handleSelect}
               selected={selected}
               className={clsOpt}
             >

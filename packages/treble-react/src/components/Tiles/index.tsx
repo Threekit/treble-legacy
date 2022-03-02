@@ -20,8 +20,6 @@ export const Tiles = (props: ITiles) => {
     title,
     description,
     options,
-    value,
-    onClick,
     className: customClassName,
     columns,
   } = Object.assign({ columns: 2 }, props);
@@ -34,15 +32,14 @@ export const Tiles = (props: ITiles) => {
       <FormComponentDescription description={description} className={cls} />
       <TilesWrapper columns={columns}>
         {options?.map((el, i) => {
-          const { name, value: optionValue } = el;
-          const selected = value === optionValue;
+          const { name, value: optionValue, selected, handleSelect } = el;
           const clsOpt = `${cls}-option option-${i} ${optionValue}${
             selected ? ' selected' : ''
           }`;
           return (
             <TileWrapper
               key={i}
-              onClick={() => onClick && onClick(optionValue)}
+              onClick={handleSelect}
               selected={selected}
               className={clsOpt}
             >

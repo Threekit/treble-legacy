@@ -2,22 +2,18 @@ import React, { FunctionComponent } from 'react';
 import useAttribute, { RawAttributeValue } from '../../hooks/useAttribute';
 import usePlayerLoadingStatus from '../../hooks/usePlayerLoadingStatus';
 import {
-  IAttributeColor,
-  IDisplayAttributeAssetValue,
-  IThreekitDisplayAttribute,
-  IDisplayAttributeAsset,
-  IDisplayAttributeString,
+  IHydratedAttribute,
+  IHydratedAttributeAssetValue,
 } from '../../threekit';
 import { inflateRgb } from '../../utils';
-import {
-  METADATA_RESERVED,
-  ATTRIBUTE_TYPES,
-  SORT_OPTIONS,
-} from '../../constants';
+import { METADATA_RESERVED, SORT_OPTIONS } from '../../constants';
 
 export interface IOptionShared {
   name: string;
   value: string;
+  handleSelect: () => Promise<void>;
+  selected: boolean;
+  // label: string;
 }
 
 export interface IOption extends IOptionShared {
@@ -25,7 +21,6 @@ export interface IOption extends IOptionShared {
   price?: string;
   color?: string;
   imageUrl?: string;
-  // label: string;
 }
 interface MetadataKeys {
   imgBaseUrl?: string;
@@ -69,7 +64,7 @@ interface IPrepAttributeConfig {
 }
 
 export const prepAttributeForComponent = (
-  attribute: IThreekitDisplayAttribute,
+  attribute: IHydratedAttribute,
   config: IPrepAttributeConfig
 ) => {
   const { metadataKeyThumbnail, metadataKeyPrice, metadataKeyDescription } =
@@ -85,14 +80,15 @@ export const prepAttributeForComponent = (
   let options;
   let selected = attribute.value;
 
-  if (attribute.type === ATTRIBUTE_TYPES.string) {
-    const stringAttribute = attribute as IDisplayAttributeString;
-    options = stringAttribute.values.map(el => ({ ...el, name: el.label }));
-  } else if (attribute.type === ATTRIBUTE_TYPES.asset) {
-    const assetAttribute = attribute as IDisplayAttributeAsset;
-    selected = assetAttribute.value?.assetId;
-    options = assetAttribute.values
-      ? assetAttribute.values
+  if (attribute.type === 'String') {
+    options = attribute.values.map(el => ({
+      ...el,
+      name: el.label,
+    }));
+  } else if (attribute.type === 'Asset') {
+    selected = attribute.value?.assetId;
+    options = attribute.values
+      ? attribute.values
           .map(el => prepCatalogItem(el))
           .sort((a, b) => {
             if (!sort || !Object.keys(SORT_OPTIONS).includes(sort)) return 1;
@@ -103,14 +99,13 @@ export const prepAttributeForComponent = (
             return 1;
           })
       : [];
-  } else if (attribute.type === ATTRIBUTE_TYPES.color) {
-    const colorAttribute = attribute as IAttributeColor;
-    selected = inflateRgb(colorAttribute.value);
+  } else if (attribute.type === 'Color') {
+    selected = inflateRgb(attribute.value);
   }
 
   function prepCatalogItem(
-    item: IDisplayAttributeAssetValue
-  ): IDisplayAttributeAssetValue {
+    item: IHydratedAttributeAssetValue
+  ): IHydratedAttributeAssetValue {
     return Object.assign(
       {},
       item,
@@ -145,7 +140,6 @@ export const prepAttributeForComponent = (
 
 function formComponentContainer<P extends IFormContainerProps>(
   FormComponent: IFormComponent<Omit<P, 'options'>>
-  // FormComponent: IFormComponent<P>
 ) {
   return (props: P) => {
     const {
@@ -178,7 +172,7 @@ function formComponentContainer<P extends IFormContainerProps>(
     });
 
     const handleSetAttribute = (value: RawAttributeValue) =>
-      setAttribute && setAttribute(value);
+      setAttribute?.(value);
 
     let preppedProps = { ...props };
     if (!hideAttributeTitle && !preppedProps.title)

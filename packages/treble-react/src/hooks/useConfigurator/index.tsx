@@ -1,10 +1,13 @@
-import { getAttributes, setConfiguration } from '../../store/attributes';
-import { ISetConfiguration, IThreekitDisplayAttribute } from '../../threekit';
+import {
+  getHydratedAttributes,
+  setConfiguration,
+} from '../../store/attributes';
+import { ISetConfiguration, IHydratedAttribute } from '../../threekit';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 
 type UseConfiguratorError = [undefined, undefined];
 type UseConfiguratorSuccess = [
-  Record<string, IThreekitDisplayAttribute>,
+  Record<string, IHydratedAttribute>,
   (configuration: ISetConfiguration) => void
 ];
 
@@ -13,8 +16,8 @@ type UseConfiguratorHook = UseConfiguratorError | UseConfiguratorSuccess;
 const useConfigurator = (): UseConfiguratorHook => {
   const dispatch = useThreekitDispatch();
   const attributes = useThreekitSelector<
-    undefined | Record<string, IThreekitDisplayAttribute>
-  >(getAttributes);
+    undefined | Record<string, IHydratedAttribute>
+  >(getHydratedAttributes);
 
   if (!attributes) return [undefined, undefined];
 
