@@ -114,6 +114,15 @@ export interface IDisplayAttributeAssetValue extends IConfigurationAssetValue {
   label: string;
 }
 
+//  Asset Attribute Value - Hydrated by Treble
+export interface IHydratedAttributeAssetValue
+  extends IDisplayAttributeAssetValue {
+  //  The label is added by the translations
+  label: string;
+  handleSelect: () => Promise<void>;
+  selected: boolean;
+}
+
 //  Generic Asset Type Attribute
 export interface IAttributeAssetBase<V>
   extends IAttributeBase<'Asset', IConfigurationAsset> {
@@ -129,6 +138,9 @@ export interface IAttributeAssetBase<V>
 export type IDisplayAttributeAsset =
   IAttributeAssetBase<IDisplayAttributeAssetValue>;
 
+export type IHydratedAttributeAsset =
+  IAttributeAssetBase<IHydratedAttributeAssetValue>;
+
 export type IAttributeAsset = IAttributeAssetBase<IConfigurationAssetValue>;
 
 /****** String TYPE ATTRIBUTE *******/
@@ -136,6 +148,13 @@ export type IAttributeAsset = IAttributeAssetBase<IConfigurationAssetValue>;
 export interface IDisplayAttributeStringValue {
   label: string;
   value: string;
+}
+
+//  String Attribute Value - Hydrated by Treble
+export interface IHydratedAttributeStringValue
+  extends IDisplayAttributeStringValue {
+  handleSelect: () => Promise<void>;
+  selected: boolean;
 }
 
 export interface IAttributeStringBase<V>
@@ -149,6 +168,8 @@ export interface IAttributeStringBase<V>
 
 export type IDisplayAttributeString =
   IAttributeStringBase<IDisplayAttributeStringValue>;
+export type IHydratedAttributeString =
+  IAttributeStringBase<IHydratedAttributeStringValue>;
 export type IAttributeString = IAttributeStringBase<string>;
 
 /****** STRING TYPE ATTRIBUTE *******/
@@ -176,8 +197,15 @@ export type IThreekitAttribute =
 /****** getDisplayAttributes() *******/
 export type IThreekitDisplayAttribute =
   | IDisplayAttributeAsset
-  | IAttributeColor
   | IDisplayAttributeString
+  | IAttributeColor
+  | IAttributeNumber;
+
+/****** Treble Hydrated Values *******/
+export type IHydratedAttribute =
+  | IHydratedAttributeAsset
+  | IHydratedAttributeString
+  | IAttributeColor
   | IAttributeNumber;
 
 /***************************************************
@@ -262,6 +290,7 @@ export interface IThreekitPlayer {
   getConfigurator: () => Promise<IThreekitConfigurator>;
   enableApi: (api: PRIVATE_APIS) => any;
   snapshotAsync: (snapshotConfig: ISnapshotConfig) => Promise<string>;
+  unload: () => Promise<string>;
 }
 
 export interface IThreekitPrivateConfigurator extends IThreekitConfigurator {
@@ -337,6 +366,7 @@ export interface IProducts extends Record<string, string | Partial<IProduct>> {}
 export interface IProject {
   credentials: ICredentials;
   products: IProducts;
+  serverUrl?: string;
 }
 
 export interface ITrebleConfig {
