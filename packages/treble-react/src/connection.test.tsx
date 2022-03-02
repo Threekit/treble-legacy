@@ -76,5 +76,6 @@ test('should return a connection object when given a valid connection', () => {
     orgId,
     assetId,
     threekitDomain: `https://${threekitDomain}`,
+    serverUrl: '',
   });
 });

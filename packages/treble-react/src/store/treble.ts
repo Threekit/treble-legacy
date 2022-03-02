@@ -2,12 +2,7 @@ import connection from '../connection';
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
 import threekitAPI from '../api';
-import {
-  isUuid,
-  getParams,
-  createThreekitScriptEl,
-  loadTrebleConfig,
-} from '../utils';
+import { isUuid, getParams, loadTrebleConfig } from '../utils';
 import {
   DEFAULT_PLAYER_CONFIG,
   TK_SAVED_CONFIG_PARAM_KEY,
@@ -21,24 +16,47 @@ import {
   IPlayerConfig,
   IThreekitDisplayAttribute,
   ISetConfiguration,
+  IConfiguration,
 } from '../threekit';
 import Treble from '../Treble';
 import { setAttributes } from './attributes';
 import { initPrice, updatePrice } from './price';
 import { refreshWishlist } from './wishlist';
 import { initTranslations } from './translations';
-import { initProduct } from './product';
+import { initProduct, setName, setMetadata } from './product';
+import message from '../components/message';
 
 /*****************************************************
  * Types and Interfaces
  ****************************************************/
 
+export interface IPlayerInit {
+  el: HTMLElement;
+  authToken: string;
+  assetId: string;
+  stageId?: string;
+  orgId: string;
+  playerConfig: IPlayerConfig;
+  initialConfiguration?: IConfiguration;
+}
+
 export interface ILaunchConfig {
   threekitEnv: string;
+  serverUrl: string;
   locale: string;
   project: IProject;
   playerConfig: IPlayerConfig;
   eventHandlers: EventHandlers;
+}
+
+export interface IReloadConfig {
+  label?: string;
+  thumbnail?: string;
+  configuration?: IConfiguration;
+  assetId?: string;
+  stageId?: string;
+  configurationId?: string;
+  cacheProduct?: boolean;
 }
 
 export interface TrebleState {
@@ -48,6 +66,15 @@ export interface TrebleState {
   isThreekitInitialized: boolean;
   //  HTML Player element's ID
   playerElId: undefined | string;
+  //  Event based notifications
+  notifications: boolean;
+}
+
+export interface NotificationEvent extends Event {
+  detail: {
+    message: string;
+    type: string;
+  };
 }
 
 interface EventHandlers {
@@ -103,13 +130,14 @@ const initialState: TrebleState = {
   isThreekitInitialized: false,
   isPlayerLoading: false,
   playerElId: undefined,
+  notifications: true,
 };
 
 /*****************************************************
  * Actions
  ****************************************************/
 
-export const setThreekitInitialized = createAction<undefined>(
+export const setThreekitInitialized = createAction<boolean>(
   'treble/set-threekit-initialized'
 );
 export const setPlayerLoading = createAction<boolean>(
@@ -118,6 +146,7 @@ export const setPlayerLoading = createAction<boolean>(
 export const setPlayerElement = createAction<string>(
   'treble/set-player-element'
 );
+export const reloadTreble = createAction<Partial<TrebleState>>('treble/reload');
 
 /*****************************************************
  * Slice
@@ -128,14 +157,20 @@ const { reducer } = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(setThreekitInitialized, (state, _) => {
-      state.isThreekitInitialized = true;
+    builder.addCase(setThreekitInitialized, (state, action) => {
+      state.isThreekitInitialized = action.payload;
+      return state;
     });
     builder.addCase(setPlayerLoading, (state, action) => {
       state.isPlayerLoading = action.payload;
+      return state;
     });
     builder.addCase(setPlayerElement, (state, action) => {
       state.playerElId = action.payload;
+      return state;
+    });
+    builder.addCase(reloadTreble, (state, action) => {
+      return { ...state, ...action.payload };
     });
   },
 });
@@ -159,6 +194,57 @@ export const getPlayerElementId = (state: RootState): undefined | string =>
  * Complex Actions
  ****************************************************/
 
+export const initPlayer =
+  (config: IPlayerInit) => async (dispatch: ThreekitDispatch) => {
+    const {
+      el,
+      authToken,
+      assetId,
+      stageId,
+      orgId,
+      playerConfig,
+      initialConfiguration,
+    } = config;
+    const player = await window.threekitPlayer({
+      el: el as HTMLElement,
+      // Variables to sort out
+      authToken,
+      stageId,
+      assetId,
+      ...playerConfig,
+      initialConfiguration,
+    });
+
+    const configurator = await player.getConfigurator();
+
+    if (window.threekit) {
+      window.threekit = Object.assign(window.threekit, {
+        player,
+        configurator,
+      });
+    } else
+      window.threekit = {
+        player,
+        configurator,
+        treble: new Treble({
+          player,
+          orgId,
+          initialConfiguration: configurator.getConfiguration(),
+        }),
+      };
+
+    dispatch(setThreekitInitialized(true));
+    dispatch(setPlayerLoading(false));
+
+    window.threekit.player.on('setConfiguration', () => {
+      dispatch(
+        setAttributes(window.threekit.configurator.getDisplayAttributes())
+      );
+    });
+
+    return;
+  };
+
 export const launch =
   (launchConfig?: Partial<ILaunchConfig>) =>
   async (dispatch: ThreekitDispatch) => {
@@ -181,6 +267,8 @@ export const launch =
 
     const threekitEnv: string =
       launchConfig?.threekitEnv || process.env.THREEKIT_ENV || 'preview';
+    const serverUrl = launchConfig?.serverUrl || config?.project?.serverUrl;
+    launchConfig?.threekitEnv || process.env.THREEKIT_ENV || 'preview';
 
     const playerConfig: IPlayerConfig = Object.assign(
       {},
@@ -225,6 +313,7 @@ export const launch =
       orgId,
       assetId,
       threekitDomain: threekitDomainRaw,
+      serverUrl,
     });
 
     //  We use the threekitDomain returned by the connection object
@@ -256,48 +345,120 @@ export const launch =
     if (!updatedAssetId) return console.error('missing assetId');
 
     //  We create the threekit script
-    await createThreekitScriptEl(threekitDomain);
-
-    const player = await window.threekitPlayer({
-      el: el as HTMLElement,
-      // Variables to sort out
-      authToken,
-      stageId,
-      assetId: updatedAssetId,
-      ...playerConfig,
-      initialConfiguration,
+    await new Promise<void>(resolve => {
+      const script = document.createElement('script');
+      script.src = `${threekitDomain}/app/js/threekit-player-bundle.js`;
+      script.id = 'threekit-player-bundle';
+      script.onload = () => resolve();
+      document.head.appendChild(script);
     });
 
-    const configurator = await player.getConfigurator();
-
-    window.threekit = {
-      player,
-      configurator,
-      treble: new Treble({
-        player,
+    await dispatch(
+      initPlayer({
+        el: el as HTMLElement,
         orgId,
-        initialConfiguration: configurator.getConfiguration(),
-      }),
-    };
+        authToken,
+        stageId,
+        assetId: updatedAssetId,
+        playerConfig,
+        initialConfiguration,
+      })
+    );
 
-    dispatch(setThreekitInitialized());
-    dispatch(setPlayerLoading(false));
-
-    window.threekit.player.on('setConfiguration', () => {
-      dispatch(
-        setAttributes(window.threekit.configurator.getDisplayAttributes())
-      );
-      dispatch(updatePrice());
+    document.addEventListener('treble:notification', (e: NotificationEvent) => {
+      message.info(e.detail.message);
     });
 
     EVENTS = Object.assign(EVENTS, launchConfig?.eventHandlers);
 
     dispatch(initTranslations(launchConfig?.locale));
     dispatch(initPrice());
-    dispatch(initProduct());
+    dispatch(updatePrice());
+    dispatch(initProduct(products));
     dispatch(refreshWishlist());
 
     return;
+  };
+
+export const unloadPlayer = () => async (dispatch: ThreekitDispatch) => {
+  dispatch(setThreekitInitialized(true));
+  dispatch(setPlayerLoading(false));
+  dispatch(setAttributes([]));
+  dispatch(setName(''));
+  dispatch(setMetadata({}));
+  await window.threekit.player.unload();
+};
+
+export const reloadPlayer =
+  (
+    config:
+      | undefined
+      | string
+      | Pick<
+          IReloadConfig,
+          'assetId' | 'stageId' | 'configurationId' | 'configuration'
+        >
+  ) =>
+  async (dispatch: ThreekitDispatch, getState: () => RootState) => {
+    const connectionObj = connection.getConnection();
+    let assetId: string;
+    let stageId: string | undefined;
+    let initialConfiguration: IConfiguration | undefined;
+
+    //  If no asset is specified, we reload the player with
+    //  the current asset
+    if (config === undefined) {
+      assetId = connectionObj.assetId;
+    } else if (typeof config === 'string') {
+      assetId = config;
+    } else {
+      assetId = config?.assetId || connectionObj.assetId;
+      stageId = config?.stageId;
+      initialConfiguration = config?.configuration || {};
+      if (config?.configurationId) {
+        const configuration = await threekitAPI.configurations.fetch(
+          config?.configurationId
+        );
+        if (configuration) {
+          initialConfiguration = Object.assign(
+            {},
+            initialConfiguration,
+            configuration.data.variant
+          );
+          assetId = configuration.data.productId;
+        }
+      }
+    }
+
+    //  Update connection
+    if (assetId !== connectionObj.assetId) connection.connect({ assetId });
+
+    //  Player re-initialization
+    const state = getState();
+    const trebleConfig = loadTrebleConfig();
+    const playerConfig: IPlayerConfig = Object.assign(
+      {},
+      DEFAULT_PLAYER_CONFIG,
+      trebleConfig.player
+    );
+
+    const el = document.getElementById(state.treble.playerElId as string);
+
+    if (state.treble.isThreekitInitialized) dispatch(unloadPlayer());
+    await dispatch(
+      initPlayer({
+        el: el as HTMLElement,
+        orgId: connectionObj.orgId,
+        authToken: connectionObj.authToken,
+        stageId,
+        assetId,
+        playerConfig,
+        initialConfiguration,
+      })
+    );
+
+    dispatch(updatePrice());
+    dispatch(initProduct());
   };
 
 export default reducer;

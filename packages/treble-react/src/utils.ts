@@ -1,4 +1,3 @@
-import { ITranslationMap } from './api/products';
 import {
   IThreekitCamera,
   IConfigurationColor,
@@ -301,63 +300,6 @@ export const metadataValueToObject = (
       .map(el => el.trim());
     return Object.assign(output, { [key]: parseFloat(value) || value });
   }, {});
-
-/**
- * A function to load the Threekit JS Player API script
- *
- * @param threekitDomain The threekit environement to use. i.e. preview.threekit.com
- * @returns
- */
-export const createThreekitScriptEl = (threekitDomain: string) =>
-  new Promise<void>(resolve => {
-    const script = document.createElement('script');
-    script.src = `${threekitDomain}/app/js/threekit-player-bundle.js`;
-    script.id = 'threekit-player-bundle';
-    script.onload = () => resolve();
-    document.head.appendChild(script);
-  });
-
-export const translateAttribute = (
-  attributes: Array<IThreekitDisplayAttribute>,
-  translations?: ITranslationMap,
-  language?: string
-): IThreekitDisplayAttribute => {
-  const hasTranslation = !!language && !!translations;
-  return attributes.reduce((output, attribute) =>
-    Object.assign(output, {
-      [attribute.name]: Object.assign(
-        {},
-        attribute,
-        {
-          label: hasTranslation
-            ? translations?.[attribute.name]?.[language] || attribute.name
-            : attribute.name,
-        },
-        attribute.type === 'String'
-          ? {
-              values: attribute.values.map(el =>
-                Object.assign({}, el, {
-                  label: hasTranslation
-                    ? translations?.[el.label]?.[language] || el.label
-                    : attribute.name,
-                })
-              ),
-            }
-          : attribute.type === 'Asset'
-          ? {
-              values: attribute.values.map(el =>
-                Object.assign({}, el, {
-                  label: hasTranslation
-                    ? translations?.[el.name]?.[language] || el.name
-                    : attribute.name,
-                })
-              ),
-            }
-          : undefined
-      ),
-    })
-  );
-};
 
 export const selectionToConfiguration = (
   value: RawAttributeValue,

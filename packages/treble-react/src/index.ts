@@ -12,6 +12,7 @@ import useWishlist from './hooks/useWishlist';
 import useShare from './hooks/useShare';
 import usePlayerPortal from './hooks/usePlayerPortal';
 // import useSingleAnimation from './hooks/useSingleAnimation';
+// import useProductCache from './hooks/useProductCache';
 //  Components
 import ThreekitProvider from './components/ThreekitProvider';
 import Player from './components/Player';
@@ -69,6 +70,7 @@ export {
   useShare,
   usePlayerPortal,
   // useSingleAnimation,
+  // useProductCache,
   //  Components
   ThreekitProvider,
   Player,
