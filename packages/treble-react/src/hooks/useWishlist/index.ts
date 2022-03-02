@@ -6,61 +6,56 @@ import {
   clearWishlist,
 } from '../../store/wishlist';
 import { isThreekitInitialized } from '../../store/treble';
-import { WishlistArray } from '../../Treble';
+import { IConfigurationResponse } from '../../http/configurations';
 import { ISaveConfiguration } from '../../api/configurations';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 import { copyToClipboard, getResumableUrl } from '../../utils';
 import message from '../../components/message';
 
+interface HydratedWishlistItem extends IConfigurationResponse {
+  handleSelect: () => void;
+  handleRemove: () => void;
+  handleShare: () => void;
+}
+
 type UseWishlistHook =
   | [
-      WishlistArray,
+      Array<HydratedWishlistItem>,
       (config?: Omit<ISaveConfiguration, 'configurator'>) => void,
-      (idx: number) => void,
-      (idx: number) => void,
-      (idx: number) => void,
       () => void
     ]
-  | [undefined, undefined, undefined, undefined, undefined, undefined];
+  | [undefined, undefined, undefined];
 
 const useWishlist = (): UseWishlistHook => {
   const dispatch = useThreekitDispatch();
   const isLoaded = useThreekitSelector<boolean>(isThreekitInitialized);
-  const wishlist = useThreekitSelector(getWishlist);
+  const wishlistData = useThreekitSelector(getWishlist);
 
-  if (!isLoaded)
-    return [undefined, undefined, undefined, undefined, undefined, undefined];
+  if (!isLoaded) return [undefined, undefined, undefined];
 
   const handleAddToWishlist = (
     config: Omit<ISaveConfiguration, 'configurator'>
   ) => dispatch(addToWishlist(config));
 
-  const handleRemoveFromWishlist = (idx: number) => {
-    dispatch(removeFromWishlist(idx));
-    message.info('Item removed from wishlist');
-  };
-  const handleResumeItem = (idx: number) => {
-    dispatch(resumeFromWishlist(idx));
-  };
-
-  const handleShareItem = (idx: number) => {
-    const url = getResumableUrl(wishlist[idx].shortId);
-    copyToClipboard(url);
-    message.info('Link copied!');
-  };
-
   const handleClearWishlist = () => {
     dispatch(clearWishlist);
   };
 
-  return [
-    wishlist,
-    handleAddToWishlist,
-    handleRemoveFromWishlist,
-    handleResumeItem,
-    handleShareItem,
-    handleClearWishlist,
-  ];
+  const wishlist: Array<HydratedWishlistItem> = wishlistData.map((el, i) =>
+    Object.assign({}, el, {
+      handleSelect: () => dispatch(resumeFromWishlist(i)),
+      handleRemove: () => {
+        dispatch(removeFromWishlist(i));
+        message.info('Item removed from wishlist');
+      },
+      handleShare: () => {
+        copyToClipboard(getResumableUrl(el.shortId));
+        message.info('Link copied!');
+      },
+    })
+  );
+
+  return [wishlist, handleAddToWishlist, handleClearWishlist];
 };
 
 export default useWishlist;

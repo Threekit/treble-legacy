@@ -54,36 +54,18 @@ export const WishlistButton = (props: WidgetButtonProps) => {
 
 export const Wishlist = (props: WishlistProps) => {
   const [showWishlist, setShowWishlist] = useState(false);
-  const [
-    wishlist,
-    addToWishlist,
-    removeFromWishlist,
-    resumeWishlistItem,
-    shareWishlistItem,
-  ] = useWishlist();
+  const [wishlist, addToWishlist] = useWishlist();
   const { className, showLabel } = props;
   const shape = props.shape || 'round';
   const type = props.type || 'threekit';
 
   const cls = generateClassName('wishlist', className);
 
-  if (
-    !wishlist ||
-    !addToWishlist ||
-    !resumeWishlistItem ||
-    !removeFromWishlist ||
-    !shareWishlistItem
-  )
-    return null;
+  if (!wishlist || !addToWishlist) return null;
 
   const handleAddToWishlist = async () => {
     await addToWishlist();
     setShowWishlist(true);
-  };
-
-  const handleClickResume = (idx: number) => {
-    resumeWishlistItem(idx);
-    setShowWishlist(false);
   };
 
   return (
@@ -115,9 +97,12 @@ export const Wishlist = (props: WishlistProps) => {
               key={i}
               thumbnail={el.thumbnail || undefined}
               metadata={el.metadata || undefined}
-              onDelete={() => removeFromWishlist(i)}
-              onResume={() => handleClickResume(i)}
-              onShare={() => shareWishlistItem(i)}
+              onDelete={el.handleRemove}
+              onResume={() => {
+                el.handleSelect();
+                setShowWishlist(false);
+              }}
+              onShare={el.handleShare}
             />
           ))}
         </Wrapper>

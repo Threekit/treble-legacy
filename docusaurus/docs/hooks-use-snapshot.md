@@ -27,7 +27,9 @@ const SnapshotComponent = () => {
   };
 
   return (
-    <button onClick={() => handleClickSnapshot()}>Download Snapshot</button>
+    <button type="button" onClick={() => handleClickSnapshot()}>
+      Download Snapshot
+    </button>
   );
 };
 ```

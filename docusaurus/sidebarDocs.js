@@ -59,6 +59,7 @@ const docs = [
           'form-components-tiles',
           'form-components-tiles-group',
           'form-components-strips',
+          'form-components-upload',
         ],
       },
       {

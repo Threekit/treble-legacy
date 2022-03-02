@@ -9,16 +9,19 @@ import {
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 import { IReloadConfig } from '../../store/treble';
 
+interface HydratedCacheProduct
+  extends Pick<CachedProduct, 'name' | 'label' | 'thumbnail'> {
+  selected: boolean;
+  handleSelect: () => Promise<void>;
+  handleRemove: () => Promise<void>;
+}
 interface CacheData {
-  activeProductIdx: number;
-  cache: Array<Pick<CachedProduct, 'name' | 'label' | 'thumbnail'>>;
+  cache: Array<HydratedCacheProduct>;
 }
 
 type UseProductCache = [
   CacheData,
-  (config?: string | IReloadConfig) => Promise<void>,
-  (idx: number) => Promise<void>,
-  (idx: number) => Promise<void>
+  (config?: string | IReloadConfig) => Promise<void>
 ];
 
 const useProductCache = (): UseProductCache => {
@@ -26,32 +29,22 @@ const useProductCache = (): UseProductCache => {
   const cache = useThreekitSelector(getProductCache);
   const activeProductIdx = useThreekitSelector(getActiveProductIdx);
 
-  const data = {
-    cache,
-    activeProductIdx,
-  };
-
-  const handleChangeActiveProduct = (idx: number) => {
-    if (idx === undefined) return Promise.resolve();
-    if (idx === activeProductIdx) return Promise.resolve();
-    if (!cache || idx >= cache?.length) return Promise.resolve();
-    return dispatch(changeActiveProductIdx(idx));
-  };
-
   const handleLoadNewProduct = (config?: string | IReloadConfig) => {
     return dispatch(loadNewProduct(config));
   };
 
-  const handleRemoveProduct = (idx: number) => {
-    return dispatch(removeProductIdx(idx));
-  };
+  const hydratedCache: Array<HydratedCacheProduct> = cache.map((el, i) =>
+    Object.assign({}, el, {
+      selected: activeProductIdx === i,
+      handleRemove: () => dispatch(removeProductIdx(i)),
+      handleSelect:
+        activeProductIdx === i
+          ? () => Promise.resolve()
+          : () => dispatch(changeActiveProductIdx(i)),
+    })
+  );
 
-  return [
-    data,
-    handleLoadNewProduct,
-    handleChangeActiveProduct,
-    handleRemoveProduct,
-  ];
+  return [{ cache: hydratedCache }, handleLoadNewProduct];
 };
 
 export default useProductCache;

@@ -14,13 +14,7 @@ const ICON_BTN_STYLES = `${BASE_BTN_STYLES} border-gray-300 text-gray-500 hover:
 
 export default function Wishlist() {
   const [showWishlist, setShowWishlist] = useState(false);
-  const [
-    wishlist,
-    addToWishlist,
-    removeFromWishlist,
-    resumeWishlistItem,
-    shareWishlistItem,
-  ] = useWishlist();
+  const [wishlist, addToWishlist] = useWishlist();
   if (!wishlist) return null;
 
   const handleAddToWishlist = async () => {
@@ -28,10 +22,6 @@ export default function Wishlist() {
     setShowWishlist(true);
   };
 
-  const handleClickResume = (idx) => {
-    resumeWishlistItem(idx);
-    setShowWishlist(false);
-  };
   return (
     <>
       <button
@@ -69,21 +59,24 @@ export default function Wishlist() {
               <div className="flex flex-row space-x-1 mt-2">
                 <button
                   type="button"
-                  onClick={() => handleClickResume(i)}
+                  onClick={() => {
+                    item.handleSelect();
+                    setShowWishlist(false);
+                  }}
                   className={`${BASE_BTN_STYLES} flex-grow text-base border-primary text-primary hover:bg-primary hover:text-white`}
                 >
                   Resume
                 </button>
                 <button
                   type="button"
-                  onClick={() => shareWishlistItem(i)}
+                  onClick={item.handleShare}
                   className={ICON_BTN_STYLES}
                 >
                   <ShareIcon />
                 </button>
                 <button
                   type="button"
-                  onClick={() => removeFromWishlist(i)}
+                  onClick={item.handleRemove}
                   className={ICON_BTN_STYLES}
                 >
                   <DeleteIcon />
