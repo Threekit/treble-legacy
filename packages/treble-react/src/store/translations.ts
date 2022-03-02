@@ -62,6 +62,10 @@ const { reducer } = createSlice({
 export const getLanguage = (state: RootState): undefined | string =>
   state.translations.language;
 
+export const getTranslations = (
+  state: RootState
+): undefined | ITranslationMap => state.translations.translations;
+
 export const getLanguageOptions = (state: RootState): Array<string> => {
   if (!state.treble.isThreekitInitialized || !state.translations.translations)
     return [];
