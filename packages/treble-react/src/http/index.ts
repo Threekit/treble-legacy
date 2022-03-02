@@ -3,6 +3,7 @@ import * as products from './products';
 import * as configurations from './configurations';
 import * as pricebook from './pricebook';
 import * as catalog from './catalog';
+import * as server from './server';
 
 export default {
   orders,
@@ -10,4 +11,5 @@ export default {
   configurations,
   pricebook,
   catalog,
+  server,
 };

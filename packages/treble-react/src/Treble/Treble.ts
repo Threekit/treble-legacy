@@ -17,6 +17,12 @@ interface ITreble {
   initialConfiguration: IConfiguration;
 }
 
+interface IEmailShareCredentials {
+  to: string;
+  from: string;
+  templateId: string;
+}
+
 class Treble {
   _api: typeof threekitAPI;
   _player: IThreekitPlayer;
@@ -93,6 +99,31 @@ class Treble {
       configuration
     );
     window.threekit.configurator.setConfiguration(updateConfiguration);
+  };
+
+  sendEmail = (
+    credentials: IEmailShareCredentials,
+    templateData: Record<string, any>
+  ) => {
+    if (!credentials)
+      throw new Error('sendEmail is missing credentials object');
+    if (!credentials.from.length)
+      throw new Error('sendEmail is missing sender email - "From"');
+    if (!credentials.to.length)
+      throw new Error('sendEmail is missing receivers email - "To"');
+    if (!credentials.templateId.length)
+      throw new Error(
+        'sendEmail is missing the templateId to use - "TemplateId"'
+      );
+    const data = Object.assign(
+      {
+        To: credentials.to,
+        From: credentials.from,
+        TemplateId: credentials.templateId,
+      },
+      { TemplateModel: templateData }
+    );
+    return threekitAPI.server.sendEmail(data);
   };
 }
 
