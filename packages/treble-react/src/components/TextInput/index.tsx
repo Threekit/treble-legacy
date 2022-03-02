@@ -10,7 +10,9 @@ import container, {
   IFormComponentProps,
 } from '../containers/formInputContainer';
 
-export interface ITextInput extends IFormComponentProps<undefined> {}
+export interface ITextInput extends IFormComponentProps<undefined> {
+  maxLength?: number;
+}
 
 export const TextInput = (props: ITextInput) => {
   const {
@@ -18,6 +20,7 @@ export const TextInput = (props: ITextInput) => {
     description,
     value,
     onChange,
+    maxLength,
     className: customClassName,
   } = props;
   const cls = generateClassName('text-input', customClassName, title);
@@ -28,6 +31,7 @@ export const TextInput = (props: ITextInput) => {
       <FormComponentDescription description={description} className={cls} />
       <Input
         type="text"
+        maxLength={maxLength}
         value={value}
         onChange={e => onChange && onChange(e.target.value)}
         className={cls}
