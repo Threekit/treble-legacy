@@ -1,11 +1,11 @@
 import { useAttribute } from '@threekit-tools/treble';
 
 export default function Strips(props) {
-  const [attribute] = useAttribute(props.attribute);
+  const { title, attribute } = props;
   if (!attribute) return <></>;
   return (
     <div>
-      <h3 className="text-xl mb-4">{props.title || attribute?.label}</h3>
+      <h3 className="text-xl mb-4">{title || attribute?.label}</h3>
       <div className="flex flex-col flex-wrap content-start">
         {attribute?.values.map((item, i) => {
           return (
@@ -42,4 +42,10 @@ export default function Strips(props) {
       </div>
     </div>
   );
+}
+
+export default function StripsAttribute(props) {
+  const [attribute] = useAttribute(props.attribute);
+  if (!attribute) return <></>;
+  return <Strips title={props.title} attribute={attribute} />;
 }

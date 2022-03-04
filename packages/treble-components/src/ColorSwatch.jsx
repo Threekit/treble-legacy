@@ -1,11 +1,11 @@
 import { useAttribute } from '@threekit-tools/treble';
 
 export default function ColorSwatch(props) {
-  const [attribute] = useAttribute(props.attribute);
+  const { title, attribute } = props;
   if (!attribute) return <></>;
   return (
     <div>
-      <h3 className="text-xl mb-4">{props.title || attribute?.label}</h3>
+      <h3 className="text-xl mb-4">{title || attribute?.label}</h3>
       <div className="flex flex-row flex-wrap content-start">
         {attribute?.values.map((item, i) => {
           return (
@@ -37,4 +37,10 @@ export default function ColorSwatch(props) {
       </div>
     </div>
   );
+}
+
+export default function ColorSwatchAttribute(props) {
+  const [attribute] = useAttribute(props.attribute);
+  if (!attribute) return <></>;
+  return <ColorSwatch title={props.title} attribute={attribute} />;
 }

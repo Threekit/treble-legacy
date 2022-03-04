@@ -1,18 +1,18 @@
 import { useAttribute } from '@threekit-tools/treble';
 
 export default function Tiles(props) {
-  const [attribute] = useAttribute(props.attribute);
+  const { title, attribute } = props;
   if (!attribute) return <></>;
   return (
     <div className="mb-5">
-      <h3 className="text-xl mb-4">{props.title || attribute?.label}</h3>
+      <h3 className="text-xl mb-4">{title || attribute?.label}</h3>
       <div className="grid grid-cols-2 gap-1">
         {attribute?.values.map((item, i) => {
           return (
             <button
               key={i}
               type="button"
-              onClick={handleSelect}
+              onClick={item.handleSelect}
               className={`group rounded-sm h-11 px-3 mb-1 mr-1 text-base cursor-pointer border border-solid hover:border-blue-500 hover:bg-blue-50 ${
                 item.selected
                   ? 'border-blue-500 bg-blue-50 text-blue-500'
@@ -26,4 +26,10 @@ export default function Tiles(props) {
       </div>
     </div>
   );
+}
+
+export default function TilesAttribute(props) {
+  const [attribute] = useAttribute(props.attribute);
+  if (!attribute) return <></>;
+  return <Tiles title={props.title} attribute={attribute} />;
 }

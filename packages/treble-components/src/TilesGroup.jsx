@@ -1,11 +1,11 @@
 import { useAttribute } from '@threekit-tools/treble';
 
 export default function TilesGroup(props) {
-  const [attribute] = useAttribute(props.attribute);
+  const { title, attribute } = props;
   if (!attribute) return <></>;
   return (
     <div className="w-full mb-5">
-      <h3 className="text-xl mb-4">{props.title || attribute?.label}</h3>
+      <h3 className="text-xl mb-4">{title || attribute?.label}</h3>
       <div className="w-full flex flex-row items-stretch content-start">
         {attribute?.values.map((item, i) => (
           <button
@@ -24,4 +24,10 @@ export default function TilesGroup(props) {
       </div>
     </div>
   );
+}
+
+export default function TilesGroupAttribute(props) {
+  const [attribute] = useAttribute(props.attribute);
+  if (!attribute) return <></>;
+  return <TilesGroup title={props.title} attribute={attribute} />;
 }
