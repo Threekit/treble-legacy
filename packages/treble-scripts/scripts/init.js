@@ -4,6 +4,7 @@ const fs = require('fs-extra');
 const chalk = require('chalk');
 
 const COMPONENTS_PACKAGE = '@threekit-tools/treble-components';
+const RECIPES_PACKAGE = '@threekit-tools/treble-recipes';
 const DEFAULT_TEMPLATE = '@threekit-tools/treble-template';
 const TYPESCRIPT_TEMPLATE = '@threekit-tools/treble-template-typescript';
 
@@ -54,9 +55,10 @@ function installDependencies(root, dependencies, isTypescript) {
   });
 }
 
-function copyTemplate(root, templateName) {
+function copyTemplate(root, templateName, includeRecipes) {
   // const appPath = path.join(root, "src");
   const componentsOutputPath = path.join(root, 'src', 'components');
+  const recipesOutputPath = path.join(root, 'recipes');
   const componentsPath = path.dirname(
     require.resolve(`${COMPONENTS_PACKAGE}/package.json`, { paths: [root] })
   );
@@ -85,6 +87,24 @@ function copyTemplate(root, templateName) {
       `Could not locate components template: ${chalk.green(COMPONENTS_PACKAGE)}`
     );
     return Promise.reject();
+  }
+
+  if (includeRecipes) {
+    fs.ensureDirSync(recipesOutputPath);
+
+    const recipesPath = path.dirname(
+      require.resolve(`${RECIPES_PACKAGE}/package.json`, { paths: [root] })
+    );
+    const recipesDir = path.join(recipesPath, 'src');
+
+    if (fs.existsSync(recipesDir)) {
+      fs.copySync(recipesDir, recipesOutputPath);
+    } else {
+      console.error(
+        `Could not locate supplied recipes: ${chalk.green(RECIPES_PACKAGE)}`
+      );
+      return Promise.reject();
+    }
   }
 
   return Promise.resolve();
@@ -151,6 +171,7 @@ module.exports = async function init([
   // eslint-disable-next-line
   originalDirectory,
   template,
+  includeRecipes,
 ]) {
   let templateName = template || DEFAULT_TEMPLATE;
   let isTypescript = false;
@@ -161,10 +182,11 @@ module.exports = async function init([
   }
 
   const dependencies = [templateName];
+  if (includeRecipes) dependencies.push(RECIPES_PACKAGE);
 
-  await installDependencies(root, dependencies, isTypescript);
-  await copyTemplate(root, templateName);
-  await removeTemplateDependencies([templateName, COMPONENTS_PACKAGE]);
+  await installDependencies(root, dependencies, isTypescript, includeRecipes);
+  await copyTemplate(root, templateName, includeRecipes);
+  await removeTemplateDependencies([...dependencies, COMPONENTS_PACKAGE]);
   await enrichPackageJson(root, isTypescript);
   await renameGitIgnore(root);
 

@@ -27,9 +27,10 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-module.exports = (env, threekitEnv) => {
+module.exports = (env, threekitEnv, config) => {
   const isDev = env === 'development';
   const isProd = env === 'production';
+  const useRecipes = config?.useRecipes;
 
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
@@ -94,11 +95,22 @@ module.exports = (env, threekitEnv) => {
     bail: isProd,
     stats: 'none',
     devtool: isDev ? 'cheap-module-source-map' : false,
-    entry: paths.appIndexJs,
+    entry: Object.assign(
+      {
+        treble: { import: paths.appIndexJs, filename: 'treble-app.js' },
+      },
+      isProd && useRecipes
+        ? {
+            recipes: {
+              import: paths.recipesIndexJs,
+              filename: 'treble-recipes.js',
+            },
+          }
+        : {}
+    ),
     output: {
       path: paths.appBuild,
       clean: true,
-      filename: 'treble-app.js',
     },
     optimization: {
       minimize: isProd,

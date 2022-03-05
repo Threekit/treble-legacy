@@ -18,7 +18,7 @@ const portIdx =
 const ENV = argv.includes('--admin-fts') ? 'admin-fts' : 'preview';
 const PORT = process.env.PORT || portIdx !== -1 ? argv[portIdx + 1] : 3000;
 
-const config = configFactory('development', ENV);
+const config = configFactory('development', ENV, {});
 const serverConfig = createDevServerConfig({ port: PORT });
 
 const compiler = createCompiler({

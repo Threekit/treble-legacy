@@ -10,6 +10,8 @@ const appPublic = resolveApp('public');
 const appIndexHtml = resolveApp('public/index.html');
 const appSrc = resolveApp('src');
 const appIndexJs = resolveApp('src/index');
+const recipesSrc = resolveApp('recipes');
+const recipesIndexJs = resolveApp('recipes/index');
 
 const nodeModules = resolveApp('node_modules');
 const pkgJson = resolveApp('package.json');
@@ -23,6 +25,8 @@ module.exports = {
   appIndexHtml,
   appSrc,
   appIndexJs,
+  recipesSrc,
+  recipesIndexJs,
   nodeModules,
   pkgJson,
   tsConfig,
