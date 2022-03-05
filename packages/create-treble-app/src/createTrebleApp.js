@@ -89,8 +89,14 @@ function createPackageJson(root) {
   return Promise.resolve();
 }
 
-function initTreble(name, root, originalDirectory, templateName) {
-  const data = [name, root, originalDirectory, templateName];
+function initTreble(
+  name,
+  root,
+  originalDirectory,
+  templateName,
+  includeRecipes
+) {
+  const data = [name, root, originalDirectory, templateName, includeRecipes];
   const nodeScript = `
   const init = require('${TREBLE_SCRIPTS_PACKAGE}/scripts/init.js');
   init(JSON.parse(process.argv[1]));
@@ -119,6 +125,7 @@ export default async function createTrebleApp() {
   const templateName = preppedArgs.flags?.template || undefined;
   let name = preppedArgs.appName;
   const originalDirectory = process.cwd();
+  const includeRecipes = argv.includes('--recipes');
 
   if (!name) {
     const response = await enquirer.prompt({
@@ -142,5 +149,5 @@ export default async function createTrebleApp() {
   await installTreble(root);
   process.chdir(root);
 
-  initTreble(name, root, originalDirectory, templateName);
+  initTreble(name, root, originalDirectory, templateName, includeRecipes);
 }
