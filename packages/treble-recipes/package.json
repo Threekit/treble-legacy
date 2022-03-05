@@ -1,0 +1,26 @@
+{
+  "name": "@threekit-tools/treble-recipes",
+  "version": "0.0.1",
+  "main": "dist/treble-recipes.js",
+  "license": "MIT",
+  "scripts": {
+    "serve": "node server",
+    "start": "webpack --watch --config ./config/webpack.prod.js",
+    "build": "webpack --config ./config/webpack.prod.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "babel-loader": "^8.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "webpack": "^5.56.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^4.7.4"
+  }
+}
