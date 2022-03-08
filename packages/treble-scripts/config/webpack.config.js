@@ -27,10 +27,12 @@ const cssModuleRegex = /\.module\.css$/;
 const sassRegex = /\.(scss|sass)$/;
 const sassModuleRegex = /\.module\.(scss|sass)$/;
 
-module.exports = (env, threekitEnv, config) => {
+module.exports = (env, threekitEnv, config = {}) => {
   const isDev = env === 'development';
   const isProd = env === 'production';
-  const useRecipes = config?.useRecipes;
+  let useRecipes = false;
+
+  if (config.useRecipes === true) useRecipes = true;
 
   // common function to get style loaders
   const getStyleLoaders = (cssOptions, preProcessor) => {
