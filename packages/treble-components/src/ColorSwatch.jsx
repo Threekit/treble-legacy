@@ -1,6 +1,6 @@
 import { useAttribute } from '@threekit-tools/treble';
 
-export default function ColorSwatch(props) {
+export function ColorSwatch(props) {
   const { title, attribute } = props;
   if (!attribute) return <></>;
   return (

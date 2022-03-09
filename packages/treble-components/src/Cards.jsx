@@ -1,6 +1,6 @@
 import { useAttribute } from '@threekit-tools/treble';
 
-export default function Cards(props) {
+export function Cards(props) {
   const { title, attribute } = props;
   if (!attribute) return <></>;
   return (

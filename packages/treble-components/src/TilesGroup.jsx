@@ -1,6 +1,6 @@
 import { useAttribute } from '@threekit-tools/treble';
 
-export default function TilesGroup(props) {
+export function TilesGroup(props) {
   const { title, attribute } = props;
   if (!attribute) return <></>;
   return (

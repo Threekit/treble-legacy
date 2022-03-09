@@ -1,6 +1,6 @@
 import { useAttribute } from '@threekit-tools/treble';
 
-export default function Tiles(props) {
+export function Tiles(props) {
   const { title, attribute } = props;
   if (!attribute) return <></>;
   return (

@@ -1,6 +1,6 @@
 import { useAttribute } from '@threekit-tools/treble';
 
-export default function Strips(props) {
+export function Strips(props) {
   const { title, attribute } = props;
   if (!attribute) return <></>;
   return (
