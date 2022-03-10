@@ -112,6 +112,7 @@ module.exports = (env, threekitEnv, config = {}) => {
     ),
     output: {
       path: paths.appBuild,
+      assetModuleFilename: 'static/media/[name][ext]',
       clean: true,
     },
     optimization: {
@@ -198,18 +199,12 @@ module.exports = (env, threekitEnv, config = {}) => {
             // A missing `test` is equivalent to a match.
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-              type: 'asset',
-              parser: {
-                dataUrlCondition: {
-                  maxSize: imageInlineSizeLimit,
-                },
-              },
-              use: {
-                loader: require.resolve('file-loader'),
-                options: {
-                  name: 'static/media/[name].[ext]',
-                },
-              },
+              type: 'asset/resource',
+              // parser: {
+              //   dataUrlCondition: {
+              //     maxSize: imageInlineSizeLimit,
+              //   },
+              // },
             },
             {
               test: /\.svg$/,
