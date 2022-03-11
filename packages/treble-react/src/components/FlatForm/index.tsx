@@ -9,7 +9,7 @@ import {
   filterFormAttributes,
 } from '../../utils';
 import useConfigurator from '../../hooks/useConfigurator';
-import { IDisplayAttributeAsset } from '../../threekit';
+import { IDisplayAttributeAsset } from '../../types';
 import { ASSET_TYPES } from '../../constants';
 
 interface FlatFormProps {

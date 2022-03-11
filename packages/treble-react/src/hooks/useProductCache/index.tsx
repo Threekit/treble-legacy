@@ -1,10 +1,12 @@
 import {
   getProductCache,
-  getActiveProductIdx,
-  changeActiveProductIdx,
+  getActiveCacheIdx,
+  changeActiveCacheIdx,
   loadNewProduct,
   removeProductIdx,
   CachedProduct,
+  PRODUCTS,
+  loadProduct,
 } from '../../store/product';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 import { IReloadConfig } from '../../store/treble';
@@ -15,8 +17,16 @@ interface HydratedCacheProduct
   handleSelect: () => Promise<void>;
   handleRemove: () => Promise<void>;
 }
+
+interface ISelectableProduct {
+  id: string;
+  label: string;
+  handleSelect: () => void;
+}
+
 interface CacheData {
   cache: Array<HydratedCacheProduct>;
+  products: Array<ISelectableProduct>;
 }
 
 type UseProductCache = [
@@ -27,7 +37,7 @@ type UseProductCache = [
 const useProductCache = (): UseProductCache => {
   const dispatch = useThreekitDispatch();
   const cache = useThreekitSelector(getProductCache);
-  const activeProductIdx = useThreekitSelector(getActiveProductIdx);
+  const activeProductIdx = useThreekitSelector(getActiveCacheIdx);
 
   const handleLoadNewProduct = (config?: string | IReloadConfig) => {
     return dispatch(loadNewProduct(config));
@@ -40,11 +50,19 @@ const useProductCache = (): UseProductCache => {
       handleSelect:
         activeProductIdx === i
           ? () => Promise.resolve()
-          : () => dispatch(changeActiveProductIdx(i)),
+          : () => dispatch(changeActiveCacheIdx(i)),
     })
   );
 
-  return [{ cache: hydratedCache }, handleLoadNewProduct];
+  const products: Array<ISelectableProduct> = Object.keys(PRODUCTS).map(
+    prod => ({
+      id: prod,
+      label: prod,
+      handleSelect: () => dispatch(loadProduct(prod)),
+    })
+  );
+
+  return [{ cache: hydratedCache, products }, handleLoadNewProduct];
 };
 
 export default useProductCache;

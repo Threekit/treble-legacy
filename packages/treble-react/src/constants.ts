@@ -116,3 +116,12 @@ export const SNAPSHOT_OUTPUTS = {
  ****************************************************/
 
 export const WISHLIST_LOCALSTORAGE_KEY = 'tk_wishlist';
+
+/*****************************************************
+ * Datatables
+ ****************************************************/
+
+export const DATATABLE_FORMATS = {
+  csv: 'csv',
+  json: 'json',
+};

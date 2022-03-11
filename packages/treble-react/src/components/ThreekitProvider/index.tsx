@@ -14,6 +14,7 @@ interface Theme {
 }
 
 export interface ThreekitProviderProps extends Partial<ILaunchConfig> {
+  productId?: string;
   theme?: Theme;
   reducer?: Record<string, Reducer>;
   children: React.ReactNode;
@@ -21,13 +22,26 @@ export interface ThreekitProviderProps extends Partial<ILaunchConfig> {
 
 const App = (props: ThreekitProviderProps) => {
   const dispatch = useThreekitDispatch();
+  const {
+    playerConfig,
+    productId,
+    project,
+    locale,
+    threekitEnv,
+    eventHandlers,
+  } = props;
 
   useEffect(() => {
     const init = () => {
-      const { playerConfig, project, locale, threekitEnv, eventHandlers } =
-        props;
       dispatch(
-        launch({ playerConfig, project, locale, threekitEnv, eventHandlers })
+        launch({
+          playerConfig,
+          productId,
+          project,
+          locale,
+          threekitEnv,
+          eventHandlers,
+        })
       );
     };
     init();
@@ -44,6 +58,7 @@ const ThreekitProvider = (props: ThreekitProviderProps) => {
         <GlobalStyle />
         <App
           locale={props.locale}
+          productId={props.productId}
           project={props.project}
           playerConfig={props.playerConfig}
           threekitEnv={props.threekitEnv}

@@ -4,7 +4,9 @@ import {
   ICoordinates,
   IQuaternion,
   IThreekitDisplayAttribute,
-} from './threekit';
+  ISetConfiguration,
+  IHydratedAttribute,
+} from './types';
 import {
   ATTRIBUTE_TYPES,
   //  Class Names
@@ -17,8 +19,9 @@ import {
   FORM_CLASS_NAME,
   TK_SAVED_CONFIG_PARAM_KEY,
 } from './constants';
-import { ITrebleConfig, IAttributeTypes } from './threekit';
+import { ITrebleConfig, IAttributeTypes } from './types';
 import { RawAttributeValue } from './hooks/useAttribute';
+import { ITranslationMap } from './api/products';
 
 interface ICameraPosition {
   position: ICoordinates;
@@ -300,6 +303,68 @@ export const metadataValueToObject = (
       .map(el => el.trim());
     return Object.assign(output, { [key]: parseFloat(value) || value });
   }, {});
+
+export const hydrateAttribute = (
+  data: [
+    Record<string, IThreekitDisplayAttribute>,
+    undefined | ITranslationMap,
+    undefined | string
+  ],
+  optionSelectionHandler: (config: ISetConfiguration) => Promise<void>
+): Record<string, IHydratedAttribute> => {
+  const [attributes, translations, language] = data;
+  const hasTranslation = !!language && !!translations;
+
+  return Object.values(attributes).reduce(
+    (
+      output: Record<string, IHydratedAttribute>,
+      attribute: IThreekitDisplayAttribute
+    ) =>
+      Object.assign(output, {
+        [attribute.name]: Object.assign(
+          {},
+          attribute,
+          {
+            label: hasTranslation
+              ? translations?.[attribute.name]?.[language] || attribute.name
+              : attribute.name,
+          },
+          attribute.type === 'String'
+            ? {
+                values: attribute.values.map(el =>
+                  Object.assign({}, el, {
+                    label: hasTranslation
+                      ? translations?.[el.label]?.[language] || el.label
+                      : el.label,
+                    handleSelect: () =>
+                      optionSelectionHandler({
+                        [attribute.name]: el.value,
+                      }),
+                    selected: attribute.value === el.value,
+                  })
+                ),
+              }
+            : attribute.type === 'Asset'
+            ? {
+                values: attribute.values.map(el =>
+                  Object.assign({}, el, {
+                    label: hasTranslation
+                      ? translations?.[el.name]?.[language] || el.name
+                      : el.name,
+                    handleSelect: () =>
+                      optionSelectionHandler({
+                        [attribute.name]: { assetId: el.assetId },
+                      }),
+                    selected: attribute.value.assetId === el.assetId,
+                  })
+                ),
+              }
+            : undefined
+        ),
+      }),
+    {} as Record<string, IHydratedAttribute>
+  );
+};
 
 export const selectionToConfiguration = (
   value: RawAttributeValue,

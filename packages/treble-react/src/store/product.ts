@@ -1,6 +1,6 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
-import { IMetadata, IConfiguration, IProducts } from '../threekit';
+import { IMetadata, IConfiguration, IProduct } from '../types';
 import connection, { IConnectionConfig } from '../connection';
 import { IReloadConfig, reloadPlayer } from './treble';
 
@@ -9,6 +9,7 @@ import { IReloadConfig, reloadPlayer } from './treble';
  ****************************************************/
 
 export interface CachedProduct {
+  id: undefined | string;
   name?: string;
   label?: string;
   thumbnail?: string;
@@ -17,51 +18,57 @@ export interface CachedProduct {
 }
 
 export interface CachedProductState
-  extends Pick<CachedProduct, 'name' | 'label' | 'thumbnail'> {
+  extends Pick<CachedProduct, 'id' | 'name' | 'label' | 'thumbnail'> {
   data: string;
 }
 
+interface IEnvConfig extends Record<string, Partial<IProduct>> {}
+
+export interface IHydratedProducts extends Record<string, IEnvConfig> {}
+
 export interface ProductState {
-  //  Name of the Initialized Item
+  //  ID of initialized product
+  id: undefined | string;
+  //  Name of the Initialized product(Item)
   name: undefined | string;
   //  Initialized item's metadata
   metadata: undefined | IMetadata;
-  cachedProducts: Array<CachedProductState>;
-  activeProductIdx: number;
+  //  Cache
+  cache: Array<CachedProductState>;
+  activeCacheIdx: number;
 }
 
 /*****************************************************
  * Constants
  ****************************************************/
 
-export let PRODUCTS: IProducts;
+export let PRODUCTS: IHydratedProducts;
 
 /*****************************************************
  * Actions
  ****************************************************/
 
 //  Actions to be used only internally
-export const setName = createAction<string>('treble/product/set-name');
-export const setMetadata = createAction<IMetadata>(
-  'treble/product/set-metadata'
+export const setProductId = createAction<undefined | string>(
+  'treble/set-product-id'
 );
-export const addProductToCache = createAction<CachedProductState>(
-  'treble/add-product-to-cache'
+export const setName = createAction<string>('treble/set-product-name');
+export const setMetadata = createAction<IMetadata>('treble/set-metadata');
+export const appendToCache = createAction<CachedProductState>(
+  'treble/append-to-cache'
 );
 export const updateActiveProductCache = createAction<CachedProductState>(
   'treble/update-active-product-cache'
 );
-export const removeProductFromCache = createAction<number>(
-  'treble/remove-product-from-cache'
+export const removeFromCache = createAction<number>('treble/remove-from-cache');
+export const setActiveCacheIdx = createAction<number>(
+  'treble/set-active-cache-idx'
 );
-export const setActiveProductIdx = createAction<number>(
-  'treble/set-active-product-idx'
+export const incrementActiveCacheIdx = createAction<undefined>(
+  'treble/increment-active-cache-idx'
 );
-export const incrementActiveProductIdx = createAction<undefined>(
-  'treble/increment-active-product-idx'
-);
-export const decrementActiveProductIdx = createAction<undefined>(
-  'treble/decrement-active-product-idx'
+export const decrementActiveCacheIdx = createAction<undefined>(
+  'treble/decrement-active-cache-idx'
 );
 
 /*****************************************************
@@ -69,55 +76,60 @@ export const decrementActiveProductIdx = createAction<undefined>(
  ****************************************************/
 
 const initialState: ProductState = {
+  //  ID of initialized item
+  id: undefined,
   //  Name of the Initialized Item
   name: undefined,
   //  Initialized item's metadata
   metadata: undefined,
   //  cached products. Does not include the active product
-  cachedProducts: [],
-  activeProductIdx: 0,
+  cache: [],
+  activeCacheIdx: 0,
 };
 
 const { reducer } = createSlice({
   name: 'product',
   initialState,
   extraReducers: builder => {
+    builder.addCase(setProductId, (state, action) => {
+      return { ...state, id: action.payload };
+    });
     builder.addCase(setName, (state, action) => {
       return { ...state, name: action.payload };
     });
     builder.addCase(setMetadata, (state, action) => {
       return { ...state, metadata: action.payload };
     });
-    builder.addCase(addProductToCache, (state, action) => {
-      state.cachedProducts.push(action.payload);
+    builder.addCase(appendToCache, (state, action) => {
+      state.cache.push(action.payload);
       return state;
     });
-    builder.addCase(removeProductFromCache, (state, action) => {
-      state.cachedProducts.splice(action.payload, 1);
+    builder.addCase(removeFromCache, (state, action) => {
+      state.cache.splice(action.payload, 1);
       return state;
     });
     builder.addCase(updateActiveProductCache, (state, action) => {
-      state.cachedProducts[state.activeProductIdx] = Object.assign(
+      state.cache[state.activeCacheIdx] = Object.assign(
         {},
-        state.cachedProducts[state.activeProductIdx],
+        state.cache[state.activeCacheIdx],
         action.payload
       );
       return state;
     });
-    builder.addCase(setActiveProductIdx, (state, action) => {
-      state.activeProductIdx = action.payload;
+    builder.addCase(setActiveCacheIdx, (state, action) => {
+      state.activeCacheIdx = action.payload;
       return state;
     });
-    builder.addCase(incrementActiveProductIdx, state => {
-      state.activeProductIdx =
-        state.activeProductIdx >= state.cachedProducts.length
-          ? state.activeProductIdx
-          : state.activeProductIdx + 1;
+    builder.addCase(incrementActiveCacheIdx, state => {
+      state.activeCacheIdx =
+        state.activeCacheIdx >= state.cache.length
+          ? state.activeCacheIdx
+          : state.activeCacheIdx + 1;
       return state;
     });
-    builder.addCase(decrementActiveProductIdx, state => {
-      state.activeProductIdx =
-        state.activeProductIdx === 0 ? 0 : state.activeProductIdx - 1;
+    builder.addCase(decrementActiveCacheIdx, state => {
+      state.activeCacheIdx =
+        state.activeCacheIdx === 0 ? 0 : state.activeCacheIdx - 1;
       return state;
     });
   },
@@ -128,6 +140,9 @@ const { reducer } = createSlice({
  * Standard Selectors
  ****************************************************/
 
+export const getProductId = (state: RootState): undefined | string =>
+  state.product.id;
+
 export const getName = (state: RootState): undefined | string =>
   state.product.name;
 
@@ -136,13 +151,13 @@ export const getMetadata = (state: RootState): undefined | IMetadata =>
   state.product.metadata;
 
 //  Product Cache
-export const getActiveProductIdx = (state: RootState): number =>
-  state.product.activeProductIdx;
+export const getActiveCacheIdx = (state: RootState): number =>
+  state.product.activeCacheIdx;
 
 export const getProductCache = (
   state: RootState
 ): Array<Pick<CachedProduct, 'name' | 'label' | 'thumbnail'>> =>
-  state.product.cachedProducts.map(prod =>
+  state.product.cache.map(prod =>
     Object.assign(
       {
         name: prod.name,
@@ -157,7 +172,7 @@ export const getProductCache = (
  ****************************************************/
 
 export const initProduct =
-  (prods?: IProducts) =>
+  (prods?: IHydratedProducts) =>
   (dispatch: ThreekitDispatch, getState: () => RootState) => {
     if (prods) PRODUCTS = prods;
     const state = getState();
@@ -167,8 +182,8 @@ export const initProduct =
     const metadata = window.threekit.configurator.getMetadata();
     dispatch(setName(name));
     dispatch(setMetadata(metadata));
-    if (!state.product.cachedProducts.length) {
-      dispatch(setActiveProductIdx(0));
+    if (!state.product.cache.length) {
+      dispatch(setActiveCacheIdx(0));
       dispatch(cacheActiveProduct());
     }
   };
@@ -186,12 +201,36 @@ export const cacheActiveProduct =
     const data = { connection: connectionObj, configuration };
 
     const product: CachedProductState = Object.assign(
-      { name: state.product.name, data: JSON.stringify(data) },
+      {
+        id: state.product.id,
+        name: state.product.name,
+        data: JSON.stringify(data),
+      },
       label ? { label } : {},
       thumbnail ? { thumbnail } : {}
     );
 
     return dispatch(updateActiveProductCache(product));
+  };
+
+export const loadProduct =
+  (id: string) =>
+  async (dispatch: ThreekitDispatch, getState: () => RootState) => {
+    const state = getState();
+    const productsList = Object.keys(PRODUCTS);
+    let shouldCacheProduct = true;
+
+    if (!productsList.includes(id)) return;
+
+    const productConfig = PRODUCTS[id][state.treble.threekitEnv];
+
+    dispatch(setProductId(id));
+    if (shouldCacheProduct) dispatch(cacheActiveProduct());
+    await dispatch(reloadPlayer(productConfig));
+    if (shouldCacheProduct) {
+      dispatch(incrementActiveCacheIdx());
+      dispatch(cacheActiveProduct());
+    }
   };
 
 export const loadNewProduct =
@@ -208,30 +247,32 @@ export const loadNewProduct =
     }
 
     if (shouldCacheProduct) dispatch(cacheActiveProduct({ label, thumbnail }));
+    dispatch(setProductId(undefined));
     await dispatch(reloadPlayer(config));
     if (shouldCacheProduct) {
-      dispatch(incrementActiveProductIdx());
+      dispatch(incrementActiveCacheIdx());
       dispatch(cacheActiveProduct({ label, thumbnail }));
     }
   };
 
-export const changeActiveProductIdx =
+export const changeActiveCacheIdx =
   (idx: number) =>
   async (dispatch: ThreekitDispatch, getState: () => RootState) => {
     const state = getState();
-    const { cachedProducts } = state.product;
+    const { cache } = state.product;
 
-    if (idx >= cachedProducts.length) return Promise.resolve();
+    if (idx >= cache.length) return Promise.resolve();
 
     dispatch(cacheActiveProduct());
 
-    const cachedProduct = { ...state.product.cachedProducts[idx] };
+    const cachedProduct = { ...state.product.cache[idx] };
     const data: Pick<CachedProduct, 'connection' | 'configuration'> =
       JSON.parse(cachedProduct.data);
 
     connection.connect(data.connection);
 
-    dispatch(setActiveProductIdx(idx));
+    dispatch(setActiveCacheIdx(idx));
+    dispatch(setProductId(cachedProduct.id));
     await dispatch(
       reloadPlayer({
         assetId: data.connection.assetId,
@@ -244,23 +285,23 @@ export const removeProductIdx =
   (idx?: number) =>
   async (dispatch: ThreekitDispatch, getState: () => RootState) => {
     const state = getState();
-    const { cachedProducts, activeProductIdx } = state.product;
+    const { cache, activeCacheIdx } = state.product;
 
-    if (cachedProducts.length <= 1) return Promise.resolve();
+    if (cache.length <= 1) return Promise.resolve();
 
-    if (!idx || idx === activeProductIdx) {
-      if (activeProductIdx === state.product.cachedProducts.length - 1) {
-        await dispatch(changeActiveProductIdx(activeProductIdx - 1));
-        dispatch(removeProductFromCache(activeProductIdx));
+    if (!idx || idx === activeCacheIdx) {
+      if (activeCacheIdx === state.product.cache.length - 1) {
+        await dispatch(changeActiveCacheIdx(activeCacheIdx - 1));
+        dispatch(removeFromCache(activeCacheIdx));
       } else {
-        dispatch(removeProductFromCache(activeProductIdx));
-        await dispatch(changeActiveProductIdx(activeProductIdx));
+        dispatch(removeFromCache(activeCacheIdx));
+        await dispatch(changeActiveCacheIdx(activeCacheIdx));
       }
-    } else if (idx >= activeProductIdx) {
-      dispatch(removeProductFromCache(idx));
-    } else if (idx <= activeProductIdx) {
-      dispatch(decrementActiveProductIdx());
-      dispatch(removeProductFromCache(idx));
+    } else if (idx >= activeCacheIdx) {
+      dispatch(removeFromCache(idx));
+    } else if (idx <= activeCacheIdx) {
+      dispatch(decrementActiveCacheIdx());
+      dispatch(removeFromCache(idx));
     }
 
     return Promise.resolve();

@@ -1,3 +1,4 @@
+import threekitAPI from './api';
 import Treble from './Treble';
 
 type SCENE_PHASES = 'LOADED' | 'PRELOADED' | 'RENDERED';
@@ -6,7 +7,12 @@ type PRIVATE_APIS = 'scene' | 'player';
 
 export type DISPLAY_OPTIONS = 'webgl' | 'image';
 
-export type IAttributeTypes = 'String' | 'Asset' | 'Color' | 'Number';
+export type IAttributeTypes =
+  | 'String'
+  | 'Asset'
+  | 'Color'
+  | 'Number'
+  | 'Boolean';
 
 export type AssetType = 'upload' | 'item';
 
@@ -70,6 +76,7 @@ export type IConfigurationAttribute =
   | IConfigurationColor
   | string
   | number
+  | boolean
   | undefined;
 
 export type IConfiguration = Record<string, IConfigurationAttribute>;
@@ -187,26 +194,34 @@ export interface IAttributeNumber extends IAttributeBase<'Number', number> {
   step: number;
 }
 
+/****** NUMBER TYPE ATTRIBUTE *******/
+export interface IAttributeBoolean extends IAttributeBase<'Boolean', boolean> {
+  defaultValue: boolean;
+}
+
 /****** getAttributes() *******/
 export type IThreekitAttribute =
   | IAttributeAsset
   | IAttributeColor
   | IAttributeString
-  | IAttributeNumber;
+  | IAttributeNumber
+  | IAttributeBoolean;
 
 /****** getDisplayAttributes() *******/
 export type IThreekitDisplayAttribute =
   | IDisplayAttributeAsset
   | IDisplayAttributeString
   | IAttributeColor
-  | IAttributeNumber;
+  | IAttributeNumber
+  | IAttributeBoolean;
 
 /****** Treble Hydrated Values *******/
 export type IHydratedAttribute =
   | IHydratedAttributeAsset
   | IHydratedAttributeString
   | IAttributeColor
-  | IAttributeNumber;
+  | IAttributeNumber
+  | IAttributeBoolean;
 
 /***************************************************
  *  Camera
@@ -385,6 +400,7 @@ declare global {
     threekit: {
       player: IThreekitPlayer;
       configurator: IThreekitConfigurator;
+      services: typeof threekitAPI;
       treble: Treble;
     };
   }

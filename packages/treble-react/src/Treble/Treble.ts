@@ -4,7 +4,8 @@ import {
   IThreekitPlayer,
   IConfiguration,
   ISetConfiguration,
-} from '../threekit';
+  IThreekitPrivateConfigurator,
+} from '../types';
 import { TK_SAVED_CONFIG_PARAM_KEY } from '../constants';
 import { getParams, objectToQueryStr } from '../utils';
 import createWishlist, { IWishlist } from './Wishlist';
@@ -24,7 +25,6 @@ interface IEmailShareCredentials {
 }
 
 class Treble {
-  _api: typeof threekitAPI;
   _player: IThreekitPlayer;
   wishlist: IWishlist;
   private _initialConfiguration: string;
@@ -33,7 +33,6 @@ class Treble {
 
   constructor({ player, orgId, initialConfiguration }: ITreble) {
     //  Threekit API
-    this._api = threekitAPI;
     this._player = player;
     this.wishlist = createWishlist(orgId);
     this._snapshots = new Snapshots();
@@ -78,15 +77,19 @@ class Treble {
     );
   };
 
-  getNestedConfigurator = (address: string | Array<string>) => {
+  getNestedConfigurator = (
+    address: string | Array<string>
+  ): undefined | IThreekitPrivateConfigurator => {
+    if (!address) return undefined;
     const player = window.threekit.player.enableApi('player');
     const addressArr = Array.isArray(address) ? address : [address];
     return addressArr.reduce((configurator, attributeName) => {
+      if (!configurator) return undefined;
       const itemId = configurator.getAppliedConfiguration(attributeName);
       return window.threekit.player.scene.get({
         id: itemId,
         evalNode: true,
-      }).configurator;
+      })?.configurator;
     }, player.getConfigurator());
   };
 

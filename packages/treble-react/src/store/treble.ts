@@ -17,13 +17,19 @@ import {
   IThreekitDisplayAttribute,
   ISetConfiguration,
   IConfiguration,
-} from '../threekit';
+} from '../types';
 import Treble from '../Treble';
 import { setAttributes } from './attributes';
 import { initPrice, updatePrice } from './price';
 import { refreshWishlist } from './wishlist';
 import { initTranslations } from './translations';
-import { initProduct, setName, setMetadata } from './product';
+import {
+  initProduct,
+  setName,
+  setMetadata,
+  setProductId,
+  IHydratedProducts,
+} from './product';
 import message from '../components/message';
 
 /*****************************************************
@@ -41,6 +47,7 @@ export interface IPlayerInit {
 }
 
 export interface ILaunchConfig {
+  productId: string;
   threekitEnv: string;
   serverUrl: string;
   locale: string;
@@ -60,6 +67,8 @@ export interface IReloadConfig {
 }
 
 export interface TrebleState {
+  //  The threekit env
+  threekitEnv: string;
   //  Tracks configuration update
   isPlayerLoading: boolean;
   //  Tracks Threekit API initialization status
@@ -127,6 +136,7 @@ let EVENTS: EventHandlers = {};
  ****************************************************/
 
 const initialState: TrebleState = {
+  threekitEnv: 'preview',
   isThreekitInitialized: false,
   isPlayerLoading: false,
   playerElId: undefined,
@@ -137,6 +147,7 @@ const initialState: TrebleState = {
  * Actions
  ****************************************************/
 
+export const setThreekitEnv = createAction<string>('treble/set-threekit-env');
 export const setThreekitInitialized = createAction<boolean>(
   'treble/set-threekit-initialized'
 );
@@ -157,6 +168,10 @@ const { reducer } = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
+    builder.addCase(setThreekitEnv, (state, action) => {
+      state.threekitEnv = action.payload;
+      return state;
+    });
     builder.addCase(setThreekitInitialized, (state, action) => {
       state.isThreekitInitialized = action.payload;
       return state;
@@ -178,6 +193,10 @@ const { reducer } = createSlice({
 /*****************************************************
  * Standard Selectors
  ****************************************************/
+
+//  Loading Trackers
+export const getThreekitEnv = (state: RootState): string =>
+  state.treble.threekitEnv;
 
 //  Loading Trackers
 export const isThreekitInitialized = (state: RootState): boolean =>
@@ -226,6 +245,7 @@ export const initPlayer =
       window.threekit = {
         player,
         configurator,
+        services: threekitAPI,
         treble: new Treble({
           player,
           orgId,
@@ -252,23 +272,54 @@ export const launch =
 
     const config = loadTrebleConfig();
 
-    const credentials: ICredentials = Object.assign(
-      {},
-      config.project?.credentials || {},
-      launchConfig?.project?.credentials || {}
-    );
-    const products: IProducts = Object.assign(
-      {},
-      config.project?.products || {},
-      launchConfig?.project?.products || {}
-    );
+    let productId: string;
+    const credentials: ICredentials =
+      launchConfig?.project?.credentials || config.project?.credentials || {};
+    let productsRaw: IProducts | Record<string, IProducts> =
+      launchConfig?.project?.products || config.project?.products || {};
+
+    if (!launchConfig?.productId?.length) {
+      productsRaw = { default: productsRaw };
+      productId = 'default';
+    } else productId = launchConfig.productId;
+
+    const products: IHydratedProducts = Object.entries(
+      productsRaw as Record<string, IProducts>
+    ).reduce((output, [prodId, envs]) => {
+      const updatedEnvs = Object.entries(envs).reduce((result, [env, conf]) => {
+        let initialConfiguration: Record<string, any> | undefined;
+        let assetId: string | undefined;
+        let stageId: string | undefined;
+        let configurationId: string | undefined;
+
+        if (typeof conf === 'string') {
+          if (isUuid(conf)) assetId = conf;
+          else configurationId = conf;
+        } else {
+          stageId = conf.stageId;
+          if (conf.configurationId) configurationId = conf.configurationId;
+          else if (isUuid(conf.assetId)) assetId = conf.assetId;
+          else configurationId = conf.assetId;
+        }
+
+        return Object.assign(result, {
+          [env]: {
+            assetId,
+            stageId,
+            configurationId,
+            initialConfiguration,
+          },
+        });
+      }, {});
+      return Object.assign(output, { [prodId]: updatedEnvs });
+    }, {} as IHydratedProducts);
+
     if (!Object.keys(credentials).length || !Object.keys(products).length)
       return console.error('Missing credentials');
 
     const threekitEnv: string =
       launchConfig?.threekitEnv || process.env.THREEKIT_ENV || 'preview';
     const serverUrl = launchConfig?.serverUrl || config?.project?.serverUrl;
-    launchConfig?.threekitEnv || process.env.THREEKIT_ENV || 'preview';
 
     const playerConfig: IPlayerConfig = Object.assign(
       {},
@@ -278,24 +329,16 @@ export const launch =
     );
 
     const envCredentials = credentials[threekitEnv];
-    const product = products[threekitEnv];
+    const {
+      assetId,
+      stageId,
+      configurationId,
+      initialConfiguration: initialConfigurationRaw,
+    } = products[productId][threekitEnv];
+    // const product = products[threekitEnv];
     const threekitDomainRaw =
       envCredentials.threekitDomain || `${threekitEnv}.threekit.com`;
     const { orgId, publicToken: authToken } = envCredentials;
-    let initialConfigurationRaw: Record<string, any> | undefined;
-    let assetId: string | undefined;
-    let stageId: string | undefined;
-    let configurationId: string | undefined;
-
-    if (typeof product === 'string') {
-      if (isUuid(product)) assetId = product;
-      else configurationId = product;
-    } else {
-      stageId = product.stageId;
-      if (product.configurationId) configurationId = product.configurationId;
-      else if (isUuid(product.assetId)) assetId = product.assetId;
-      else configurationId = product.assetId;
-    }
 
     //  We get or create the player HTML element
     let el;
@@ -371,10 +414,12 @@ export const launch =
 
     EVENTS = Object.assign(EVENTS, launchConfig?.eventHandlers);
 
+    dispatch(setThreekitEnv(threekitEnv));
     dispatch(initTranslations(launchConfig?.locale));
     dispatch(initPrice());
     dispatch(updatePrice());
     dispatch(initProduct(products));
+    dispatch(setProductId(productId));
     dispatch(refreshWishlist());
 
     return;

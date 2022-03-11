@@ -1,5 +1,5 @@
 import React from 'react';
-import { IProducts } from '../../threekit';
+import { IProducts } from '../../types';
 
 export interface ProductLayoutProps {
   products: Record<string, IProducts>;

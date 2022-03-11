@@ -1,8 +1,10 @@
 import React, { Children } from 'react';
+import { useThreekitSelector } from '../../store';
 import ThreekitProvider, { ThreekitProviderProps } from '../ThreekitProvider';
 import { getParams, loadTrebleConfig } from '../../utils';
 import { TK_PRODUCT_ID_PARAM_KEY, IS_TREBLE_SCRIPTS } from '../../constants';
-import { IProducts } from '../../threekit';
+import { IProducts } from '../../types';
+import { getProductId } from '../../store/product';
 
 interface TrebleAppProps extends Omit<ThreekitProviderProps, 'children'> {
   productId?: string;
@@ -11,6 +13,17 @@ interface TrebleAppProps extends Omit<ThreekitProviderProps, 'children'> {
 const productsMap: Record<string, IProducts> = {};
 const productComponents: Array<React.FC> = [];
 const productToComponentMap: Record<string, number> = {};
+
+export const Products = () => {
+  const productId = useThreekitSelector(getProductId);
+
+  if (!productId) return null;
+
+  const Product = productComponents[productToComponentMap[productId]];
+  if (!Product) return null;
+
+  return <Product />;
+};
 
 export default function TrebleApp(props: TrebleAppProps) {
   const {
@@ -67,15 +80,13 @@ export default function TrebleApp(props: TrebleAppProps) {
 
   if (!id) return null;
 
-  const Product = productComponents[productToComponentMap[id]];
-  if (!Product) return null;
-
   const preppedProject = Object.assign({}, project, {
-    products: productsMap[id],
+    products: productsMap,
   });
 
   return (
     <ThreekitProvider
+      productId={id}
       project={preppedProject}
       locale={locale}
       playerConfig={playerConfig}
@@ -83,7 +94,7 @@ export default function TrebleApp(props: TrebleAppProps) {
       threekitEnv={threekitEnv}
       eventHandlers={eventHandlers}
     >
-      <Product />
+      <Products />
     </ThreekitProvider>
   );
 }

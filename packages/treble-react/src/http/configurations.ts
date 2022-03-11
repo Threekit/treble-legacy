@@ -1,5 +1,5 @@
 import threekitRequest, { IMultiPageResponse } from './request';
-import { IConfiguration } from '../threekit';
+import { IConfiguration } from '../types';
 
 const CONFIGURATIONS_API_ROUTE = `/api/configurations`;
 

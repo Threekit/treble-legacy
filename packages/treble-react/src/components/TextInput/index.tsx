@@ -25,6 +25,8 @@ export const TextInput = (props: ITextInput) => {
   } = props;
   const cls = generateClassName('text-input', customClassName, title);
 
+  if (typeof value !== 'string') return <></>;
+
   return (
     <Wrapper className={cls}>
       <FormComponentTitle title={title} className={cls} />

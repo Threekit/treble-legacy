@@ -11,7 +11,7 @@ import {
   IDisplayAttributeString,
   IDisplayAttributeAssetValue,
   IDisplayAttributeStringValue,
-} from '../threekit';
+} from '../types';
 import {
   dataURItoBlob,
   dataURItoFile,

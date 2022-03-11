@@ -12,7 +12,8 @@ import useWishlist from './hooks/useWishlist';
 import useShare from './hooks/useShare';
 import usePlayerPortal from './hooks/usePlayerPortal';
 // import useSingleAnimation from './hooks/useSingleAnimation';
-// import useProductCache from './hooks/useProductCache';
+import useProductCache from './hooks/useProductCache';
+import useNestedConfigurator from './hooks/useNestedConfigurator';
 //  Components
 import ThreekitProvider from './components/ThreekitProvider';
 import Player from './components/Player';
@@ -25,6 +26,7 @@ import Swatch from './components/Swatch';
 import Tiles from './components/Tiles';
 import TilesGroup from './components/TilesGroup';
 import Upload from './components/Upload';
+import Switch from './components/Switch';
 //  Display
 import ProductName from './components/ProductName';
 import ProductDescription from './components/ProductDescription';
@@ -70,7 +72,8 @@ export {
   useShare,
   usePlayerPortal,
   // useSingleAnimation,
-  // useProductCache,
+  useProductCache,
+  useNestedConfigurator,
   //  Components
   ThreekitProvider,
   Player,
@@ -83,6 +86,7 @@ export {
   Tiles,
   TilesGroup,
   Upload,
+  Switch,
   //  Display
   ProductName,
   ProductDescription,

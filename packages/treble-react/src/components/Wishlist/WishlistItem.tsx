@@ -6,7 +6,7 @@ import {
   WishlistActionArea as ActionArea,
 } from './wishlist.styles';
 import { Button } from '../Button';
-import { IMetadata } from '../../threekit';
+import { IMetadata } from '../../types';
 
 interface WishlistItemProps {
   thumbnail?: string;

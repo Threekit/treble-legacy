@@ -1,10 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import useAttribute, { RawAttributeValue } from '../../hooks/useAttribute';
 import usePlayerLoadingStatus from '../../hooks/usePlayerLoadingStatus';
-import {
-  IHydratedAttribute,
-  IHydratedAttributeAssetValue,
-} from '../../threekit';
+import { IHydratedAttribute, IHydratedAttributeAssetValue } from '../../types';
 import { inflateRgb } from '../../utils';
 import { METADATA_RESERVED, SORT_OPTIONS } from '../../constants';
 
@@ -40,7 +37,7 @@ export interface IFormContainerProps
 
   title?: string;
   description?: string;
-  value?: string;
+  value?: string | boolean;
   onClick?: (value: RawAttributeValue) => Promise<void>;
   onChange?: (value: RawAttributeValue) => Promise<void>;
   className?: string;
@@ -58,14 +55,14 @@ export interface IFormComponent<P> extends FunctionComponent<P> {
   compatibleAttributes: Set<string>;
 }
 
-interface IPrepAttributeConfig {
+interface IHydrateAttributeConfig {
   metadataKeys: MetadataKeys;
   sort?: string;
 }
 
-export const prepAttributeForComponent = (
+export const hydrateAttributeForComponent = (
   attribute: IHydratedAttribute,
-  config: IPrepAttributeConfig
+  config: IHydrateAttributeConfig
 ) => {
   const { metadataKeyThumbnail, metadataKeyPrice, metadataKeyDescription } =
     config.metadataKeys;
@@ -162,7 +159,7 @@ function formComponentContainer<P extends IFormContainerProps>(
       return null;
     }
 
-    const { selected, options } = prepAttributeForComponent(attributeData, {
+    const { selected, options } = hydrateAttributeForComponent(attributeData, {
       metadataKeys: {
         metadataKeyThumbnail,
         metadataKeyDescription,

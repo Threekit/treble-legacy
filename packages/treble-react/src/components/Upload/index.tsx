@@ -40,7 +40,7 @@ export const Upload = (props: IUpload) => {
 
   const handleClick = () => {
     if (isUploading) return;
-    if (value?.length) return;
+    if (typeof value === 'string' && value?.length) return;
     inputRef.current?.click();
   };
 
@@ -68,7 +68,7 @@ export const Upload = (props: IUpload) => {
       <FormComponentDescription description={description} className={cls} />
       <UploadWrapper
         className={cls}
-        uploaded={!!(!isUploading && value?.length)}
+        uploaded={!!(!isUploading && (value as string)?.length)}
       >
         <input
           type="file"
@@ -86,7 +86,7 @@ export const Upload = (props: IUpload) => {
               </IconWrapper>
               <div>Uploading...</div>
             </>
-          ) : value?.length ? (
+          ) : (value as string)?.length ? (
             <ImageWrapper>
               <div>
                 <img ref={imgRef} src="#" />

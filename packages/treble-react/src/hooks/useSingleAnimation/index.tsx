@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import useThreekitInitStatus from '../useThreekitInitStatus';
 import { easeInOutCubic } from '../../utils';
-import { ICoordinates } from '../../threekit';
+import { ICoordinates } from '../../types';
 
 interface NodeConfig {
   nodeId: string;

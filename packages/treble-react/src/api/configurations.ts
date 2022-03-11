@@ -1,6 +1,6 @@
 import http from '../http';
 import { IConfigurationResponse } from '../http/configurations';
-import { IConfiguration, IMetadata } from '../threekit';
+import { IConfiguration, IMetadata } from '../types';
 
 export interface ISaveConfiguration {
   assetId: string;

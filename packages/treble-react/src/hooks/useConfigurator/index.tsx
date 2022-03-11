@@ -1,9 +1,7 @@
-import {
-  getHydratedAttributes,
-  setConfiguration,
-} from '../../store/attributes';
-import { ISetConfiguration, IHydratedAttribute } from '../../threekit';
+import { getHydrationData, setConfiguration } from '../../store/attributes';
+import { ISetConfiguration, IHydratedAttribute } from '../../types';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
+import { hydrateAttribute } from '../../utils';
 
 type UseConfiguratorError = [undefined, undefined];
 type UseConfiguratorSuccess = [
@@ -15,16 +13,18 @@ type UseConfiguratorHook = UseConfiguratorError | UseConfiguratorSuccess;
 
 const useConfigurator = (): UseConfiguratorHook => {
   const dispatch = useThreekitDispatch();
-  const attributes = useThreekitSelector<
-    undefined | Record<string, IHydratedAttribute>
-  >(getHydratedAttributes);
+  const hydrationData = useThreekitSelector(getHydrationData);
 
-  if (!attributes) return [undefined, undefined];
+  if (!hydrationData) return [undefined, undefined];
+
+  const preppedAttributes = hydrateAttribute(hydrationData, config =>
+    dispatch(setConfiguration(config))
+  );
 
   const handleChange = (configuration: ISetConfiguration) =>
     dispatch(setConfiguration(configuration));
 
-  return [attributes, handleChange];
+  return [preppedAttributes, handleChange];
 };
 
 export default useConfigurator;

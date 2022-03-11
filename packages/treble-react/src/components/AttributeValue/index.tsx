@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Wrapper } from './attributeValue.styles';
 import useAttribute from '../../hooks/useAttribute';
 import { ATTRIBUTE_TYPES } from '../../constants';
-import { IDisplayAttributeAsset } from '../../threekit';
+import { IDisplayAttributeAsset } from '../../types';
 import { generateDisplayClassName as generateClassName } from '../../utils';
 
 interface IAttributeValue {

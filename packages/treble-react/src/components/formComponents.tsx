@@ -9,6 +9,7 @@ import TilesGroup, { TilesGroup as TilesGroupComponent } from './TilesGroup';
 import Upload, { Upload as UploadComponent } from './Upload';
 // import UploadArea, { UploadArea as UploadAreaComponent } from './UploadArea';
 import TextInput, { TextInput as TextInputComponent } from './TextInput';
+import Switch, { Switch as SwitchComponent } from './Switch';
 
 export const FORM_COMPONENT_TYPES = {
   stringInput: 'string-input',
@@ -38,6 +39,10 @@ export const formComponents = {
   },
   [ASSET_TYPES.upload]: {
     [UploadComponent.componentName]: Upload,
+    // [UploadAreaComponent.componentName]: UploadArea,
+  },
+  [ATTRIBUTE_TYPES.boolean]: {
+    [SwitchComponent.componentName]: Switch,
     // [UploadAreaComponent.componentName]: UploadArea,
   },
   //   [ATTRIBUTE_TYPES.color]: {

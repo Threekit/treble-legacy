@@ -77,7 +77,7 @@ export const UploadArea = (props: IUpload) => {
               </div>
               <div>Uploading...</div>
             </UploadingWrapper>
-          ) : value?.length ? (
+          ) : (value as string)?.length ? (
             <UploadingWrapper>
               <div>
                 <img ref={imgRef} src="#" />

@@ -1,12 +1,8 @@
 import { createSlice, createAction, createSelector } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
-import {
-  ISetConfiguration,
-  IThreekitDisplayAttribute,
-  IHydratedAttribute,
-} from '../threekit';
+import { ISetConfiguration, IThreekitDisplayAttribute } from '../types';
 import { setPlayerLoading, setThreekitInitialized } from './treble';
-import { getLanguage, getTranslations } from './translations';
+import { getLanguage, TRANSLATIONS } from './translations';
 import { ITranslationMap } from '../api/products';
 
 /*****************************************************
@@ -64,65 +60,18 @@ const { reducer } = createSlice({
 
 export const getAttributes = (state: RootState) => state.attributes;
 
-export const getHydratedAttributes = createSelector(
+export const getHydrationData = createSelector(
   getAttributes,
-  getTranslations,
   getLanguage,
   (
     attributes: Record<string, IThreekitDisplayAttribute>,
-    translations: undefined | ITranslationMap,
     language: undefined | string
-  ): Record<string, IHydratedAttribute> => {
-    const hasTranslation = !!language && !!translations;
-    return Object.values(attributes).reduce(
-      (
-        output: Record<string, IHydratedAttribute>,
-        attribute: IThreekitDisplayAttribute
-      ) =>
-        Object.assign(output, {
-          [attribute.name]: Object.assign(
-            {},
-            attribute,
-            {
-              label: hasTranslation
-                ? translations?.[attribute.name]?.[language] || attribute.name
-                : attribute.name,
-            },
-            attribute.type === 'String'
-              ? {
-                  values: attribute.values.map(el =>
-                    Object.assign({}, el, {
-                      label: hasTranslation
-                        ? translations?.[el.label]?.[language] || el.label
-                        : el.label,
-                      handleSelect: () =>
-                        window.threekit.configurator.setConfiguration({
-                          [attribute.name]: el.value,
-                        }),
-                      selected: attribute.value === el.value,
-                    })
-                  ),
-                }
-              : attribute.type === 'Asset'
-              ? {
-                  values: attribute.values.map(el =>
-                    Object.assign({}, el, {
-                      label: hasTranslation
-                        ? translations?.[el.name]?.[language] || el.name
-                        : el.name,
-                      handleSelect: () =>
-                        window.threekit.configurator.setConfiguration({
-                          [attribute.name]: el.assetId,
-                        }),
-                      selected: attribute.value.assetId === el.assetId,
-                    })
-                  ),
-                }
-              : undefined
-          ),
-        }),
-      {} as Record<string, IHydratedAttribute>
-    );
+  ): [
+    Record<string, IThreekitDisplayAttribute>,
+    undefined | ITranslationMap,
+    undefined | string
+  ] => {
+    return [attributes, TRANSLATIONS, language];
   }
 );
 
