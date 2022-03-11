@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble-template-typescript",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "license": "MIT",
   "description": "A typescript template for Create Treble App.",
   "engines": {
