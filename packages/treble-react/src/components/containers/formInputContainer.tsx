@@ -178,7 +178,6 @@ function formComponentContainer<P extends IFormContainerProps>(
     return (
       <FormComponent
         {...preppedProps}
-        title={props.title || attribute}
         value={selected}
         onClick={handleSetAttribute}
         onChange={handleSetAttribute}
