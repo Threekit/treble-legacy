@@ -7,11 +7,9 @@ process.env.NODE_ENV = 'production';
 
 const argv = process.argv.slice(2);
 const ENV = argv.includes('--admin-fts') ? 'admin-fts' : 'preview';
-const INCLUDE_RECIPES = argv.includes('--recipes');
+const useRecipes = argv.includes('--recipes');
 
-const config = configFactory('production', ENV, {
-  useRecipes: INCLUDE_RECIPES,
-});
+const config = configFactory('production', ENV, { useRecipes });
 const compiler = webpack(config);
 
 compiler.run(async (err, stats) => {

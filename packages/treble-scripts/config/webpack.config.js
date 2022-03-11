@@ -101,7 +101,7 @@ module.exports = (env, threekitEnv, config = {}) => {
       {
         treble: { import: paths.appIndexJs, filename: 'treble-app.js' },
       },
-      isProd && useRecipes
+      useRecipes
         ? {
             recipes: {
               import: paths.recipesIndexJs,
