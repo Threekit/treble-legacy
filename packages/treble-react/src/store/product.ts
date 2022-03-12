@@ -247,7 +247,7 @@ export const loadNewProduct =
     }
 
     if (shouldCacheProduct) dispatch(cacheActiveProduct({ label, thumbnail }));
-    dispatch(setProductId(undefined));
+    if (config) dispatch(setProductId(undefined));
     await dispatch(reloadPlayer(config));
     if (shouldCacheProduct) {
       dispatch(incrementActiveCacheIdx());

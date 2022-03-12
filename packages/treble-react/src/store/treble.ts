@@ -426,8 +426,8 @@ export const launch =
   };
 
 export const unloadPlayer = () => async (dispatch: ThreekitDispatch) => {
-  dispatch(setThreekitInitialized(true));
-  dispatch(setPlayerLoading(false));
+  dispatch(setThreekitInitialized(false));
+  dispatch(setPlayerLoading(true));
   dispatch(setAttributes([]));
   dispatch(setName(''));
   dispatch(setMetadata({}));
@@ -489,7 +489,8 @@ export const reloadPlayer =
 
     const el = document.getElementById(state.treble.playerElId as string);
 
-    if (state.treble.isThreekitInitialized) dispatch(unloadPlayer());
+    if (state.treble.isThreekitInitialized) await dispatch(unloadPlayer());
+
     await dispatch(
       initPlayer({
         el: el as HTMLElement,
