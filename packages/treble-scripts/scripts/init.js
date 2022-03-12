@@ -144,14 +144,14 @@ async function renameGitIgnore(root) {
   return Promise.resolve();
 }
 
-function enrichPackageJson(root, isTypescript) {
+function enrichPackageJson(root, isTypescript, includeRecipes) {
   const packageJson = require(path.join(root, 'package.json'));
 
   // const templateScripts = templatePackage.scripts || {};
   (packageJson.main = isTypescript ? 'src/index.tsx' : 'src/index.js'),
     (packageJson.scripts = Object.assign({
-      start: 'treble-scripts start',
-      build: 'treble-scripts build',
+      start: `treble-scripts start${includeRecipes ? ' --recipes' : ''}`,
+      build: `treble-scripts build${includeRecipes ? ' --recipes' : ''}`,
       format: 'prettier --write ./src',
       lint: 'eslint ./src',
       serve: 'node server',
@@ -187,7 +187,7 @@ module.exports = async function init([
   await installDependencies(root, dependencies, isTypescript, includeRecipes);
   await copyTemplate(root, templateName, includeRecipes);
   await removeTemplateDependencies([...dependencies, COMPONENTS_PACKAGE]);
-  await enrichPackageJson(root, isTypescript);
+  await enrichPackageJson(root, isTypescript, includeRecipes);
   await renameGitIgnore(root);
 
   console.log();
