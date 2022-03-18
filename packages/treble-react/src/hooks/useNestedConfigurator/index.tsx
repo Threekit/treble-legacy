@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import {
   IHydratedAttribute,
+  IMetadata,
   ISetConfiguration,
   IThreekitDisplayAttribute,
   IThreekitPrivateConfigurator,
@@ -14,10 +15,11 @@ import {
 import { hydrateAttribute } from '../../utils';
 import { getHydrationData } from '../../store/attributes';
 
-type UseNestedConfiguratorError = [undefined, undefined];
+type UseNestedConfiguratorError = [undefined, undefined, undefined];
 type UseNestedConfiguratorSuccess = [
   Record<string, IHydratedAttribute>,
-  (val: ISetConfiguration) => Promise<void>
+  (val: ISetConfiguration) => Promise<void>,
+  IMetadata
 ];
 
 const useNestedConfigurator = (
@@ -29,6 +31,7 @@ const useNestedConfigurator = (
   const [_, translations, language] = useThreekitSelector(getHydrationData);
   const [attributes, setAttributes] =
     useState<Array<IThreekitDisplayAttribute>>();
+  const metadataRef = useRef<IMetadata>({});
   const configurator = useRef<undefined | IThreekitPrivateConfigurator>();
 
   useEffect(() => {
@@ -40,13 +43,15 @@ const useNestedConfigurator = (
         window.threekit.treble.getNestedConfigurator(address);
 
       if (!configurator.current) return;
-      const updatedAttrs = configurator.current?.getDisplayAttributes();
+
+      const updatedAttrs = configurator.current.getDisplayAttributes();
       setAttributes(updatedAttrs);
+      metadataRef.current = configurator.current.getMetadata();
     })();
   }, [hasInitialized, address, playerLoading]);
 
   if (!hasInitialized || !configurator.current || !attributes)
-    return [undefined, undefined];
+    return [undefined, undefined, undefined];
 
   const handleSelect = async (config: ISetConfiguration) => {
     dispatch(setPlayerLoading(true));
@@ -67,7 +72,7 @@ const useNestedConfigurator = (
     handleSelect
   );
 
-  return [preppedAttributes, handleSelect];
+  return [preppedAttributes, handleSelect, metadataRef.current];
 };
 
 export default useNestedConfigurator;

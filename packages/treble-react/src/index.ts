@@ -41,6 +41,7 @@ import Drawer from './components/Drawer';
 import Accordion from './components/Accordion';
 import Tabs from './components/Tabs';
 //  Wrappers
+import PortalToArOverlay from './components/PortalToArOverlay';
 import PortalToElement from './components/PortalToElement';
 import AwaitThreekitLoad from './components/AwaitThreekitLoad';
 //  Forms
@@ -101,6 +102,7 @@ export {
   Accordion,
   Tabs,
   //  Wrappers
+  PortalToArOverlay,
   PortalToElement,
   AwaitThreekitLoad,
   //  Form
