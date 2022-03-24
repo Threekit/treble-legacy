@@ -6,12 +6,6 @@ import threekitAPI from '../api';
  * Types and Interfaces
  ****************************************************/
 
-export interface PriceState {
-  id: undefined | string;
-  currency: undefined | string;
-  price: undefined | number;
-}
-
 export interface IPriceConfig {
   id: string;
   currency: string;
@@ -20,6 +14,12 @@ export interface IPriceConfig {
 export interface IPrice {
   currency: string;
   price: number;
+}
+
+export interface PriceState {
+  id: undefined | string;
+  currency: undefined | string;
+  price: undefined | number;
 }
 
 /*****************************************************
@@ -82,6 +82,12 @@ export const getPrice = (state: RootState): undefined | IPrice => {
   const { price, currency } = state.price;
   if (!price || !currency) return undefined;
   return { price, currency };
+};
+
+export const getPriceConfig = (state: RootState): undefined | IPriceConfig => {
+  const { id, currency } = state.price;
+  if (!id || !currency) return undefined;
+  return { id, currency };
 };
 
 /*****************************************************

@@ -14,12 +14,14 @@ import {
 } from '../../store/treble';
 import { hydrateAttribute } from '../../utils';
 import { getHydrationData } from '../../store/attributes';
+import { getPriceConfig } from '../../store/price';
 
-type UseNestedConfiguratorError = [undefined, undefined, undefined];
+type UseNestedConfiguratorError = [undefined, undefined, undefined, undefined];
 type UseNestedConfiguratorSuccess = [
   Record<string, IHydratedAttribute>,
   (val: ISetConfiguration) => Promise<void>,
-  IMetadata
+  IMetadata,
+  number | undefined
 ];
 
 const useNestedConfigurator = (
@@ -28,6 +30,7 @@ const useNestedConfigurator = (
   const dispatch = useThreekitDispatch();
   const hasInitialized = useThreekitSelector(isThreekitInitialized);
   const playerLoading = useThreekitSelector(isPlayerLoading);
+  const priceConfig = useThreekitSelector(getPriceConfig);
   const [_, translations, language] = useThreekitSelector(getHydrationData);
   const [attributes, setAttributes] =
     useState<Array<IThreekitDisplayAttribute>>();
@@ -51,7 +54,7 @@ const useNestedConfigurator = (
   }, [hasInitialized, address, playerLoading]);
 
   if (!hasInitialized || !configurator.current || !attributes)
-    return [undefined, undefined, undefined];
+    return [undefined, undefined, undefined, undefined];
 
   const handleSelect = async (config: ISetConfiguration) => {
     dispatch(setPlayerLoading(true));
@@ -72,7 +75,11 @@ const useNestedConfigurator = (
     handleSelect
   );
 
-  return [preppedAttributes, handleSelect, metadataRef.current];
+  const price = priceConfig
+    ? configurator.current.getPrice(priceConfig.id, priceConfig.currency)
+    : undefined;
+
+  return [preppedAttributes, handleSelect, metadataRef.current, price];
 };
 
 export default useNestedConfigurator;
