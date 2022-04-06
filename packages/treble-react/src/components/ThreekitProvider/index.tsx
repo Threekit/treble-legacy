@@ -9,6 +9,8 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../../theme';
 import GlobalStyle from './GlobalStyles.styles';
 
+import DevTools from '../DevTools';
+
 interface Theme {
   [key: string]: string | number;
 }
@@ -66,6 +68,7 @@ const ThreekitProvider = (props: ThreekitProviderProps) => {
         >
           {props.children}
         </App>
+        <DevTools />
       </ThemeProvider>
     </Provider>
   );

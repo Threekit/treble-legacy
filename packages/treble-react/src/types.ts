@@ -248,6 +248,14 @@ export type SNAPSHOT_FORMAT_TYPES = 'jpg' | 'png';
  *  Threekit Api
  **************************************************/
 
+export interface IConfigurationChangeEvent {
+  name: string;
+  appliedConfiguration: Record<string, string>;
+  previousConfiguration: IConfiguration;
+  configuration: IConfiguration;
+  metadata: Record<string, string>;
+}
+
 export interface IThreekitConfigurator {
   getMetadata: () => IMetadata;
   getAttributes: () => Array<IThreekitAttribute>;

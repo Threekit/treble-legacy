@@ -214,7 +214,8 @@ export const getPlayerElementId = (state: RootState): undefined | string =>
  ****************************************************/
 
 export const initPlayer =
-  (config: IPlayerInit) => async (dispatch: ThreekitDispatch) => {
+  (config: IPlayerInit) =>
+  async (dispatch: ThreekitDispatch, getState: () => RootState) => {
     const {
       el,
       authToken,
@@ -256,9 +257,18 @@ export const initPlayer =
     dispatch(setThreekitInitialized(true));
     dispatch(setPlayerLoading(false));
 
-    window.threekit.player.on('setConfiguration', () => {
-      dispatch(
-        setAttributes(window.threekit.configurator.getDisplayAttributes())
+    window.threekit.player.on('setConfiguration', async () => {
+      const { attributes } = getState();
+      const previousAttributes = Object.values(attributes);
+      const updatedAttributes =
+        window.threekit.configurator.getDisplayAttributes();
+
+      dispatch(setAttributes(updatedAttributes));
+
+      await EVENTS.postConfigurationChange?.(
+        updatedAttributes,
+        {},
+        previousAttributes
       );
     });
 

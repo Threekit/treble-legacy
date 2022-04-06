@@ -34,6 +34,7 @@ export default function TrebleApp(props: TrebleAppProps) {
     locale,
     theme,
     eventHandlers,
+    reducer,
   } = props;
 
   const config = IS_TREBLE_SCRIPTS ? loadTrebleConfig() : {};
@@ -93,6 +94,7 @@ export default function TrebleApp(props: TrebleAppProps) {
       theme={theme}
       threekitEnv={threekitEnv}
       eventHandlers={eventHandlers}
+      reducer={reducer}
     >
       <Products />
     </ThreekitProvider>
