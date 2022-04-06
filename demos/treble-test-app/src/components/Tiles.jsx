@@ -1,11 +1,11 @@
 import { useAttribute } from '@threekit-tools/treble';
 
-export default function Tiles(props) {
-  const [attribute] = useAttribute(props.attribute);
+export function Tiles(props) {
+  const { title, attribute } = props;
   if (!attribute) return <></>;
   return (
     <div className="mb-5">
-      <h3 className="text-xl mb-4">{props.title || attribute?.label}</h3>
+      <h3 className="text-xl mb-4">{title || attribute?.label}</h3>
       <div className="grid grid-cols-2 gap-1">
         {attribute?.values.map((item, i) => {
           return (
@@ -26,4 +26,10 @@ export default function Tiles(props) {
       </div>
     </div>
   );
+}
+
+export default function TilesAttribute(props) {
+  const [attribute] = useAttribute(props.attribute);
+  if (!attribute) return <></>;
+  return <Tiles title={props.title} attribute={attribute} />;
 }
