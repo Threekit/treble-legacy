@@ -1,16 +1,16 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
-import { Description } from './index';
+import { ProductDescriptionComponent as ProductDescription } from './index';
 
-export const Template = args => <Description {...args} />;
+export const Template = args => <ProductDescription {...args} />;
 
-<Meta title="Display/Description" />
+<Meta title="Display/Product Description" />
 
-# Description
+# Product Description
 
 ### Display a Product's Description
 
-The `<Description />` component will display a description for the product initialized
+The `<ProductDescription />` component will display a description for the product initialized
 in the Threekit Player. By default, the description data comes
 from the metadata on the initialized Catalog Item, under the key
 `_description`.
@@ -30,4 +30,4 @@ It's also possible to display a custom description by passing a string into the 
 
 ## Props
 
-<ArgsTable of={Description} />
+<ArgsTable of={ProductDescription} />

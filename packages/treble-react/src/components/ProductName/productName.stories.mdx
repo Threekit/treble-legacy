@@ -1,14 +1,14 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
-import { Title } from './index';
+import { ProductNameComponent as ProductName } from './index';
 
-export const Template = args => <Title {...args} />;
+export const Template = args => <ProductName {...args} />;
 
-<Meta title="Display/Title" />
+<Meta title="Display/Product Name" />
 
-# Title
+# Product Name
 
-### Display the Product Title
+### Display the Product's Name
 
 The `<Title />` component will display the title of the Product used to
 initialize the Threekit Player.
@@ -30,4 +30,4 @@ It's also possible to display a custom title by passing a string into the `title
 
 ## Props
 
-<ArgsTable of={Title} />
+<ArgsTable of={ProductName} />
