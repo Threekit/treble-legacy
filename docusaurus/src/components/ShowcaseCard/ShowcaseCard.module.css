@@ -1,0 +1,40 @@
+.showcase-card--wrapper {
+  border-radius: 0.4rem;
+  background: white;
+  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.showcase-card--image {
+  height: 150px;
+  border-bottom: 2px solid #ebedf0;
+}
+
+.showcase-card--image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.showcase-card--content {
+  padding: 1rem;
+}
+
+.showcase-card--filters {
+  padding-bottom: 1rem;
+}
+
+.showcase-card--title {
+  text-align: left;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.showcase-card--description {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  padding-top: 1rem;
+}
+
+.showcase-card--button {
+}

@@ -79,6 +79,11 @@ const config = {
           //   position: 'right',
           // },
           {
+            to: 'showcase',
+            position: 'right',
+            label: 'Showcase',
+          },
+          {
             to: 'demos/demo-overview',
             // type: 'doc',
             // docId: 'demo-overview',

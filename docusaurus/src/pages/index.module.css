@@ -175,3 +175,66 @@ main > div {
 .gettingstarted__action:hover img {
   transform: scale(1.05);
 }
+
+.showcase {
+  margin-top: 80px;
+  padding: 80px 1rem;
+  padding-top: 20px;
+}
+
+.showcase__title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.showcase__subtitle {
+  text-align: center;
+}
+
+.showcase__filters-title {
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+
+.showcase__filters {
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 1rem;
+}
+
+.showcase__filters-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.showcase__filter-item {
+  align-items: center;
+  border: 2px solid lightgrey;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  line-height: 1.5;
+  opacity: 0.85;
+  padding: 0.275rem 0.8rem;
+  transition: opacity 0.2s ease-out;
+
+  width: max-content;
+  margin-right: 0.4rem;
+}
+
+.showcase__content {
+  background: #f6fdfd;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+
+.showcase__content > div {
+  max-width: 1320px;
+  margin: 0 auto;
+
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
