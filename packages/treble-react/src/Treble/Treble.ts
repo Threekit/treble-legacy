@@ -77,6 +77,16 @@ class Treble {
     );
   };
 
+  resumeConfiguration = async (configurationId: string) => {
+    if (!configurationId) return;
+    const configuration = await threekitAPI.configurations.fetch(
+      configurationId
+    );
+    if (!configuration) return;
+    window.threekit.configurator.setConfiguration(configuration.data.variant);
+    return Promise.resolve();
+  };
+
   getNestedConfigurator = (
     address: string | Array<string>
   ): undefined | IThreekitPrivateConfigurator => {

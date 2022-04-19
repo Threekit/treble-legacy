@@ -30,7 +30,6 @@ export const getDatatable = async (
   const datatableJson = csvData.reduce((output, row, idx) => {
     if (!idx) return output;
     const rowOutput = row.reduce((result, el, i) => {
-      if (!i) return result;
       return Object.assign(result, {
         [headings[i]]: el.length
           ? isJsonString(el)
