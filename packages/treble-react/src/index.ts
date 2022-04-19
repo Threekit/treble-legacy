@@ -1,6 +1,7 @@
 //  Hooks
 import useAttribute from './hooks/useAttribute';
 import useConfigurator from './hooks/useConfigurator';
+import useConfigurationLoader from './hooks/useConfigurationLoader';
 import useMetadata from './hooks/useMetadata';
 import useName from './hooks/useName';
 import usePlayerLoadingStatus from './hooks/usePlayerLoadingStatus';
@@ -62,6 +63,7 @@ export {
   //  Hooks
   useAttribute,
   useConfigurator,
+  useConfigurationLoader,
   useMetadata,
   useName,
   usePlayerLoadingStatus,
