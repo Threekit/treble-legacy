@@ -12,7 +12,8 @@ export type IAttributeTypes =
   | 'Asset'
   | 'Color'
   | 'Number'
-  | 'Boolean';
+  | 'Boolean'
+  | 'Array';
 
 export type AssetType = 'upload' | 'item';
 
@@ -73,6 +74,7 @@ export interface IConfigurationColor {
 
 export type IConfigurationAttribute =
   | IConfigurationAsset
+  | Array<IConfigurationAsset>
   | IConfigurationColor
   | string
   | number
@@ -100,6 +102,25 @@ interface IAttributeBase<
   id: string;
   name: string;
   value: V;
+  //  The label is added by the translations
+  label: string;
+}
+
+//  Base Interface for all Array Attribute Types
+interface IArrayAttributeBase<
+  T extends 'Asset',
+  V extends Array<IConfigurationAsset>
+> {
+  type: 'Array';
+  of: {
+    type: T;
+    assetType: AssetType;
+    blacklist: [];
+  };
+  id: string;
+  name: string;
+  value: V;
+  maxLength: number;
   //  The label is added by the translations
   label: string;
 }
@@ -141,6 +162,13 @@ export interface IAttributeAssetBase<V>
   values: Array<V>;
 }
 
+export interface IAttributeAssetArrayBase<V>
+  extends IArrayAttributeBase<'Asset', Array<IConfigurationAsset>> {
+  hiddenValues?: Array<string>;
+  disabledValues?: Array<string>;
+  values: Array<V>;
+}
+
 //  Asset Type Attribute - getDisplayAttributes()
 export type IDisplayAttributeAsset =
   IAttributeAssetBase<IDisplayAttributeAssetValue>;
@@ -149,6 +177,16 @@ export type IHydratedAttributeAsset =
   IAttributeAssetBase<IHydratedAttributeAssetValue>;
 
 export type IAttributeAsset = IAttributeAssetBase<IConfigurationAssetValue>;
+
+//  Asset Array Type Attribute - getDisplayAttributes()
+export type IDisplayAttributeAssetArray =
+  IAttributeAssetArrayBase<IDisplayAttributeAssetValue>;
+
+// export type IHydratedAttributeAsset =
+//   IAttributeAssetBase<IHydratedAttributeAssetValue>;
+
+export type IAttributeAssetArray =
+  IAttributeAssetArrayBase<IConfigurationAssetValue>;
 
 /****** String TYPE ATTRIBUTE *******/
 //  String Attribute Value - getDisplayAttributes()
@@ -202,6 +240,7 @@ export interface IAttributeBoolean extends IAttributeBase<'Boolean', boolean> {
 /****** getAttributes() *******/
 export type IThreekitAttribute =
   | IAttributeAsset
+  | IAttributeAssetArray
   | IAttributeColor
   | IAttributeString
   | IAttributeNumber
@@ -210,6 +249,7 @@ export type IThreekitAttribute =
 /****** getDisplayAttributes() *******/
 export type IThreekitDisplayAttribute =
   | IDisplayAttributeAsset
+  | IDisplayAttributeAssetArray
   | IDisplayAttributeString
   | IAttributeColor
   | IAttributeNumber

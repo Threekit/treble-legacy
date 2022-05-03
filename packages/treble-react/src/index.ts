@@ -15,6 +15,7 @@ import usePlayerPortal from './hooks/usePlayerPortal';
 // import useSingleAnimation from './hooks/useSingleAnimation';
 import useProductCache from './hooks/useProductCache';
 import useNestedConfigurator from './hooks/useNestedConfigurator';
+import useArrayAttribute from './hooks/useArrayAttribute';
 //  Components
 import ThreekitProvider from './components/ThreekitProvider';
 import Player from './components/Player';
@@ -77,6 +78,7 @@ export {
   // useSingleAnimation,
   useProductCache,
   useNestedConfigurator,
+  useArrayAttribute,
   //  Components
   ThreekitProvider,
   Player,
