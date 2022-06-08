@@ -1,8 +1,9 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
-import { Description } from './index';
+import { ProductDescription } from './index';
+import ThreekitProvider from '../ThreekitProvider/index'
 
-export const Template = args => <Description {...args} />;
+export const Template = args => <ThreekitProvider><ProductDescription {...args} /></ThreekitProvider>;
 
 <Meta title="Display/Description" />
 
@@ -19,7 +20,7 @@ It's also possible to display a custom description by passing a string into the 
 
 <Canvas>
   <Story
-    name="Default"
+    name="Description"
     args={{
       description: 'This is the description for a single-product configurator.',
     }}
@@ -30,4 +31,4 @@ It's also possible to display a custom description by passing a string into the 
 
 ## Props
 
-<ArgsTable of={Description} />
+<ArgsTable of={ProductDescription} />

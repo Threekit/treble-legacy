@@ -2,19 +2,53 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
 import { Drawer } from './index';
 
-export const Template = args => <Drawer {...args} />;
+export const Template = args => <Drawer {...args} >
+  <p>
+  Labore dolore quis sit dolore dolore qui quis 
+  laboris ullamco ad adipisicing.</p></Drawer>;
+function closeDrawer(e){
+        console.log("drawer closed")
+      }
 
-<Meta title="Layouts/Drawer" />
+<Meta title="Form Components/Drawer" />
 
 # Drawer
 
-hello
+### A Form Component for **Asset / Part Reference** and **String** type Attributes
 
 <Canvas>
-  <Story name="Drawer" args={{ title: 'Drawer Title' }}>
+  <Story
+    name="Drawer"
+args={{
+      title: 'Drawer Title',
+      className: 'className',
+      show: true,
+      handleClose:closeDrawer,
+      showHeader:true,
+    }}
+  >
     {Template.bind({})}
   </Story>
 </Canvas>
+
+## Overview
+
+`<Drawer />` can be used anywhere in the app.
+It does not connect to the
+ThreekitProvider and as such it can be used as a general
+UI element.
+
+## When to Use
+
+A `<Drawer />` is useful for Configurator UI when screen real estate is at a premium. In situations where
+as much of the screen as possible needs to be taken up by the player as possible the configurator UI can be put in a `<Drawer />`
+so as to conserve screen real estate. One situation where a drawer is ideal is on mobile devices.
+
+The drawer is also ffully capable of showing the player if that is required.
+
+
+## How to Use
+Any children of the drawer will be rendered inside of the slide-in drawer.
 
 ## Props
 

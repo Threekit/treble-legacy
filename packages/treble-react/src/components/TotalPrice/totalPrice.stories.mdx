@@ -1,12 +1,13 @@
 import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
-import { Price } from './index';
+import { TotalPrice } from './index';
+import ThreekitProvider from '../ThreekitProvider/index'
 
-export const Template = args => <Price {...args} />;
+export const Template = args => <ThreekitProvider><TotalPrice {...args} /></ThreekitProvider>;
 
-<Meta title="Display/Price" />
+<Meta title="Display/Total Price" />
 
-# Price
+# TotalPrice
 
 ### Display the Configuration's Price
 
@@ -17,7 +18,7 @@ value instead.
 
 <Canvas>
   <Story
-    name="Default"
+    name="Total Price"
     args={{
       price: '$500',
     }}
@@ -28,4 +29,4 @@ value instead.
 
 ## Props
 
-<ArgsTable of={Price} />
+<ArgsTable of={TotalPrice} />
