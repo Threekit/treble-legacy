@@ -16,5 +16,5 @@ export default {
 
 const Template = args => <Switch {...args} />;
 
-export const Default = Template.bind({});
-Default.args = props;
+export const SwitchComponent = Template.bind({});
+SwitchComponent.args = props;
