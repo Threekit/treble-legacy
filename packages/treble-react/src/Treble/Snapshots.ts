@@ -1,5 +1,5 @@
 import threekitAPI from '../api';
-import connection from '../connection';
+// import connection from '../connection';
 import {
   SNAPSHOT_FORMATS,
   ATTRIBUTES_RESERVED,
@@ -147,7 +147,7 @@ class Snapshots implements ISnapshots {
     camerasList: ISnapshotsCameras,
     snapshotsConfig: ITakeSnapshotsConfig
   ) => {
-    const { threekitDomain, orgId } = connection.getConnection();
+    // const { threekitDomain, orgId } = connection.getConnection();
     const filename =
       snapshotsConfig?.filename || DEFAULT_CAMERA_CONFIG.filename;
     const size = snapshotsConfig?.size || DEFAULT_CAMERA_CONFIG.size;
@@ -183,8 +183,12 @@ class Snapshots implements ISnapshots {
         const attachments = snapshotsRaw.reduce((output, el, idx) => {
           const cameraName = camerasList?.[idx]
             ? regularToKebabCase(camerasList[idx] || 'default')
-            : '';
-          const file = dataURItoFile(el, `${filename}-${cameraName}.${format}`);
+            : filename;
+          const preppedFilename =
+            cameraName === filename
+              ? `${filename}.${format}`
+              : `${filename}-${cameraName}.${format}`;
+          const file = dataURItoFile(el, preppedFilename);
           return Object.assign(output, { [cameraName]: file });
         }, {});
         const response = await threekitAPI.configurations.save({
@@ -192,10 +196,7 @@ class Snapshots implements ISnapshots {
           configuration: window.threekit.configurator.getConfiguration(),
           attachments,
         });
-        const urlsArray = Object.keys(response.data.attachments).map(
-          key =>
-            `${threekitDomain}/api/configurations/${response.data.shortId}/files/${key}?orgId=${orgId}`
-        );
+        const urlsArray = Object.values(response.data.attachments);
         return Promise.resolve(urlsArray);
       case SNAPSHOT_OUTPUTS.download:
         snapshotsRaw.forEach((snapshotBlob, idx) => {

@@ -4,7 +4,6 @@ module.exports = {
     '@storybook/addon-docs',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    'storybook-addon-styled-component-theme/dist/preset',
     {
       name: '@storybook/addon-storysource',
       options: {

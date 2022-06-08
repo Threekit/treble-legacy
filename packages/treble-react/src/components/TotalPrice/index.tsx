@@ -9,20 +9,25 @@ interface IPrice {
   className?: string;
 }
 
-export const TotalPrice = (props: IPrice) => {
+export const TotalPriceComponent = (props: IPrice) => {
   const { price, className: customClassName } = props;
-  const priceData = usePrice();
   const cls = generateClassName('price', customClassName);
+  return <Wrapper className={cls}>{price}</Wrapper>;
+};
+
+export const TotalPrice = (props: IPrice) => {
+  const { price, className } = props;
+  const priceData = usePrice();
 
   let preppedPrice = props.price;
 
   if (priceData) preppedPrice = `${priceData.price} ${priceData.currency}`;
 
   if (!price && !priceData) return null;
-  return <Wrapper className={cls}>{preppedPrice}</Wrapper>;
+  return <TotalPriceComponent className={className} price={preppedPrice} />;
 };
 
-TotalPrice.propTypes = {
+TotalPriceComponent.propTypes = {
   /**
    * The price displayed to the user
    */
@@ -33,7 +38,7 @@ TotalPrice.propTypes = {
   className: PropTypes.string,
 };
 
-TotalPrice.defaultProps = {
+TotalPriceComponent.defaultProps = {
   price: undefined,
   className: '',
 };

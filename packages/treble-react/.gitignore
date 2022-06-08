@@ -3,6 +3,7 @@ node_modules
 dist
 lib
 storybook-static
+build-storybook.log
 yarn.lock
 package-lock.json
 .DS_STORE

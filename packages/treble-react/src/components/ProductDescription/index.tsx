@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper } from './description.styles';
+import { Wrapper } from './productDescription.styles';
 import useMetadata from '../../hooks/useMetadata';
 import { generateDisplayClassName as generateClassName } from '../../utils';
 
@@ -9,25 +9,36 @@ interface IProductDescription {
   className?: string;
 }
 
-export const ProductDescription = (props: IProductDescription) => {
+export const ProductDescriptionComponent = (props: IProductDescription) => {
   const { description, className: customClassName } = Object.assign(
+    { className: '' },
+    props
+  );
+  const cls = generateClassName('description', customClassName);
+  return <Wrapper className={cls}>{description}</Wrapper>;
+};
+
+const ProductDescription = (props: IProductDescription) => {
+  const { description, className } = Object.assign(
     {
       description: undefined,
-      className: '',
     },
     props
   );
   const metadata = useMetadata();
   if (!description && !metadata?._description) return null;
 
-  const cls = generateClassName('description', customClassName);
+  if (!description) return null;
 
   return (
-    <Wrapper className={cls}>{metadata?._description || description}</Wrapper>
+    <ProductDescriptionComponent
+      className={className}
+      description={metadata?._description?.toString() || description}
+    />
   );
 };
 
-ProductDescription.propTypes = {
+ProductDescriptionComponent.propTypes = {
   /**
    * The description displayed to the user
    */
@@ -38,7 +49,7 @@ ProductDescription.propTypes = {
   className: PropTypes.string,
 };
 
-ProductDescription.defaultProps = {
+ProductDescriptionComponent.defaultProps = {
   description: undefined,
   className: '',
 };

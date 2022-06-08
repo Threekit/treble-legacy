@@ -10,25 +10,34 @@ interface ITitle {
   align?: string;
 }
 
-export const ProductName = (props: ITitle) => {
+export const ProductNameComponent = (props: ITitle) => {
   const {
     title,
     className: customClassName,
     align,
   } = Object.assign({ className: '', align: 'left' }, props);
-  const name = useName();
-  if (!title?.length && !name) return null;
-
   const cls = generateClassName('title', customClassName);
-
   return (
     <Wrapper align={align} className={cls}>
-      {title || name}
+      {title}
     </Wrapper>
   );
 };
 
-ProductName.propTypes = {
+export const ProductName = (props: ITitle) => {
+  const { title, className, align } = props;
+  const name = useName();
+  if (!title?.length && !name) return null;
+  return (
+    <ProductNameComponent
+      align={align}
+      className={className}
+      title={title || name}
+    />
+  );
+};
+
+ProductNameComponent.propTypes = {
   /**
    * The title displayed to the user
    */
@@ -43,7 +52,7 @@ ProductName.propTypes = {
   align: PropTypes.string,
 };
 
-ProductName.defaultProps = {
+ProductNameComponent.defaultProps = {
   className: '',
   align: 'left',
 };
