@@ -50,9 +50,10 @@ class Treble {
       config
     );
 
+    const player = window.threekit.player.enableApi('player');
     const response = await threekitAPI.configurations.save({
       assetId: window.threekit.player.assetId,
-      configuration: window.threekit.configurator.getConfiguration(),
+      configuration: player.getConfigurator().getFullConfiguration(),
       customerId,
       metadata,
       productVersion,

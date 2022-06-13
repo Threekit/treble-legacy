@@ -51,7 +51,7 @@ const useNestedConfigurator = (
       setAttributes(updatedAttrs);
       metadataRef.current = configurator.current.getMetadata();
     })();
-  }, [hasInitialized, playerLoading]);
+  }, [address, hasInitialized, playerLoading]);
 
   if (!hasInitialized || !configurator.current || !attributes)
     return [undefined, undefined, undefined, undefined];
