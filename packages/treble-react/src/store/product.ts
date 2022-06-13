@@ -17,6 +17,10 @@ export interface CachedProduct {
   configuration: IConfiguration;
 }
 
+export interface LoadProductConfig {
+  cacheProduct: boolean;
+}
+
 export interface CachedProductState
   extends Pick<CachedProduct, 'id' | 'name' | 'label' | 'thumbnail'> {
   data: string;
@@ -214,20 +218,20 @@ export const cacheActiveProduct =
   };
 
 export const loadProduct =
-  (id: string) =>
+  (id: string, config?: LoadProductConfig) =>
   async (dispatch: ThreekitDispatch, getState: () => RootState) => {
+    const { cacheProduct } = config || { cacheProduct: true };
     const state = getState();
     const productsList = Object.keys(PRODUCTS);
-    let shouldCacheProduct = true;
 
     if (!productsList.includes(id)) return;
 
     const productConfig = PRODUCTS[id][state.treble.threekitEnv];
 
     dispatch(setProductId(id));
-    if (shouldCacheProduct) dispatch(cacheActiveProduct());
+    if (cacheProduct) dispatch(cacheActiveProduct());
     await dispatch(reloadPlayer(productConfig));
-    if (shouldCacheProduct) {
+    if (cacheProduct) {
       dispatch(incrementActiveCacheIdx());
       dispatch(cacheActiveProduct());
     }
