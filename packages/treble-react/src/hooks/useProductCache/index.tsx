@@ -7,6 +7,7 @@ import {
   CachedProduct,
   PRODUCTS,
   loadProduct,
+  LoadProductConfig,
 } from '../../store/product';
 import { useThreekitSelector, useThreekitDispatch } from '../../store';
 import { IReloadConfig } from '../../store/treble';
@@ -21,7 +22,7 @@ interface HydratedCacheProduct
 interface ISelectableProduct {
   id: string;
   label: string;
-  handleSelect: () => void;
+  handleSelect: (config?: LoadProductConfig) => void;
 }
 
 interface CacheData {
@@ -58,7 +59,8 @@ const useProductCache = (): UseProductCache => {
     prod => ({
       id: prod,
       label: prod,
-      handleSelect: () => dispatch(loadProduct(prod)),
+      handleSelect: (config: LoadProductConfig) =>
+        dispatch(loadProduct(prod, config)),
     })
   );
 
