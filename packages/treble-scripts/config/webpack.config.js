@@ -207,6 +207,10 @@ module.exports = (env, threekitEnv, config = {}) => {
               // },
             },
             {
+              test: /.(ttf|otf|eot|woff(2)?)(\?[a-z0-9]+)?$/,
+              type: 'asset/inline',
+            },
+            {
               test: /\.svg$/,
               use: [
                 {
