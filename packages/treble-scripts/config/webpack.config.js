@@ -13,9 +13,9 @@ const Dotenv = require('dotenv-webpack');
 const paths = require('./paths');
 const fs = require('fs');
 
-const imageInlineSizeLimit = parseInt(
-  process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
-);
+// const imageInlineSizeLimit = parseInt(
+//   process.env.IMAGE_INLINE_SIZE_LIMIT || '10000'
+// );
 
 const useTypeScript = fs.existsSync(paths.tsConfig);
 
