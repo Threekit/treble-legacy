@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Accordion } from './index';
 const { AccordionItem } = Accordion;
+import CustomMDXDocumentation from './Custom-MDX-Documentation.mdx';
+
 
 const items = [
   {
@@ -17,6 +19,11 @@ const items = [
 export default {
   title: 'Layouts/Accordion',
   component: Accordion,
+  parameters: {
+    docs: {
+      page: CustomMDXDocumentation,
+    },
+  },
 };
 
 const Template = args => (

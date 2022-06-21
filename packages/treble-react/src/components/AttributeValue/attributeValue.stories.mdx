@@ -2,7 +2,7 @@ import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 
 import { AttributeValue } from './index';
 
-export const Template = args => <AttributeValue {...args} />;
+export const Template = args => <div>{args.value}</div>;
 
 <Meta title="Display/Attribute Value" />
 
@@ -12,14 +12,10 @@ export const Template = args => <AttributeValue {...args} />;
 
 The `<AttributeValue />` component will display the value of the attribute
 specified in the `attribute` prop.
-
-Passing a string into the `value` prop will display that
-value instead.
-
 ## Demo
 
 <Canvas>
-  <Story name="Default" args={{ value: 'Blue' }}>
+  <Story name="Attribute Value" args={{ value: 'Blue' }}>
     {Template.bind({})}
   </Story>
 </Canvas>

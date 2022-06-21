@@ -16,13 +16,13 @@ const items = [
 
 export default {
   title: 'Layouts/Tabs',
-  component: Tabs,
+  component: TabPane,
 };
 
 const Template = args => (
   <Tabs {...args}>
     {items.map((el, i) => (
-      <TabPane key={i} label={el.label}>
+      <TabPane key={i} label={args.label}>
         {el.content}
       </TabPane>
     ))}
@@ -30,3 +30,6 @@ const Template = args => (
 );
 
 export const Primary = Template.bind({});
+Primary.args = {
+  label: 'Section',
+};
