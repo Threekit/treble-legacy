@@ -1,4 +1,4 @@
-name: Sync `documentation` directory to ReadMe
+name: Sync `docs` directory to ReadMe
 
 # Run workflow for every push to the `main` branch
 on:
@@ -8,6 +8,7 @@ on:
 
 jobs:
   sync:
+    name: Sync Readme Docs
     runs-on: ubuntu-latest
     steps:
       - name: Checkout this repo
@@ -19,4 +20,4 @@ jobs:
         # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
         uses: readmeio/rdme@7.2.2
         with:
-          rdme: docs ./docs --key=README_DEVELOPERS_API_KEY --version=2.0
+          rdme: docs ./docs --key=${{ secrets.README_DEVELOPERS_API_KEY }} --version=2.0
