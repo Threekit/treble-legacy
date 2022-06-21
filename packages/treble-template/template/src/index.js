@@ -1,12 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 // import { TrebleApp } from "@threekit-tools/treble"
 import './index.css';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('tk-treble-root')
-);
+const container = document.getElementById('tk-treble-root');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(<App />);
