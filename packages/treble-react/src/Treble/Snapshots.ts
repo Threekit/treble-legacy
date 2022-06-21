@@ -7,6 +7,7 @@ import {
   ATTRIBUTE_TYPES,
 } from '../constants';
 import {
+  IThreekitConfigurator,
   IDisplayAttributeAsset,
   IDisplayAttributeString,
   IDisplayAttributeAssetValue,
@@ -33,6 +34,7 @@ export interface ITakeSnapshotsConfig {
   format?: string;
   size?: SnapshotSize;
   filename?: string;
+  useStage?: boolean;
 }
 
 type CamerasMap = Record<string, string | { assetId: string }>;
@@ -44,13 +46,6 @@ interface IGetSnapshot {
 
 interface ISnapshots {
   getSnapshot(snapshotConfig: IGetSnapshot): Promise<string>;
-  getSnapshots(
-    cameras: Array<string | undefined>,
-    snapshotConfig: Pick<
-      ITakeSnapshotsConfig,
-      'attributeName' | 'format' | 'size'
-    >
-  ): Promise<Array<string>>;
   takeSnapshots(
     cameras: ISnapshotsCameras,
     config: ITakeSnapshotsConfig
@@ -63,23 +58,28 @@ const DEFAULT_CAMERA_CONFIG = {
   format: SNAPSHOT_FORMATS.png,
   attributeName: ATTRIBUTES_RESERVED.camera,
   output: SNAPSHOT_OUTPUTS.blob,
+  useStage: false,
 };
 
 let cameraValues: CamerasMap;
 
 const getCameraValue = (
+  configurator: IThreekitConfigurator,
   cameraAttrName: string = ATTRIBUTES_RESERVED.camera
 ) => {
-  const attribute = window.threekit.configurator
+  const attribute = configurator
     .getDisplayAttributes()
     .find(el => el.name === cameraAttrName);
   if (!attribute) return undefined;
   return attribute.value;
 };
 
-const getCamerasMap = (cameraAttrName: string = ATTRIBUTES_RESERVED.camera) => {
+const getCamerasMap = (
+  configurator: IThreekitConfigurator,
+  cameraAttrName: string = ATTRIBUTES_RESERVED.camera
+) => {
   if (cameraValues) return cameraValues;
-  const attribute = window.threekit.configurator
+  const attribute = configurator
     .getDisplayAttributes()
     .find(el => el.name === cameraAttrName);
   if (!attribute) {
@@ -103,51 +103,57 @@ const getCamerasMap = (cameraAttrName: string = ATTRIBUTES_RESERVED.camera) => {
   return cameraValues;
 };
 
+const getSnapshot = ({ size, format }: IGetSnapshot) => {
+  return window.threekit.player.snapshotAsync({
+    size,
+    mimeType: `image/${SNAPSHOT_FORMATS[format]}`,
+  });
+};
+
+const getSnapshots = async (
+  cameras: Array<string | undefined>,
+  snapshotConfig: Pick<
+    ITakeSnapshotsConfig,
+    'attributeName' | 'format' | 'size' | 'useStage'
+  >
+) => {
+  const attributeName =
+    snapshotConfig.attributeName || DEFAULT_CAMERA_CONFIG.attributeName;
+  const size = snapshotConfig.size || DEFAULT_CAMERA_CONFIG.size;
+  const format = snapshotConfig.format || DEFAULT_CAMERA_CONFIG.format;
+
+  const configurator = snapshotConfig?.useStage
+    ? await window.threekit.player.getStageConfigurator()
+    : window.threekit.configurator;
+
+  const camerasMap = getCamerasMap(configurator, attributeName);
+  if (!camerasMap) return Promise.resolve([]);
+  let snapshots: Array<string> = [];
+  return cameras.reduce((snapshotPromise, camera) => {
+    return snapshotPromise.then(
+      () =>
+        new Promise(async resolve => {
+          if (camera)
+            await configurator.setConfiguration({
+              [attributeName]: camerasMap[camera],
+            });
+          const snapshotStr = await getSnapshot({ size, format });
+          snapshots.push(snapshotStr);
+          resolve(snapshots);
+        })
+    );
+  }, Promise.resolve(snapshots));
+};
+
 class Snapshots implements ISnapshots {
   constructor() {}
 
-  getSnapshot = ({ size, format }: IGetSnapshot) => {
-    return window.threekit.player.snapshotAsync({
-      size,
-      mimeType: `image/${SNAPSHOT_FORMATS[format]}`,
-    });
-  };
-
-  getSnapshots = (
-    cameras: Array<string | undefined>,
-    snapshotConfig: Pick<
-      ITakeSnapshotsConfig,
-      'attributeName' | 'format' | 'size'
-    >
-  ) => {
-    const attributeName =
-      snapshotConfig.attributeName || DEFAULT_CAMERA_CONFIG.attributeName;
-    const size = snapshotConfig.size || DEFAULT_CAMERA_CONFIG.size;
-    const format = snapshotConfig.format || DEFAULT_CAMERA_CONFIG.format;
-    const camerasMap = getCamerasMap(attributeName);
-    if (!camerasMap) return Promise.resolve([]);
-    let snapshots: Array<string> = [];
-    return cameras.reduce((snapshotPromise, camera) => {
-      return snapshotPromise.then(
-        () =>
-          new Promise(async resolve => {
-            if (camera)
-              await window.threekit.configurator.setConfiguration({
-                [attributeName]: camerasMap[camera],
-              });
-            const snapshotStr = await this.getSnapshot({ size, format });
-            snapshots.push(snapshotStr);
-            resolve(snapshots);
-          })
-      );
-    }, Promise.resolve(snapshots));
-  };
+  getSnapshot = getSnapshot;
 
   takeSnapshots = async (
     camerasList: ISnapshotsCameras,
     snapshotsConfig: ITakeSnapshotsConfig
   ) => {
-    // const { threekitDomain, orgId } = connection.getConnection();
     const filename =
       snapshotsConfig?.filename || DEFAULT_CAMERA_CONFIG.filename;
     const size = snapshotsConfig?.size || DEFAULT_CAMERA_CONFIG.size;
@@ -155,6 +161,9 @@ class Snapshots implements ISnapshots {
     const attributeName =
       snapshotsConfig?.attributeName || DEFAULT_CAMERA_CONFIG.attributeName;
     const output = snapshotsConfig?.output || DEFAULT_CAMERA_CONFIG.output;
+    const configurator = snapshotsConfig?.useStage
+      ? await window.threekit.player.getStageConfigurator()
+      : window.threekit.configurator;
 
     let cameras = Array.isArray(camerasList) ? camerasList : [camerasList];
     let snapshotsRaw: Array<string>;
@@ -163,16 +172,16 @@ class Snapshots implements ISnapshots {
       const snapshotData = await this.getSnapshot({ size, format });
       snapshotsRaw = [snapshotData];
     } else {
-      const camerasMap = getCamerasMap(attributeName);
+      const camerasMap = getCamerasMap(configurator, attributeName);
       if (!camerasMap) return null;
       cameras = cameras.filter(
         el => el === undefined || Object.keys(camerasMap).includes(el)
       );
 
-      const currentCamera = getCameraValue(attributeName);
+      const currentCamera = getCameraValue(configurator, attributeName);
       const cameraPosition = getCameraPosition(window.threekit.player.camera);
-      snapshotsRaw = await this.getSnapshots(cameras, camerasMap);
-      await window.threekit.configurator.setConfiguration({
+      snapshotsRaw = await getSnapshots(cameras, snapshotsConfig);
+      await configurator.setConfiguration({
         [attributeName]: currentCamera,
       });
       setCameraPosition(window.threekit.player.camera, cameraPosition);

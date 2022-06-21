@@ -311,6 +311,7 @@ export interface IThreekitPlayer {
   setActiveCamera: () => void;
   on: (phase: SCENE_PHASES | string, callback: (args: any) => void) => void;
   getConfigurator: () => Promise<IThreekitConfigurator>;
+  getStageConfigurator: () => Promise<IThreekitConfigurator>;
   enableApi: (api: PRIVATE_APIS) => any;
   snapshotAsync: (snapshotConfig: ISnapshotConfig) => Promise<string>;
   unload: () => Promise<string>;

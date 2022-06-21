@@ -55,6 +55,8 @@ export const generateToolClassName = generateClassName(TOOL_CLASS_NAME);
 export const generateDisplayClassName = generateClassName(DISPLAY_CLASS_NAME);
 export const generateFormClassName = generateClassName(FORM_CLASS_NAME);
 
+export const isIOS = () => navigator.userAgent.match(/ipad|iphone/i);
+
 export const isJsonString = (str: string): boolean => {
   try {
     JSON.parse(str);
