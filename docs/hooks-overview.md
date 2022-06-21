@@ -1,5 +1,5 @@
 ---
-id: hooks-overview
+slug: hooks-overview
 title: Hooks
 category: 62b1eff483c1e000b8a4dc26
 ---

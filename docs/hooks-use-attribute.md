@@ -1,8 +1,9 @@
 ---
-id: hooks-use-attribute
+slug: hooks-use-attribute
 title: Use Attribute
 category: 62b1eff483c1e000b8a4dc26
-tags: Hooks
+tags:
+  - Hooks
 ---
 
 # Use Attribute
