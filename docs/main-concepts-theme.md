@@ -7,11 +7,9 @@ parentDoc: 62b381c69f5d810068dc9e96
 
 # Theme
 
-:::caution Theme vs Custom Components
-
-The theme only allows making cosmetic changes to the native components provided by Treble. For more control of components and editing their designs, its strongly recommended you use the Custom Components available in `src/components` instead.
-
-:::
+> 🚧 Theme vs Custom Components
+>
+> The theme only allows making cosmetic changes to the native components provided by Treble. For more control of components and editing their designs, its strongly recommended you use the Custom Components available in `src/components` instead.
 
 ## Overview
 

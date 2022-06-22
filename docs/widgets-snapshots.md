@@ -49,11 +49,9 @@ const snapshotsConfig = {
 };
 ```
 
-:::caution Note
-
-These cameras must be setup to the configurator using the reserved camera attribute.
-
-:::
+> 🚧 Note
+>
+> These cameras must be setup to the configurator using the reserved camera attribute.
 
 ## Props
 

@@ -7,11 +7,9 @@ parentDoc: 62603c47e065f503a3a80f3f
 
 # Starting a new Treble project
 
-:::info For projects with deployment
-
-For projects that will require embedding into an existing webpages or hosting with Threekit, it is **strongly recommended** that you follow this guide for project setup.
-
-:::
+> 📘 For projects with deployment
+>
+> For projects that will require embedding into an existing webpages or hosting with Threekit, it is **strongly recommended** that you follow this guide for project setup.
 
 ## Create Treble App
 

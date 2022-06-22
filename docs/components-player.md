@@ -32,11 +32,9 @@ The containers are available on the Player itself and can be used directly from 
 
 e.g. `<Player.TopRightWidgets> </Player.TopRightWidgets>`
 
-:::info Player needs a height
-
-The Player requires that it always have a defined height 1px or greater. We recommend you pass in a height value into the component props.
-
-:::
+> 📘 Player needs a height
+>
+> The Player requires that it always have a defined height 1px or greater. We recommend you pass in a height value into the component props.
 
 ## Code Examples
 

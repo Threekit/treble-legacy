@@ -11,11 +11,9 @@ parentDoc: 62b381c69f5d810068dc9e96
 
 The Treble Framework comes loaded with the `@threekit-tools/treble-scripts` package to facilitate the development and deployment of a Treble App. It gives the ability to run the following scripts/commands straight from our projects root directory.
 
-:::info Threekit Environment
-
-If no Threekit environment is explicitly provided the scripts will default to using the Threekit `Preview` environment.
-
-:::
+> 📘 Threekit Environment
+>
+> If no Threekit environment is explicitly provided the scripts will default to using the Threekit `Preview` environment.
 
 ### `yarn start`
 

@@ -69,11 +69,9 @@ To learn more about Tailwind and using it in the custom components you can head 
 
 The products folder is where all the Product Layouts are organized. Each Product Layout file in this folder is for a unique product form, that can be used for one or many products.
 
-:::caution File Names
-
-Product Layout files must be named to match the following pattern: `*.product.jsx`. For example, `Helmet.product.jsx`
-
-:::
+> 🚧 File Names
+>
+> Product Layout files must be named to match the following pattern: `*.product.jsx`. For example, `Helmet.product.jsx`
 
 ### Treble Launchpad
 

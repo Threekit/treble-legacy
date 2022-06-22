@@ -7,17 +7,13 @@ parentDoc: 62b381c656b8c0008830a049
 
 # Product Layout
 
-:::info Multi-product workflow
+> 📘 Multi-product workflow
+>
+> The ProductLayout component works in conjunction with the TrebleApp component for multi-product implementations. To learn more about the TrebleApp component [click here](components-treble-app).
 
-The ProductLayout component works in conjunction with the TrebleApp component for multi-product implementations. To learn more about the TrebleApp component [click here](components-treble-app).
-
-:::
-
-:::caution No ThreekitProvider required
-
-You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The PlayerLayout component will setup the ThreekitProvider for you internally.
-
-:::
+> 🚧 No ThreekitProvider required
+>
+> You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The PlayerLayout component will setup the ThreekitProvider for you internally.
 
 ```jsx
 <ProductLayout />
@@ -35,11 +31,9 @@ To create a Product Layout, you would build your UI view as normal and wrap the 
 
 Each product in the ProductLayout must have its own unique **productId**. This productId is how we tell our TrebleApp which product we want to be loaded in our app. We pass these productId's and their related product credentials to the ProductLayout component using the `products` prop.
 
-:::caution File Names
-
-Product Layout files must be named to match the following pattern: `*.product.jsx`. For example, `Helmet.product.jsx`
-
-:::
+> 🚧 File Names
+>
+> Product Layout files must be named to match the following pattern: `*.product.jsx`. For example, `Helmet.product.jsx`
 
 ## Using the TrebleApp
 

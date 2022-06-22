@@ -18,11 +18,9 @@ These credentials include:
 
 ## Getting your credentials
 
-:::info public token for treble launchpad
-
-By default, Treble will run run its development server locally on `localhost:3000`. If you project will be using Treble Launchpad, it will also require a token for `*.3kit.com`.
-
-:::
+> 📘 Public Token for Treble Launchpad
+>
+> By default, Treble will run run its development server locally on `localhost:3000`. If you project will be using Treble Launchpad, it will also require a token for `*.3kit.com`.
 
 To get your credentials, both the orgId and publicToken, head over to the relevant org on the Threekit Platform and follow these instructions:
 

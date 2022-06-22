@@ -7,11 +7,9 @@ parentDoc: 62b381c656b8c0008830a049
 
 # Threekit Provider
 
-:::info Multi-products
-
-You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The PlayerLayout component will setup the ThreekitProvider for you internally.
-
-:::
+> 📘 Multiple Products
+>
+> You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The PlayerLayout component will setup the ThreekitProvider for you internally.
 
 ```jsx
 <ThreekitProvider />

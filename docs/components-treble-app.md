@@ -7,11 +7,9 @@ parentDoc: 62b381c656b8c0008830a049
 
 # Treble App
 
-:::info Multi-product workflow
-
-The TrebleApp component works in conjunction with the ProductLayout component for multi-product implementations. To learn more about the ProductLayout component [click here](components-treble-app).
-
-:::
+> 📘 Multiple Products Workflow
+>
+> The TrebleApp component works in conjunction with the ProductLayout component for multi-product implementations. To learn more about the ProductLayout component [click here](components-treble-app).
 
 ```jsx
 <TrebleApp />

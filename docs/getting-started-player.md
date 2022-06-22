@@ -25,11 +25,9 @@ const TrebleApp = () => {
 
 All styling and CSS related to the Player should be applied directly in the Player component and its relevant styles directly.
 
-:::info Player Component sizing limitation
-
-The player component is required to have a height above 0px at all times. If the div we try to embed the player into has a height of 0px, the Threekit API will not be able to use that div for the Player load and the API will not initialize correctly.
-
-:::
+> 📘 Player Component sizing limitation
+>
+> The player component is required to have a height above 0px at all times. If the div we try to embed the player into has a height of 0px, the Threekit API will not be able to use that div for the Player load and the API will not initialize correctly.
 
 ## The Player Config
 

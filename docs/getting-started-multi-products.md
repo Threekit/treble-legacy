@@ -50,11 +50,9 @@ const HelmetProduct = () => {
 };
 ```
 
-:::info products folder
-
-All product UIs built using the ProductLayouts must be place in the `src/products` folder.
-
-:::
+> 📘 products folder
+>
+> All product UIs built using the ProductLayouts must be place in the `src/products` folder.
 
 ### Using the TrebleApp
 

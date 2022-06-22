@@ -31,11 +31,9 @@ The credentials include all the parameters and authentication tokens that are sp
 
 The products object defines the default product, from your Threekit Platform catalog, to be used by the Treble App. A default product needs to be provided for each environment, i.e `preview` and `admin-fts`.
 
-:::info Working with multiple products
-
-While populating the products object is still recommended, if you are using the multi-product workflow you will be passing in each product's ids directly to the `<ProductLayout>` component and do not need to provide them in this products object.
-
-:::
+> 📘 Working with Multiple Products
+>
+> While populating the products object is still recommended, if you are using the multi-product workflow you will be passing in each product's ids directly to the `<ProductLayout>` component and do not need to provide them in this products object.
 
 | Property    | Description                                                      | Type             | Default |
 | ----------- | ---------------------------------------------------------------- | ---------------- | ------- |

@@ -17,11 +17,9 @@ The `<Price>` component will display the total price of your configuration. It i
 
 <!-- It is built using the [usePrice() hook](#use-price). -->
 
-:::info Coming Soon!
-
-Currently the component can only show the price from the first pricing schema. Support for multiple Pricebooks and Currencies coming soon.
-
-:::
+> 📘 Coming Soon!
+>
+> Currently the component can only show the price from the first pricing schema. Support for multiple Pricebooks and Currencies coming soon.
 
 ## Code Examples
 
