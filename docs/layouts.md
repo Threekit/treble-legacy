@@ -2,6 +2,7 @@
 slug: layouts-overview
 title: Layouts
 category: 6261727455090d002780b880
+order: 10
 ---
 
 # Layouts

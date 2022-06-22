@@ -2,6 +2,7 @@
 slug: hooks-overview
 title: Hooks
 category: 6261727455090d002780b880
+order: 3
 ---
 
 # Hooks

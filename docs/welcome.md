@@ -7,7 +7,7 @@ order: 0
 
 # Treble Framework
 
-> 📘 Info - Beta Version
+> 📘 Beta Version
 >
 > The Treble Framework is currently available as a **preview for developers**. The library and documentation will be evolving quickly as we refine this project for launch.
 

@@ -2,6 +2,7 @@
 slug: display-overview
 title: Display
 category: 6261727455090d002780b880
+order: 8
 ---
 
 # Displays
