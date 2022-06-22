@@ -1,6 +1,7 @@
 ---
 slug: hooks-use-nested-configurator
 title: Use Nested Configurator
+category: 62b1eff483c1e000b8a4dc26
 ---
 
 ```jsx
