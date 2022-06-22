@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62603c47e065f503a3a80f3f
 ---
 
-# Adding widgets to your player
-
 ## What are widgets?
 
 In most Treble Apps, we need to implement features for the UX that require UI in addition to the Player and Form. This can often present the design challenge of where and how in the page to place these UI elements, which becomes more relevant as the complexity of the Product's configuration goes up. Widgets offer one conceptual way to approach such requirements that work for most projects.

@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 order: 0
 ---
 
-# Treble Framework
-
 > 📘 Beta Version
 >
 > The Treble Framework is currently available as a **preview for developers**. The library and documentation will be evolving quickly as we refine this project for launch.

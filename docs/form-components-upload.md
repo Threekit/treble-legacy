@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c61332320084fdb81d
 ---
 
-# Upload
-
 **A Form Component for an `Image Upload` type Attributes**
 
 ```jsx

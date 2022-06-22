@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c61332320084fdb81d
 ---
 
-# Tiles
-
 **A Form Component for `Asset / Part Reference` and `String` type Attributes**
 
 ```jsx

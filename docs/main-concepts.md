@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 order: 2
 ---
 
-# Treble Overview
-
 ## The 10 Thousand Foot View...
 
 The **Treble Framework** provides a variety of packages, tools and boilerplate code intended to bootstrap development and support deployment of an eCommerce oriented web-experience (Treble App) for one or more Threekit Product configurators. These apps can range from multi-page stand-alone React apps to a simple Player and Form embed inside an existing eCommerce page.

@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62603c47e065f503a3a80f3f
 ---
 
-# Embedding your app in a website
-
 ## Overview
 
 To embed the hosted App in any existing web-page or eCommerce setup you will need to add two things into the HTML content of that page - The set of **HTML elements** we want to embed out UI into and the **script tag** to request our React UI bundle.

@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c69f5d810068dc9e96
 ---
 
-# Threekit Credentials
-
 ## Overview
 
 All Threekit front-end implementations, Treble included, require the correct Threekit credentials to connect the API to your org on the Threekit Platform and authenticate/authorize your request.

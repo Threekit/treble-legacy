@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c69f5d810068dc9e96
 ---
 
-# Best Practices
-
 ### Keep it lightweight
 
 Keep it simple. Especially for projects embedding into an existing product page - try to keep the UI you have to build to a minimum. Leverage as much of the UI on the existing page possible, ideally limiting your development to components/visuals that directly interact with the underlying Threekit API.

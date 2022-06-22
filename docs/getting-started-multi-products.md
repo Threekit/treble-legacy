@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62603c47e065f503a3a80f3f
 ---
 
-# Managing multiple products
-
 ## Overview
 
 So far we've discussed building out a UI for a **single product**, however, the Treble Framework also supports **multiple products in a single app**. In this tutorial we'll convert the product configurator UI we've built into a Product Layout and set it up in our multi-product app.

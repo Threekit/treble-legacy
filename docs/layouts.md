@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 order: 10
 ---
 
-# Layouts
-
 ## Overview
 
 Layout components offer solutions to organize and structure your UI with components like **Modals**, **Drawers**, **Accordions** etc.

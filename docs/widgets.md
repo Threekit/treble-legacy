@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 order: 7
 ---
 
-# Widgets
-
 ## Overview
 
 Widgets offer us additional functional features that we can use to enhance the user's experience. They can cover a vast range of functionality including: **Zoom**, **Share**, managing a **Wishlist**, etc.

@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c64bf3a7004a150e92
 ---
 
-## Portal to Element
-
 ```jsx
 <PortalToElement>
 ```

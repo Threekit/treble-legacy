@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c6f82af7001342ffec
 ---
 
-# Use Attribute
-
 ```jsx
 const [attribute, setAttribute] = useAttribute('Attribute Name');
 ```

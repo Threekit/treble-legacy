@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c69f5d810068dc9e96
 ---
 
-# Treble React
-
 ## Provider Pattern
 
 The Treble React package follows a **Provider Pattern**, where all Treble components and hooks must be used inside the provider. Within this provider context, all the components and hooks have complete flexibility in where and how they're used while still fully connected to the Threekit API, the 3D Player and each other.

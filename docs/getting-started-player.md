@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62603c47e065f503a3a80f3f
 ---
 
-# Setting up your Threekit Player
-
 ## The Player Component
 
 The `<Player>` component, available as both a native component and custom component, should be used to render out the Threekit 3D/2D Player. Only a single Player component can be rendered in the DOM at any given time.

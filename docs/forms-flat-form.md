@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381d78108cf008f9033bd
 ---
 
-# Flat Form
-
 ```jsx
 <FlatForm />
 ```

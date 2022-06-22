@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62603c47e065f503a3a80f3f
 ---
 
-# Building your configurator form
-
 ## Using the native Form
 
 The Treble Framework includes a component for a pre-build form called the `<FlatForm>`. The **FlatForm** will render out the entire configurator for the initialized product, as it appears on the Threekit Platform, along with the item's name and any description is available.

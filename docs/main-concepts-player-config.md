@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c69f5d810068dc9e96
 ---
 
-# Player Config
-
 ## Overview
 
 The `player.config.js` file, located at `.treble/player.config.js`, contains the **Player API initialization parameters** that are passed directly to the Threekit Player API. These exclude all the environment specific parameters and values which are handled in the credentials in `threekit.config.js`.

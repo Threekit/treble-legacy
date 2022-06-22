@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c69f5d810068dc9e96
 ---
 
-# Threekit Config
-
 ## Overview
 
 The `threekit.config.js` file, located in the project's root directory, is where we add the Threekit credentials and product data required for the project.
