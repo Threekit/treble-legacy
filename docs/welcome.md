@@ -7,9 +7,9 @@ order: 1
 
 # Treble Framework
 
-:::info beta version
-The Treble Framework is currently available as a **preview for developers**. The library and documentation will be evolving quickly as we refine this project for launch.
-:::
+> 📘 Info beta version
+>
+> The Treble Framework is currently available as a **preview for developers**. The library and documentation will be evolving quickly as we refine this project for launch.
 
 ## Welcome to Treble!
 
