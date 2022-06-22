@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c656b8c0008830a049
 ---
 
-# Product Layout
-
 > 📘 Multi-product workflow
 >
 > The ProductLayout component works in conjunction with the TrebleApp component for multi-product implementations. To learn more about the TrebleApp component [click here](components-treble-app).

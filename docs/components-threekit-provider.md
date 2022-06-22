@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c656b8c0008830a049
 ---
 
-# Threekit Provider
-
 > 📘 Multiple Products
 >
 > You **do not** need to use the ThreekitProvider if you are using the `<PlayerLayouts>` component to defined multiple products. The PlayerLayout component will setup the ThreekitProvider for you internally.

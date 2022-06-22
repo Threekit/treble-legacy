@@ -5,8 +5,6 @@ category: 6261727455090d002780b880
 parentDoc: 62b381c656b8c0008830a049
 ---
 
-# Player
-
 ```jsx
 <Player />
 ```
