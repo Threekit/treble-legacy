@@ -2,6 +2,7 @@
 slug: hooks-use-attribute
 title: Use Attribute
 category: 62b1eff483c1e000b8a4dc26
+parentDoc: 62b34e70a2b03e00a1eae153
 ---
 
 # Use Attribute
