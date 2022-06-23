@@ -26,6 +26,7 @@ const App = (props: ThreekitProviderProps) => {
   const dispatch = useThreekitDispatch();
   const {
     playerConfig,
+    assetId,
     productId,
     project,
     locale,
@@ -39,6 +40,7 @@ const App = (props: ThreekitProviderProps) => {
         launch({
           playerConfig,
           productId,
+          assetId,
           project,
           locale,
           threekitEnv,
@@ -60,6 +62,7 @@ const ThreekitProvider = (props: ThreekitProviderProps) => {
         <GlobalStyle />
         <App
           locale={props.locale}
+          assetId={props.assetId}
           productId={props.productId}
           project={props.project}
           playerConfig={props.playerConfig}

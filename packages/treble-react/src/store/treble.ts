@@ -47,6 +47,7 @@ export interface IPlayerInit {
 }
 
 export interface ILaunchConfig {
+  assetId?: string;
   productId: string;
   threekitEnv: string;
   serverUrl: string;
@@ -342,11 +343,12 @@ export const launch =
 
     const envCredentials = credentials[threekitEnv];
     const {
-      assetId,
+      assetId: assetIdRaw,
       stageId,
       configurationId,
       initialConfiguration: initialConfigurationRaw,
     } = products[productId][threekitEnv];
+    const assetId = launchConfig?.assetId || assetIdRaw;
     // const product = products[threekitEnv];
     const threekitDomainRaw =
       envCredentials.threekitDomain || `${threekitEnv}.threekit.com`;
