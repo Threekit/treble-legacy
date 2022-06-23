@@ -1,5 +1,5 @@
 ---
-slug: main-concepts-treble-react
+slug: treble-main-concepts-treble-react
 title: Treble React
 category: 6261727455090d002780b880
 parentDoc: 62b381c69f5d810068dc9e96
