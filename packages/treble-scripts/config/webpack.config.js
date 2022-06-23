@@ -440,6 +440,7 @@ module.exports = (env, threekitEnv, config = {}) => {
       new webpack.DefinePlugin({
         'process.env.TREBLE_SCRIPTS': JSON.stringify(true),
         'process.env.THREEKIT_ENV': JSON.stringify(threekitEnv),
+        'process.env.TREBLE_DEBUG': JSON.stringify(isDev ? true : false),
       }),
       // Makes some environment variables available in index.html.
       // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
