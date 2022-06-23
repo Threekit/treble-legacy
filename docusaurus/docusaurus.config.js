@@ -74,7 +74,7 @@ const config = {
             position: 'right',
           },
           {
-            to: 'https://develop.threekit.com/reference/welcome',
+            to: 'https://developer.threekit.com/reference/welcome',
             label: 'Docs',
             position: 'right',
           },
