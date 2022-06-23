@@ -265,8 +265,6 @@ export const initPlayer =
       const updatedAttributes =
         window.threekit.configurator.getDisplayAttributes();
 
-      if (window.threekit.treble._debugMode) runDebugger();
-
       dispatch(setAttributes(updatedAttributes));
 
       await EVENTS.postConfigurationChange?.(

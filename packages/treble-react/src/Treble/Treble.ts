@@ -26,6 +26,7 @@ interface IEmailShareCredentials {
 }
 
 class Treble {
+  _api: typeof threekitAPI;
   _player: IThreekitPrivatePlayer;
   wishlist: IWishlist;
   private _initialConfiguration: string;
@@ -35,6 +36,7 @@ class Treble {
 
   constructor({ player, orgId, initialConfiguration }: ITreble) {
     //  Threekit API
+    this._api = threekitAPI;
     this.wishlist = createWishlist(orgId);
     this._snapshots = new Snapshots();
     this.takeSnapshots = this._snapshots.takeSnapshots;
