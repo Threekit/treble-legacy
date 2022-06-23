@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 import { Reducer } from 'redux';
 import logger from 'redux-logger';
+import { TREBLE_DEBUG } from '../constants';
 
 import treble from './treble';
 import product from './product';
@@ -19,7 +20,9 @@ const store = configureStore({
     wishlist,
     price,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+  middleware: TREBLE_DEBUG
+    ? getDefaultMiddleware => getDefaultMiddleware().concat(logger)
+    : getDefaultMiddleware => getDefaultMiddleware(),
 });
 
 export const createStore = (reducer?: Record<string, Reducer>) => {
@@ -34,7 +37,9 @@ export const createStore = (reducer?: Record<string, Reducer>) => {
       wishlist,
       price,
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(logger),
+    middleware: TREBLE_DEBUG
+      ? getDefaultMiddleware => getDefaultMiddleware().concat(logger)
+      : getDefaultMiddleware => getDefaultMiddleware(),
   });
 };
 

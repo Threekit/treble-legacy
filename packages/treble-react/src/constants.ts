@@ -2,6 +2,8 @@
  * Treble Config
  ****************************************************/
 
+export const TREBLE_DEBUG: boolean = !!process.env.TREBLE_DEBUG;
+
 export const DEFAULT_CLASS_NAME = 'threekit-react';
 export const CLASS_NAME_PREFIX = 'tk';
 

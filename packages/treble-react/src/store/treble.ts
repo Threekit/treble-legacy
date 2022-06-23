@@ -2,7 +2,7 @@ import connection from '../connection';
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
 import threekitAPI from '../api';
-import { isUuid, getParams, loadTrebleConfig } from '../utils';
+import { isUuid, getParams, loadTrebleConfig, runDebugger } from '../utils';
 import {
   DEFAULT_PLAYER_CONFIG,
   TK_SAVED_CONFIG_PARAM_KEY,
@@ -257,11 +257,15 @@ export const initPlayer =
     dispatch(setThreekitInitialized(true));
     dispatch(setPlayerLoading(false));
 
+    if (window.threekit.treble._debugMode) runDebugger();
+
     window.threekit.player.on('setConfiguration', async () => {
       const { attributes } = getState();
       const previousAttributes = Object.values(attributes);
       const updatedAttributes =
         window.threekit.configurator.getDisplayAttributes();
+
+      if (window.threekit.treble._debugMode) runDebugger();
 
       dispatch(setAttributes(updatedAttributes));
 

@@ -2,11 +2,12 @@ import threekitAPI from '../api';
 import connection from '../connection';
 import {
   IThreekitPlayer,
+  IThreekitPrivatePlayer,
   IConfiguration,
   ISetConfiguration,
   IThreekitPrivateConfigurator,
 } from '../types';
-import { TK_SAVED_CONFIG_PARAM_KEY } from '../constants';
+import { TK_SAVED_CONFIG_PARAM_KEY, TREBLE_DEBUG } from '../constants';
 import { getParams, objectToQueryStr } from '../utils';
 import createWishlist, { IWishlist } from './Wishlist';
 import Snapshots from './Snapshots';
@@ -25,20 +26,21 @@ interface IEmailShareCredentials {
 }
 
 class Treble {
-  _player: IThreekitPlayer;
+  _player: IThreekitPrivatePlayer;
   wishlist: IWishlist;
   private _initialConfiguration: string;
   private _snapshots: Snapshots;
   takeSnapshots: Snapshots['takeSnapshots'];
+  _debugMode: boolean;
 
   constructor({ player, orgId, initialConfiguration }: ITreble) {
     //  Threekit API
-    this._player = player;
     this.wishlist = createWishlist(orgId);
     this._snapshots = new Snapshots();
     this.takeSnapshots = this._snapshots.takeSnapshots;
-    // this._player = player.enableApi('player');
+    this._player = player.enableApi('player');
     this._initialConfiguration = JSON.stringify(initialConfiguration);
+    this._debugMode = TREBLE_DEBUG;
   }
 
   saveConfiguration = async (

@@ -324,6 +324,7 @@ export interface IThreekitPrivateConfigurator extends IThreekitConfigurator {
 export interface IThreekitPrivatePlayer {
   getConfigurator: () => IThreekitPrivateConfigurator;
   configurator: { getFullConfiguration: () => IConfiguration };
+  calculateLogs: () => Promise<Record<string, any>>;
 }
 
 export interface ThreekitInitConfig {

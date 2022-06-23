@@ -415,6 +415,11 @@ export const isUuid = (str?: string) => {
   return check.test(str);
 };
 
+export const runDebugger = async () => {
+  const logs = await window.threekit.treble._player.calculateLogs();
+  if (logs.length) console.log(`Threekit Debugger: \n`, logs);
+};
+
 export const loadTrebleConfig = () => {
   let config: Partial<ITrebleConfig> = {};
   try {
