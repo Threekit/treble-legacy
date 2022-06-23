@@ -73,24 +73,29 @@ const config = {
             label: 'Threekit Community',
             position: 'right',
           },
+          {
+            to: 'https://develop.threekit.com/reference/welcome',
+            label: 'Docs',
+            position: 'right',
+          },
           // {
           //   to: '/get-started',
           //   label: 'Get Started',
           //   position: 'right',
           // },
-          {
-            to: 'demos/demo-overview',
-            // type: 'doc',
-            // docId: 'demo-overview',
-            position: 'right',
-            label: 'Demos',
-          },
-          {
-            type: 'doc',
-            docId: 'welcome',
-            position: 'right',
-            label: 'Docs',
-          },
+          // {
+          //   to: 'demos/demo-overview',
+          //   // type: 'doc',
+          //   // docId: 'demo-overview',
+          //   position: 'right',
+          //   label: 'Demos',
+          // },
+          // {
+          //   type: 'doc',
+          //   docId: 'welcome',
+          //   position: 'right',
+          //   label: 'Docs',
+          // },
           { to: '/storybook', label: 'Storybook', position: 'right' },
           // {
           //   href: "https://github.com/Threekit/treble",
