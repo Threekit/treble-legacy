@@ -2,7 +2,7 @@
 slug: treble-hooks-use-player-loading-status
 title: Use Player Loading Status
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1dea5ebc037be1664b
 ---
 
 ```jsx

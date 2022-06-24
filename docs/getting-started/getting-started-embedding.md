@@ -2,7 +2,7 @@
 slug: treble-getting-started-embedding
 title: Embedding your app in a website
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1dc3856d003d7b5087
 ---
 
 ## Overview

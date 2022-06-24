@@ -2,7 +2,7 @@
 slug: treble-components-product-layout
 title: Product Layout
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1d084ec2001add7b1e
 ---
 
 > 📘 Multi-product workflow

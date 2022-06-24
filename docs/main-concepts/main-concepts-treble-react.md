@@ -2,7 +2,7 @@
 slug: treble-main-concepts-treble-react
 title: Treble React
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1de2c89700a801c530
 ---
 
 ## Provider Pattern

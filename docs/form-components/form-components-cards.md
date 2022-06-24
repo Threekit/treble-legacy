@@ -2,7 +2,7 @@
 slug: treble-form-components-cards
 title: Cards
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1d7459f5008ebebde9
 ---
 
 **A Form Component for `Asset / Part Reference` and `String` type Attributes**

@@ -2,7 +2,7 @@
 slug: treble-wrappers-await-threekit-load
 title: Await Threekit Load
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1dc81d6c01021abc38
 ---
 
 ```jsx

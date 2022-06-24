@@ -2,7 +2,7 @@
 slug: treble-main-concepts-credentials
 title: Threekit Credentials
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1de2c89700a801c530
 ---
 
 ## Overview

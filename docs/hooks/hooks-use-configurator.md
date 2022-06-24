@@ -2,7 +2,7 @@
 slug: treble-hooks-use-configurator
 title: Use Configurator
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1dea5ebc037be1664b
 ---
 
 ```jsx

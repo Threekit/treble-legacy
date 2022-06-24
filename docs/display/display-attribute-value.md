@@ -2,7 +2,7 @@
 slug: treble-display-attribute-value
 title: Attribute Value
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1d11db8c0013df7d5f
 ---
 
 ```jsx

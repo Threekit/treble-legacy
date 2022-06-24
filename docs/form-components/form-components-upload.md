@@ -2,7 +2,7 @@
 slug: treble-form-components-upload
 title: Upload
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1d7459f5008ebebde9
 ---
 
 **A Form Component for an `Image Upload` type Attributes**

@@ -2,7 +2,7 @@
 slug: treble-getting-started-player
 title: Setting up your Threekit Player
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1dc3856d003d7b5087
 ---
 
 ## The Player Component

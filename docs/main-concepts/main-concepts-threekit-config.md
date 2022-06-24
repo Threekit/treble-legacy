@@ -2,7 +2,7 @@
 slug: treble-main-concepts-threekit-config
 title: Threekit Config
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1de2c89700a801c530
 ---
 
 ## Overview

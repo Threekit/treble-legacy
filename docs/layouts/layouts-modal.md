@@ -2,7 +2,7 @@
 slug: treble-layouts-modal
 title: Modal
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1d99afed00285942aa
 ---
 
 ```jsx

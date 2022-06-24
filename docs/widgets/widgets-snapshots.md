@@ -2,7 +2,7 @@
 slug: treble-widgets-snapshots
 title: Snapshots
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1d3a0cda006e751920
 ---
 
 ```jsx

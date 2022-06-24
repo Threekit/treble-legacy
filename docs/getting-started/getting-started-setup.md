@@ -2,7 +2,7 @@
 slug: treble-getting-started-setup
 title: Starting a new Treble Project
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1dc3856d003d7b5087
 ---
 
 > 📘 For projects with deployment

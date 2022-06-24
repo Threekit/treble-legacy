@@ -2,7 +2,7 @@
 slug: treble-display-total-price
 title: Total Price
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1d11db8c0013df7d5f
 ---
 
 ```jsx

@@ -2,7 +2,7 @@
 slug: treble-hooks-use-threekit-init-status
 title: Use Threekit Init Status
 category: 6261727455090d002780b880
-parentDoc:
+parentDoc: 62b4ff1dea5ebc037be1664b
 ---
 
 ```jsx
