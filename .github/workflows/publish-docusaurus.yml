@@ -2,7 +2,10 @@ name: Publish Docusaurus
 
 on:
   push:
-    branches: main
+    paths:
+      - docusaurus/**
+    branches:
+      - main
 
 jobs:
   publish-docusaurus:
