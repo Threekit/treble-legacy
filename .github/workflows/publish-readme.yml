@@ -3,10 +3,10 @@ name: ReadMe Sync
 # Run workflow for every push to the `main` branch
 on:
   push:
+    paths:
+      - docs/**/*.md
     branches:
       - main
-    paths:
-      - 'docs/**'
 
 jobs:
   sync:
