@@ -12,13 +12,13 @@ const FeatureList = [
   {
     title: 'Components',
     SVG: require('../../static/img/icon-iso-components.svg').default,
-    link: '/docs/components-overview',
+    link: 'https://developer.threekit.com/reference/treble-components',
     description: <>The building blocks for engaging web experiences.</>,
   },
   {
     title: 'Hooks',
     SVG: require('../../static/img/icon-iso-hooks.svg').default,
-    link: '/docs/hooks-overview',
+    link: 'https://developer.threekit.com/reference/treble-hooks',
     description: (
       <>Threekit powered React hooks to build your own components.</>
     ),
@@ -37,7 +37,7 @@ const ResourceList = [
   {
     title: 'Prep for your project',
     SVG: require('../../static/img/icon-iso-prep.svg').default,
-    link: '/docs/tutorial-setup',
+    link: 'https://developer.threekit.com/reference/treble-getting-started-setup',
     description: (
       <>Get started quickly with our comprehensive project overview.</>
     ),
@@ -62,14 +62,14 @@ const CardsList = [
     title: 'Quick start',
     description: 'Launch a new project and run starter code in a few steps.',
     linkText: 'Get Started ->',
-    link: '/docs/tutorial-setup',
+    link: 'https://developer.threekit.com/reference/treble',
   },
   {
     SVG: require('../../static/img/icon-iso-coreconcepts.svg').default,
     title: 'Main Concepts',
     description: 'Learn about core features and functionality.',
     linkText: 'Learn Here ->',
-    link: '/docs/main-concepts-introduction',
+    link: 'https://developer.threekit.com/reference/treble-main-concepts',
   },
 ];
 
