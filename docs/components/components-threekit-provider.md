@@ -1,8 +1,8 @@
 ---
-slug: components-threekit-provider
+slug: treble-components-threekit-provider
 title: Threekit Provider
 category: 6261727455090d002780b880
-parentDoc: 62b381c656b8c0008830a049
+parentDoc:
 ---
 
 > 📘 Multiple Products

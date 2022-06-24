@@ -1,8 +1,8 @@
 ---
-slug: widgets-zoom
+slug: treble-widgets-zoom
 title: Zoom
 category: 6261727455090d002780b880
-parentDoc: 62b381c6798771004e5b994c
+parentDoc:
 ---
 
 ```jsx

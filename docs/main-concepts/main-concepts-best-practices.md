@@ -2,7 +2,7 @@
 slug: treble-main-concepts-best-practices
 title: Best Practices
 category: 6261727455090d002780b880
-parentDoc: 62b381c69f5d810068dc9e96
+parentDoc:
 ---
 
 ### Keep it lightweight

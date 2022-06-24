@@ -1,8 +1,8 @@
 ---
-slug: display-attribute-value
+slug: treble-display-attribute-value
 title: Attribute Value
 category: 6261727455090d002780b880
-parentDoc: 62b381c6969fed008e5b9124
+parentDoc:
 ---
 
 ```jsx

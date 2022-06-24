@@ -1,8 +1,8 @@
 ---
-slug: hooks-use-attribute
+slug: treble-hooks-use-attribute
 title: Use Attribute
 category: 6261727455090d002780b880
-parentDoc: 62b381c6f82af7001342ffec
+parentDoc:
 ---
 
 ```jsx

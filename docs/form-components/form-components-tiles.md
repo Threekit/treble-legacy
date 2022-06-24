@@ -1,8 +1,8 @@
 ---
-slug: form-components-tiles
+slug: treble-form-components-tiles
 title: Tiles
 category: 6261727455090d002780b880
-parentDoc: 62b381c61332320084fdb81d
+parentDoc:
 ---
 
 **A Form Component for `Asset / Part Reference` and `String` type Attributes**

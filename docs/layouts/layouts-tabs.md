@@ -1,8 +1,8 @@
 ---
-slug: layouts-tabs
+slug: treble-layouts-tabs
 title: Tabs
 category: 6261727455090d002780b880
-parentDoc: 62b381c6d83ddd00270e9ba0
+parentDoc:
 ---
 
 ```jsx

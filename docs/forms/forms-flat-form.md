@@ -1,8 +1,8 @@
 ---
-slug: forms-flat-form
+slug: treble-forms-flat-form
 title: Flat Form
 category: 6261727455090d002780b880
-parentDoc: 62b381d78108cf008f9033bd
+parentDoc:
 ---
 
 ```jsx

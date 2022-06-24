@@ -1,8 +1,8 @@
 ---
-slug: getting-started-multi-products
+slug: treble-getting-started-multi-products
 title: Managing multiple products
 category: 6261727455090d002780b880
-parentDoc: 62603c47e065f503a3a80f3f
+parentDoc:
 ---
 
 ## Overview

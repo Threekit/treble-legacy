@@ -1,8 +1,8 @@
 ---
-slug: widgets-snapshots
+slug: treble-widgets-snapshots
 title: Snapshots
 category: 6261727455090d002780b880
-parentDoc: 62b381c6798771004e5b994c
+parentDoc:
 ---
 
 ```jsx

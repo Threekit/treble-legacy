@@ -1,8 +1,8 @@
 ---
-slug: getting-started-form
+slug: treble-getting-started-form
 title: Building your configurator form
 category: 6261727455090d002780b880
-parentDoc: 62603c47e065f503a3a80f3f
+parentDoc:
 ---
 
 ## Using the native Form

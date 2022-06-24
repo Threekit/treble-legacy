@@ -1,8 +1,8 @@
 ---
-slug: display-total-price
+slug: treble-display-total-price
 title: Total Price
 category: 6261727455090d002780b880
-parentDoc: 62b381c6969fed008e5b9124
+parentDoc:
 ---
 
 ```jsx

@@ -2,7 +2,7 @@
 slug: treble-main-concepts-folder-structure
 title: Folder Structure
 category: 6261727455090d002780b880
-parentDoc: 62b381c69f5d810068dc9e96
+parentDoc:
 ---
 
 The project's folder structure is purposefully kept to be as close to that of a create-react-project. Using the Treble Framework should feel familiar to anyone who has worked with CRA.

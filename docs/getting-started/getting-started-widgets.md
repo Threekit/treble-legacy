@@ -1,8 +1,8 @@
 ---
-slug: getting-started-widgets
+slug: treble-getting-started-widgets
 title: Adding widgets to your player
 category: 6261727455090d002780b880
-parentDoc: 62603c47e065f503a3a80f3f
+parentDoc:
 ---
 
 ## What are widgets?

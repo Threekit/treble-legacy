@@ -1,5 +1,5 @@
 ---
-slug: layouts-overview
+slug: treble-layouts
 title: Layouts
 category: 6261727455090d002780b880
 order: 10

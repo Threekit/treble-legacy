@@ -1,5 +1,5 @@
 ---
-slug: form-components-overview
+slug: treble-form-components
 title: Form Components
 category: 6261727455090d002780b880
 order: 6
