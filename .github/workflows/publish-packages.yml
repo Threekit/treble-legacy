@@ -2,24 +2,25 @@ name: Publish Packages
 
 on:
   push:
-    branches: main
+    branches:
+      - main
 
 jobs:
   publish:
     runs-on: ubuntu-latest
 
     steps:
-      - name: "Checkout"
+      - name: 'Checkout'
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
 
-      - name: "Use NodeJS 16"
+      - name: 'Use NodeJS 16'
         uses: actions/setup-node@v2
         with:
-          node-version: "16"
+          node-version: '16'
 
-      - name: "Setup npm"
+      - name: 'Setup npm'
         run: |
           echo //registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }} > .npmrc
 
