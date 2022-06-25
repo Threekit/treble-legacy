@@ -78,6 +78,8 @@ export interface TrebleState {
   playerElId: undefined | string;
   //  Event based notifications
   notifications: boolean;
+  //  Loading Progress
+  loadingProgress: number;
 }
 
 export interface NotificationEvent extends Event {
@@ -142,6 +144,7 @@ const initialState: TrebleState = {
   isPlayerLoading: false,
   playerElId: undefined,
   notifications: true,
+  loadingProgress: 0,
 };
 
 /*****************************************************
@@ -159,6 +162,10 @@ export const setPlayerElement = createAction<string>(
   'treble/set-player-element'
 );
 export const reloadTreble = createAction<Partial<TrebleState>>('treble/reload');
+
+export const updateLoadingProgress = createAction<number>(
+  'treble/update-loading-progress'
+);
 
 /*****************************************************
  * Slice
@@ -188,6 +195,10 @@ const { reducer } = createSlice({
     builder.addCase(reloadTreble, (state, action) => {
       return { ...state, ...action.payload };
     });
+    builder.addCase(updateLoadingProgress, (state, action) => {
+      state.loadingProgress = Math.round(action.payload * 100);
+      return state;
+    });
   },
 });
 
@@ -209,6 +220,10 @@ export const isPlayerLoading = (state: RootState): boolean =>
 //  Player's HTML element
 export const getPlayerElementId = (state: RootState): undefined | string =>
   state.treble.playerElId;
+
+//  Player's HTML element
+export const getLoadingProgress = (state: RootState): number =>
+  state.treble.loadingProgress;
 
 /*****************************************************
  * Complex Actions
@@ -234,6 +249,10 @@ export const initPlayer =
       assetId,
       ...playerConfig,
       initialConfiguration,
+      onLoadingProgress: progress => {
+        dispatch(updateLoadingProgress(progress));
+        playerConfig?.onLoadingProgress?.(progress);
+      },
     });
 
     const configurator = await player.getConfigurator();
@@ -257,6 +276,7 @@ export const initPlayer =
 
     dispatch(setThreekitInitialized(true));
     dispatch(setPlayerLoading(false));
+    dispatch(updateLoadingProgress(1));
 
     if (window.threekit.treble._debugMode) runDebugger();
 

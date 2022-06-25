@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import createStore, { useThreekitDispatch } from '../../store';
 import { Reducer } from 'redux';
 import { launch, ILaunchConfig } from '../../store/treble';
+import { TREBLE_DEBUG } from '../../constants';
 
 import { Provider } from 'react-redux';
 
@@ -71,7 +72,7 @@ const ThreekitProvider = (props: ThreekitProviderProps) => {
         >
           {props.children}
         </App>
-        <DevTools />
+        {TREBLE_DEBUG ? null : <DevTools />}
       </ThemeProvider>
     </Provider>
   );

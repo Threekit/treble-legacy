@@ -29,7 +29,7 @@ export const refreshWishlist = createAsyncThunk(
 
 export const addToWishlist = createAsyncThunk(
   'treble/wishlist/add-item',
-  async (config: Omit<ISaveConfiguration, 'configurator'>) => {
+  async (config: Omit<ISaveConfiguration, 'configuration'>) => {
     const wishlistData = await window.threekit.treble.wishlist.addItem(config);
     return wishlistData;
   }

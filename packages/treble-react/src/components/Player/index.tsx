@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import {
   Wrapper,
   TopLeftWidgetsWrapper,
@@ -11,7 +11,7 @@ import {
   BottomRightWidgetsWrapper,
 } from './player.styles';
 import { DEFAULT_CLASS_NAME, CLASS_NAME_PREFIX } from '../../constants';
-import usePlayerPortal from '../../hooks/usePlayerPortal';
+import usePlayer from '../../hooks/usePlayer';
 
 export interface IProps {
   children: React.ReactNode;
@@ -22,8 +22,6 @@ export interface PlayerProps extends IProps {
   width?: string;
   minHeight?: string;
 }
-
-export const PLAYER_DIV_ID = 'tk-player-component';
 
 const className = `${DEFAULT_CLASS_NAME} ${CLASS_NAME_PREFIX}-player`;
 
@@ -36,23 +34,7 @@ const Player = (props: PlayerProps) => {
     },
     props
   );
-  const [portalPlayerTo, portalBack] = usePlayerPortal();
-  const hasMoved = useRef<boolean>(false);
-
-  useEffect(() => {
-    if (portalPlayerTo && !hasMoved.current) {
-      portalPlayerTo(PLAYER_DIV_ID);
-      hasMoved.current = true;
-    }
-
-    return () => {
-      if (portalBack) {
-        portalBack();
-        hasMoved.current = false;
-      }
-    };
-  }, [portalPlayerTo]);
-
+  const [playerRef] = usePlayer();
   return (
     <Wrapper
       height={height}
@@ -60,7 +42,7 @@ const Player = (props: PlayerProps) => {
       minHeight={minHeight}
       className={className}
     >
-      <div id={PLAYER_DIV_ID} />
+      <div ref={playerRef} />
       {children}
     </Wrapper>
   );

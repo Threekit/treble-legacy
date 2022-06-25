@@ -22,6 +22,9 @@ export default function Wishlist() {
     setShowWishlist(true);
   };
 
+  const handleClickResume = () => {
+    setShowWishlist(false);
+  };
   return (
     <>
       <button
@@ -34,7 +37,7 @@ export default function Wishlist() {
       <button
         type="button"
         className="trbl-wgt-btn"
-        onClick={() => handleAddToWishlist(true)}
+        onClick={() => handleAddToWishlist()}
       >
         <HeartIcon />
       </button>
@@ -52,7 +55,7 @@ export default function Wishlist() {
               <div className="h-50 w-50 mx-auto">
                 <img
                   className="h-50 w-50 object-contain"
-                  src={item.thumbnail}
+                  src={item.attachments.thumbnail}
                 />
               </div>
               <div className="">{item.label}</div>
@@ -61,7 +64,7 @@ export default function Wishlist() {
                   type="button"
                   onClick={() => {
                     item.handleSelect();
-                    setShowWishlist(false);
+                    handleClickResume(i);
                   }}
                   className={`${BASE_BTN_STYLES} flex-grow text-base border-primary text-primary hover:bg-primary hover:text-white`}
                 >
@@ -69,14 +72,14 @@ export default function Wishlist() {
                 </button>
                 <button
                   type="button"
-                  onClick={item.handleShare}
+                  onClick={() => item.handleShare()}
                   className={ICON_BTN_STYLES}
                 >
                   <ShareIcon />
                 </button>
                 <button
                   type="button"
-                  onClick={item.handleRemove}
+                  onClick={() => item.handleRemove()}
                   className={ICON_BTN_STYLES}
                 >
                   <DeleteIcon />

@@ -46,7 +46,7 @@ class Treble {
   }
 
   saveConfiguration = async (
-    config?: Omit<ISaveConfiguration, 'configuration'>
+    config?: Partial<Omit<ISaveConfiguration, 'configuration'>>
   ) => {
     const { threekitDomain } = connection.getConnection();
     const { customerId, metadata, productVersion, attachments } = Object.assign(

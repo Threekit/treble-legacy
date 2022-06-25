@@ -49,7 +49,7 @@ interface ISnapshots {
   takeSnapshots(
     cameras: ISnapshotsCameras,
     config: ITakeSnapshotsConfig
-  ): Promise<void | string[] | Blob[] | null>;
+  ): Promise<void | string[] | Blob[] | File[] | null>;
 }
 
 const DEFAULT_CAMERA_CONFIG = {
@@ -153,7 +153,7 @@ class Snapshots implements ISnapshots {
   takeSnapshots = async (
     camerasList: ISnapshotsCameras,
     snapshotsConfig: ITakeSnapshotsConfig
-  ) => {
+  ): Promise<void | string[] | Blob[] | File[] | null> => {
     const filename =
       snapshotsConfig?.filename || DEFAULT_CAMERA_CONFIG.filename;
     const size = snapshotsConfig?.size || DEFAULT_CAMERA_CONFIG.size;

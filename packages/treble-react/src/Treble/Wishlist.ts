@@ -1,5 +1,5 @@
 import threekitAPI from '../api';
-import connection from '../connection';
+// import connection from '../connection';
 import { IConfigurationResponse } from '../http/configurations';
 import { ISaveConfiguration } from '../api/configurations';
 import { WISHLIST_LOCALSTORAGE_KEY } from '../constants';
@@ -11,7 +11,7 @@ let wishlistData: WishlistArray;
 export interface IWishlist {
   getWishlist(): Promise<Array<IConfigurationResponse>>;
   addItem(
-    config?: Omit<ISaveConfiguration, 'configurator'>
+    config?: Omit<ISaveConfiguration, 'configuration'>
   ): Promise<Array<IConfigurationResponse>>;
   removeItemByIdx(idx: number): Array<IConfigurationResponse>;
   clearWishlist(): Array<IConfigurationResponse>;
@@ -28,7 +28,6 @@ class Wishlist implements IWishlist {
 
   getWishlist = async () => {
     if (wishlistData) return wishlistData;
-    const { threekitDomain } = connection.getConnection();
 
     const wishlistListStr = localStorage.getItem(this._wishlistKey);
     const wishlistList: Array<string> = JSON.parse(wishlistListStr || '[]');
@@ -37,32 +36,24 @@ class Wishlist implements IWishlist {
       wishlistList.map(el => threekitAPI.configurations.fetch(el))
     );
 
-    wishlistData = wishlistDataRaw.map(el =>
-      Object.assign(
-        {},
-        el.data,
-        el.data.thumbnail?.length
-          ? {
-              thumbnail: `${threekitDomain}/api/files/hash/${el.data.thumbnail}`,
-            }
-          : undefined
-      )
-    );
-
+    wishlistData = wishlistDataRaw.map(el => el.data);
     return wishlistData;
   };
 
-  addItem = async (config?: Omit<ISaveConfiguration, 'configurator'>) => {
+  addItem = async () => {
     if (!wishlistData) {
       wishlistData = [];
       localStorage.setItem(this._wishlistKey, JSON.stringify([]));
     }
 
-    const configPrepped = Object.assign({ snapshot: true }, config);
+    const thumbnails = (await window.threekit.treble.takeSnapshots(undefined, {
+      output: 'file',
+      filename: 'thumbnail',
+    })) as Array<File>;
 
-    const savedConfiguration = await window.threekit.treble.saveConfiguration(
-      configPrepped
-    );
+    const savedConfiguration = await window.threekit.treble.saveConfiguration({
+      attachments: { thumbnail: thumbnails[0] },
+    });
     if (!savedConfiguration) return wishlistData;
 
     wishlistData = [...wishlistData, savedConfiguration];

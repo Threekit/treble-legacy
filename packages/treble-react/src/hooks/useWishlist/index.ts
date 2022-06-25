@@ -21,7 +21,7 @@ interface HydratedWishlistItem extends IConfigurationResponse {
 type UseWishlistHook =
   | [
       Array<HydratedWishlistItem>,
-      (config?: Omit<ISaveConfiguration, 'configurator'>) => void,
+      (config?: Omit<ISaveConfiguration, 'configuration'>) => void,
       () => void
     ]
   | [undefined, undefined, undefined];
@@ -34,7 +34,7 @@ const useWishlist = (): UseWishlistHook => {
   if (!isLoaded) return [undefined, undefined, undefined];
 
   const handleAddToWishlist = (
-    config: Omit<ISaveConfiguration, 'configurator'>
+    config: Omit<ISaveConfiguration, 'configuration'>
   ) => dispatch(addToWishlist(config));
 
   const handleClearWishlist = () => {
