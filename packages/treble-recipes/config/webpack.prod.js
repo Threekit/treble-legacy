@@ -1,12 +1,12 @@
-const nodeExternals = require("webpack-node-externals");
-const paths = require("./paths");
+const nodeExternals = require('webpack-node-externals');
+const paths = require('./paths');
 
 module.exports = {
   // Makes sure errors in console map to the correct file
   // and line number
   // devtool: 'eval',
   // watch: true,
-  mode: "production",
+  mode: 'production',
   entry: paths.recipesJs,
   //   entry: {
   //     catalog: paths.recipesCatalogJs,
@@ -14,13 +14,13 @@ module.exports = {
   //   },
   output: {
     path: paths.recipesBuild,
-    filename: "threekit-recipes.js",
+    filename: 'threekit-recipes.js',
     // filename: "[name].js",
     clean: true,
   },
   devServer: {
     static: paths.recipesBuild,
-    watchFiles: "./src",
+    watchFiles: './src',
     hot: true,
   },
   externalsPresets: { node: true },
@@ -36,9 +36,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
-          presets: ["@babel/preset-env"],
+          presets: ['@babel/preset-env'],
         },
       },
     ],

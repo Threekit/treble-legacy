@@ -8,9 +8,16 @@
     "treble-scripts": "./bin/treble-scripts.js"
   },
   "scripts": {
+    "lint-staged": "lint-staged",
     "lint": "eslint ./scripts ./config ./bin ./tests",
     "format": "prettier --write ./scripts ./config ./bin ./tests",
     "test": "jest"
+  },
+  "lint-staged": {
+    "*.{css,less,scss,html,json,jsx,js,tsx,ts}": [
+      "prettier --write ./scripts ./config ./bin ./tests"
+    ],
+    "*.js": "eslint ./scripts ./config ./bin ./tests --fix"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
@@ -32,6 +39,7 @@
     "html-webpack-plugin": "^5.4.0",
     "interpolate-html-plugin": "^4.0.0",
     "less-loader": "^10.2.0",
+    "lint-staged": "^13.0.3",
     "loader-utils": "^3.2.0",
     "mini-css-extract-plugin": "^2.4.5",
     "node-notifier": "^10.0.0",

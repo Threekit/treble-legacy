@@ -1,13 +1,13 @@
 let player = undefined;
 
-const wobble = (config) => {
+const wobble = config => {
   if (animationInProgress) return;
   let animationInProgress = false;
   let animationNodeId = undefined;
   let startTime = undefined;
   let initialRotation = undefined;
   let initialTranslation = undefined;
-  if (!player) player = api.enableApi("player");
+  if (!player) player = api.enableApi('player');
 
   const { resumeDelay, nodeName, speed, magnifier } = Object.assign(
     {
@@ -19,19 +19,19 @@ const wobble = (config) => {
     config
   );
 
-  const animateFrame = (timestamp) => {
+  const animateFrame = timestamp => {
     if (startTime === undefined) {
       startTime = timestamp;
 
       initialRotation = api.scene.get({
         id: animationNodeId,
-        plug: "Transform",
-        property: "rotation",
+        plug: 'Transform',
+        property: 'rotation',
       });
       initialTranslation = api.scene.get({
         id: animationNodeId,
-        plug: "Transform",
-        property: "translation",
+        plug: 'Transform',
+        property: 'translation',
       });
     }
 
@@ -51,8 +51,8 @@ const wobble = (config) => {
     api.scene.set(
       {
         id: animationNodeId,
-        plug: "Transform",
-        property: "rotation",
+        plug: 'Transform',
+        property: 'rotation',
       },
       {
         x: initialRotation.x + rotationDelta.x,
@@ -63,8 +63,8 @@ const wobble = (config) => {
     api.scene.set(
       {
         id: animationNodeId,
-        plug: "Transform",
-        property: "translation",
+        plug: 'Transform',
+        property: 'translation',
       },
       {
         x: initialTranslation.x + translationDelta.x,
@@ -76,21 +76,21 @@ const wobble = (config) => {
     if (animationInProgress) window.requestAnimationFrame(animateFrame);
   };
 
-  const tool = (player) => ({
-    key: "wobble-on-load",
-    label: "wobble-on-load",
+  const tool = player => ({
+    key: 'wobble-on-load',
+    label: 'wobble-on-load',
     active: true,
     enabled: true,
     handlers: {
       mousedown: async () => {
-        console.log("mousedown - wobble on load");
+        console.log('mousedown - wobble on load');
         animationInProgress = false;
       },
       mouseup: async () => {
         if (!resumeDelay) return;
-        console.log("mouseup - wobble on load");
+        console.log('mouseup - wobble on load');
         setTimeout(() => {
-          console.log("resuming animation");
+          console.log('resuming animation');
           startTime = undefined;
           animationInProgress = true;
           window.requestAnimationFrame(animateFrame);
@@ -104,8 +104,8 @@ const wobble = (config) => {
     const assetInstance = await player.getAssetInstance(
       api.scene.find({
         id: player.instanceId,
-        plug: "Proxy",
-        property: "asset",
+        plug: 'Proxy',
+        property: 'asset',
       })
     );
 

@@ -8,6 +8,12 @@
     "start": "webpack --watch --config ./config/webpack.prod.js",
     "build": "webpack --config ./config/webpack.prod.js"
   },
+  "lint-staged": {
+    "./src/**/*.{json,js,ts}": [
+      "prettier --write ./src"
+    ],
+    "./src/**/*.{js,ts}": "eslint ./src"
+  },
   "dependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.6",
@@ -15,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
+    "lint-staged": "^13.0.3",
     "morgan": "^1.10.0",
     "webpack": "^5.56.1",
     "webpack-cli": "^4.8.0",

@@ -1,6 +1,6 @@
 let configurator;
 
-const validateAttributeValue = async (attributes) => {
+const validateAttributeValue = async attributes => {
   if (!configurator) configurator = await api.getConfigurator();
   if (!configurator) return;
 
@@ -9,10 +9,10 @@ const validateAttributeValue = async (attributes) => {
   const validatedConfig = configurator
     .getDisplayAttributes()
     .reduce((output, attr) => {
-      if (attr.type.toLowerCase() !== "asset" || !attrs.includes(attr.name))
+      if (attr.type.toLowerCase() !== 'asset' || !attrs.includes(attr.name))
         return output;
       const isValid = !!attr.values.find(
-        (val) => val.assetId === attr.value.assetId
+        val => val.assetId === attr.value.assetId
       );
       if (isValid) return output;
       return Object.assign({}, output, {
