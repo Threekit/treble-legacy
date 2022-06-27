@@ -1,16 +1,16 @@
-const AXIS = ["x", "y", "z"];
-const TRANSFORMS = ["translation", "rotation", "scale"];
+const AXIS = ['x', 'y', 'z'];
+const TRANSFORMS = ['translation', 'rotation', 'scale'];
 let player;
 
 const handleListPositioning = async (listNamePattern, config) => {
   if (!listNamePattern) return;
   const listPattern =
-    typeof listNamePattern === "string"
+    typeof listNamePattern === 'string'
       ? new RegExp(listNamePattern)
       : listNamePattern;
   const transformPattern = new RegExp(/^_(translation|rotation|scale)_(x|y|z)/);
 
-  if (!player) player = await playerApi.enableApi("player");
+  if (!player) player = await playerApi.enableApi('player');
   await player.api.getConfigurator();
 
   Object.entries(player.configurator.appliedConfiguration)
@@ -28,9 +28,9 @@ const handleListPositioning = async (listNamePattern, config) => {
         const isTransform = transformPattern.test(key);
         if (!isTransform) return output;
 
-        const address = `${isTransform ? "_transform" : ""}${key}`
-          .split("_")
-          .filter((el) => !!el.length);
+        const address = `${isTransform ? '_transform' : ''}${key}`
+          .split('_')
+          .filter(el => !!el.length);
 
         address.reduce((result, el, idx) => {
           if (idx === address.length - 1) {
@@ -53,16 +53,16 @@ const handleListPositioning = async (listNamePattern, config) => {
       });
 
       if (metadata.transform) {
-        TRANSFORMS.forEach((transformName) => {
+        TRANSFORMS.forEach(transformName => {
           let transform = {};
           if (!metadata.transform[transformName]) return;
           transform = playerApi.scene.get({
             id: nodeId,
-            plug: "Transform",
+            plug: 'Transform',
             property: transformName,
           });
 
-          AXIS.forEach((ax) => {
+          AXIS.forEach(ax => {
             if (metadata.transform[transformName][ax])
               transform[ax] = metadata.transform[transformName][ax];
           });
@@ -70,7 +70,7 @@ const handleListPositioning = async (listNamePattern, config) => {
           playerApi.scene.set(
             {
               id: nodeId,
-              plug: "Transform",
+              plug: 'Transform',
               property: transformName,
             },
             transform

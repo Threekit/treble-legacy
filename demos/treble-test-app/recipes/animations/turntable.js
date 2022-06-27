@@ -1,24 +1,24 @@
 let player = undefined;
 
-const turntable = (config) => {
+const turntable = config => {
   if (animationInProgress) return;
   let animationInProgress = false;
   let initialRotation = undefined;
   let rotationNodeId = undefined;
   let startTime = undefined;
-  if (!player) player = api.enableApi("player");
+  if (!player) player = api.enableApi('player');
 
   const { speed, resumeDelay, rotationDirection, nodeName } = Object.assign(
     {
       speed: 4,
       resumeDelay: 3,
-      rotationDirection: "clockwise",
+      rotationDirection: 'clockwise',
       nodeName: undefined,
     },
     config
   );
 
-  const animateFrame = (timestamp) => {
+  const animateFrame = timestamp => {
     if (startTime === undefined) startTime = timestamp;
 
     const elapsed = timestamp - startTime;
@@ -27,7 +27,7 @@ const turntable = (config) => {
 
     const currentRotation = Object.assign({}, initialRotation, {
       y:
-        rotationDirection === "clockwise"
+        rotationDirection === 'clockwise'
           ? initialRotation.y + rotation
           : initialRotation.y - rotation,
     });
@@ -35,8 +35,8 @@ const turntable = (config) => {
     api.scene.set(
       {
         id: rotationNodeId,
-        plug: "Transform",
-        property: "rotation",
+        plug: 'Transform',
+        property: 'rotation',
       },
       currentRotation
     );
@@ -44,14 +44,14 @@ const turntable = (config) => {
     if (animationInProgress) window.requestAnimationFrame(animateFrame);
   };
 
-  const tool = (player) => ({
-    key: "rotate-on-load",
-    label: "rotate-on-load",
+  const tool = player => ({
+    key: 'rotate-on-load',
+    label: 'rotate-on-load',
     active: true,
     enabled: true,
     handlers: {
       mousedown: async () => {
-        console.log("clicked - rotate on load");
+        console.log('clicked - rotate on load');
         animationInProgress = false;
       },
       mouseup: async () => {
@@ -59,8 +59,8 @@ const turntable = (config) => {
         setTimeout(() => {
           initialRotation = api.scene.get({
             id: rotationNodeId,
-            plug: "Transform",
-            property: "rotation",
+            plug: 'Transform',
+            property: 'rotation',
           });
           startTime = undefined;
           animationInProgress = true;
@@ -72,12 +72,12 @@ const turntable = (config) => {
 
   if (!nodeName) return;
   setTimeout(async () => {
-    console.log("running turntable");
+    console.log('running turntable');
     const assetInstance = await player.getAssetInstance(
       api.scene.find({
         id: player.instanceId,
-        plug: "Proxy",
-        property: "asset",
+        plug: 'Proxy',
+        property: 'asset',
       })
     );
 
@@ -88,8 +88,8 @@ const turntable = (config) => {
 
     initialRotation = api.scene.get({
       id: rotationNodeId,
-      plug: "Transform",
-      property: "rotation",
+      plug: 'Transform',
+      property: 'rotation',
     });
 
     animationInProgress = true;
