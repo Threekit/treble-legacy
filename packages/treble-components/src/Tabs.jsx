@@ -7,7 +7,7 @@ export function TabPane(props) {
 function Tabs({ children }) {
   const [selected, setSelected] = useState(0);
 
-  const handleSelect = (idx) => setSelected(idx);
+  const handleSelect = idx => setSelected(idx);
 
   if (!children) return null;
 

@@ -32,7 +32,7 @@ export function AccordionItem(props) {
 function Accordion(props) {
   const [selected, setSelected] = useState(undefined);
 
-  const handleSelect = (idx) => setSelected(idx === selected ? undefined : idx);
+  const handleSelect = idx => setSelected(idx === selected ? undefined : idx);
 
   if (!props.children) return null;
 

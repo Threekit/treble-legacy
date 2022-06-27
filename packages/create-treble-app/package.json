@@ -8,15 +8,23 @@
     "create-treble-app": "src/index.js"
   },
   "scripts": {
+    "lint-staged": "lint-staged",
     "lint": "eslint ./src",
     "check-format": "prettier -c ./src",
     "format": "prettier --write ./src",
     "dev": "node src/index.js"
   },
+  "lint-staged": {
+    "./src/**/*.{css,less,scss,html,json,jsx,js,tsx,ts}": [
+      "prettier --write ./src"
+    ],
+    "./src": "eslint ./src --fix"
+  },
   "dependencies": {
     "chalk": "^5.0.0",
     "cross-spawn": "^7.0.3",
     "enquirer": "^2.3.6",
-    "fs-extra": "^10.0.0"
+    "fs-extra": "^10.0.0",
+    "lint-staged": "^13.0.3"
   }
 }

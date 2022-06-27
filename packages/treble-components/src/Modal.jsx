@@ -5,7 +5,7 @@ function ModalComponent(props) {
   const { title, children, handleClose } = props;
   return (
     <div
-      onClick={(e) => e.stopPropagation()}
+      onClick={e => e.stopPropagation()}
       className="w-max max-h-min mx-auto p-1 bg-white"
     >
       <div>
