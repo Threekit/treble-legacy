@@ -245,6 +245,61 @@ export interface ISnapshotConfig {
 export type SNAPSHOT_FORMAT_TYPES = 'jpg' | 'png';
 
 /***************************************************
+ * Tools
+ **************************************************/
+
+export interface Node {
+  name: string;
+  nodeId: string;
+  type: string;
+}
+
+export interface HitNode {
+  distance: number;
+  intersection: ICoordinates;
+  nodeId: string;
+  hierarchy: Array<Node>;
+}
+
+export interface PlayerToolEvent {
+  altKey: boolean;
+  clientX: number;
+  clientY: number;
+  deltaX: number;
+  deltaY: number;
+  ctrlKey: boolean;
+  isTouch: boolean;
+  metaKey: boolean;
+  shiftKey: boolean;
+  which: number;
+  originalEvent: MouseEvent;
+  rect: DOMRect;
+  hitNodes: Array<HitNode>;
+}
+
+export interface CustomPlayerTool {
+  key: string;
+  label: string;
+  active: boolean;
+  enabled: boolean;
+  handlers: {
+    click?: (event: PlayerToolEvent) => void | Promise<void>;
+    mousedown?: (event: PlayerToolEvent) => void | Promise<void>;
+    mouseup?: (event: PlayerToolEvent) => void | Promise<void>;
+  };
+}
+export interface IThreekitTools {
+  addTool: (tool: string | CustomPlayerTool) => void;
+  addTools: (tools: Array<string | CustomPlayerTool>) => void;
+  removeTool: (tool: string) => void;
+  removeTools: (tools: Array<string>) => void;
+  setPrimary: (tool: string) => void;
+  getPrimaryTool: () => string;
+  setTool: () => void;
+  setTools: () => void;
+}
+
+/***************************************************
  *  Threekit Api
  **************************************************/
 
@@ -278,17 +333,6 @@ export interface IThreekitScene {
   get: (query: ISceneQuery | string) => ISceneResult;
   find: (query: ISceneQuery | string) => ISceneResult;
   set: (query: ISceneQuery | string, transform: ICoordinates) => void;
-}
-
-export interface IThreekitTools {
-  addTool: (tool: string) => void;
-  addTools: (tools: string[]) => void;
-  removeTool: (tool: string) => void;
-  removeTools: (tools: string[]) => void;
-  setPrimary: (tool: string) => void;
-  getPrimaryTool: () => string;
-  setTool: () => void;
-  setTools: () => void;
 }
 
 export interface IThreekitCamera {
