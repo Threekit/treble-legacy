@@ -1,0 +1,110 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { ThreekitProvider } from '@threekit-tools/treble';
+
+import Cards, { Cards as CardsComponent } from '../src/Cards';
+
+<Meta title="Components/Cards" />
+
+export const CardsComponentTemplate = args => <CardsComponent {...args} />;
+export const CardsTemplate = args => <Cards {...args} />;
+
+# Cards
+
+### A Form Component for **Asset / Part Reference** and **String** type Attributes
+
+<Canvas>
+  <Story
+    name="Cards"
+    args={{
+      title: 'Cards Attribute Title',
+      description: 'This is the description for the Tiles attribute.',
+      attribute: {
+        value: 'arsenal',
+        columns: 2,
+        values: [
+          {
+            label: 'Celtic',
+            value: 'celtic',
+          },
+          {
+            label: 'Arsenal',
+            value: 'arsenal',
+          },
+          {
+            label: 'Dortmund',
+            value: 'dortmund',
+          },
+          {
+            label: 'Ajax',
+            value: 'ajax',
+          },
+        ],
+      },
+    }}
+  >
+    {CardsComponentTemplate.bind({})}
+  </Story>
+</Canvas>
+
+<Canvas>
+  <Story
+    name="Cards Plugged In"
+    args={{ attribute: 'Left Panel' }}
+    decorators={[
+      Story => (
+        <ThreekitProvider
+          threekitEnv="preview"
+          project={{
+            credentials: {
+              preview: {
+                publicToken: '5df547d4-9d0d-431c-b04c-1c96eec73f53',
+                orgId: '3ba9a3d4-8c19-411a-85e6-277ca93e8836',
+              },
+            },
+            products: {
+              preview: {
+                assetId: '04e7f832-622f-4375-89c8-299519237aeb',
+              },
+            },
+          }}
+        >
+          <Story />
+        </ThreekitProvider>
+      ),
+    ]}
+  >
+    {CardsTemplate.bind({})}
+  </Story>
+</Canvas>
+
+## When to Use
+
+`<Cards />` are a Form Component that can be used with an **Asset / Part Reference** or
+**String** type Attribute.
+
+**Cards** are great for displaying option sets where each option only
+needs to display a title.
+
+## Overview
+
+The `<Cards />` component will render out 2 or more columns of Tile components, where each Tile
+represents an option in the options array. The Cards form a neat grid.
+
+## How to Use
+
+### Default use with an Attribute
+
+To connect and use the `<Cards />` component with an Attribute by default, you need to pass the attribute's name
+to the component as the prop `attribute`.
+
+E.g. `<Cards attribute="Attribute Name" />`
+
+### Custom use
+
+You may want to use the **Cards** component in a custom way rather than directly
+with an attribute. To do this, instead of passing in an `attribute` prop, you
+can directly pass in the `value`, `options` and `onClick` props. You can find more
+information about the props in the Props Table below.
+
+**Note**: The component will not manage your selection state, and will require
+the selected value be passed in as well.
