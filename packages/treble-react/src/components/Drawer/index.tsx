@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { Wrapper, Background, Header, Content } from './drawer.styles';
 import { generateLayoutClassName as generateClassName } from '../../utils';
-import { RemoveIcon } from '../../icons';
+import RemoveIcon from '../../icons/Remove';
 
 interface IDrawerProps {
   title?: string;

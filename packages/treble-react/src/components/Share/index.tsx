@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button, { BUTTON_SHAPES, BUTTON_TYPES } from '../Button';
-import { ShareIcon } from '../../icons';
+import ShareIcon from '../../icons/Share';
 import useThreekitInitStatus from '../../hooks/useThreekitInitStatus';
 import useShare from '../../hooks/useShare';
 import { generateWidgetClassName as generateClassName } from '../../utils';

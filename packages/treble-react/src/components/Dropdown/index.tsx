@@ -13,7 +13,7 @@ import {
   OptionPrice,
   IconWrapper,
 } from './dropdown.styles';
-import { CaretDownIcon } from '../../icons';
+import CaretDownIcon from '../../icons/CaretDown';
 import { generateInputClassName as generateClassName } from '../../utils';
 import { ATTRIBUTE_TYPES } from '../../constants';
 import container, {

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import { Wrapper, Background, Header, Content } from './modal.styles';
 import { generateLayoutClassName as generateClassName } from '../../utils';
-import { RemoveIcon } from '../../icons';
+import RemoveIcon from '../../icons/Remove';
 
 interface IModalProps {
   title?: string;

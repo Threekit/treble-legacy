@@ -4,7 +4,9 @@ import FormComponentTitle from '../FormComponentTitle';
 import FormComponentDescription from '../FormComponentDescription';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { SpinnerIcon, AddIcon, DeleteIcon } from '../../icons';
+import SpinnerIcon from '../../icons/Spinner';
+import AddIcon from '../../icons/Add';
+import DeleteIcon from '../../icons/Delete';
 import container, {
   IFormComponentProps,
   IOptionShared,

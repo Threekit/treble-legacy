@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button, { BUTTON_SHAPES, BUTTON_TYPES } from '../Button';
-import { DownloadIcon } from '../../icons';
+import DownloadIcon from '../../icons/Download';
 import useThreekitInitStatus from '../../hooks/useThreekitInitStatus';
 import useSnapshot from '../../hooks/useSnapshot';
 import { ISnapshotsCameras, ITakeSnapshotsConfig } from '../../Treble';

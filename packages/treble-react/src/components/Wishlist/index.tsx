@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { WishlistIcon, HeartIcon } from '../../icons';
+import HeartIcon from '../../icons/Heart';
+import WishlistIcon from '../../icons/Wishlist';
 import { Button, BUTTON_SHAPES, BUTTON_TYPES } from '../Button';
 import Drawer from '../Drawer';
 import { TwinButtonWrapper } from '../shared.styles';

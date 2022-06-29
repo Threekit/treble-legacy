@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { Wrapper, IconWrapper } from './message.styles';
-import icons, { InfoIcon } from '../../icons';
+import icons from '../../icons';
+import InfoIcon from '../../icons/Info';
 import { ThemeProvider } from 'styled-components';
 import baseTheme from '../../theme';
 

@@ -4,7 +4,8 @@ import FormComponentTitle from '../FormComponentTitle';
 import FormComponentDescription from '../FormComponentDescription';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { ImageIcon, SpinnerIcon } from '../../icons';
+import SpinnerIcon from '../../icons/Spinner';
+import ImageIcon from '../../icons/Image';
 import container, {
   IFormComponentProps,
   IOptionShared,
