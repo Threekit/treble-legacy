@@ -1,5 +1,3 @@
 docusaurus/build
 packages/*/build
 packages/*/dist
-packages/*/build
-packages/*/dist
