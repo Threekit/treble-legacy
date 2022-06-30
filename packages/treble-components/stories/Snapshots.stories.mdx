@@ -1,0 +1,41 @@
+import { Meta, Story, Canvas, ArgsTable } from '@storybook/addon-docs';
+import { ThreekitProvider } from '@threekit-tools/treble';
+
+import Snapshots from '../src/Snapshots';
+
+<Meta title="Components/Snapshots" />
+
+export const SnapshotsTemplate = args => <Snapshots {...args} />;
+
+# Snapshots
+
+<Canvas>
+  <Story
+    name="Snapshots"
+    args={{}}
+    decorators={[
+      Story => (
+        <ThreekitProvider
+          threekitEnv="preview"
+          project={{
+            credentials: {
+              preview: {
+                publicToken: '5df547d4-9d0d-431c-b04c-1c96eec73f53',
+                orgId: '3ba9a3d4-8c19-411a-85e6-277ca93e8836',
+              },
+            },
+            products: {
+              preview: {
+                assetId: '04e7f832-622f-4375-89c8-299519237aeb',
+              },
+            },
+          }}
+        >
+          <Story />
+        </ThreekitProvider>
+      ),
+    ]}
+  >
+    {SnapshotsTemplate.bind({})}
+  </Story>
+</Canvas>
