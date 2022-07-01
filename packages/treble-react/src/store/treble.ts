@@ -350,6 +350,9 @@ export const launch =
     if (!Object.keys(credentials).length || !Object.keys(products).length)
       return console.error('Missing credentials');
 
+    dispatch(initProduct(products));
+    dispatch(setProductId(productId));
+
     const threekitEnv: string =
       launchConfig?.threekitEnv || process.env.THREEKIT_ENV || 'preview';
     const serverUrl = launchConfig?.serverUrl || config?.project?.serverUrl;
@@ -367,7 +370,7 @@ export const launch =
       stageId,
       configurationId,
       initialConfiguration: initialConfigurationRaw,
-    } = products[productId][threekitEnv];
+    } = products[productId][threekitEnv] || {};
     const assetId = launchConfig?.assetId || assetIdRaw;
     // const product = products[threekitEnv];
     const threekitDomainRaw =
@@ -448,12 +451,13 @@ export const launch =
 
     EVENTS = Object.assign(EVENTS, launchConfig?.eventHandlers);
 
+    dispatch(setName());
+    dispatch(setMetadata());
+    dispatch(initProduct());
     dispatch(setThreekitEnv(threekitEnv));
     dispatch(initTranslations(launchConfig?.locale));
     dispatch(initPrice());
     dispatch(updatePrice());
-    dispatch(initProduct(products));
-    dispatch(setProductId(productId));
     dispatch(refreshWishlist());
 
     return;

@@ -56,8 +56,12 @@ export let PRODUCTS: IHydratedProducts;
 export const setProductId = createAction<undefined | string>(
   'treble/set-product-id'
 );
-export const setName = createAction<string>('treble/set-product-name');
-export const setMetadata = createAction<IMetadata>('treble/set-metadata');
+export const setName = createAction<string | undefined>(
+  'treble/set-product-name'
+);
+export const setMetadata = createAction<IMetadata | undefined>(
+  'treble/set-metadata'
+);
 export const appendToCache = createAction<CachedProductState>(
   'treble/append-to-cache'
 );
@@ -99,10 +103,16 @@ const { reducer } = createSlice({
       return { ...state, id: action.payload };
     });
     builder.addCase(setName, (state, action) => {
-      return { ...state, name: action.payload };
+      const name = window.threekit.player.scene.get({
+        id: window.threekit.player.assetId,
+      }).name;
+      return { ...state, name: action.payload || name };
     });
     builder.addCase(setMetadata, (state, action) => {
-      return { ...state, metadata: action.payload };
+      return {
+        ...state,
+        metadata: action.payload || window.threekit.configurator.getMetadata(),
+      };
     });
     builder.addCase(appendToCache, (state, action) => {
       state.cache.push(action.payload);
@@ -179,6 +189,7 @@ export const initProduct =
   (prods?: IHydratedProducts) =>
   (dispatch: ThreekitDispatch, getState: () => RootState) => {
     if (prods) PRODUCTS = prods;
+    if (!window.threekit) return;
     const state = getState();
     const name = window.threekit.player.scene.get({
       id: window.threekit.player.assetId,

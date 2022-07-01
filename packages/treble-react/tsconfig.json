@@ -18,7 +18,8 @@
     "allowSyntheticDefaultImports": true,
     "declarationMap": false,
     "isolatedModules": true,
-    "strictFunctionTypes": false
+    "strictFunctionTypes": false,
+    "removeComments": true
   },
   "include": ["src"],
   "exclude": [

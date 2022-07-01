@@ -23,14 +23,22 @@
   },
   "scripts": {
     "start": "tsc --watch",
-    "build": "tsc",
+    "build": "npm run clean && tsc",
     "clean": "rimraf dist",
+    "esbuild": "npm run clean && node build.js && tsc --emitDeclarationOnly --outDir dist",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o build",
     "lint": "eslint ./src",
+    "lint-staged": "lint-staged",
     "check-format": "prettier -c ./src",
     "format": "prettier --write ./src",
     "test": "jest"
+  },
+  "lint-staged": {
+    "./src/**/*.{css,less,scss,html,json,jsx,js,tsx,ts}": [
+      "prettier --write ./src"
+    ],
+    "./src": "eslint ./src --fix"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
@@ -61,14 +69,18 @@
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.2",
     "chromatic": "^6.5.3",
+    "esbuild": "^0.14.48",
     "jest": "^27.5.1",
-    "react": ">=17.0.2",
-    "react-dom": ">=17.0.2",
+    "lint-staged": "^13.0.3",
     "rimraf": "^3.0.2",
     "serve": "^12.0.1",
     "themeprovider-storybook": "^1.8.0",
     "ts-jest": "^27.1.3",
     "typescript": ">=4.4.4"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.2",
+    "react-dom": ">=17.0.2"
   },
   "gitHead": "2e16bcf98f81e16bb1768072fdb3968122e7966f"
 }

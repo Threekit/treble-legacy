@@ -12,7 +12,6 @@ import useSnapshot from './hooks/useSnapshot';
 import useWishlist from './hooks/useWishlist';
 import useShare from './hooks/useShare';
 import usePlayerPortal from './hooks/usePlayerPortal';
-// import useSingleAnimation from './hooks/useSingleAnimation';
 import useProductCache from './hooks/useProductCache';
 import useNestedConfigurator from './hooks/useNestedConfigurator';
 import useLoadingProgress from './hooks/useLoadingProgress';
@@ -54,12 +53,51 @@ import Zoom from './components/Zoom';
 import Snapshots from './components/Snapshots';
 import Wishlist from './components/Wishlist';
 import Share from './components/Share';
-//  Icons
-import icons from './icons';
-export * from './icons';
 //  Products - Multi-configurtors
 import TrebleApp from './components/TrebleApp';
 import ProductLayout from './components/ProductLayout';
+//  Icons
+import AddIcon from './icons/Add';
+import ArrowLeftIcon from './icons/ArrowLeft';
+import ArrowRightIcon from './icons/ArrowRight';
+import CameraIcon from './icons/Camera';
+import CaretDownIcon from './icons/CaretDown';
+import CaretUpIcon from './icons/CaretUp';
+import CaretLeftIcon from './icons/CaretLeft';
+import CaretRightIcon from './icons/CaretRight';
+import CartIcon from './icons/Cart';
+import CheckmateIcon from './icons/Checkmate';
+import ClipboardIcon from './icons/Clipboard';
+import ColorPickerIcon from './icons/ColorPicker';
+import CopyIcon from './icons/Copy';
+import DeleteIcon from './icons/Delete';
+import DoubleCaretLeftIcon from './icons/DoubleCaretLeft';
+import DoubleCaretRightIcon from './icons/DoubleCaretRight';
+import DownloadIcon from './icons/Download';
+import DragIcon from './icons/Drag';
+import EditIcon from './icons/Edit';
+import HeartIcon from './icons/Heart';
+import ImageIcon from './icons/Image';
+import InfoIcon from './icons/Info';
+import MailIcon from './icons/Mail';
+import MenuIcon from './icons/Menu';
+import MoreIcon from './icons/More';
+import NewWindowIcon from './icons/NewWindow';
+import PauseIcon from './icons/Pause';
+import PlayIcon from './icons/Play';
+import RedoIcon from './icons/Redo';
+import RemoveIcon from './icons/Remove';
+import RulerIcon from './icons/Ruler';
+import SearchIcon from './icons/Search';
+import SettingsIcon from './icons/Settings';
+import ShareIcon from './icons/Share';
+import SwitchIcon from './icons/Switch';
+import TagIcon from './icons/Tag';
+import UndoIcon from './icons/Undo';
+import WishlistIcon from './icons/Wishlist';
+import ZoomInIcon from './icons/ZoomIn';
+import ZoomOutIcon from './icons/ZoomOut';
+import SpinnerIcon from './icons/Spinner';
 
 export {
   //  Hooks
@@ -76,7 +114,6 @@ export {
   useWishlist,
   useShare,
   usePlayerPortal,
-  // useSingleAnimation,
   useProductCache,
   useNestedConfigurator,
   useLoadingProgress,
@@ -118,9 +155,49 @@ export {
   Snapshots,
   Wishlist,
   Share,
-  //  icons
-  icons,
   //  Products - Multi-configurtors
   TrebleApp,
   ProductLayout,
+  //  icons
+  AddIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+  CameraIcon,
+  CaretDownIcon,
+  CaretUpIcon,
+  CaretLeftIcon,
+  CaretRightIcon,
+  CartIcon,
+  CheckmateIcon,
+  ClipboardIcon,
+  ColorPickerIcon,
+  CopyIcon,
+  DeleteIcon,
+  DoubleCaretLeftIcon,
+  DoubleCaretRightIcon,
+  DownloadIcon,
+  DragIcon,
+  EditIcon,
+  HeartIcon,
+  ImageIcon,
+  InfoIcon,
+  MailIcon,
+  MenuIcon,
+  MoreIcon,
+  NewWindowIcon,
+  PauseIcon,
+  PlayIcon,
+  RedoIcon,
+  RemoveIcon,
+  RulerIcon,
+  SearchIcon,
+  SettingsIcon,
+  ShareIcon,
+  SwitchIcon,
+  TagIcon,
+  UndoIcon,
+  WishlistIcon,
+  ZoomInIcon,
+  ZoomOutIcon,
+  SpinnerIcon,
 };
