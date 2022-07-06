@@ -34,6 +34,7 @@ ReactDOM.render(<TrebleApp />, document.getElementById('root'));
 
 ## Props
 
-| Name      | Description                                                              | Type   | Default |
-| --------- | ------------------------------------------------------------------------ | ------ | ------- |
-| productId | The product (from the Product Layouts) to initialize the Treble App with | string | -       |
+| Name        | Description                                                              | Type                    | Default   |
+| ----------- | ------------------------------------------------------------------------ | ----------------------- | --------- |
+| productId   | The product (from the Product Layouts) to initialize the Treble App with | string                  | -         |
+| threekitEnv | The Threekit Environment to be used.                                     | 'preview' / 'admin-fts' | 'preview' |
