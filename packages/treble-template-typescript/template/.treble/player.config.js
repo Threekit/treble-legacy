@@ -1,12 +1,12 @@
 export default {
   showConfigurator: false,
   initialConfiguration: undefined,
-  showLoadingThumbnail: false,
+  showLoadingThumbnail: true,
   showLoadingProgress: true,
-  // onLoadingProgress: undefined,
+  onLoadingProgress: undefined,
   showAR: true,
   showShare: false,
-  // locale: undefined,
+  locale: undefined,
   allowMobileVerticalOrbit: false,
   publishStage: 'draft',
 };
