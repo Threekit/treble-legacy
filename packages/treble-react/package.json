@@ -1,6 +1,6 @@
 {
   "name": "@threekit-tools/treble",
-  "version": "0.0.84",
+  "version": "0.0.85",
   "author": "Amaan Saeed",
   "license": "MIT",
   "files": [
@@ -43,6 +43,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
     "axios": "^0.22.0",
+    "chokidar": "^3.5.3",
+    "live-server": "^1.2.2",
     "react-redux": "^7.2.6",
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
