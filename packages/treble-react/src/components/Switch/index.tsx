@@ -5,7 +5,7 @@ import FormComponentDescription from '../FormComponentDescription';
 import { SwitchWrapper, Checkbox, Knob, Layer } from './switch.styles';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { ATTRIBUTE_TYPES } from '../../constants';
+import { ATTRIBUTE_TYPES } from '../../types';
 import container, {
   IFormComponentProps,
   IOption,
@@ -106,6 +106,6 @@ Switch.defaultProps = {
 };
 
 Switch.componentName = 'Switch';
-Switch.compatibleAttributes = new Set([ATTRIBUTE_TYPES.boolean]);
+Switch.compatibleAttributes = new Set([ATTRIBUTE_TYPES.BOOLEAN]);
 
 export default container<ISwitch>(Switch);

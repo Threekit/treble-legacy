@@ -58,19 +58,6 @@ export const DEFAULT_PLAYER_CONFIG = {
  * Attributes
  ****************************************************/
 
-export const ATTRIBUTE_TYPES = {
-  asset: 'Asset',
-  string: 'String',
-  number: 'Number',
-  color: 'Color',
-  boolean: 'Boolean',
-};
-
-export const ASSET_TYPES = {
-  item: 'item',
-  upload: 'upload',
-};
-
 export const SORT_OPTIONS = {
   ascending: 'ascending',
   descending: 'descending',
@@ -94,23 +81,6 @@ export const METADATA_RESERVED = {
   translate: '_translate',
   rotate: '_rotate',
   scale: '_scale',
-};
-
-/*****************************************************
- * Snapshot
- ****************************************************/
-
-export const SNAPSHOT_FORMATS = {
-  png: 'png',
-  jpeg: 'jpeg',
-};
-
-export const SNAPSHOT_OUTPUTS = {
-  url: 'url',
-  download: 'download',
-  dataUrl: 'dataUrl',
-  blob: 'blob',
-  file: 'file',
 };
 
 /*****************************************************

@@ -8,7 +8,6 @@ import {
   IHydratedAttribute,
 } from './types';
 import {
-  ATTRIBUTE_TYPES,
   //  Class Names
   INPUT_COMPONENT_CLASS_NAME,
   WIDGET_CLASS_NAME,
@@ -19,7 +18,7 @@ import {
   FORM_CLASS_NAME,
   TK_SAVED_CONFIG_PARAM_KEY,
 } from './constants';
-import { ITrebleConfig, IAttributeTypes } from './types';
+import { ITrebleConfig, ATTRIBUTE_TYPES } from './types';
 import { RawAttributeValue } from './hooks/useAttribute';
 import { ITranslationMap } from './api/products';
 
@@ -370,15 +369,15 @@ export const hydrateAttribute = (
 
 export const selectionToConfiguration = (
   value: RawAttributeValue,
-  attributeType: IAttributeTypes
+  attributeType: ATTRIBUTE_TYPES
 ) => {
   switch (attributeType) {
-    case ATTRIBUTE_TYPES.number:
-    case ATTRIBUTE_TYPES.string:
+    case ATTRIBUTE_TYPES.NUMBER:
+    case ATTRIBUTE_TYPES.STRING:
       return value;
-    case ATTRIBUTE_TYPES.asset:
+    case ATTRIBUTE_TYPES.ASSET:
       return { assetId: value };
-    case ATTRIBUTE_TYPES.color:
+    case ATTRIBUTE_TYPES.COLOR:
       return deflateRgb(value as IConfigurationColor);
     default:
       return value;

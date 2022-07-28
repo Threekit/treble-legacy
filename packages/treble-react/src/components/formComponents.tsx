@@ -1,4 +1,4 @@
-import { ATTRIBUTE_TYPES, ASSET_TYPES } from '../constants';
+import { ATTRIBUTE_TYPES, ASSET_TYPES } from '../types';
 
 import Cards, { Cards as CardsComponent } from './Cards';
 import Dropdown, { Dropdown as DropdownComponent } from './Dropdown';
@@ -17,7 +17,7 @@ export const FORM_COMPONENT_TYPES = {
 
 //  First option for each attribute type is the default value
 export const formComponents = {
-  [ATTRIBUTE_TYPES.asset]: {
+  [ATTRIBUTE_TYPES.ASSET]: {
     [StripsComponent.componentName]: Strips,
     [CardsComponent.componentName]: Cards,
     [DropdownComponent.componentName]: Dropdown,
@@ -25,7 +25,7 @@ export const formComponents = {
     [TilesComponent.componentName]: Tiles,
     [TilesGroupComponent.componentName]: TilesGroup,
   },
-  [ATTRIBUTE_TYPES.string]: {
+  [ATTRIBUTE_TYPES.STRING]: {
     [TilesComponent.componentName]: Tiles,
     [DropdownComponent.componentName]: Dropdown,
     [CardsComponent.componentName]: Cards,
@@ -37,11 +37,11 @@ export const formComponents = {
   [FORM_COMPONENT_TYPES.stringInput]: {
     [TextInputComponent.componentName]: TextInput,
   },
-  [ASSET_TYPES.upload]: {
+  [ASSET_TYPES.UPLOAD]: {
     [UploadComponent.componentName]: Upload,
     // [UploadAreaComponent.componentName]: UploadArea,
   },
-  [ATTRIBUTE_TYPES.boolean]: {
+  [ATTRIBUTE_TYPES.BOOLEAN]: {
     [SwitchComponent.componentName]: Switch,
     // [UploadAreaComponent.componentName]: UploadArea,
   },

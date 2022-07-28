@@ -1,14 +1,13 @@
 import http from '../http';
-import { ICart, STATUSES, IOrderResponse } from '../http/orders';
+import { ICartItem, STATUSES, IOrderResponse } from '../http/orders';
 import connection from '../connection';
 
-interface IEditOrder extends ICart {}
-
-interface ICreateOrder extends ICart {
-  name: string;
+export interface ICreateOrder {
+  name?: string;
   metadata?: Record<string, string>;
   platform?: Record<string, string>;
   status?: STATUSES;
+  cart: Array<ICartItem>;
 }
 
 export const getOrder = async (orderId: string) => {
@@ -54,7 +53,7 @@ export const createOrder = async (order: ICreateOrder) => {
   });
 };
 
-export const editOrder = async (orderId: string, data: IEditOrder) => {
+export const editOrder = async (orderId: string, data: Array<ICartItem>) => {
   return new Promise<IOrderResponse>(async resolve => {
     if (!orderId) throw new Error('Missing Order ID');
     if (!data) throw new Error('Missing New Cart data for Cart Order update.');

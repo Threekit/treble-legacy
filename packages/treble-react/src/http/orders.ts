@@ -4,22 +4,19 @@ const ORDERS_API_ROUTE = '/api/orders';
 
 export type STATUSES = 'List';
 
-interface ICartItem {
+export interface ICartItem {
   count: number;
-  metadata: null | Record<string, string>;
+  metadata?: null | Record<string, string>;
   configurationId: string;
 }
 
-export interface ICart {
-  cart: Array<ICartItem>;
-}
-
-interface IOrderShared extends ICart {
-  name: string;
+interface IOrderShared {
+  name?: string;
   orgId: string;
   platform: Record<string, any>;
   metadata: Record<string, string>;
   status: STATUSES;
+  cart: Array<ICartItem>;
 }
 
 interface IOrderRequest extends IOrderShared {}
@@ -48,7 +45,7 @@ export const createOrder = (data: IOrderRequest) => {
   });
 };
 
-export const editOrderCart = (orderId: string, data: ICart) => {
+export const editOrderCart = (orderId: string, data: Array<ICartItem>) => {
   let error: undefined | string;
   if (!data) error = 'Requires Order Data';
   if (!orderId) error = 'Requires Order ID';
