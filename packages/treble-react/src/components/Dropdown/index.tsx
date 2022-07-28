@@ -15,7 +15,7 @@ import {
 } from './dropdown.styles';
 import CaretDownIcon from '../../icons/CaretDown';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { ATTRIBUTE_TYPES } from '../../constants';
+import { ATTRIBUTE_TYPES } from '../../types';
 import container, {
   IFormComponentProps,
   IOption,
@@ -307,8 +307,8 @@ Dropdown.defaultProps = {
 
 Dropdown.componentName = 'dropdown';
 Dropdown.compatibleAttributes = new Set([
-  ATTRIBUTE_TYPES.asset,
-  ATTRIBUTE_TYPES.string,
+  ATTRIBUTE_TYPES.ASSET,
+  ATTRIBUTE_TYPES.STRING,
 ]);
 
 export default container<IDropdown>(Dropdown);

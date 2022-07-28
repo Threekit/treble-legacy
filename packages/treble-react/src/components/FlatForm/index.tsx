@@ -9,8 +9,11 @@ import {
   filterFormAttributes,
 } from '../../utils';
 import useConfigurator from '../../hooks/useConfigurator';
-import { IDisplayAttributeAsset } from '../../types';
-import { ASSET_TYPES } from '../../constants';
+import {
+  IDisplayAttributeAsset,
+  ATTRIBUTE_TYPES,
+  ASSET_TYPES,
+} from '../../types';
 
 interface FlatFormProps {
   title?: string;
@@ -73,9 +76,15 @@ export const FlatForm = (props: FlatFormProps) => {
         let Component;
         let props = (attributes || {})?.[attr.name]?.props || {};
         let type: string = attr.type;
-        if (attr.type === 'Asset' && attr.assetType === ASSET_TYPES.upload) {
+        if (
+          attr.type === ATTRIBUTE_TYPES.ASSET &&
+          attr.assetType === ASSET_TYPES.UPLOAD
+        ) {
           type = (attr as IDisplayAttributeAsset).assetType;
-        } else if (attr.type === 'String' && attr.values.length === 0) {
+        } else if (
+          attr.type === ATTRIBUTE_TYPES.STRING &&
+          attr.values.length === 0
+        ) {
           type = FORM_COMPONENT_TYPES.stringInput;
         }
         if ((attributes || {})?.[attr.name]?.component) {

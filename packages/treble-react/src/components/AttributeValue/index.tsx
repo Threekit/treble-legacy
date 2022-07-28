@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Wrapper } from './attributeValue.styles';
 import useAttribute from '../../hooks/useAttribute';
-import { ATTRIBUTE_TYPES } from '../../constants';
-import { IDisplayAttributeAsset } from '../../types';
+import { IDisplayAttributeAsset, ATTRIBUTE_TYPES } from '../../types';
 import { generateDisplayClassName as generateClassName } from '../../utils';
 
 interface IAttributeValue {
@@ -19,7 +18,7 @@ export const AttributeValue = (props: IAttributeValue) => {
 
   let value;
 
-  if (attributeData.type === ATTRIBUTE_TYPES.asset) {
+  if (attributeData.type === ATTRIBUTE_TYPES.ASSET) {
     let assetAttribute = attributeData as IDisplayAttributeAsset;
     if (!assetAttribute.value?.assetId) return null;
     value = assetAttribute.values.find(

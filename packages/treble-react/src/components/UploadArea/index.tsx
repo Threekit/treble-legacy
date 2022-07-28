@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { ATTRIBUTE_TYPES } from '../../constants';
 import FormComponentTitle from '../FormComponentTitle';
 import FormComponentDescription from '../FormComponentDescription';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
+import { ATTRIBUTE_TYPES } from '../../types';
 import { generateInputClassName as generateClassName } from '../../utils';
 import SpinnerIcon from '../../icons/Spinner';
 import ImageIcon from '../../icons/Image';
@@ -104,6 +104,6 @@ export const UploadArea = (props: IUpload) => {
 };
 
 UploadArea.componentName = 'upload-area';
-UploadArea.compatibleAttributes = new Set([ATTRIBUTE_TYPES.asset]);
+UploadArea.compatibleAttributes = new Set([ATTRIBUTE_TYPES.ASSET]);
 
 export default container<IUpload>(UploadArea);

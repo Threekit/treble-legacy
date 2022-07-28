@@ -14,7 +14,7 @@ import { DEFAULT_CLASS_NAME, CLASS_NAME_PREFIX } from '../../constants';
 import usePlayer from '../../hooks/usePlayer';
 
 export interface IProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export interface PlayerProps extends IProps {

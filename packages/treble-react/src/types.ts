@@ -1,20 +1,58 @@
 import threekitAPI from './api';
 import Treble from './Treble';
 
-type SCENE_PHASES = 'LOADED' | 'PRELOADED' | 'RENDERED';
+enum SCENE_PHASES {
+  LOADED,
+  PRELOADED,
+  RENDERED,
+}
 
-type PRIVATE_APIS = 'scene' | 'player';
+export enum PRIVATE_APIS {
+  SCENE = 'scene',
+  PLAYER = 'player',
+}
 
-export type DISPLAY_OPTIONS = 'webgl' | 'image';
+export enum DISPLAY_OPTIONS {
+  WEBGL = 'webgl',
+  IMAGE = 'image',
+}
 
-export type IAttributeTypes =
-  | 'String'
-  | 'Asset'
-  | 'Color'
-  | 'Number'
-  | 'Boolean';
+export enum ATTRIBUTE_TYPES {
+  STRING = 'String',
+  ASSET = 'Asset',
+  COLOR = 'Color',
+  NUMBER = 'Number',
+  BOOLEAN = 'Boolean',
+}
 
-export type AssetType = 'upload' | 'item';
+export enum ASSET_TYPES {
+  UPLOAD = 'upload',
+  ITEM = 'item',
+}
+
+export enum PLUG_TYPES {
+  PROXY = 'Proxy',
+  TRANSFORM = 'Transform',
+}
+
+export enum TRANSFORM_PROPERTY_TYPES {
+  ROTATION = 'rotation',
+  TRANSLATION = 'translation',
+  SCALE = 'scale',
+}
+
+export enum SNAPSHOT_FORMATS {
+  JPG = 'jpg',
+  PNG = 'png',
+}
+
+export enum SNAPSHOT_OUTPUTS {
+  URL = 'url',
+  DOWNLOAD = 'download',
+  DATA_URL = 'dataUrl',
+  BLOB = 'blob',
+  FILE = 'file',
+}
 
 export type IMetadata = Record<string, string | number | null>;
 
@@ -22,24 +60,24 @@ export type IMetadata = Record<string, string | number | null>;
  *  Scene
  **************************************************/
 
-export interface ISceneQuery {
+export interface ISceneQueryShared {
   all?: boolean;
   id?: string;
   name?: string | RegExp;
   type?: string | Array<string>;
   names?: Array<RegExp>;
   properties?: any;
-  property?: string;
   child?: string;
   parent?: boolean;
   includeParent?: boolean;
-  from?: string | ISceneQuery;
+  from?: string | ISceneQueryShared | ISceneQueryNode;
   hasPlug?: string;
   operator?: any;
   operatorIndex?: number;
   evalNode?: boolean;
   evalPlug?: string;
-  plug?: string;
+  // plug?: string;
+  // property?: string;
   shallow?: boolean;
   skipModels?: boolean;
   configurator?: boolean;
@@ -48,6 +86,18 @@ export interface ISceneQuery {
   tags?: Array<RegExp>;
   hierarchial?: boolean;
 }
+
+export interface ISceneQueryNode extends ISceneQueryShared {
+  plug?: PLUG_TYPES.PROXY;
+  property?: 'asset';
+}
+
+export interface ISceneQueryTransform extends ISceneQueryShared {
+  plug: PLUG_TYPES.TRANSFORM;
+  property: TRANSFORM_PROPERTY_TYPES;
+}
+
+export type ISceneQuery = ISceneQueryNode | ISceneQueryTransform | string;
 
 export interface ISceneResult {
   id: string;
@@ -93,7 +143,7 @@ interface IDisplayAttributeConfig {
 
 //  Base Interface for all Attribute Types
 interface IAttributeBase<
-  T extends IAttributeTypes,
+  T extends ATTRIBUTE_TYPES,
   V extends IConfigurationAttribute
 > {
   type: T;
@@ -132,8 +182,8 @@ export interface IHydratedAttributeAssetValue
 
 //  Generic Asset Type Attribute
 export interface IAttributeAssetBase<V>
-  extends IAttributeBase<'Asset', IConfigurationAsset> {
-  assetType: AssetType;
+  extends IAttributeBase<ATTRIBUTE_TYPES.ASSET, IConfigurationAsset> {
+  assetType: ASSET_TYPES;
   blacklist: [];
   defaultValue: IConfigurationAsset;
   hiddenValues?: Array<string>;
@@ -165,7 +215,7 @@ export interface IHydratedAttributeStringValue
 }
 
 export interface IAttributeStringBase<V>
-  extends IAttributeBase<'String', string> {
+  extends IAttributeBase<ATTRIBUTE_TYPES.STRING, string> {
   blacklist: [];
   defaultValue: string;
   hiddenValues?: Array<string>;
@@ -181,12 +231,13 @@ export type IAttributeString = IAttributeStringBase<string>;
 
 /****** STRING TYPE ATTRIBUTE *******/
 export interface IAttributeColor
-  extends IAttributeBase<'Color', IConfigurationColor> {
+  extends IAttributeBase<ATTRIBUTE_TYPES.COLOR, IConfigurationColor> {
   defaultValue: IConfigurationColor;
 }
 
 /****** NUMBER TYPE ATTRIBUTE *******/
-export interface IAttributeNumber extends IAttributeBase<'Number', number> {
+export interface IAttributeNumber
+  extends IAttributeBase<ATTRIBUTE_TYPES.NUMBER, number> {
   defaultValue: number;
   lockToStep: boolean;
   max?: number;
@@ -195,7 +246,8 @@ export interface IAttributeNumber extends IAttributeBase<'Number', number> {
 }
 
 /****** NUMBER TYPE ATTRIBUTE *******/
-export interface IAttributeBoolean extends IAttributeBase<'Boolean', boolean> {
+export interface IAttributeBoolean
+  extends IAttributeBase<ATTRIBUTE_TYPES.BOOLEAN, boolean> {
   defaultValue: boolean;
 }
 
@@ -241,8 +293,6 @@ export interface ISnapshotConfig {
   mimeType?: string;
   size?: { width: number; height: number };
 }
-
-export type SNAPSHOT_FORMAT_TYPES = 'jpg' | 'png';
 
 /***************************************************
  * Tools
@@ -326,13 +376,15 @@ export interface IThreekitConfigurator {
 
 export interface IThreekitScene {
   PHASES: {
-    LOADED: 'loaded';
-    PRELOADED: 'preloaded';
-    RENDERED: 'rendered';
+    LOADED: SCENE_PHASES.LOADED;
+    PRELOADED: SCENE_PHASES.PRELOADED;
+    RENDERED: SCENE_PHASES.RENDERED;
   };
-  get: (query: ISceneQuery | string) => ISceneResult;
-  find: (query: ISceneQuery | string) => ISceneResult;
-  set: (query: ISceneQuery | string, transform: ICoordinates) => void;
+  get: <T extends ISceneQuery>(
+    query: T
+  ) => T extends ISceneQueryTransform ? ICoordinates : ISceneResult;
+  find: (query: ISceneQuery) => string;
+  set: (query: ISceneQueryTransform, transform: ICoordinates) => void;
 }
 
 export interface IThreekitCamera {
@@ -356,19 +408,23 @@ export interface IThreekitPlayer {
   on: (phase: SCENE_PHASES | string, callback: (args: any) => void) => void;
   getConfigurator: () => Promise<IThreekitConfigurator>;
   getStageConfigurator: () => Promise<IThreekitConfigurator>;
-  enableApi: (api: PRIVATE_APIS) => any;
+  enableApi: <T extends PRIVATE_APIS>(
+    api: T
+  ) => T extends PRIVATE_APIS.PLAYER ? IThreekitPrivatePlayer : any;
   snapshotAsync: (snapshotConfig: ISnapshotConfig) => Promise<string>;
   unload: () => Promise<string>;
 }
 
 export interface IThreekitPrivateConfigurator extends IThreekitConfigurator {
   getAppliedConfiguration: (attributeName: string) => string;
+  getFullConfiguration: () => IConfiguration;
 }
 
 export interface IThreekitPrivatePlayer {
   getConfigurator: () => IThreekitPrivateConfigurator;
   configurator: { getFullConfiguration: () => IConfiguration };
   calculateLogs: () => Promise<Record<string, any>>;
+  getAssetInstance: (query: ISceneQueryNode | string) => Promise<string>;
 }
 
 export interface ThreekitInitConfig {

@@ -12,7 +12,7 @@ import {
   CardPrice,
 } from './cards.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { ATTRIBUTE_TYPES } from '../../constants';
+import { ATTRIBUTE_TYPES } from '../../types';
 import container, {
   IFormComponentProps,
   IOption,
@@ -243,8 +243,8 @@ Cards.defaultProps = {
 
 Cards.componentName = 'cards';
 Cards.compatibleAttributes = new Set([
-  ATTRIBUTE_TYPES.asset,
-  ATTRIBUTE_TYPES.string,
+  ATTRIBUTE_TYPES.ASSET,
+  ATTRIBUTE_TYPES.STRING,
 ]);
 
 export default container<ICards>(Cards);

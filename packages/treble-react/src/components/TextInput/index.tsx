@@ -5,7 +5,7 @@ import FormComponentDescription from '../FormComponentDescription';
 import { Input } from './textInput.styles';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { ATTRIBUTE_TYPES } from '../../constants';
+import { ATTRIBUTE_TYPES } from '../../types';
 import container, {
   IFormComponentProps,
 } from '../containers/formInputContainer';
@@ -43,6 +43,6 @@ export const TextInput = (props: ITextInput) => {
 };
 
 TextInput.componentName = 'text-input';
-TextInput.compatibleAttributes = new Set([ATTRIBUTE_TYPES.string]);
+TextInput.compatibleAttributes = new Set([ATTRIBUTE_TYPES.STRING]);
 
 export default container<ITextInput>(TextInput);

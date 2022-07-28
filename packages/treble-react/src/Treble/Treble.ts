@@ -6,12 +6,15 @@ import {
   IConfiguration,
   ISetConfiguration,
   IThreekitPrivateConfigurator,
+  PRIVATE_APIS,
 } from '../types';
 import { TK_SAVED_CONFIG_PARAM_KEY, TREBLE_DEBUG } from '../constants';
 import { getParams, objectToQueryStr } from '../utils';
-import createWishlist, { IWishlist } from './Wishlist';
-import Snapshots from './Snapshots';
+import wishlistInit, { IWishlist } from './wishlist';
+import snapshots from './snapshots';
 import { ISaveConfiguration } from '../api/configurations';
+import { ICreateOrder } from '../api/orders';
+import { ICartItem } from '../http/orders';
 
 interface ITreble {
   player: IThreekitPlayer;
@@ -25,25 +28,58 @@ interface IEmailShareCredentials {
   templateId: string;
 }
 
+interface IOrder extends Omit<ICreateOrder, 'cart'> {
+  cart?: Array<ICartItem>;
+}
+
 class Treble {
   _api: typeof threekitAPI;
   _player: IThreekitPrivatePlayer;
   wishlist: IWishlist;
   private _initialConfiguration: string;
-  private _snapshots: Snapshots;
-  takeSnapshots: Snapshots['takeSnapshots'];
+  private _snapshots: typeof snapshots;
+  takeSnapshots: typeof snapshots['takeSnapshots'];
   _debugMode: boolean;
 
   constructor({ player, orgId, initialConfiguration }: ITreble) {
     //  Threekit API
     this._api = threekitAPI;
-    this.wishlist = createWishlist(orgId);
-    this._snapshots = new Snapshots();
+    this.wishlist = wishlistInit(orgId);
+    this._snapshots = snapshots;
     this.takeSnapshots = this._snapshots.takeSnapshots;
-    this._player = player.enableApi('player');
+    this._player = player.enableApi(PRIVATE_APIS.PLAYER);
     this._initialConfiguration = JSON.stringify(initialConfiguration);
     this._debugMode = TREBLE_DEBUG;
   }
+
+  createOrder = async (order?: IOrder) => {
+    let updatedOrder: ICreateOrder = Object.assign(
+      {},
+      order,
+      order?.cart ? { cart: order.cart } : { cart: [] }
+    );
+
+    if (!order?.cart) {
+      const configuration = await this.saveConfiguration();
+      updatedOrder = Object.assign(
+        {},
+        order,
+        order?.cart?.length
+          ? { cart: order.cart }
+          : {
+              cart: [
+                {
+                  count: 1,
+                  configurationId: configuration.id,
+                },
+              ],
+            }
+      );
+    }
+
+    const response = await threekitAPI.orders.createOrder(updatedOrder);
+    return response;
+  };
 
   saveConfiguration = async (
     config?: Partial<Omit<ISaveConfiguration, 'configuration'>>
@@ -54,7 +90,7 @@ class Treble {
       config
     );
 
-    const player = window.threekit.player.enableApi('player');
+    const player = window.threekit.player.enableApi(PRIVATE_APIS.PLAYER);
     const response = await threekitAPI.configurations.save({
       assetId: window.threekit.player.assetId,
       configuration: player.getConfigurator().getFullConfiguration(),
@@ -86,7 +122,7 @@ class Treble {
     address: string | Array<string>
   ): undefined | IThreekitPrivateConfigurator => {
     if (!address) return undefined;
-    const player = window.threekit.player.enableApi('player');
+    const player = window.threekit.player.enableApi(PRIVATE_APIS.PLAYER);
     const addressArr = Array.isArray(address) ? address : [address];
     return addressArr.reduce((configurator, attributeName) => {
       if (!configurator) return undefined;

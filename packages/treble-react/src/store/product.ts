@@ -1,6 +1,6 @@
 import { createSlice, createAction } from '@reduxjs/toolkit';
 import { RootState, ThreekitDispatch } from './index';
-import { IMetadata, IConfiguration, IProduct } from '../types';
+import { IMetadata, IConfiguration, IProduct, PRIVATE_APIS } from '../types';
 import connection, { IConnectionConfig } from '../connection';
 import { IReloadConfig, reloadPlayer } from './treble';
 
@@ -212,7 +212,8 @@ export const cacheActiveProduct =
     const connectionObj: Partial<IConnectionConfig> =
       connection.getConnection();
     delete connectionObj.threekitDomain;
-    const configuration = window.threekit.configurator.getConfiguration();
+    const player = window.threekit.player.enableApi(PRIVATE_APIS.PLAYER);
+    const configuration = player.configurator.getFullConfiguration();
     const data = { connection: connectionObj, configuration };
 
     const product: CachedProductState = Object.assign(

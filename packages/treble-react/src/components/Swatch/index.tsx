@@ -10,7 +10,7 @@ import {
 } from './swatch.styles';
 import { FormComponentWrapper as Wrapper } from '../shared.styles';
 import { generateInputClassName as generateClassName } from '../../utils';
-import { ATTRIBUTE_TYPES } from '../../constants';
+import { ATTRIBUTE_TYPES } from '../../types';
 import container, {
   IFormComponentProps,
   IOption,
@@ -254,8 +254,8 @@ Swatch.defaultProps = {
 
 Swatch.componentName = 'swatch';
 Swatch.compatibleAttributes = new Set([
-  ATTRIBUTE_TYPES.asset,
-  ATTRIBUTE_TYPES.string,
+  ATTRIBUTE_TYPES.ASSET,
+  ATTRIBUTE_TYPES.STRING,
 ]);
 
 export default container<ISwatch>(Swatch);
