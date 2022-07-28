@@ -1,7 +1,12 @@
 import { useState, useRef } from 'react';
 import useThreekitInitStatus from '../useThreekitInitStatus';
 import { easeInOutCubic } from '../../utils';
-import { ICoordinates } from '../../types';
+import {
+  ICoordinates,
+  PLUG_TYPES,
+  TRANSFORM_PROPERTY_TYPES,
+  PRIVATE_APIS,
+} from '../../types';
 
 interface NodeConfig {
   nodeId: string;
@@ -32,11 +37,11 @@ const prepAnimateConfig = (
 ): Promise<[string, number, Record<string, NodeConfig>]> =>
   new Promise(async resolve => {
     let totalDuration = config.duration * 1000 || 0;
-    const player = window.threekit.player.enableApi('player');
+    const player = window.threekit.player.enableApi(PRIVATE_APIS.PLAYER);
     const assetId: string = await player.getAssetInstance(
       window.threekit.player.scene.find({
         id: window.threekit.player.instanceId,
-        plug: 'Proxy',
+        plug: PLUG_TYPES.PROXY,
         property: 'asset',
       })
     );
@@ -59,8 +64,8 @@ const prepAnimateConfig = (
                 window.threekit.player.scene.get({
                   from: assetId,
                   id: nodeId,
-                  plug: 'Transform',
-                  property: 'translation',
+                  plug: PLUG_TYPES.TRANSFORM,
+                  property: TRANSFORM_PROPERTY_TYPES.TRANSLATION,
                 }),
                 Object.assign({ x: 0, y: 0, z: 0 }, nodeData.translation),
               ],
@@ -72,8 +77,8 @@ const prepAnimateConfig = (
                 window.threekit.player.scene.get({
                   from: assetId,
                   id: nodeId,
-                  plug: 'Transform',
-                  property: 'rotation',
+                  plug: PLUG_TYPES.TRANSFORM,
+                  property: TRANSFORM_PROPERTY_TYPES.ROTATION,
                 }),
                 Object.assign({ x: 0, y: 0, z: 0 }, nodeData.rotation),
               ],
@@ -85,8 +90,8 @@ const prepAnimateConfig = (
                 window.threekit.player.scene.get({
                   from: assetId,
                   id: nodeId,
-                  plug: 'Transform',
-                  property: 'scale',
+                  plug: PLUG_TYPES.TRANSFORM,
+                  property: TRANSFORM_PROPERTY_TYPES.SCALE,
                 }),
                 Object.assign({ x: 0, y: 0, z: 0 }, nodeData.scale),
               ],
@@ -182,8 +187,8 @@ const useAnimation = (animationConfig: AnimationConfig) => {
           {
             from: ref.current.assetId,
             id: nodeConfig.nodeId,
-            plug: 'Transform',
-            property: 'translation',
+            plug: PLUG_TYPES.TRANSFORM,
+            property: TRANSFORM_PROPERTY_TYPES.TRANSLATION,
           },
           translation
         );
@@ -205,8 +210,8 @@ const useAnimation = (animationConfig: AnimationConfig) => {
           {
             from: ref.current.assetId,
             id: nodeConfig.nodeId,
-            plug: 'Transform',
-            property: 'rotation',
+            plug: PLUG_TYPES.TRANSFORM,
+            property: TRANSFORM_PROPERTY_TYPES.ROTATION,
           },
           rotation
         );
@@ -225,8 +230,8 @@ const useAnimation = (animationConfig: AnimationConfig) => {
           {
             from: ref.current.assetId,
             id: nodeConfig.nodeId,
-            plug: 'Transform',
-            property: 'scale',
+            plug: PLUG_TYPES.TRANSFORM,
+            property: TRANSFORM_PROPERTY_TYPES.SCALE,
           },
           scale
         );
