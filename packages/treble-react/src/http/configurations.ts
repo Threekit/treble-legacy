@@ -17,6 +17,7 @@ export interface IConfigurationResponse {
   thumbnail: null | string;
   variant: IConfiguration;
   attachments: Record<string, string>;
+  sceneGraphState: null | string;
 }
 
 interface IConfigurationsResponse extends IMultiPageResponse {
