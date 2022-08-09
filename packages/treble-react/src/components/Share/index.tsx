@@ -14,6 +14,7 @@ interface ShareProps {
   className?: string;
   message?: string;
   position: Positions;
+  saveSceneGraphState?: boolean;
 }
 
 export const Share = (props: ShareProps) => {
@@ -23,12 +24,14 @@ export const Share = (props: ShareProps) => {
     className,
     message: msg,
     position,
+    saveSceneGraphState,
   } = Object.assign(
     {
       type: 'threekit',
       shape: 'round',
       message: 'Link copied!',
       position: 'bottom-right',
+      saveSceneGraphState: false,
     },
     props
   );
@@ -68,7 +71,9 @@ export const Share = (props: ShareProps) => {
       setShow(!show);
       return;
     }
-    const configuration = await window.threekit.treble.saveConfiguration();
+    const configuration = await window.threekit.treble.saveConfiguration({
+      saveSceneGraphState,
+    });
     try {
       await navigator.clipboard.writeText(configuration.resumableUrl);
       if (msg?.length) message.info(msg);
