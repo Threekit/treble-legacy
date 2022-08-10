@@ -105,7 +105,7 @@ class Treble {
       const sceneGraphResponse = await threekitAPI.files.saveFile(
         player.saveSceneGraphState()
       );
-      sceneGraphState = sceneGraphResponse.files[0].hash;
+      sceneGraphState = sceneGraphResponse.files[0].id;
     }
 
     const response = await threekitAPI.configurations.save({
