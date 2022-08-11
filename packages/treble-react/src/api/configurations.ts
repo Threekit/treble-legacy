@@ -3,12 +3,14 @@ import { IConfigurationResponse } from '../http/configurations';
 import { IConfiguration, IMetadata } from '../types';
 
 export interface ISaveConfiguration {
+  shortId?: string;
   assetId: string;
   customerId?: string;
   configuration: IConfiguration;
   metadata?: IMetadata;
   productVersion?: string;
   attachments?: Record<string, File>;
+  sceneGraphState?: string;
 }
 
 export const save = async (saveConfig: ISaveConfiguration) => {
@@ -19,6 +21,7 @@ export const save = async (saveConfig: ISaveConfiguration) => {
     metadata,
     productVersion,
     attachments,
+    sceneGraphState,
   } = saveConfig;
   let error: string | undefined;
   if (!assetId) error = 'Requires Asset Id';
@@ -32,6 +35,7 @@ export const save = async (saveConfig: ISaveConfiguration) => {
   if (metadata && Object.keys(metadata))
     fd.append('metadata', JSON.stringify(metadata));
   if (customerId) fd.append('customerId', customerId);
+  if (sceneGraphState) fd.append('sceneGraphState', sceneGraphState);
   if (attachments && Object.keys(attachments).length) {
     let attachmentsPrepped = {};
     Object.entries(attachments).forEach(([key, file]) => {

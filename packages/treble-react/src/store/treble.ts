@@ -41,6 +41,7 @@ export interface IPlayerInit {
   authToken: string;
   assetId: string;
   stageId?: string;
+  configurationId?: string;
   orgId: string;
   playerConfig: IPlayerConfig;
   initialConfiguration?: IConfiguration;
@@ -237,6 +238,7 @@ export const initPlayer =
       authToken,
       assetId,
       stageId,
+      configurationId,
       orgId,
       playerConfig,
       initialConfiguration,
@@ -247,6 +249,7 @@ export const initPlayer =
       authToken,
       stageId,
       assetId,
+      configurationId,
       ...playerConfig,
       initialConfiguration,
       onLoadingProgress: progress => {
@@ -406,12 +409,10 @@ export const launch =
     const params = getParams();
 
     const configId = params[TK_SAVED_CONFIG_PARAM_KEY]?.length
-      ? params[TK_SAVED_CONFIG_PARAM_KEY]
+      ? (params[TK_SAVED_CONFIG_PARAM_KEY] as string)
       : configurationId;
     if (configId) {
-      const configuration = await threekitAPI.configurations.fetch(
-        configId as string
-      );
+      const configuration = await threekitAPI.configurations.fetch(configId);
       if (configuration) {
         initialConfiguration = Object.assign(
           {},
@@ -440,6 +441,7 @@ export const launch =
         authToken,
         stageId,
         assetId: updatedAssetId,
+        configurationId: configId,
         playerConfig,
         initialConfiguration,
       })

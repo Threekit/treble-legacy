@@ -425,6 +425,7 @@ export interface IThreekitPrivatePlayer {
   configurator: { getFullConfiguration: () => IConfiguration };
   calculateLogs: () => Promise<Record<string, any>>;
   getAssetInstance: (query: ISceneQueryNode | string) => Promise<string>;
+  saveSceneGraphState: () => string;
 }
 
 export interface ThreekitInitConfig {
@@ -432,6 +433,7 @@ export interface ThreekitInitConfig {
   el: HTMLElement;
   assetId: string;
   stageId?: string;
+  configurationId?: string;
   orgId?: string;
   showConfigurator?: boolean;
   initialConfiguration?: Record<string, any>;

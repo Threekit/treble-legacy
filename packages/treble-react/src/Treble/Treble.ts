@@ -1,20 +1,22 @@
 import threekitAPI from '../api';
 import connection from '../connection';
-import {
+import { PRIVATE_APIS } from '../types';
+import type {
   IThreekitPlayer,
   IThreekitPrivatePlayer,
   IConfiguration,
   ISetConfiguration,
   IThreekitPrivateConfigurator,
-  PRIVATE_APIS,
 } from '../types';
 import { TK_SAVED_CONFIG_PARAM_KEY, TREBLE_DEBUG } from '../constants';
 import { getParams, objectToQueryStr } from '../utils';
-import wishlistInit, { IWishlist } from './wishlist';
+import wishlistInit from './wishlist';
+import type { IWishlist } from './wishlist';
 import snapshots from './snapshots';
-import { ISaveConfiguration } from '../api/configurations';
-import { ICreateOrder } from '../api/orders';
-import { ICartItem } from '../http/orders';
+import type { ISaveConfiguration } from '../api/configurations';
+import type { ICreateOrder } from '../api/orders';
+import type { ICartItem } from '../http/orders';
+import shortid from 'shortid';
 
 interface ITreble {
   player: IThreekitPlayer;
@@ -30,6 +32,11 @@ interface IEmailShareCredentials {
 
 interface IOrder extends Omit<ICreateOrder, 'cart'> {
   cart?: Array<ICartItem>;
+}
+
+interface ISaveConfigurationObject
+  extends Omit<ISaveConfiguration, 'configuraiton'> {
+  saveSceneGraphState: boolean;
 }
 
 class Treble {
@@ -81,23 +88,35 @@ class Treble {
     return response;
   };
 
-  saveConfiguration = async (
-    config?: Partial<Omit<ISaveConfiguration, 'configuration'>>
-  ) => {
+  saveConfiguration = async (config?: Partial<ISaveConfigurationObject>) => {
     const { threekitDomain } = connection.getConnection();
-    const { customerId, metadata, productVersion, attachments } = Object.assign(
-      {},
-      config
-    );
+    const {
+      customerId,
+      metadata,
+      productVersion,
+      attachments,
+      saveSceneGraphState,
+    } = Object.assign({}, config);
 
     const player = window.threekit.player.enableApi(PRIVATE_APIS.PLAYER);
+    let sceneGraphState: string | undefined;
+
+    if (saveSceneGraphState && player.saveSceneGraphState) {
+      const sceneGraphResponse = await threekitAPI.files.saveFile(
+        player.saveSceneGraphState()
+      );
+      sceneGraphState = sceneGraphResponse.files[0].id;
+    }
+
     const response = await threekitAPI.configurations.save({
+      shortId: shortid.generate(),
       assetId: window.threekit.player.assetId,
       configuration: player.getConfigurator().getFullConfiguration(),
       customerId,
       metadata,
       productVersion,
       attachments,
+      sceneGraphState,
     });
 
     const params = Object.assign(getParams(), {

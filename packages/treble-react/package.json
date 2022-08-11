@@ -42,6 +42,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
+    "@types/shortid": "^0.0.29",
     "axios": "^0.22.0",
     "chokidar": "^3.5.3",
     "live-server": "^1.2.2",
@@ -49,6 +50,7 @@
     "redux": "^4.1.2",
     "redux-logger": "^3.0.6",
     "reselect": "^4.1.2",
+    "shortid": "^2.2.16",
     "styled-components": "^5.3.3"
   },
   "devDependencies": {
