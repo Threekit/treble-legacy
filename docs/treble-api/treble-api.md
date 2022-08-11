@@ -1,7 +1,7 @@
 ---
 slug: treble-api-js
-title: The Threekit Treble JS API
-sidebar_label: Treble JS API
+title: Treble JS API
+category: 6261727455090d002780b880
 ---
 
 # The Threekit Treble JS API
