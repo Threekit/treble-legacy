@@ -1,14 +1,19 @@
 import React from 'react';
 import useThreekitInitStatus from '../../hooks/useThreekitInitStatus';
 
-interface IAwaitThreekitLoad {
+interface AwaitThreekitLoadProps {
   children: React.ReactNode;
+  fallback?: React.ReactNode;
 }
 
-const AwaitThreekitLoad = (props: IAwaitThreekitLoad) => {
-  const { children } = props;
+const AwaitThreekitLoad: React.FC<AwaitThreekitLoadProps> = props => {
+  const { children, fallback } = props;
   const isLoaded = useThreekitInitStatus();
-  if (!isLoaded || !children) return null;
+  if (!isLoaded) {
+    if (fallback) return <>{fallback}</>;
+    return null;
+  }
+  if (!children) return null;
   return <>{children}</>;
 };
 
