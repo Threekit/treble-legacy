@@ -79,7 +79,9 @@ export interface TrebleState {
   //  Event based notifications
   notifications: boolean;
   //  Loading Progress
-  loadingProgress: number;
+  loadingProgress: undefined | number;
+  //  Tracks whether the user has interacted with the player
+  awaitingFirstInteraction: undefined | boolean;
 }
 
 export interface NotificationEvent extends Event {
@@ -144,7 +146,8 @@ const initialState: TrebleState = {
   isPlayerLoading: false,
   playerElId: undefined,
   notifications: true,
-  loadingProgress: 0,
+  loadingProgress: undefined,
+  awaitingFirstInteraction: undefined,
 };
 
 /*****************************************************
@@ -165,6 +168,10 @@ export const reloadTreble = createAction<Partial<TrebleState>>('treble/reload');
 
 export const updateLoadingProgress = createAction<number>(
   'treble/update-loading-progress'
+);
+
+export const setPlayerInteraction = createAction<boolean>(
+  'treble/set-player-interaction'
 );
 
 /*****************************************************
@@ -199,6 +206,9 @@ const { reducer } = createSlice({
       state.loadingProgress = Math.round(action.payload * 100);
       return state;
     });
+    builder.addCase(setPlayerInteraction, (state, action) => {
+      return { ...state, awaitingFirstInteraction: action.payload };
+    });
   },
 });
 
@@ -221,9 +231,13 @@ export const isPlayerLoading = (state: RootState): boolean =>
 export const getPlayerElementId = (state: RootState): undefined | string =>
   state.treble.playerElId;
 
-//  Player's HTML element
-export const getLoadingProgress = (state: RootState): number =>
+//  Player's Loading Progress
+export const getLoadingProgress = (state: RootState): undefined | number =>
   state.treble.loadingProgress;
+
+//  The initial interaction status
+export const getPlayerInteraction = (state: RootState): undefined | boolean =>
+  state.treble.awaitingFirstInteraction;
 
 /*****************************************************
  * Complex Actions
@@ -241,6 +255,8 @@ export const initPlayer =
       playerConfig,
       initialConfiguration,
     } = config;
+
+    dispatch(updateLoadingProgress(0));
     const player = await window.threekitPlayer({
       el: el as HTMLElement,
       // Variables to sort out
@@ -277,6 +293,21 @@ export const initPlayer =
     dispatch(setThreekitInitialized(true));
     dispatch(setPlayerLoading(false));
     dispatch(updateLoadingProgress(1));
+    dispatch(setPlayerInteraction(true));
+
+    const ruleName = 'use-first-player-interaction';
+    window.threekit.player.tools.addTool({
+      key: ruleName,
+      label: 'use-first-player-interaction',
+      active: true,
+      enabled: true,
+      handlers: {
+        mousedown: async () => {
+          dispatch(setPlayerInteraction(false));
+          window.threekit.player.tools.removeTool(ruleName);
+        },
+      },
+    });
 
     if (window.threekit.treble._debugMode) runDebugger();
 
