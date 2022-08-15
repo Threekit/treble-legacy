@@ -10,6 +10,7 @@ import {
   TK_PLAYER_LOADER_DIV,
 } from '../constants';
 import {
+  SCENE_PHASES,
   IProject,
   ICredentials,
   IProducts,
@@ -74,6 +75,8 @@ export interface TrebleState {
   isPlayerLoading: boolean;
   //  Tracks Threekit API initialization status
   isThreekitInitialized: boolean;
+  //  Tracks first player render
+  isFirstRenderComplete: boolean;
   //  HTML Player element's ID
   playerElId: undefined | string;
   //  Event based notifications
@@ -143,6 +146,7 @@ let EVENTS: EventHandlers = {};
 const initialState: TrebleState = {
   threekitEnv: 'preview',
   isThreekitInitialized: false,
+  isFirstRenderComplete: false,
   isPlayerLoading: false,
   playerElId: undefined,
   notifications: true,
@@ -157,6 +161,9 @@ const initialState: TrebleState = {
 export const setThreekitEnv = createAction<string>('treble/set-threekit-env');
 export const setThreekitInitialized = createAction<boolean>(
   'treble/set-threekit-initialized'
+);
+export const setIsFirstRenderComplete = createAction<boolean>(
+  'treble/set-is-first-render-complete'
 );
 export const setPlayerLoading = createAction<boolean>(
   'treble/set-player-loading'
@@ -191,6 +198,10 @@ const { reducer } = createSlice({
       state.isThreekitInitialized = action.payload;
       return state;
     });
+    builder.addCase(setIsFirstRenderComplete, (state, action) => {
+      state.isFirstRenderComplete = action.payload;
+      return state;
+    });
     builder.addCase(setPlayerLoading, (state, action) => {
       state.isPlayerLoading = action.payload;
       return state;
@@ -223,6 +234,9 @@ export const getThreekitEnv = (state: RootState): string =>
 //  Loading Trackers
 export const isThreekitInitialized = (state: RootState): boolean =>
   state.treble.isThreekitInitialized;
+
+export const isFirstRenderComplete = (state: RootState): boolean =>
+  state.treble.isFirstRenderComplete;
 
 export const isPlayerLoading = (state: RootState): boolean =>
   state.treble.isPlayerLoading;
@@ -294,6 +308,10 @@ export const initPlayer =
     dispatch(setPlayerLoading(false));
     dispatch(updateLoadingProgress(1));
     dispatch(setPlayerInteraction(true));
+
+    window.threekit.player.on(SCENE_PHASES.RENDERED, () => {
+      dispatch(setIsFirstRenderComplete(true));
+    });
 
     const ruleName = 'use-first-player-interaction';
     window.threekit.player.tools.addTool({

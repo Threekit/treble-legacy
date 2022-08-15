@@ -1,10 +1,10 @@
 import threekitAPI from './api';
 import Treble from './Treble';
 
-enum SCENE_PHASES {
-  LOADED,
-  PRELOADED,
-  RENDERED,
+export enum SCENE_PHASES {
+  LOADED = 'loaded',
+  PRELOADED = 'preloaded',
+  RENDERED = 'rendered',
 }
 
 export enum PRIVATE_APIS {
