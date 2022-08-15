@@ -64,6 +64,7 @@ import PlayerLoadingCircular from './components/PlayerLoadingCircular';
 import PlayerLoadingSpinner from './components/PlayerLoadingSpinner';
 import DraggableHint from './components/DraggableHint';
 import TurntableAnimation from './components/TurntableAnimation';
+import BreatheAnimation from './components/BreatheAnimation';
 //  Icons
 import AddIcon from './icons/Add';
 import ArrowLeftIcon from './icons/ArrowLeft';
@@ -175,6 +176,7 @@ export {
   PlayerLoadingSpinner,
   DraggableHint,
   TurntableAnimation,
+  BreatheAnimation,
   //  icons
   AddIcon,
   ArrowLeftIcon,
