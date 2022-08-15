@@ -140,13 +140,13 @@ export const BreatheAnimation = (props: BreatheAnimationProps) => {
             animationInProgress.current = false;
             if (resumeDelay === undefined)
               window.threekit.player.tools.removeTool(ruleName);
-          },
-          mouseup: async () => {
-            if (resumeDelay === undefined) return;
             if (timeoutId.current) {
               clearTimeout(timeoutId.current);
               timeoutId.current = null;
             }
+          },
+          mouseup: async () => {
+            if (resumeDelay === undefined) return;
 
             timeoutId.current = setTimeout(() => {
               initialRotation.current = window.threekit.player.scene.get({
