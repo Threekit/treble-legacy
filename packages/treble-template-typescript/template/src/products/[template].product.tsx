@@ -1,7 +1,6 @@
 import {
   ProductLayout,
   Player,
-  Share,
   PortalToElement,
   FlatForm,
 } from '@threekit-tools/treble';
@@ -14,11 +13,7 @@ export default function Product() {
   return (
     <ProductLayout products={products}>
       <div className="tk-treble-player">
-        <Player>
-          <Player.TopRightWidgets>
-            <Share />
-          </Player.TopRightWidgets>
-        </Player>
+        <Player />
       </div>
       <PortalToElement to="tk-treble-form" strict={true}>
         <FlatForm />
