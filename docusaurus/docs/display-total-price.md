@@ -3,6 +3,11 @@ id: display-total-price
 title: Total Price
 sidebar_label: Total Price
 ---
+:::caution
+
+Please be aware that infomation below is only applicable if you are using static Pricebooks for pricing. If you are using dynamic pricing sourced directly from E-commerce solution (Shopify, Woocommerce and such) please integrate directly with it instead  
+
+:::
 
 # Total Price
 
