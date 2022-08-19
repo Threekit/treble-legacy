@@ -14,24 +14,18 @@ interface BreatheAnimationProps {
   nodeName: string;
 }
 
-export const BreatheAnimation = (props: BreatheAnimationProps) => {
+const BreatheAnimation = (props: BreatheAnimationProps) => {
   const readyToAnimate = useAnimationStart();
-  let initialTranslation = useRef<null | ICoordinates>(null);
-  let initialRotation = useRef<null | ICoordinates>(null);
-  let animationInProgress = useRef<boolean>(false);
-  let animationNodeId = useRef<undefined | string>(undefined);
-  let startTime = useRef<null | number>(null);
-  let timeoutId = useRef<null | NodeJS.Timeout>(null);
+  const initialTranslation = useRef<null | ICoordinates>(null);
+  const initialRotation = useRef<null | ICoordinates>(null);
+  const animationInProgress = useRef<boolean>(false);
+  const animationNodeId = useRef<undefined | string>(undefined);
+  const startTime = useRef<null | number>(null);
+  const timeoutId = useRef<null | NodeJS.Timeout>(null);
 
-  const { speed, magnifier, resumeDelay, nodeName } = Object.assign(
-    {
-      speed: 4,
-      magnifier: 2,
-      resumeDelay: undefined,
-      nodeName: undefined,
-    },
-    props
-  );
+  const speed = props.speed || 4;
+  const magnifier = props.magnifier || 2;
+  const { resumeDelay, nodeName } = props;
 
   useEffect(() => {
     if (!readyToAnimate) return;

@@ -19,23 +19,17 @@ interface TurntableAnimationProps {
   nodeName: string;
 }
 
-export const TurntableAnimation = (props: TurntableAnimationProps) => {
+const TurntableAnimation = (props: TurntableAnimationProps) => {
   const readyToAnimate = useAnimationStart();
-  let initialRotation = useRef<null | ICoordinates>(null);
-  let animationInProgress = useRef<boolean>(false);
-  let rotationNodeId = useRef<undefined | string>(undefined);
-  let startTime = useRef<null | number>(null);
-  let timeoutId = useRef<null | NodeJS.Timeout>(null);
+  const initialRotation = useRef<null | ICoordinates>(null);
+  const animationInProgress = useRef<boolean>(false);
+  const rotationNodeId = useRef<undefined | string>(undefined);
+  const startTime = useRef<null | number>(null);
+  const timeoutId = useRef<null | NodeJS.Timeout>(null);
 
-  const { speed, resumeDelay, rotationDirection, nodeName } = Object.assign(
-    {
-      speed: 4,
-      resumeDelay: undefined,
-      rotationDirection: RotationDirections.CLOCKWISE,
-      nodeName: undefined,
-    },
-    props
-  );
+  const speed = props.speed || 4;
+  const rotationDirection = props.resumeDelay || RotationDirections.CLOCKWISE;
+  const { resumeDelay, nodeName } = props;
 
   useEffect(() => {
     if (!readyToAnimate) return;
