@@ -10,6 +10,7 @@ import {
   TK_PLAYER_LOADER_DIV,
 } from '../constants';
 import {
+  SCENE_PHASES,
   IProject,
   ICredentials,
   IProducts,
@@ -74,12 +75,16 @@ export interface TrebleState {
   isPlayerLoading: boolean;
   //  Tracks Threekit API initialization status
   isThreekitInitialized: boolean;
+  //  Tracks first player render
+  isFirstRenderComplete: boolean;
   //  HTML Player element's ID
   playerElId: undefined | string;
   //  Event based notifications
   notifications: boolean;
   //  Loading Progress
-  loadingProgress: number;
+  loadingProgress: undefined | number;
+  //  Tracks whether the user has interacted with the player
+  awaitingFirstInteraction: undefined | boolean;
 }
 
 export interface NotificationEvent extends Event {
@@ -141,10 +146,12 @@ let EVENTS: EventHandlers = {};
 const initialState: TrebleState = {
   threekitEnv: 'preview',
   isThreekitInitialized: false,
+  isFirstRenderComplete: false,
   isPlayerLoading: false,
   playerElId: undefined,
   notifications: true,
-  loadingProgress: 0,
+  loadingProgress: undefined,
+  awaitingFirstInteraction: undefined,
 };
 
 /*****************************************************
@@ -154,6 +161,9 @@ const initialState: TrebleState = {
 export const setThreekitEnv = createAction<string>('treble/set-threekit-env');
 export const setThreekitInitialized = createAction<boolean>(
   'treble/set-threekit-initialized'
+);
+export const setIsFirstRenderComplete = createAction<boolean>(
+  'treble/set-is-first-render-complete'
 );
 export const setPlayerLoading = createAction<boolean>(
   'treble/set-player-loading'
@@ -165,6 +175,10 @@ export const reloadTreble = createAction<Partial<TrebleState>>('treble/reload');
 
 export const updateLoadingProgress = createAction<number>(
   'treble/update-loading-progress'
+);
+
+export const setPlayerInteraction = createAction<boolean>(
+  'treble/set-player-interaction'
 );
 
 /*****************************************************
@@ -184,6 +198,10 @@ const { reducer } = createSlice({
       state.isThreekitInitialized = action.payload;
       return state;
     });
+    builder.addCase(setIsFirstRenderComplete, (state, action) => {
+      state.isFirstRenderComplete = action.payload;
+      return state;
+    });
     builder.addCase(setPlayerLoading, (state, action) => {
       state.isPlayerLoading = action.payload;
       return state;
@@ -198,6 +216,9 @@ const { reducer } = createSlice({
     builder.addCase(updateLoadingProgress, (state, action) => {
       state.loadingProgress = Math.round(action.payload * 100);
       return state;
+    });
+    builder.addCase(setPlayerInteraction, (state, action) => {
+      return { ...state, awaitingFirstInteraction: action.payload };
     });
   },
 });
@@ -214,6 +235,9 @@ export const getThreekitEnv = (state: RootState): string =>
 export const isThreekitInitialized = (state: RootState): boolean =>
   state.treble.isThreekitInitialized;
 
+export const isFirstRenderComplete = (state: RootState): boolean =>
+  state.treble.isFirstRenderComplete;
+
 export const isPlayerLoading = (state: RootState): boolean =>
   state.treble.isPlayerLoading;
 
@@ -221,9 +245,13 @@ export const isPlayerLoading = (state: RootState): boolean =>
 export const getPlayerElementId = (state: RootState): undefined | string =>
   state.treble.playerElId;
 
-//  Player's HTML element
-export const getLoadingProgress = (state: RootState): number =>
+//  Player's Loading Progress
+export const getLoadingProgress = (state: RootState): undefined | number =>
   state.treble.loadingProgress;
+
+//  The initial interaction status
+export const getPlayerInteraction = (state: RootState): undefined | boolean =>
+  state.treble.awaitingFirstInteraction;
 
 /*****************************************************
  * Complex Actions
@@ -241,6 +269,8 @@ export const initPlayer =
       playerConfig,
       initialConfiguration,
     } = config;
+
+    dispatch(updateLoadingProgress(0));
     const player = await window.threekitPlayer({
       el: el as HTMLElement,
       // Variables to sort out
@@ -277,6 +307,25 @@ export const initPlayer =
     dispatch(setThreekitInitialized(true));
     dispatch(setPlayerLoading(false));
     dispatch(updateLoadingProgress(1));
+    dispatch(setPlayerInteraction(true));
+
+    window.threekit.player.on(SCENE_PHASES.RENDERED, () => {
+      dispatch(setIsFirstRenderComplete(true));
+    });
+
+    const ruleName = 'use-first-player-interaction';
+    window.threekit.player.tools.addTool({
+      key: ruleName,
+      label: 'use-first-player-interaction',
+      active: true,
+      enabled: true,
+      handlers: {
+        mousedown: async () => {
+          dispatch(setPlayerInteraction(false));
+          window.threekit.player.tools.removeTool(ruleName);
+        },
+      },
+    });
 
     if (window.threekit.treble._debugMode) runDebugger();
 

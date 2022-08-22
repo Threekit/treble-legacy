@@ -6,7 +6,7 @@
     "demos/*"
   ],
   "scripts": {
-    "install": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap --hoist",
     "dev": "lerna run start --stream --parallel",
     "lint": "lerna run lint",
     "lint-staged": "lerna run lint-staged",

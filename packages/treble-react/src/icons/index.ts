@@ -17,6 +17,7 @@ import DoubleCaretLeftIcon from './DoubleCaretLeft';
 import DoubleCaretRightIcon from './DoubleCaretRight';
 import DownloadIcon from './Download';
 import DragIcon from './Drag';
+import DraggableIcon from './Draggable';
 import EditIcon from './Edit';
 import HeartIcon from './Heart';
 import ImageIcon from './Image';
@@ -64,6 +65,7 @@ export default {
   [DoubleCaretRightIcon.iconName]: DoubleCaretRightIcon,
   [DownloadIcon.iconName]: DownloadIcon,
   [DragIcon.iconName]: DragIcon,
+  [DraggableIcon.iconName]: DraggableIcon,
   [EditIcon.iconName]: EditIcon,
   [HeartIcon.iconName]: HeartIcon,
   [ImageIcon.iconName]: ImageIcon,
