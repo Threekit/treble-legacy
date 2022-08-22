@@ -16,7 +16,7 @@ export function DraggableIndicator(props: DraggableIndicatorProps) {
   useEffect(() => {
     if (awaitingFirstInteraction && props.timeout)
       setTimeout(() => setHasTimeoutExpired(true), props.timeout);
-  }, [awaitingFirstInteraction]);
+  }, [awaitingFirstInteraction, props.timeout]);
 
   if (!awaitingFirstInteraction || hasTimeoutExpired) return null;
   return (
